@@ -1,3 +1,3 @@
 TO DO:
 	navbar + category + footer: Hoang dep trai	
-	carousel + slidershow: Khoa
+	carousel + slidershow: Khoa dep trai 
