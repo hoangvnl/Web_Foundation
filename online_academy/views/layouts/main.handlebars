@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        .dropdown:hover>.dropdown-menu {
+            display: block;
+        }
+
+        .dropright:hover>.dropdown-menu {
+            display: block;
+        }
+
+        .dropdown>.dropdown-menu {
+            min-width: 6rem;
+        }
+    </style>
+    <meta charset="utf-8">
+    <title>Example App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <i class="fa fa-home fa-lg" aria-hidden="true">
+                Online Academy
+            </i>
+        </a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <div class="dropdown">
+                        <a class="btn btn-light dropdown" type="button" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Category
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="triggerId">
+                            <a class="dropdown-item" href="#">
+                                <div class="dropright">
+                                    <a class="btn btn-light dropdown-toggle" type="button" role="button"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Information Technology
+                                    </a>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="#">Lập trình Web</a>
+                                        <a class="dropdown-item" href="#">Lập trình di động</a>
+                                    </div>
+                                </div>
+                            </a>
+
+
+                        </div>
+                    </div>
+                </li>
+
+                <form class="form-inline my-2 my-lg-0 w-75" style="min-width: 50rem;">
+                    <button class="btn my-2 my-sm-0" type="submit"><i class="fa fa-search fa-lg"
+                            aria-hidden="true"></i></button>
+                    <input class="form-control mr-sm-2" style="width: 40rem;" type="search" placeholder="Search"
+                        aria-label="Search">
+                </form>
+            </ul>
+        </div>
+    </nav>
+    {{{body}}}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
