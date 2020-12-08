@@ -26,7 +26,7 @@
         }
     </style>
     <meta charset="utf-8">
-    <title>Example App</title>
+    <title>Online Academy</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
 </head>
@@ -38,8 +38,9 @@
                 <span class="text-dark">Online Academy</span>
             </i>
         </a>
+
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto w-100">
                 <li class="nav-item active">
                     <div class="dropdown">
                         <a class="btn m-0" type="button" role="button" data-toggle="dropdown" id="categoryId"
@@ -60,22 +61,27 @@
                         </div>
                     </div>
                 </li>
-                <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2 pl-sm-5 border" style="width: 800px;border-radius:20px"
+
+                <form class="form-inline flex-fill">
+                    <input class="form-control mr-sm-2 pl-sm-5 border" style="min-width: 100% ;border-radius:20px"
                         type="search" placeholder="Search" aria-label="Search">
                     <i class="fa fa-search fa-lg ml-3 position-absolute" type="submit" role="button" aria-hidden="true">
 
                     </i>
                     </input>
                 </form>
+                <form class="form-inline">
+                    <div class="form-group">
+                        <a name="" id="" class="btn btn-outline-primary mx-2" style="min-width: 120px;" href="#"
+                            role="button">
+                            Đăng nhập
+                        </a>
+                        <a name="" id="" class="btn btn-primary mx-2" style="min-width: 120px;" href="#" role="button">
+                            Đăng kí
+                        </a>
+                    </div>
+                </form>
             </ul>
-            <form class="form-inline">
-                <div class="form-group">
-                    <button type="button" class="btn btn-outline-primary mx-1" style="width: 120px;">Đăng
-                        nhập</button>
-                    <button type="button" class="btn btn-primary  mx-1" style="width: 120px;">Đăng kí</button>
-                </div>
-            </form>
         </div>
     </nav>
 
