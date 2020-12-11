@@ -49,13 +49,21 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="categoryId">
                             <div class="dropright m-0">
-                                <a class="btn dropdown-toggle" type="button" style="width: 100%; margin-top: -3px;"
-                                    role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    IT
+                                <a class="btn text-center pt-2" data-toggle="dropdown" type="button"
+                                    style="margin-top: -3px;width: 230px;height: 50px;" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Information Technology
+                                    <i class="fa fa-arrow-right fa-sm float-xl-right pt-xl-2" aria-hidden="true"></i>
                                 </a>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">Lập trình Web</a>
-                                    <a class="dropdown-item" href="#">Lập trình di động</a>
+                                    {{#each lcCategories }}
+                                    <a class="dropdown-item btn" style="width: 230px;" data-toggle="dropdown"
+                                        role="button" href="#">
+                                        {{CatName}}
+                                        <i class="fa fa-arrow-right fa-sm float-xl-right pt-xl-1"
+                                            aria-hidden="true"></i>
+                                    </a>
+                                    {{/each}}
                                 </div>
                             </div>
                         </div>

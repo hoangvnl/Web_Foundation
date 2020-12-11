@@ -9,11 +9,17 @@
 nodejs
 => nodejs id
 
+web, mobile: category
 
+Category {
+	CategoryID
+	CategoryName
+}
 
 Subcategory {
 	CategoryID
 	SubcategoryID
+	SubcategoryName
 }
 
 Course {
