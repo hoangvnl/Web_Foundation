@@ -1,3 +1,21 @@
+1 web
+2 mobile
+
+1 javascript
+2 html
+3 css
+4 android
+5 ios
+nodejs
+=> nodejs id
+
+
+
+Subcategory {
+	CategoryID
+	SubcategoryID
+}
+
 Course {
 	CourseID
 	CourseImage
@@ -7,6 +25,8 @@ Course {
 	Price
 	SalePrice
 	UpdatedAt
+
+	SubCategoryID
 }
 
 Rating {
