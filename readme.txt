@@ -1,6 +1,6 @@
 xem chi tiết khóa học
-web - 3 lv - 10 khoa hoc/lv - Hoang dep trai
-mobile - 3lv - 10khoa hoc/lv - Khoa
+web - 3 lv - 7 khoa hoc/lv - Hoang dep trai
+mobile - 3lv - 7 khoa hoc/lv - Khoa
 
 detail - Hoang dep trai
 danh sach - Khoa
