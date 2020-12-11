@@ -1,0 +1,42 @@
+Course {
+	CourseID
+	CourseImage
+	CourseName
+	ShortDes
+	Students
+	Price
+	SalePrice
+	UpdatedAt
+}
+
+Rating {
+	CourseID
+	TotalRates
+	TotalVotes
+}
+
+FullDes {
+	CourseID
+	DesID 
+	Des
+}
+
+Content {
+	CourseID
+	ContentID
+	ContentName
+}
+
+Lecture {
+	ContentID
+	LectureID
+	LectureName
+	Preview
+	Description
+	VideoID
+}
+
+Video {
+	CourseID
+	VideoID
+}
