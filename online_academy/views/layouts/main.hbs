@@ -7,9 +7,12 @@
             display: block;
         }
 
+        .dropdown-menu>li:hover>.submenu {
+            display: block;
+        }
+
         .dropright:hover>.dropdown-menu {
             display: block;
-            margin: 0;
         }
 
         .dropdown>.dropdown-menu {
@@ -47,24 +50,39 @@
                             aria-haspopup="true" aria-expanded="false">
                             Category
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="categoryId">
+                        <div class="dropdown-menu">
                             <div class="dropright m-0">
-                                <a class="btn text-center pt-2" data-toggle="dropdown" type="button"
-                                    style="margin-top: -3px;width: 230px;height: 50px;" role="button"
+                                <a class="btn dropdown-item pt-2 px-3" data-toggle="dropdown" type="button"
+                                    style="margin-top: -3px;width: 250px;height: 50px;" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Information Technology
                                     <i class="fa fa-arrow-right fa-sm float-xl-right pt-xl-2" aria-hidden="true"></i>
                                 </a>
-                                <div class="dropdown-menu">
-                                    {{#each lcCategories }}
-                                    <a class="dropdown-item btn" style="width: 230px;" data-toggle="dropdown"
-                                        role="button" href="#">
-                                        {{CatName}}
-                                        <i class="fa fa-arrow-right fa-sm float-xl-right pt-xl-1"
-                                            aria-hidden="true"></i>
-                                    </a>
+                                <ul class="submenu dropdown-menu">
+                                    <li><a class="dropdown-item btn text-left" style="width: 250px;" role="button"
+                                            href="#">All Information Technology
+                                        </a></li>
+                                    {{#each lcCategories}}
+                                    <li>
+                                        <a class="dropdown-item btn text-left" style="width: 250px;"
+                                            data-toggle="dropdown" role="button" href="#">
+                                            {{CatName}}
+                                            <i class="fa fa-arrow-right fa-sm float-xl-right pt-xl-1"
+                                                aria-hidden="true"></i>
+                                        </a>
+                                        <ul class="submenu dropdown-menu text-left">
+                                            <li><a class="dropdown-item btn text-left" style="width: 250px;"
+                                                    role="button" href="#">All {{CatName}}
+                                                </a></li>
+                                            {{#each subs}}
+                                            <li><a class="dropdown-item btn text-left" style="width: 250px;"
+                                                    data-toggle="dropdown" role="button" href="#">
+                                                    {{SubCatName}}
+                                                </a></li>
+                                            {{/each}}
+                                        </ul>
+                                    </li>
                                     {{/each}}
-                                </div>
                             </div>
                         </div>
                     </div>
