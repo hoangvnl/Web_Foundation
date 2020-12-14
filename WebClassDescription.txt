@@ -27,7 +27,7 @@ Course {
 	CourseImage
 	CourseName
 	ShortDes
-	Students
+	StudentCount
 	Price
 	SalePrice
 	UpdatedAt
@@ -43,23 +43,24 @@ Rating {
 
 FullDes {
 	CourseID
-	DesID 
-	Des
+	FullDesID 
+	FullDes
 }
 
-Content {
-	CourseID
+CourseContent {
 	ContentID
 	ContentName
+	CourseID
 }
 
 Lecture {
-	ContentID
 	LectureID
 	LectureName
 	Preview
 	Description
 	VideoID
+
+	ContentID
 }
 
 Video {
