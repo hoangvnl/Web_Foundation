@@ -1,6 +1,6 @@
-create database my_db
+create database Online_Academy
 go
-use my_db
+use Online_Academy
 go
 
 create table CATEGORY (
@@ -14,6 +14,11 @@ create table SUBCATEGORY (
 	CategoryID int foreign key references CATEGORY
 )
 
+create table LECTURER (
+	LecturerID int identity(1,1) primary key,
+	LecturerName nvarchar(50)
+)
+
 create table COURSE (
 	CourseID int identity(1,1) primary key,
 	CourseName nvarchar(50),
@@ -23,7 +28,14 @@ create table COURSE (
 	Price int,
 	SalePrice int,
 	UpdatedAt date,
+
 	SubcategoryID int foreign key references SUBCATEGORY
+)
+
+create table COURSE_LECTURER (
+	CourseID int foreign key references COURSE,
+	LecturerID int foreign key references LECTURER,
+	primary key (CourseID, LecturerID)
 )
 
 create table RATING (
@@ -65,3 +77,43 @@ insert into SUBCATEGORY(CategoryID, SubcategoryName) values(2,'Google Flutter'),
 	   (1,'JavaScript'),
 	   (1,'React'),
 	   (1,'Css')
+
+insert into LECTURER values('Academind by Maximilian Schwarzmüller'),
+							('Maximilian Schwarzmüller'),
+							('Dr. Angela Yu'),
+							('Stephen Grider'),
+							('Paulo Dichone'),
+							('Andrea Bizzotto'),
+							('Marcus Ng'),
+							('Lutfor Rahman'),
+							('Rob Percival'),
+							('Marc Stock'),
+							('Codestars by Rob Percival'),
+							('Nick Walter'),
+							('Tim Buchalka'),
+							('Jean-Paul Roberts'),
+							('Philipp Muellauer'),
+							('Morteza Kordi')
+
+insert into COURSE_LECTURER values ('1', '1'),
+									('1', '2'),
+									('2', '3'),
+									('3', '4'),
+									('4', '5'),
+									('5', '6'),
+									('6', '7'),
+									('7', '8'),
+									('8', '9'),
+									('8', '10'),
+									('8', '11'),
+									('9', '9'),
+									('9', '11'),
+									('9', '12'),
+									('10', '13'),
+									('10', '14'),
+									('11', '5'),
+									('12', '15'),
+									('13', '13'),
+									('13', '14'),
+									('14', '16')
+									

@@ -1,14 +1,3 @@
-1 web
-2 mobile
-
-1 javascript
-2 html
-3 css
-4 android
-5 ios
-nodejs
-=> nodejs id
-
 web, mobile: category
 
 Category {
@@ -22,6 +11,11 @@ Subcategory {
 	SubcategoryName
 }
 
+Lecturer {
+	LecturerID
+	LecturerName
+}
+
 Course {
 	CourseID
 	CourseImage
@@ -33,6 +27,11 @@ Course {
 	UpdatedAt
 
 	SubCategoryID
+}
+
+LECTURER_COURSE {
+	CourseID
+	LecturerID
 }
 
 Rating {
