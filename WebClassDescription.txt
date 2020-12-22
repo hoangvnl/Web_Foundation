@@ -56,13 +56,7 @@ Lecture {
 	LectureID
 	LectureName
 	Preview
-	Description
-	VideoID
+	VideoLink
 
 	ContentID
-}
-
-Video {
-	CourseID
-	VideoID
 }
