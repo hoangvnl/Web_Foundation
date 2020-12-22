@@ -1,0 +1,13 @@
+{{#if this.empty}}
+<h1>Khong co du lieu</h1>
+{{else}}
+{{#if this.isSub}}
+{{#each this.category}}
+<h1>{{SubCatName}}</h1>
+{{/each}}
+{{else}}
+{{#each this.category}}
+<h1>{{CatName}}</h1>
+{{/each}}
+{{/if}}
+{{/if}}

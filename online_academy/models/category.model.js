@@ -2,7 +2,7 @@ const db = require('../utils/db');
 
 module.exports = {
     allWithDetail(id) {
-        const sql = `select p.SubCatName
+        const sql = `select *
                     from subcategories p 
                     where p.CatID = ${id}`;
         return db.load(sql);
