@@ -3,15 +3,15 @@
 
 <head>
     <style>
+        a:hover>span {
+            color: dodgerblue;
+        }
+
         .dropdown:hover>.dropdown-menu {
             display: block;
         }
 
-        .dropdown-menu>li:hover>.submenu {
-            display: block;
-        }
-
-        .dropright:hover>.dropdown-menu {
+        .dropright>li:hover>.submenu {
             display: block;
         }
 
@@ -27,6 +27,10 @@
         .form-inline input[type=search]:focus+i {
             color: dodgerblue;
         }
+
+        .bodyContainer {
+            height: 100vh;
+        }
     </style>
     <meta charset="utf-8">
     <title>Online Academy</title>
@@ -36,7 +40,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/">
             <i class="fa fa-home fa-lg" style="color: dodgerblue;" aria-hidden="true">
                 <span class="text-dark">Online Academy</span>
             </i>
@@ -48,43 +52,32 @@
                     <div class="dropdown">
                         <a class="btn m-0" type="button" role="button" data-toggle="dropdown" id="categoryId"
                             aria-haspopup="true" aria-expanded="false">
-                            Category
+                            Categories
                         </a>
-                        <div class="dropdown-menu">
-                            <div class="dropright m-0">
-                                <a class="btn dropdown-item pt-2 px-3" data-toggle="dropdown" type="button"
+                        <ul class="dropdown-menu dropright m-0">
+                            {{#each lcCategories}}
+                            <li>
+                                <a class="btn dropdown-item pt-3 px-3" type="button"
                                     style="margin-top: -3px;width: 250px;height: 50px;" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    Information Technology
+                                    href="/courses/{{CatID}}">
+                                    {{CatName}}
                                     <i class="fa fa-arrow-right fa-sm float-xl-right pt-xl-2" aria-hidden="true"></i>
                                 </a>
-                                <ul class="submenu dropdown-menu">
+                                <ul class="submenu dropdown-menu text-left">
                                     <li><a class="dropdown-item btn text-left" style="width: 250px;" role="button"
-                                            href="#">All Information Technology
+                                            href="/courses/{{CatID}}">
+                                            All {{CatName}}
                                         </a></li>
-                                    {{#each lcCategories}}
-                                    <li>
-                                        <a class="dropdown-item btn text-left" style="width: 250px;"
-                                            data-toggle="dropdown" role="button" href="#">
-                                            {{CatName}}
-                                            <i class="fa fa-arrow-right fa-sm float-xl-right pt-xl-1"
-                                                aria-hidden="true"></i>
-                                        </a>
-                                        <ul class="submenu dropdown-menu text-left">
-                                            <li><a class="dropdown-item btn text-left" style="width: 250px;"
-                                                    role="button" href="#">All {{CatName}}
-                                                </a></li>
-                                            {{#each subs}}
-                                            <li><a class="dropdown-item btn text-left" style="width: 250px;"
-                                                    data-toggle="dropdown" role="button" href="#">
-                                                    {{SubCatName}}
-                                                </a></li>
-                                            {{/each}}
-                                        </ul>
-                                    </li>
+                                    {{#each subs}}
+                                    <li><a class="dropdown-item btn text-left" style="width: 250px;" role="button"
+                                            href="/courses/sub/{{SubCatID}}">
+                                            {{SubCatName}}
+                                        </a></li>
                                     {{/each}}
-                            </div>
-                        </div>
+                                </ul>
+                            </li>
+                            {{/each}}
+                        </ul>
                     </div>
                 </li>
 
@@ -96,6 +89,16 @@
                     </i>
                     </input>
                 </form>
+
+                <a name="" id="" class="btn mx-2" href="#" role="button">
+                    <span>Teach on Online Academy</span>
+                </a>
+                <a name="" id="" class="btn btn-primary mx-2" href="#" role="button">
+                    <i class="fa fa-shopping-cart" aria-hidden="true">
+
+                    </i></a>
+
+
                 <form class="form-inline">
                     <div class="form-group">
                         <a name="" id="" class="btn btn-outline-primary mx-2" style="min-width: 120px;" href="#"
@@ -112,7 +115,9 @@
     </nav>
 
 
-    {{{body}}}
+    <div class="bodyContainer">
+        {{{body}}}
+    </div>
 
 
 
