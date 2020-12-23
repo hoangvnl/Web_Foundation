@@ -59,18 +59,18 @@
                             <li>
                                 <a class="btn dropdown-item pt-3 px-3" type="button"
                                     style="margin-top: -3px;width: 250px;height: 50px;" role="button"
-                                    href="/courses/{{CatID}}">
+                                    href="/courses/{{CatName}}">
                                     {{CatName}}
                                     <i class="fa fa-arrow-right fa-sm float-xl-right pt-xl-2" aria-hidden="true"></i>
                                 </a>
                                 <ul class="submenu dropdown-menu text-left">
                                     <li><a class="dropdown-item btn text-left" style="width: 250px;" role="button"
-                                            href="/courses/{{CatID}}">
+                                            href="/courses/{{CatName}}">
                                             All {{CatName}}
                                         </a></li>
                                     {{#each subs}}
                                     <li><a class="dropdown-item btn text-left" style="width: 250px;" role="button"
-                                            href="/courses/sub/{{SubCatID}}">
+                                            href="/courses/{{../CatName}}/{{SubCatName}}">
                                             {{SubCatName}}
                                         </a></li>
                                     {{/each}}

@@ -17,7 +17,6 @@ app.get('/', function (req, res) {
     res.render('home');
 });
 
-app.use('/courses/sub', require('./routes/subcategory.route'));
 app.use('/courses', require('./routes/category.route'));
 
 
