@@ -6,5 +6,8 @@ module.exports = {
     },
     single(id) {
         return db.load(`select * from subcategories where SubCatID = ${id}`);
+    },
+    singleByName(name) {
+        return db.load(`select * from subcategories where SubCatName = "${name}"`);
     }
 }

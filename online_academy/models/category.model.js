@@ -12,6 +12,9 @@ module.exports = {
     },
     single(id) {
         return db.load(`select * from categories where CatID = ${id}`);
+    },
+    singleByName(name) {
+        return db.load(`select * from categories where CatName = "${name}"`);
     }
 
 }
