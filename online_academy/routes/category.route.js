@@ -2,7 +2,11 @@ const express = require('express');
 const category_module = require('../models/category.model');
 const sub_category_module = require('../models/subcategory.model');
 const router = express.Router();
-console.log('da vao trong ');
+
+router.get('/detail', async function (req, res) {
+    res.render('vwCategories/detail');
+})
+
 router.get('/:cat/:subCat', async function (req, res) {
     const subCat = req.params.subCat;
 

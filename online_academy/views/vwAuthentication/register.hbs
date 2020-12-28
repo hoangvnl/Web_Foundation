@@ -1,0 +1,46 @@
+{{#section 'js'}}
+<script>
+    $('#frmRegister').on('submit', function (e) {
+        e.preventDefault();
+        const email = $('#inputEmail').val();
+
+        $.getJSON(`/join/is-available?email=${email}`, function (data) {
+            if (data === true) {
+                $('#frmRegister').off('submit').submit();
+            } else {
+                $('#showValid').removeClass('d-none');
+            }
+        })
+    })
+</script>
+{{/section}}
+
+<div class="login__box mx-auto my-5" style="width: 380px;">
+    <div class="login__box__head font-weight-bold py-4 px-3 border-bottom">
+        <p>Sign Up and Start Learning!</p>
+    </div>
+    <div class="login__box__content">
+
+        <form id="frmRegister" action='' method="POST">
+            <div class="form-group form-inline mt-1 bg-danger pt-3 pl-4 text-center text-white d-none" id="showValid">
+                <p>Your email has already been registered</p>
+            </div>
+            <div class="form-group form-inline mt-3 mb-1 ">
+                <input type="email" class="form-control form-control-lg pl-sm-5 w-100" id="inputEmail" name="email"
+                    placeholder="Email" required>
+                <i class="fa fa-lg fa-envelope position-absolute ml-3" aria-hidden="true"></i>
+            </div>
+            <div class="form-group form-inline my-1 ">
+                <input type="text" class="form-control form-control-lg pl-sm-5 w-100" id="inputUserName" name="username"
+                    placeholder="Full Name" required>
+                <i class="fa fa-user-circle fa-lg position-absolute ml-3" aria-hidden="true"></i>
+            </div>
+            <div class="form-group form-inline my-1 ">
+                <input type="password" class="form-control form-control-lg pl-sm-5 w-100" id="inputPassword"
+                    name="password" placeholder="Password" required>
+                <i class="fa fa-key fa-lg position-absolute ml-3" aria-hidden="true"></i>
+            </div>
+            <button type="submit" class="btn btn-primary w-100 mt-1">Sign Up</button>
+        </form>
+    </div>
+</div>
