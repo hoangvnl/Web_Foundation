@@ -9,6 +9,7 @@ app.use(express.urlencoded({
 
 
 require('./middlewares/view.mdw')(app);
+require('./middlewares/session.mdw')(app);
 require('./middlewares/locals.mdw')(app);
 require('./middlewares/routes.mdw')(app);
 require('./middlewares/error.mdw')(app);

@@ -11,6 +11,18 @@
             display: block;
         }
 
+        .dropleft:hover>.dropdown-menu {
+            display: block;
+        }
+
+        .wishList:hover {
+            color: dodgerblue;
+        }
+
+        .cart:hover {
+            color: dodgerblue;
+        }
+
         .dropright>li:hover>.submenu {
             display: block;
         }
@@ -41,7 +53,7 @@
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand pb-3" href="/">
             <i class="fa fa-home fa-lg" style="color: dodgerblue;" aria-hidden="true">
                 <span class="text-dark">Online Academy</span>
             </i>
@@ -94,12 +106,36 @@
                 <a name="" id="" class="btn mx-2" href="#" role="button">
                     <span>Teach on Online Academy</span>
                 </a>
-                <a name="" id="" class="btn btn-primary mx-2" href="#" role="button">
-                    <i class="fa fa-shopping-cart" aria-hidden="true">
+                <a name="" id="" class="btn mx-2" href="#" role="button">
+                    <i class="cart fa fa-shopping-cart fa-lg" aria-hidden="true">
+                    </i>
+                </a>
 
-                    </i></a>
 
+                {{#if isAuth}}
+                <a name="" id="" class="btn mx-2" href="#" role="button">
+                    <i class="wishList fa fa-heart-o fa-lg" aria-hidden="true"></i>
+                </a>
+                <form id="frmLogout" action="/join/logout" method="post"></form>
+                <div class="dropleft mx-2">
+                    <a name="" id="" class="btn btn-primary rounded-circle" data-toggle="dropdown" href="#"
+                        role="button">
+                        VH
+                    </a>
+                    <ul class="dropdown-menu" style="margin-right: -3rem; margin-top: 2.4rem;">
+                        <li>
+                            <a name="" id="" class="dropdown-item btn btn-primary" href="/user/edit-profile"
+                                role="button">Edit
+                                Profile</a>
+                        </li>
+                        <li>
+                            <a name="" id="" class="dropdown-item btn btn-primary"
+                                href="javascript: $('#frmLogout').submit()" role="button">Log Out</a>
+                        </li>
 
+                    </ul>
+                </div>
+                {{else}}
                 <form class="form-inline">
                     <div class="form-group">
                         <a name="" id="" class="btn btn-outline-primary mx-2" style="min-width: 120px;"
@@ -112,6 +148,7 @@
                         </a>
                     </div>
                 </form>
+                {{/if}}
             </ul>
         </div>
     </nav>
