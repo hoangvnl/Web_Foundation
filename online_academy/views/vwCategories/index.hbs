@@ -1,4 +1,58 @@
-<div style="margin: 4rem 8rem;">
+{{#section 'css'}}
+<style>
+    .mainContent {
+        margin: 4rem 8rem;
+    }
+
+    .content {
+        margin-top: 1rem;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: black;
+    }
+
+    .courseCard {
+        border-bottom: whitesmoke;
+        margin-top: 1rem;
+        padding-bottom: 1rem;
+        border-style: none none solid none;
+    }
+
+    .courseName {
+        font-size: 1.4rem;
+        color: lightslategray;
+    }
+
+    .info>p {
+        color: black;
+        line-height: .7rem;
+    }
+
+    .instructor {
+        color: gray;
+    }
+
+    .rate {
+        color: orange;
+        font-size: 1.2rem;
+    }
+
+    .rateCount {
+        color: gray;
+        line-height: 1.8rem;
+        margin-left: 1rem;
+    }
+
+    img {
+        width: 20rem;
+        height: 12rem;
+        margin-right: 1rem;
+    }
+</style>
+{{/section}}
+<div class="mainContent">
     {{#if this.empty}}
     <h1>Khong co du lieu</h1>
     {{else}}
@@ -12,4 +66,52 @@
     {{/each}}
     {{/if}}
     {{/if}}
+    <div class="content">
+        <a name="" id="" class="" href="#" role="button">
+            <div class="courseCard d-flex">
+                <img src="/public/images/course1.png" alt="">
+                <div class="info">
+                    <p><b class="courseName">The Complete Financial Analyst Course 2020</b></p>
+                    <p class="category">Development</p>
+                    <p class="instructor">365 Carrers</p>
+                    <div class="d-flex">
+                        <div class="rate">
+                            <b>4.6</b>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="rateCount">
+                            (60,979)
+                        </div>
+                    </div>
+                    <p class="badge badge-warning mt-5">Warning</p>
+                </div>
+            </div>
+            <div class="courseCard d-flex">
+                <img src="/public/images/course1.png" alt="">
+                <div class="info">
+                    <p><b class="courseName">The Complete Financial Analyst Course 2020</b></p>
+                    <p class="category">Development</p>
+                    <p class="instructor">365 Carrers</p>
+                    <div class="d-flex">
+                        <div class="rate">
+                            <b>4.6</b>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star" aria-hidden="true"></i>
+                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                        </div>
+                        <div class="rateCount">
+                            (60,979)
+                        </div>
+                    </div>
+                    <p class="badge badge-warning mt-5">Warning</p>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>
