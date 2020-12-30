@@ -7,6 +7,7 @@ app.use(express.urlencoded({
 }));
 
 
+app.use('/public', express.static('public'));
 
 require('./middlewares/view.mdw')(app);
 require('./middlewares/session.mdw')(app);

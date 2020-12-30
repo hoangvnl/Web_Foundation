@@ -1,10 +1,10 @@
 const db = require('../utils/db');
-const TBL_TOKENS = 'tokens';
+const TBL_TOKENS = 'TOKENS';
 
 module.exports = {
 
     async singleByToken(token) {
-        const rows = await db.load(`select * from ${TBL_TOKENS} where token = '${token}'`);
+        const rows = await db.load(`select * from ${TBL_TOKENS} where Token = '${token}'`);
         if (rows.length === 0) {
             return null;
         }

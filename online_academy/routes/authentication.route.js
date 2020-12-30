@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const userModel = require('../models/user.model');
-const tokenModel = require('../models/token.model')
+const tokenModel = require('../models/token.model');
 
 router.get('/login', async function (req, res) {
     res.render('vwAuthentication/login');
@@ -15,28 +15,29 @@ router.get('/login', async function (req, res) {
 })
 
 router.post('/login', async function (req, res) {
-    const user = await userModel.singleByEmail(req.body.email);
+    const user = await userModel.singleByEmail(req.body.Email);
     if (user === null) {
         return res.render('vwAuthentication/login', {
             err_message: 'Invalid email or password.'
         });
     }
 
-    const ret = bcrypt.compareSync(req.body.password, user.password);
+    const ret = bcrypt.compareSync(req.body.Password, user.Password);
     if (ret === false) {
         return res.render('vwAuthentication/login', {
             err_message: 'Invalid email or password.'
         });
     }
 
-    if (!user.isverified) {
+    if (!user.Verification) {
         return res.render('vwAuthentication/pending', {
-            email: user.email
+            email: user.Email
         });
     }
 
     req.session.isAuth = true;
     req.session.userAuth = user;
+
 
 
     let url = req.session.retUrl || '/';
@@ -50,28 +51,33 @@ router.post('/logout', async function (req, res) {
     res.redirect(req.headers.referer);
 })
 
-router.get('/register', async function (req, res) {
-    res.render('vwAuthentication/register');
+router.get('/register', function (req, res) {
+    if (req.session.isAuth === false) {
+        res.render('vwAuthentication/register');
+    }
+    else {
+
+        res.redirect('/');
+    }
 })
 
 router.post('/register', async function (req, res) {
 
-
-    const hash = bcrypt.hashSync(req.body.password, 7);
+    const hash = bcrypt.hashSync(req.body.Password, 7);
     const user = {
-        username: req.body.username,
-        password: hash,
-        permission: 0,
-        email: req.body.email,
-        isverified: 0
+        UserName: req.body.UserName,
+        Password: hash,
+        Permission: 0,
+        Email: req.body.Email,
+        Verification: 0
     }
 
     await userModel.add(user);
-    const row = await userModel.singleByEmail(user.email);
+    const row = await userModel.singleByEmail(user.Email);
 
     const newToken = {
-        userid: row.id,
-        token: crypto.randomBytes(16).toString('hex')
+        UserID: row.UserID,
+        Token: crypto.randomBytes(16).toString('hex')
     };
 
     await tokenModel.add(newToken);
@@ -85,9 +91,9 @@ router.post('/register', async function (req, res) {
     });
     var mailOptions = {
         from: 'onlineacademy388421@gmail.com',
-        to: row.email,
+        to: row.Email,
         subject: 'Account Verification Token',
-        text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/join\/confirmation\/' + newToken.token + '\n'
+        text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/join\/confirmation\/' + newToken.Token + '\n'
     };
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
@@ -99,12 +105,11 @@ router.post('/register', async function (req, res) {
 
 
     res.render('vwAuthentication/pending', {
-        email: row.email
+        email: row.Email
     });
 })
 
 router.get('/:confirmation/:token', async function (req, res) {
-    console.log('da vao confirmation');
     const token = req.params.token;
     console.log(token);
     const row = await tokenModel.singleByToken(token);
@@ -113,11 +118,9 @@ router.get('/:confirmation/:token', async function (req, res) {
 
     }
     else {
-        const user = await userModel.singleByID(row.userid);
-        userModel.verify(user.id);
+        const user = await userModel.singleByID(row.UserID);
+        userModel.verify(user.UserID);
         res.render('vwAuthentication/confirmed');
-        req.session.isAuth = true;
-        req.session.userAuth = user;
     }
 
 })

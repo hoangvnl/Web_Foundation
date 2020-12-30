@@ -1,5 +1,5 @@
 const db = require('../utils/db');
-const TBL_USERS = 'users';
+const TBL_USERS = 'USERS';
 
 module.exports = {
 
@@ -8,7 +8,7 @@ module.exports = {
     },
 
     async singleByEmail(email) {
-        const rows = await db.load(`select * from ${TBL_USERS} where email = '${email}'`);
+        const rows = await db.load(`select * from ${TBL_USERS} where Email = '${email}'`);
         if (rows.length === 0) {
             return null;
         }
@@ -17,7 +17,7 @@ module.exports = {
         }
     },
     async singleByID(id) {
-        const rows = await db.load(`select * from ${TBL_USERS} where id = '${id}'`);
+        const rows = await db.load(`select * from ${TBL_USERS} where UserID = ${id}`);
         if (rows.length === 0) {
             return null;
         }
@@ -26,7 +26,7 @@ module.exports = {
         }
     },
     verify(entity) {
-        db.load(`update ${TBL_USERS} set isverified = 1 where id = ${entity}`)
+        db.load(`update ${TBL_USERS} set Verification = 1 where UserID = ${entity}`)
     },
     add(entity) {
         return db.add(entity, TBL_USERS);

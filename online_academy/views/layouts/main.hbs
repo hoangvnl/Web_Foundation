@@ -72,19 +72,19 @@
                             <li>
                                 <a class="btn dropdown-item pt-3 px-3" type="button"
                                     style="margin-top: -3px;width: 250px;height: 50px;" role="button"
-                                    href="/courses/{{CatName}}">
-                                    {{CatName}}
+                                    href="/courses/{{CategoryName}}">
+                                    {{CategoryName}}
                                     <i class="fa fa-arrow-right fa-sm float-xl-right pt-xl-2" aria-hidden="true"></i>
                                 </a>
                                 <ul class="submenu dropdown-menu text-left">
                                     <li><a class="dropdown-item btn text-left" style="width: 250px;" role="button"
-                                            href="/courses/{{CatName}}">
-                                            All {{CatName}}
+                                            href="/courses/{{CategoryName}}">
+                                            All {{CategoryName}}
                                         </a></li>
                                     {{#each subs}}
                                     <li><a class="dropdown-item btn text-left" style="width: 250px;" role="button"
-                                            href="/courses/{{../CatName}}/{{SubCatName}}">
-                                            {{SubCatName}}
+                                            href="/courses/{{../CategoryName}}/{{SubcategoryName}}">
+                                            {{SubcategoryName}}
                                         </a></li>
                                     {{/each}}
                                 </ul>
@@ -160,7 +160,7 @@
 
 
 
-    <footer style="display:flex">
+    <footer style="display:flex; height: 8rem;">
         <a name="aboutUs" id="aboutUs" class="btn text-primary mx-auto" href="#" role="text">About us</a>
         <a name="contactUs" id="contactUs" class="btn text-primary mx-auto" href="#" role="text">Contact us</a>
     </footer>

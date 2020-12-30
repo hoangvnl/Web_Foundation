@@ -1,7 +1,59 @@
+{{#section 'css'}}
+<style>
+    .rotate {
+        -moz-transition: all 0.3s linear;
+        -webkit-transition: all 0.3s linear;
+        transition: all 0.3s linear;
+    }
+
+    .fa-star,
+    .fa-star-o,
+    .fa-star-half {
+        color: orange;
+    }
+
+    .reviewItem {
+        display: flex;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border-bottom: gray;
+        border-style: none none solid none;
+    }
+
+    .reviewItemAvatar {
+        display: block;
+        width: 9rem;
+        height: 3rem;
+        background-color: green;
+        line-height: 3rem;
+        margin-right: 1rem;
+    }
+
+    .sideBarMenu {
+        margin-left: 60rem;
+        position: fixed;
+        z-index: 1;
+        width: 25rem;
+    }
+
+    .rotate.down {
+        -ms-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+    }
+</style>
+{{/section}}
+
 {{#section 'js'}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
 </script>
 <script>
+
+    $(".collapsed").click(function () {
+        $('.rotate').toggleClass("down");
+    })
+
     function changeDisplay() {
         var scroll = $(window).scrollTop();
 
@@ -22,25 +74,34 @@
 {{/section}}
 
 <div class="mainContent">
-    <div id="sideBar" class="position-absolute" style="margin-left: 69rem;z-index: 1;position: fixed;">
+    <div id="sideBar" class="position-absolute sideBarMenu shadow">
         <div class="card text-left">
-            <img class="card-img-top" src="holder.js/100px180/" alt="">
             <div class="card-body">
                 <div class="card-title d-flex">
-                    <h3 class="d-flex">$15.99&nbsp;
-                    </h3>
-                    <p class="d-flex"><del>$179.99</del>&nbsp;91% off</p>
+                    <h1 class="d-flex">
+                        <b>$15.99&nbsp;</b>
+                    </h1>
+                    <h6 class="d-flex" style="line-height: 3rem;">
+                        <del>$179.99</del>&nbsp;91% off
+                    </h6>
 
                 </div>
-                <p class="card-text">Body</p>
+                <p class="card-text">
+                    <button class="btn btn-danger w-100 my-3">
+                        <b>Add to cart</b>
+                    </button>
+                    <button class="btn btn-outline-primary w-100 ">
+                        <b>Buy now</b>
+                    </button>
+                </p>
             </div>
         </div>
     </div>
     <div class="topContainer">
         <div class="card text-white bg-dark">
-            <div class="card-body" style="margin: 4rem 45rem 4rem 8rem;">
+            <div class="card-body" style="margin: 4rem 39rem 1rem 8rem;">
                 <h1 class="card-title">C# Basics for Beginners: Learn C# Fundamentals by Coding</h1>
-                <div style="color: yellow;">4.5
+                <div style="color: orange;">4.5
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
@@ -56,185 +117,321 @@
                     <p> <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                         Last updated 12/2020
                     </p>
+                    <p>
+                        <button class="btn btn-outline-dark text-white">
+                            Wishlist
+                            <i class="fa fa-heart-o" aria-hidden="true"></i>
+                        </button>
+                    </p>
                 </div>
             </div>
-            <div></div>
+
         </div>
     </div>
-    <div class="botContainer">
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio adipisci iure quibusdam assumenda beatae
-            repellendus similique commodi numquam laudantium, obcaecati voluptatem praesentium quod blanditiis neque
-            animi velit dolorem itaque at?</p>
-        <p>Rerum dignissimos placeat commodi exercitationem accusantium. Iusto quos sed delectus! Itaque, ad? Hic
-            nesciunt doloribus quidem magni impedit quae tempora commodi ipsum nulla mollitia, dignissimos iusto.
-            Quisquam officia voluptatem deserunt.</p>
-        <p>Esse mollitia dolorem blanditiis quo omnis dolor? Eaque fugit velit voluptatibus quibusdam nihil et? Iusto
-            asperiores sit, natus officiis sapiente tempora, doloribus odit unde, eaque voluptatum veritatis aspernatur
-            quae provident?</p>
-        <p>Beatae asperiores nostrum qui natus aliquid expedita animi ad omnis illum blanditiis maiores molestias odio
-            repudiandae eos magni quia, quod deleniti perspiciatis porro vitae? Quisquam debitis in doloribus maiores
-            illo?</p>
-        <p>Tempora perferendis in exercitationem neque ipsum veritatis veniam molestiae odit omnis culpa. At neque nihil
-            alias iure in dolore error eaque, accusantium est, assumenda, unde ullam ut cupiditate quidem officia!</p>
-        <p>Libero veniam itaque, doloremque, soluta molestiae illo atque rerum eligendi facilis est labore eveniet
-            possimus mollitia deleniti quaerat fuga at, harum similique dicta quos. Necessitatibus, quas sequi.
-            Laboriosam, maxime eius.</p>
-        <p>Optio minus placeat aperiam, accusantium doloribus ducimus mollitia architecto, earum explicabo labore rem
-            voluptatem, error vero pariatur veritatis? Quidem impedit nobis doloribus possimus? Ex, nesciunt modi iure
-            maxime fugiat provident!</p>
-        <p>Est eum praesentium maiores cupiditate necessitatibus dicta tenetur perspiciatis porro culpa numquam
-            voluptatibus quaerat itaque aperiam, repudiandae tempore asperiores velit delectus impedit? Facere eos nemo
-            exercitationem necessitatibus inventore reprehenderit illo?</p>
-        <p>Obcaecati ex recusandae sint, debitis enim laudantium harum repudiandae eveniet at minima voluptas nobis
-            excepturi optio quam possimus, quod modi voluptatum necessitatibus impedit! Fugiat officia fugit quasi illo
-            cupiditate consequuntur.</p>
-        <p>Dolor corporis culpa ullam sapiente! Excepturi asperiores totam fuga incidunt ea, adipisci possimus dolor
-            quas accusantium atque quos! Qui consectetur maiores earum deleniti pariatur minus quas sed adipisci ratione
-            molestias?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio adipisci iure quibusdam assumenda beatae
-            repellendus similique commodi numquam laudantium, obcaecati voluptatem praesentium quod blanditiis neque
-            animi velit dolorem itaque at?</p>
-        <p>Rerum dignissimos placeat commodi exercitationem accusantium. Iusto quos sed delectus! Itaque, ad? Hic
-            nesciunt doloribus quidem magni impedit quae tempora commodi ipsum nulla mollitia, dignissimos iusto.
-            Quisquam officia voluptatem deserunt.</p>
-        <p>Esse mollitia dolorem blanditiis quo omnis dolor? Eaque fugit velit voluptatibus quibusdam nihil et? Iusto
-            asperiores sit, natus officiis sapiente tempora, doloribus odit unde, eaque voluptatum veritatis aspernatur
-            quae provident?</p>
-        <p>Beatae asperiores nostrum qui natus aliquid expedita animi ad omnis illum blanditiis maiores molestias odio
-            repudiandae eos magni quia, quod deleniti perspiciatis porro vitae? Quisquam debitis in doloribus maiores
-            illo?</p>
-        <p>Tempora perferendis in exercitationem neque ipsum veritatis veniam molestiae odit omnis culpa. At neque nihil
-            alias iure in dolore error eaque, accusantium est, assumenda, unde ullam ut cupiditate quidem officia!</p>
-        <p>Libero veniam itaque, doloremque, soluta molestiae illo atque rerum eligendi facilis est labore eveniet
-            possimus mollitia deleniti quaerat fuga at, harum similique dicta quos. Necessitatibus, quas sequi.
-            Laboriosam, maxime eius.</p>
-        <p>Optio minus placeat aperiam, accusantium doloribus ducimus mollitia architecto, earum explicabo labore rem
-            voluptatem, error vero pariatur veritatis? Quidem impedit nobis doloribus possimus? Ex, nesciunt modi iure
-            maxime fugiat provident!</p>
-        <p>Est eum praesentium maiores cupiditate necessitatibus dicta tenetur perspiciatis porro culpa numquam
-            voluptatibus quaerat itaque aperiam, repudiandae tempore asperiores velit delectus impedit? Facere eos nemo
-            exercitationem necessitatibus inventore reprehenderit illo?</p>
-        <p>Obcaecati ex recusandae sint, debitis enim laudantium harum repudiandae eveniet at minima voluptas nobis
-            excepturi optio quam possimus, quod modi voluptatum necessitatibus impedit! Fugiat officia fugit quasi illo
-            cupiditate consequuntur.</p>
-        <p>Dolor corporis culpa ullam sapiente! Excepturi asperiores totam fuga incidunt ea, adipisci possimus dolor
-            quas accusantium atque quos! Qui consectetur maiores earum deleniti pariatur minus quas sed adipisci ratione
-            molestias?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio adipisci iure quibusdam assumenda beatae
-            repellendus similique commodi numquam laudantium, obcaecati voluptatem praesentium quod blanditiis neque
-            animi velit dolorem itaque at?</p>
-        <p>Rerum dignissimos placeat commodi exercitationem accusantium. Iusto quos sed delectus! Itaque, ad? Hic
-            nesciunt doloribus quidem magni impedit quae tempora commodi ipsum nulla mollitia, dignissimos iusto.
-            Quisquam officia voluptatem deserunt.</p>
-        <p>Esse mollitia dolorem blanditiis quo omnis dolor? Eaque fugit velit voluptatibus quibusdam nihil et? Iusto
-            asperiores sit, natus officiis sapiente tempora, doloribus odit unde, eaque voluptatum veritatis aspernatur
-            quae provident?</p>
-        <p>Beatae asperiores nostrum qui natus aliquid expedita animi ad omnis illum blanditiis maiores molestias odio
-            repudiandae eos magni quia, quod deleniti perspiciatis porro vitae? Quisquam debitis in doloribus maiores
-            illo?</p>
-        <p>Tempora perferendis in exercitationem neque ipsum veritatis veniam molestiae odit omnis culpa. At neque nihil
-            alias iure in dolore error eaque, accusantium est, assumenda, unde ullam ut cupiditate quidem officia!</p>
-        <p>Libero veniam itaque, doloremque, soluta molestiae illo atque rerum eligendi facilis est labore eveniet
-            possimus mollitia deleniti quaerat fuga at, harum similique dicta quos. Necessitatibus, quas sequi.
-            Laboriosam, maxime eius.</p>
-        <p>Optio minus placeat aperiam, accusantium doloribus ducimus mollitia architecto, earum explicabo labore rem
-            voluptatem, error vero pariatur veritatis? Quidem impedit nobis doloribus possimus? Ex, nesciunt modi iure
-            maxime fugiat provident!</p>
-        <p>Est eum praesentium maiores cupiditate necessitatibus dicta tenetur perspiciatis porro culpa numquam
-            voluptatibus quaerat itaque aperiam, repudiandae tempore asperiores velit delectus impedit? Facere eos nemo
-            exercitationem necessitatibus inventore reprehenderit illo?</p>
-        <p>Obcaecati ex recusandae sint, debitis enim laudantium harum repudiandae eveniet at minima voluptas nobis
-            excepturi optio quam possimus, quod modi voluptatum necessitatibus impedit! Fugiat officia fugit quasi illo
-            cupiditate consequuntur.</p>
-        <p>Dolor corporis culpa ullam sapiente! Excepturi asperiores totam fuga incidunt ea, adipisci possimus dolor
-            quas accusantium atque quos! Qui consectetur maiores earum deleniti pariatur minus quas sed adipisci ratione
-            molestias?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio adipisci iure quibusdam assumenda beatae
-            repellendus similique commodi numquam laudantium, obcaecati voluptatem praesentium quod blanditiis neque
-            animi velit dolorem itaque at?</p>
-        <p>Rerum dignissimos placeat commodi exercitationem accusantium. Iusto quos sed delectus! Itaque, ad? Hic
-            nesciunt doloribus quidem magni impedit quae tempora commodi ipsum nulla mollitia, dignissimos iusto.
-            Quisquam officia voluptatem deserunt.</p>
-        <p>Esse mollitia dolorem blanditiis quo omnis dolor? Eaque fugit velit voluptatibus quibusdam nihil et? Iusto
-            asperiores sit, natus officiis sapiente tempora, doloribus odit unde, eaque voluptatum veritatis aspernatur
-            quae provident?</p>
-        <p>Beatae asperiores nostrum qui natus aliquid expedita animi ad omnis illum blanditiis maiores molestias odio
-            repudiandae eos magni quia, quod deleniti perspiciatis porro vitae? Quisquam debitis in doloribus maiores
-            illo?</p>
-        <p>Tempora perferendis in exercitationem neque ipsum veritatis veniam molestiae odit omnis culpa. At neque nihil
-            alias iure in dolore error eaque, accusantium est, assumenda, unde ullam ut cupiditate quidem officia!</p>
-        <p>Libero veniam itaque, doloremque, soluta molestiae illo atque rerum eligendi facilis est labore eveniet
-            possimus mollitia deleniti quaerat fuga at, harum similique dicta quos. Necessitatibus, quas sequi.
-            Laboriosam, maxime eius.</p>
-        <p>Optio minus placeat aperiam, accusantium doloribus ducimus mollitia architecto, earum explicabo labore rem
-            voluptatem, error vero pariatur veritatis? Quidem impedit nobis doloribus possimus? Ex, nesciunt modi iure
-            maxime fugiat provident!</p>
-        <p>Est eum praesentium maiores cupiditate necessitatibus dicta tenetur perspiciatis porro culpa numquam
-            voluptatibus quaerat itaque aperiam, repudiandae tempore asperiores velit delectus impedit? Facere eos nemo
-            exercitationem necessitatibus inventore reprehenderit illo?</p>
-        <p>Obcaecati ex recusandae sint, debitis enim laudantium harum repudiandae eveniet at minima voluptas nobis
-            excepturi optio quam possimus, quod modi voluptatum necessitatibus impedit! Fugiat officia fugit quasi illo
-            cupiditate consequuntur.</p>
-        <p>Dolor corporis culpa ullam sapiente! Excepturi asperiores totam fuga incidunt ea, adipisci possimus dolor
-            quas accusantium atque quos! Qui consectetur maiores earum deleniti pariatur minus quas sed adipisci ratione
-            molestias?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio adipisci iure quibusdam assumenda beatae
-            repellendus similique commodi numquam laudantium, obcaecati voluptatem praesentium quod blanditiis neque
-            animi velit dolorem itaque at?</p>
-        <p>Rerum dignissimos placeat commodi exercitationem accusantium. Iusto quos sed delectus! Itaque, ad? Hic
-            nesciunt doloribus quidem magni impedit quae tempora commodi ipsum nulla mollitia, dignissimos iusto.
-            Quisquam officia voluptatem deserunt.</p>
-        <p>Esse mollitia dolorem blanditiis quo omnis dolor? Eaque fugit velit voluptatibus quibusdam nihil et? Iusto
-            asperiores sit, natus officiis sapiente tempora, doloribus odit unde, eaque voluptatum veritatis aspernatur
-            quae provident?</p>
-        <p>Beatae asperiores nostrum qui natus aliquid expedita animi ad omnis illum blanditiis maiores molestias odio
-            repudiandae eos magni quia, quod deleniti perspiciatis porro vitae? Quisquam debitis in doloribus maiores
-            illo?</p>
-        <p>Tempora perferendis in exercitationem neque ipsum veritatis veniam molestiae odit omnis culpa. At neque nihil
-            alias iure in dolore error eaque, accusantium est, assumenda, unde ullam ut cupiditate quidem officia!</p>
-        <p>Libero veniam itaque, doloremque, soluta molestiae illo atque rerum eligendi facilis est labore eveniet
-            possimus mollitia deleniti quaerat fuga at, harum similique dicta quos. Necessitatibus, quas sequi.
-            Laboriosam, maxime eius.</p>
-        <p>Optio minus placeat aperiam, accusantium doloribus ducimus mollitia architecto, earum explicabo labore rem
-            voluptatem, error vero pariatur veritatis? Quidem impedit nobis doloribus possimus? Ex, nesciunt modi iure
-            maxime fugiat provident!</p>
-        <p>Est eum praesentium maiores cupiditate necessitatibus dicta tenetur perspiciatis porro culpa numquam
-            voluptatibus quaerat itaque aperiam, repudiandae tempore asperiores velit delectus impedit? Facere eos nemo
-            exercitationem necessitatibus inventore reprehenderit illo?</p>
-        <p>Obcaecati ex recusandae sint, debitis enim laudantium harum repudiandae eveniet at minima voluptas nobis
-            excepturi optio quam possimus, quod modi voluptatum necessitatibus impedit! Fugiat officia fugit quasi illo
-            cupiditate consequuntur.</p>
-        <p>Dolor corporis culpa ullam sapiente! Excepturi asperiores totam fuga incidunt ea, adipisci possimus dolor
-            quas accusantium atque quos! Qui consectetur maiores earum deleniti pariatur minus quas sed adipisci ratione
-            molestias?</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio adipisci iure quibusdam assumenda beatae
-            repellendus similique commodi numquam laudantium, obcaecati voluptatem praesentium quod blanditiis neque
-            animi velit dolorem itaque at?</p>
-        <p>Rerum dignissimos placeat commodi exercitationem accusantium. Iusto quos sed delectus! Itaque, ad? Hic
-            nesciunt doloribus quidem magni impedit quae tempora commodi ipsum nulla mollitia, dignissimos iusto.
-            Quisquam officia voluptatem deserunt.</p>
-        <p>Esse mollitia dolorem blanditiis quo omnis dolor? Eaque fugit velit voluptatibus quibusdam nihil et? Iusto
-            asperiores sit, natus officiis sapiente tempora, doloribus odit unde, eaque voluptatum veritatis aspernatur
-            quae provident?</p>
-        <p>Beatae asperiores nostrum qui natus aliquid expedita animi ad omnis illum blanditiis maiores molestias odio
-            repudiandae eos magni quia, quod deleniti perspiciatis porro vitae? Quisquam debitis in doloribus maiores
-            illo?</p>
-        <p>Tempora perferendis in exercitationem neque ipsum veritatis veniam molestiae odit omnis culpa. At neque nihil
-            alias iure in dolore error eaque, accusantium est, assumenda, unde ullam ut cupiditate quidem officia!</p>
-        <p>Libero veniam itaque, doloremque, soluta molestiae illo atque rerum eligendi facilis est labore eveniet
-            possimus mollitia deleniti quaerat fuga at, harum similique dicta quos. Necessitatibus, quas sequi.
-            Laboriosam, maxime eius.</p>
-        <p>Optio minus placeat aperiam, accusantium doloribus ducimus mollitia architecto, earum explicabo labore rem
-            voluptatem, error vero pariatur veritatis? Quidem impedit nobis doloribus possimus? Ex, nesciunt modi iure
-            maxime fugiat provident!</p>
-        <p>Est eum praesentium maiores cupiditate necessitatibus dicta tenetur perspiciatis porro culpa numquam
-            voluptatibus quaerat itaque aperiam, repudiandae tempore asperiores velit delectus impedit? Facere eos nemo
-            exercitationem necessitatibus inventore reprehenderit illo?</p>
-        <p>Obcaecati ex recusandae sint, debitis enim laudantium harum repudiandae eveniet at minima voluptas nobis
-            excepturi optio quam possimus, quod modi voluptatum necessitatibus impedit! Fugiat officia fugit quasi illo
-            cupiditate consequuntur.</p>
-        <p>Dolor corporis culpa ullam sapiente! Excepturi asperiores totam fuga incidunt ea, adipisci possimus dolor
-            quas accusantium atque quos! Qui consectetur maiores earum deleniti pariatur minus quas sed adipisci ratione
-            molestias?</p>
+    <div class="botContainer" style="margin: 1rem 39rem 1rem 8rem;">
+        <div class="card border-dark" style="background-color: whitesmoke; max-height: 500px;">
+            <div class="card-body" style="display: inline-block;">
+                <h4 class="card-title">What you'll learn</h4>
+                <ul class="d-flex" style="list-style-type:none;flex-flow: row wrap; justify-content: space-between;">
+                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
+                        <div class="d-flex" style="max-width: 280px;max-height: 100px;">
+                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
+                            <p class="text-justify ml-1"
+                                style="white-space: normal; text-overflow: ellipsis; overflow-y: hidden; ">
+                                Understand the main interior design styles used in today’s homes in great detail, which
+                                include: Formal Interior Design Styles: Traditional, English Country, French </p>
+                        </div>
+                    </li>
+                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
+                        <div class="d-flex" style="width: 280px;">
+                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
+                            <p class="text-justify ml-1">Select the common materials used in each of the main styles</p>
+                        </div>
+                    </li>
+                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
+                        <div class="d-flex" style="width: 280px;">
+                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
+                            <p class="text-justify ml-1">Select the commonly used patterns for each of the main styles
+                            </p>
+                        </div>
+                    </li>
+                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
+                        <div class="d-flex" style="width: 280px;">
+                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
+                            <p class="text-justify ml-1">Discover your interior design style personality</p>
+                        </div>
+                    </li>
+                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
+                        <div class="d-flex" style="width: 280px;">
+                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
+                            <p class="text-justify ml-1">hUnderstand the main interior design
+                                styles used in today’s
+                                homes in great detail, which include: Formal Interior Design Styles: Traditional,
+                                English Country, French, and Mediterranean; Casual Interior Design Styles</p>
+                        </div>
+                    </li>
+                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
+                        <div class="d-flex" style="width: 280px;">
+                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
+                            <p class="text-justify ml-1">hUnderstand the main interior design
+                                styles used in today’s
+                                homes in great detail, which include: Formal Interior Design Styles: Traditional,
+                                English Country, French, and Mediterranean; Casual Interior Design Styles</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="description mt-4">
+            <h4>Description</h4>
+            <p>With so many different interior design styles available today, do you find yourself getting overwhelmed
+                and unsure of how to choose a style or pull off a style well in your own home? It becomes even more
+                complicated when you want to mix different interior design styles but are unsure of how to do that so it
+                looks fabulous and well pulled together, instead of flat out chaotic. <br>
+
+                To that end, this course has been created to help you understand the defining characteristics of 18
+                different popular interior design styles today so that you can either create one of those styles in your
+                own home or learn how to easily and effectively mix different styles on your own. <br>
+
+                Please note that this course only covers the characteristics of various interior design styles. It does
+                NOT provide information on how to pull together a room (e.g., furniture layouts, rug sizes, etc.). That
+                information can be found in my course "How to Design a Room in 10 Easy Steps"
+            </p>
+        </div>
+        <div class="courseContent mt-4">
+            <h4>Course content</h4>
+            <div id="accordion">
+                <div class="card">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0">
+                            <button class="btn btn-outline-light collapsed w-100 text-dark text-left"
+                                data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
+                                aria-controls="collapseOne">
+                                <i class="fa fa-arrow-down rotate"
+                                    style="animation-duration: 1s;animation-fill-mode: forwards;"></i>
+                                Welcome and Introduction
+                            </button>
+                        </h5>
+                    </div>
+                    <script>
+
+                    </script>
+
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
+                        <div class="card-body">
+                            1
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="instructor mt-4">
+            <h4>Instructor</h4>
+            <h5> <a name="" id="" href="#" role="button">Jose Portilla</a></h5>
+            <div class="d-flex">
+                <a href="#">
+                    <img src="/public/images/courses/1/main.jpg" style="width: 150px;height: 150px;"
+                        class="rounded-circle" alt="">
+                </a>
+                <ul style="list-style-type: none;">
+                    <li class="my-2">
+                        <i class="fa fa-star mx-1" style="color: orange;" aria-hidden="true"></i>
+                        <span>
+                            4.6 Instructor Rating
+                        </span>
+                    </li>
+                    <li class="my-2">
+                        <i class="fa fa-certificate mx-1" style="color: orange;" aria-hidden="true"></i>
+                        <span>
+                            687,667 Reviews
+                        </span>
+                    </li>
+                    <li class="my-2">
+                        <i class="fa fa-users mx-1" style="color: orange;" aria-hidden="true"></i>
+                        <span>
+                            2,102,385 Students
+                        </span>
+                    </li>
+                    <li class="my-2">
+                        <i class="fa fa-play-circle mx-1" style="color: orange;" aria-hidden="true"></i>
+                        <span>
+                            31 Courses
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <p>
+                Jose Marcial Portilla has a BS and MS in Mechanical Engineering from Santa Clara University and years of
+                experience as a professional instructor and trainer for Data Science and programming. He has
+                publications and patents in various fields such as microfluidics, materials science, and data science
+                technologies. Over the course of his career he has developed a skill set in analyzing data and he hopes
+                to use his experience in teaching and data science to help other people learn the power of programming
+                the ability to analyze data, as well as present the data in clear and beautiful visualizations.
+                Currently he works as the Head of Data Science for Pierian Data Inc. and provides in-person data science
+                and python programming training courses to employees working at top companies, including General
+                Electric, Cigna, The New York Times, Credit Suisse, McKinsey and many more. Feel free to contact him on
+                LinkedIn for more information on in-person training sessions or group training sessions in Las Vegas,
+                NV.
+            </p>
+        </div>
+        <div class="studentFeedback mt-4">
+            <h4>Student Feedback</h4>
+            <div class="d-flex">
+                <div class="d-inline-block">
+                    <h1 class="text-center px-2" style="font-size: 4.8rem; color: orange;">4.6</h1>
+                    <p class="text-center">
+                        <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                        <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                        <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                        <i class="fa fa-star fa-lg" aria-hidden="true"></i>
+                        <i class="fa fa-star-half fa-lg" aria-hidden="true"></i>
+                    </p>
+                    <p class="text-center">
+                        Course Rating
+                    </p>
+                </div>
+                <div class="d-block w-100">
+                    <div class="d-flex flex-row mt-2">
+                        <div class="progress ml-3" style="width: 500px;">
+                            <div class="progress-bar" role="progressbar" style="width: 54%" aria-valuenow="28"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <span class="d-inline-flex float-right mx-2">
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                        </span>
+                        <span style="margin-top: -.3rem;">
+                            54%
+                        </span>
+                    </div>
+                    <div class="d-flex flex-row mt-2">
+                        <div class="progress ml-3" style="width: 500px;">
+                            <div class="progress-bar" role="progressbar" style="width: 54%" aria-valuenow="28"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <span class="d-inline-flex float-right mx-2" style="color: orange;">
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star-o float-right" aria-hidden="true"></i>
+                        </span>
+                        <span style="margin-top: -.3rem;">
+                            54%
+                        </span>
+                    </div>
+                    <div class="d-flex flex-row mt-2">
+                        <div class="progress ml-3" style="width: 500px;">
+                            <div class="progress-bar" role="progressbar" style="width: 54%" aria-valuenow="28"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <span class="d-inline-flex float-right mx-2" style="color: orange;">
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star-o float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star-o float-right" aria-hidden="true"></i>
+                        </span>
+                        <span style="margin-top: -.3rem;">
+                            54%
+                        </span>
+                    </div>
+                    <div class="d-flex flex-row mt-2">
+                        <div class="progress ml-3" style="width: 500px;">
+                            <div class="progress-bar" role="progressbar" style="width: 54%" aria-valuenow="28"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <span class="d-inline-flex float-right mx-2" style="color: orange;">
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star-o float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star-o float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star-o float-right" aria-hidden="true"></i>
+                        </span>
+                        <span style="margin-top: -.3rem;">
+                            54%
+                        </span>
+                    </div>
+                    <div class="d-flex flex-row mt-2">
+                        <div class="progress ml-3" style="width: 500px;">
+                            <div class="progress-bar" role="progressbar" style="width: 54%" aria-valuenow="28"
+                                aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                        <span class="d-inline-flex float-right mx-2" style="color: orange;">
+                            <i class="fa fa-star float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star-o float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star-o float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star-o float-right" aria-hidden="true"></i>
+                            <i class="fa fa-star-o float-right" aria-hidden="true"></i>
+                        </span>
+                        <span style="margin-top: -.3rem;">
+                            54%
+                        </span>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+        <div class="reviews my-4">
+            <h4>Reviews</h4>
+            <div class="reviewItem">
+                <div class="reviewItemAvatar text-center text-white align-content-center rounded-circle">
+                    HT
+                </div>
+                <div>
+                    <div>
+                        <b>
+                            Pratik Mahajan
+                        </b>
+                    </div>
+                    <div>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        Amazing course specially for someone who has no idea about Python. This course starts from very
+                        basic and slowly goes into advanced topics in a very detailed manner. There are lot of hands-on
+                        exercises to assess your learning and real-world projects to apply your knowledge. Thanks for
+                        this course
+                    </div>
+                </div>
+            </div>
+            <div class="reviewItem">
+                <div class="reviewItemAvatar text-center text-white align-content-center rounded-circle">
+                    RT
+                </div>
+                <div>
+                    <div>
+                        <b>
+                            Pratik Mahajan
+                        </b>
+                    </div>
+                    <div>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        Amazing course specially for someone who has no idea about Python. This course starts from very
+                        basic and slowly goes into advanced topics in a very detailed manner. There are lot of hands-on
+                        exercises to assess your learning and real-world projects to apply your knowledge. Thanks for
+                        this course
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
