@@ -8,10 +8,9 @@ const tokenModel = require('../models/token.model');
 
 router.get('/login', async function (req, res) {
     res.render('vwAuthentication/login');
-    if (req.headers.referer) {
+    if (req.headers.referer && !req.session.confirmed) {
         req.session.retUrl = req.headers.referer;
     }
-
 })
 
 router.post('/login', async function (req, res) {
@@ -38,8 +37,6 @@ router.post('/login', async function (req, res) {
     req.session.isAuth = true;
     req.session.userAuth = user;
 
-
-
     let url = req.session.retUrl || '/';
     res.redirect(url);
 })
@@ -63,8 +60,7 @@ router.get('/register', function (req, res) {
 
 router.post('/register', async function (req, res) {
 
-    console.log(req.body.row);
-
+    console.log(req.body);
     const hash = bcrypt.hashSync(req.body.Password, 7);
     const user = {
         UserName: req.body.UserName,
@@ -107,21 +103,23 @@ router.post('/register', async function (req, res) {
 
 
     res.render('vwAuthentication/pending', {
+
         row
     });
 })
 
 router.get('/:confirmation/:token', async function (req, res) {
     const token = req.params.token;
-    console.log(token);
     const row = await tokenModel.singleByToken(token);
-    console.log(row);
     if (row === null) {
 
     }
     else {
         const user = await userModel.singleByID(row.UserID);
         userModel.verify(user.UserID);
+        req.session.retUrl = req.headers.referer;
+        console.log(req.session.retUrl);
+        req.session.confirmed = true;
         res.render('vwAuthentication/confirmed');
     }
 

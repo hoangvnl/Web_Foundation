@@ -24,7 +24,39 @@ CREATE DATABASE IF NOT EXISTS `online_academy` DEFAULT CHARACTER SET utf8mb4 COL
 USE `online_academy`;
 
 -- --------------------------------------------------------
+--
+-- Cấu trúc bảng cho bảng `tokens`
+--
 
+CREATE TABLE `tokens` (
+	UserID int,
+    Token varchar(50)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `tokens`
+--
+
+
+
+-- --------------------------------------------------------
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+CREATE TABLE `users` (
+	UserID INT AUTO_INCREMENT PRIMARY KEY not null,
+	Email varchar(50) DEFAULT NULL,
+    Password varchar(255) DEFAULT NULL,
+    UserName varchar(50) DEFAULT NULL,
+    Permission int(6) DEFAULT NULL,
+    Verification int(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+-- --------------------------------------------------------
 --
 -- Cấu trúc bảng cho bảng `category`
 --

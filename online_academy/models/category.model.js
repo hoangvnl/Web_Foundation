@@ -16,6 +16,15 @@ module.exports = {
     },
     singleByName(name) {
         return db.load(`select * from ${TBL_CATEGORY} where CategoryName = "${name}"`);
+    },
+    async getIDByName(name) {
+        const rows = await db.load(`select CategoryID from ${TBL_CATEGORY} where CategoryName = "${name}"`);
+        if (rows.length === 0) {
+            return null;
+        }
+        else {
+            return rows[0].CategoryID;
+        }
     }
 
 }

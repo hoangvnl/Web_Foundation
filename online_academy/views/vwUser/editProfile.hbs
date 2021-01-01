@@ -1,14 +1,89 @@
-<div class="container-fluid">
-    <div class="row h-100 align-items-center">
-        <div class="col-sm-12 ">
-            <div class="card w-50 shadow mx-auto">
-                <div class="card-body text-center">
-                    <h1 class="card-title text-muted text-center" style="font-size: 5rem;">Ooops!</h1>
-                    <h3 class="card-text text">
-                        Hi~
-                    </h3>
-                </div>
+{{#section 'css'}}
+<style>
+    .mainSection {
+        margin: 2rem 12rem;
+        padding-left: 20rem;
+        position: relative;
+        border-style: solid none solid solid;
+        border-width: 1px;
+    }
+
+    .formWrap {
+        position: relative;
+        text-align: center;
+        border-style: none solid;
+        border-width: 1px;
+    }
+
+    .formWrap>form {
+        padding: 1rem 8rem;
+    }
+
+    .user {
+        text-align: center;
+        margin-left: -20rem;
+
+
+    }
+
+    .avatar {
+        width: 120px;
+        height: 120px;
+        font-size: 2rem;
+        line-height: 120px;
+        background-color: cornflowerblue;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+</style>
+{{/section}}
+<div class="mainSection ">
+    <div class="sideNav position-absolute">
+        <div class="user">
+            <div class="avatar text-white text-center rounded-circle mx-auto">
+                VH
             </div>
+            <div class="userName"> Võ Nguyễn Lê Hoàng</div>
+            <ul class="p-0">
+                <li>
+                    <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="#" role="button">Profile</a>
+                </li>
+                <li>
+                    <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="#" role="button">Profile</a>
+                </li>
+                <li>
+                    <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="#" role="button">Profile</a>
+                </li>
+
+            </ul>
         </div>
+
     </div>
+    <div class="formWrap">
+        <h2>Public Profile</h2>
+        <form class="text-left">
+            <div class="form-group">
+                <label for="inputName">Basic:</label>
+                <input type="text" class="form-control" id="inputName" name="UserName" placeholder="Full Name">
+            </div>
+            <button type="submit" class="btn btn-danger">Save</button>
+        </form>
+        <form class="text-left">
+            <div class="form-group">
+                <label for="inputEmail">Email:</label>
+                <input type="email" class="form-control" id="inputEmail" name="Email" placeholder="Email">
+            </div>
+            <button type="submit" class="btn btn-danger">Save</button>
+        </form>
+        <form class="text-left">
+            <div class="form-group">
+                <label for="inputPassword">Password:</label>
+                <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-danger">Save</button>
+        </form>
+    </div>
+
 </div>

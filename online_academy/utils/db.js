@@ -4,7 +4,7 @@ var pool = mysql.createPool({
     host: 'localhost',
     user: 'root',
     password: '1234',
-    database: 'my_db'
+    database: 'online_academy'
 });
 
 const pool_query = util.promisify(pool.query).bind(pool);

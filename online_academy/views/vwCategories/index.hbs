@@ -18,6 +18,7 @@
         margin-top: 1rem;
         padding-bottom: 1rem;
         border-style: none none solid none;
+        display: flex;
     }
 
     .courseName {
@@ -25,9 +26,13 @@
         color: lightslategray;
     }
 
-    .info>p {
+    .info>div>p {
         color: black;
-        line-height: .7rem;
+
+    }
+
+    .info>.courseCost {
+        line-height: 0.7rem;
     }
 
     .instructor {
@@ -37,18 +42,23 @@
     .rate {
         color: orange;
         font-size: 1.2rem;
+        line-height: 1rem;
     }
 
     .rateCount {
         color: gray;
-        line-height: 1.8rem;
+        line-height: 1rem;
         margin-left: 1rem;
     }
 
-    img {
-        width: 20rem;
-        height: 12rem;
+    .img {
+        width: 30rem;
+        height: 17rem;
         margin-right: 1rem;
+    }
+
+    img {
+        width: 100%
     }
 </style>
 {{/section}}
@@ -56,62 +66,58 @@
     {{#if this.empty}}
     <h1>Khong co du lieu</h1>
     {{else}}
-    {{#if this.isSub}}
-    {{#each this.category}}
-    <h1>All {{SubcategoryName}} Courses</h1>
-    {{/each}}
-    {{else}}
-    {{#each this.category}}
-    <h1>All {{CategoryName}} Courses</h1>
-    {{/each}}
-    {{/if}}
+    <h1>All {{#each this.category}}
+        {{CategoryName}} {{SubcategoryName}}
+        {{/each}} Courses</h1>
     {{/if}}
     <div class="content">
-        <a name="" id="" class="" href="#" role="button">
-            <div class="courseCard d-flex">
-                <img src="/public/images/course1.png" alt="">
-                <div class="info">
-                    <p><b class="courseName">The Complete Financial Analyst Course 2020</b></p>
-                    <p class="category">Development</p>
-                    <p class="instructor">365 Carrers</p>
-                    <div class="d-flex">
-                        <div class="rate">
-                            <b>4.6</b>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                        </div>
-                        <div class="rateCount">
-                            (60,979)
-                        </div>
-                    </div>
-                    <p class="badge badge-warning mt-5">Warning</p>
+        {{#each this.course}}
+
+        <a name="" id="" class="" href="/courses/detail" role="button">
+            <div class="courseCard">
+                <div class="img">
+
+                    <img src="/public/{{CourseImage}}" alt="">
                 </div>
-            </div>
-            <div class="courseCard d-flex">
-                <img src="/public/images/course1.png" alt="">
-                <div class="info">
-                    <p><b class="courseName">The Complete Financial Analyst Course 2020</b></p>
-                    <p class="category">Development</p>
-                    <p class="instructor">365 Carrers</p>
-                    <div class="d-flex">
-                        <div class="rate">
-                            <b>4.6</b>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star" aria-hidden="true"></i>
-                            <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                        </div>
-                        <div class="rateCount">
-                            (60,979)
+                <div class="info w-100 d-flex">
+                    <div style="padding-right: 20rem;">
+                        <p><b class="courseName">{{CourseName}}</b></p>
+                        <p class="category">{{#each ../category}}
+                            {{CategoryName}} {{SubcategoryName}}
+                            {{/each}}</p>
+                        <p class="instructor">
+                            {{lecturerName}}
+                        </p>
+                        <div class="d-block">
+                            <div class="rate d-flex text-center">
+                                <b>4.6</b>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star" aria-hidden="true"></i>
+                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                <div class="rateCount">
+                                    ({{StudentCount}})
+                                </div>
+                            </div>
+                            <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
                         </div>
                     </div>
-                    <p class="badge badge-warning mt-5">Warning</p>
+                    <div class="courseCost d-flex mt-4 text-right">
+                        <p>
+                            {{#if SalePrice}}
+                            <b> ${{format SalePrice}}</b><br><br>
+                            <del>${{format Price}}</del>
+                            {{else}}
+                            <b> ${{format Price}}</b><br><br>
+                            {{/if}}
+
+                        </p>
+                    </div>
                 </div>
             </div>
         </a>
+        {{/each}}
+
     </div>
 </div>
