@@ -1,0 +1,62 @@
+web, mobile: category
+
+Category {
+	CategoryID
+	CategoryName
+}
+
+Subcategory {
+	CategoryID
+	SubcategoryID
+	SubcategoryName
+}
+
+Lecturer {
+	LecturerID
+	LecturerName
+}
+
+Course {
+	CourseID
+	CourseImage
+	CourseName
+	ShortDes
+	StudentCount
+	Price
+	SalePrice
+	UpdatedAt
+
+	SubCategoryID
+}
+
+LECTURER_COURSE {
+	CourseID
+	LecturerID
+}
+
+Rating {
+	CourseID
+	TotalRates
+	TotalVotes
+}
+
+FullDes {
+	CourseID
+	FullDesID 
+	FullDes
+}
+
+CourseContent {
+	ContentID
+	ContentName
+	CourseID
+}
+
+Lecture {
+	LectureID
+	LectureName
+	Preview
+	VideoLink
+
+	ContentID
+}

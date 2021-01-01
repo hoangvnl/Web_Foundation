@@ -1,0 +1,106 @@
+﻿ContentID,ContentName,CourseID
+1,Introduction,1
+2,Flutter Basics,1
+3,Running Apps on Different Devices & Debugging Apps,1
+4,Introduction,2
+5,Setup and Installation,2
+6,How to create Flutter App from scratch,2
+7,Let's Dive In!,3
+8,A Dart Introduction,3
+9,Staing on Target with Dart,3
+10,Getting Started,4
+11,Why Flutter,4
+12,Object Oriented Programming - Introduction,4
+13,Course Introduction,5
+14,Introduction to Dart,5
+15,Flutter setup on macOS,5
+16,Introduction,6
+17,Food Delivery App,6
+18,Budget App,6
+19,Introduction,7
+20,Installation and configuration,7
+21,Flutter - Welcome to my Universe,7
+22,What Does the Course Cover?,8
+23,Introduction To Android Studio,8
+24,Java Deep Dive,8
+25,What Does the Course Cover?,9
+26,Introduction To Android Studio,9
+27,Java Deep Dive,9
+28,Introduction,10
+29,Downloading and Setup,10
+30,Hello World Android app,10
+31,Welcome,11
+32,Install Android Studio on Windows Machine,11
+33,Install Android Studio on Mac Machine,11
+34,Set up for Android Development,12
+35,"Build the ""I am Rich"" App",12
+36,Coding Challenge #1 - Using the layout editor in Android Studio and Github,12
+37,Introduction and Course Information,13
+38,Downloading and Installing the Necessary Tools,13
+39,Hello World Android App,13
+40,Welcome to Android R,14
+41,Develop your first Android R App,14
+42,Learn to Code in Java,14
+43,"Welcome, Welcome, Welcome",15
+44,JS Fundamental - Part 1,15
+45,JS Fundamental - Part 2,15
+46,Getting Started,16
+47,Execution Contexts and Lexical Environments,16
+48,Types and Operators,16
+49,Intro & Getting Started,17
+50,JS Language Fundamentals,17
+51,DOM Manipulation & Events,17
+52,Introduction,18
+53,Basics,18
+54,Efficient Development & Debugging,18
+55,Course Overview,19
+56,Setting up Your Machine,19
+57,JS Basics,19
+58,Introduction,20
+59,JavaScript Foundation,20
+60,JavaScript Foundation II,20
+61,Introduction,21
+62,JS Values & Variables,21
+63,How to Model data Efficiently,21
+64,Getting Started,22
+65,Refreshing Next generation JavaScript,22
+66,understanding the base Features * Syntax,22
+67,Let's Dive In!,23
+68,Building Content with JSX,23
+69,Communicating with Props,23
+70,Welcome! Let's Get Started!,24
+71,Testing,24
+72,Higher Order Components,24
+73,Course Overview,25
+74,Server Side Architecture,25
+75,Authentication with Google Oauth,25
+76,Welcome,26
+77,Setting up Your Machine,26
+78,Hello React,26
+79,Why GraphQL?,27
+80,A REST-ful Routing Primer,27
+81,On To GraphQL,27
+82,A Taste of React,28
+83,Introducing JSX,28
+84,Props and More,28
+85,Course Introduction,29
+86,Dive into HTML,29
+87,Formatting with CSS,29
+88,"Welcome, Welcome, Welcome",30
+89,Natours Project - Setup and First Steps,30
+90,How CSS Works,30
+91,Welcome! Let's Get Started!,31
+92,HTML Essentials,31
+93,Adding Media to a Web Page,31
+94,Getting Started,32
+95,Diving Into the Basics of CSS,32
+96,Diving Deeper into CSS,32
+97,Introduction,33
+98,HTML Basics,33
+99,CSS Basics,33
+100,Getting Started,34
+101,HTML Foundations : Part I,34
+102,HTML Foundations : Part II,34
+103,Introduction,35
+104,Day 1 - Expanding Cards,35
+105,Day 2 - Progress Steps,35

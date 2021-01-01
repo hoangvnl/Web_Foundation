@@ -1,0 +1,355 @@
+﻿LectureID,LectureName,Preview,VideoLink,ContentID
+1,What is Flutter ?,1,https://www.udemy.com/tutorial/learn-flutter-dart-to-build-ios-android-apps/what-is-flutter/,1
+2,Flutter MacOS Setup,1,https://www.udemy.com/tutorial/learn-flutter-dart-to-build-ios-android-apps/flutter-macos-setup/,1
+3,Flutter Windows Setup,1,https://www.udemy.com/tutorial/learn-flutter-dart-to-build-ios-android-apps/flutter-windows-setup/,1
+4,Module Introduction,0,,2
+5,Creating a new project,0,,2
+6,An Overview of the Generated Files & Folders,0,,2
+7,Module Introduction,0,,3
+8,Running the App on a Real Android Device,0,,3
+9,Running the App on an iOS Emulator,0,,3
+10,What is Flutter ?,1,https://www.udemy.com/tutorial/flutter-bootcamp-with-dart/what-is-flutter/,4
+11,Why is Flutter ?,1,https://www.udemy.com/tutorial/flutter-bootcamp-with-dart/why-flutter/,4
+12,Overview of the Process,0,,5
+13,Windows Setup Step 1 - Install the Flutter SDK,0,,5
+14,Windows Setup Step 2 - Install Android Studio,0,,5
+15,Windows Setup Step 3 - Install the Android Emulator,0,,5
+16,Windows Installation Troubleshooting,0,,5
+17,A Quick Note About macOS Catalina,0,,5
+18,Mac Setup Step 1 - Install the Flutter SDK,0,,5
+19,Mac Setup Step 2 - Install Android Studio,0,,5
+20,Mac Setup Step 3 - Install the Android Emulator,0,,5
+21,Mac Setup Step 4 - Install Xcode and Command Line Tools,0,,5
+22,Mac Setup Step 5 - Test the iOS Simulator,0,,5
+23,Mac Installation Troubleshooting,0,,5
+24,[Optional] Configure Android Studio for Flutter Development,0,,5
+25,[Optional] Guided Tour of Android Studio for Flutter Development,0,,5
+26,Creating a New Flutter Project from Scratch,0,,6
+27,A quick note about Hot Reload,0,,6
+28,Scaffolding a Flutter App,0,,6
+29,Working with Assets in Flutter & the Pubspec file,0,,6
+30,How to Add App Icons to the iOS and Android Apps,0,,6
+31,How to Ace this Course,0,,6
+32,How to Get Help,0,,7
+33,Course Organization,0,,7
+34,Dart Overview,0,,8
+35,The Dartpad Editor,0,,8
+36,Our First program,0,,8
+37,For Loops,0,,9
+38,Adding Elements to Lists,1,https://www.udemy.com/tutorial/dart-and-flutter-the-complete-developers-guide/adding-elements-to-lists/,9
+39,More on Variable Initialization,0,,9
+40,The Learning Path of This Course,0,,10
+41,Why Flutter Development ?,1,https://www.udemy.com/tutorial/flutter-dart-the-complete-flutter-app-development-course/why-flutter-development/,11
+42,Important Message,0,,11
+43,Introduction to Classes and Objects,1,https://www.udemy.com/tutorial/flutter-dart-the-complete-flutter-app-development-course/introduction-to-classes-and-objects/,12
+44,Introduction to Class Creation and Instance Variables,0,,12
+45,Adding Methods to Classes,0,,12
+46,Course Introduction,0,,13
+47,Course Content,0,,13
+48,App Overview,0,,13
+49,The Dart Language,0,,14
+50,Introduction to Dartpad,0,,14
+51,String interpolation,0,,14
+52,Flutter setup on macOS,0,,15
+53,Setting the PATH variable,0,,15
+54,Flutter doctor,0,,15
+55,Introduction,0,,16
+56,Search Bar,0,,17
+57,Recent Orders,0,,17
+58,Nearby Restaurant,0,,17
+59,Home Screen,0,,18
+60,Sliver App Bar and Sliver List,0,,18
+61,Bar Chart,0,,18
+62,Before you take this course,0,,19
+63,What is flutter for,0,,19
+64,Installing the flutter sdk,0,,20
+65,Installing android studio,0,,20
+66,Setting up emulator,0,,20
+67,Create and run the application,0,,21
+68,Create and run the application using android studio,0,,21
+69,Writing from scratch,0,,21
+70,What does the course cover ?,0,,22
+71,How To Get All The Free Stuff,0,,22
+72,Frequently Asked Questions,0,,22
+73,Asking Great Questions & Debugging Your Code,0,,22
+74,Introduction,0,,23
+75,Installing Anndroid Studio On MacOS,0,,23
+76,Installing Anndroid Studio On Windows,0,,23
+77,Android Studio Overview,0,,23
+78,Opening Sample Projects,0,,23
+79,Opening Sample Projects (Android Studio files),0,,23
+80,Formatting Text,0,,23
+81,Formatting Text (Android Studio files),0,,23
+82,Buttons,0,,23
+83,Buttons (Android Studio files),0,,23
+84,TextFields,0,,23
+85,TextFields (Android Studio files),0,,23
+86,Displaying Messages,0,,23
+87,Displaying Messages (Android Studio files),0,,23
+88,Images,0,,23
+89,Images (Android Studio files),0,,23
+90,Currency Converter,0,,23
+91,Currency Converter (Android Studio files),0,,23
+92,Introduction To Android Studio Quiz,0,,23
+93,Hello World With Java,0,,24
+94,Hello World With Java (Java files),0,,24
+95,Variables,0,,24
+96,Variables (Java files),0,,24
+97,Arrays And Maps,0,,24
+98,Arrays And Maps (Java files),0,,24
+99,If Statements,0,,24
+100,If Statements (Java Files),0,,24
+101,What does the course cover ?,0,,25
+102,How To Get All The Free Stuff,0,,25
+103,Frequently Asked Questions,0,,25
+104,Asking Great Questions & Debugging Your Code,0,,25
+105,Introduction,0,,26
+106,Installing Anndroid Studio On MacOS,0,,26
+107,Installing Anndroid Studio On Windows,0,,26
+108,Android Studio Overview,0,,26
+109,Opening Sample Projects,0,,26
+110,Opening Sample Projects (Android Studio files),0,,26
+111,Formatting Text,0,,26
+112,Formatting Text (Android Studio files),0,,26
+113,Buttons,0,,26
+114,Buttons (Android Studio files),0,,26
+115,TextFields,0,,26
+116,TextFields (Android Studio files),0,,26
+117,Displaying Messages,0,,26
+118,Displaying Messages (Android Studio files),0,,26
+119,Images,0,,26
+120,Images (Android Studio files),0,,26
+121,Currency Converter,0,,26
+122,Currency Converter (Android Studio files),0,,26
+123,Introduction To Android Studio Quiz,0,,26
+124,Hello World With Java,0,,27
+125,Hello World With Java (Java files),0,,27
+126,Variables,0,,27
+127,Variables (Java files),0,,27
+128,Arrays And Maps,0,,27
+129,Arrays And Maps (Java files),0,,27
+130,If Statements,0,,27
+131,If Statements (Java Files),0,,27
+132,Interface Overview,0,,28
+133,Introduction to Android,0,,28
+134,FAQ,0,,28
+135,Windows - Install Android Studio,0,,29
+136,Mac - Install Android Studio,0,,29
+137,Linux - Install Android Studio,0,,29
+138,Hello World,0,,30
+139,Tour of Android Studio,0,,30
+140,Setting Up a Virtual Device,0,,30
+141,Learning Path,0,,31
+142,Important Message,0,,31
+143,WINDOWS USERS ONLY] Download Android Studio for Windows,0,,32
+144,[OPTIONAL - WINDOWS USERS ONLY]VTX Emulator Issues Fixes on Windows,0,,32
+145,[MAC USERS ONLY] Download and Install Android Studio on MAC,0,,33
+146,"Configure Android Studio for Productivity: Themes, Auto-Import & SDKs",0,,34
+147,How to Set Up an Android Emulator with Hardware Acceleration,1,https://www.udemy.com/tutorial/android-app-development-with-java/how-to-set-up-an-android-emulator-with-hardware-acceleration/,34
+148,How to Get All the Free Stuff,0,,34
+149,"Working with the Layout Editor, Strings, and App Themes",0,,35
+150,Adding Graphics to a Project and using ImageViews,0,,35
+151,What is XML and How Does it Work ?,1,https://www.udemy.com/tutorial/android-app-development-with-java/what-is-xml-and-how-does-it-work/,35
+152,What are the Coding Challenges?,0,,36
+153,What You Will Create,0,,36
+154,Step 1: Importing Projects from GitHub and Opening them in Android Studio ⭐️,0,,36
+155,Introduction,0,,37
+156,The Udemy Interface,1,https://www.udemy.com/tutorial/android-oreo-kotlin-app-masterclass/the-udemy-interface/,37
+157,Introduction To Android,1,https://www.udemy.com/tutorial/android-oreo-kotlin-app-masterclass/introduction-to-android/,37
+158,Mac - Install Android Studio,0,,38
+159,Linux - Install Android Studio,0,,38
+160,Configure Android SDK on all Three Platforms,1,https://www.udemy.com/tutorial/android-oreo-kotlin-app-masterclass/configure-android-sdk-on-all-three-platforms/,38
+161,Your Programming Careers Questions Answered,0,,39
+162,Access to Programming Career Q&A,0,,39
+163,Introduction,0,,39
+164,What is a Programming Language,0,,40
+165,Lots of Programming Languages. Why?,0,,40
+166,What is Java?,0,,40
+167,Learning Objectives,0,,41
+168,Enter the world of android application development!,0,,41
+169,Download & Install Android Studio,0,,41
+170,Learning Objectives,0,,42
+171,Take a look at Java Code!,0,,42
+172,Take a look at XML Code!,0,,42
+173,Watch Before You Start!,0,,43
+174,Read Before You Start!,0,,43
+175,Migration Guide to v2 + Old Course,0,,43
+176,Section Intro,0,,44
+177,Hello World!,0,,44
+178,A Brief Introduction to JavaScript,0,,44
+179,Section Intro,0,,45
+180,Activating Strict Mode,0,,45
+181,Functions,0,,45
+182,Introduction and The Goal of this Course,0,,46
+183,Setup,0,,46
+184,Big Words and Javascript,0,,46
+185,What About Asunchronous Callbacks?,1,https://www.udemy.com/tutorial/understand-javascript/what-about-asynchronous-callbacks/,47
+186,The Scope Chain,0,,47
+187,"Scope, ES6, and let",0,,47
+188,Primitive Types,0,,48
+189,Conceptual Aside : Operators,0,,48
+190,Operator Precedence and Associaivity,0,,48
+191,Welcome To The Course,0,,49
+192,Project Files & Questions,0,,49
+193,Projects Github Repo,0,,49
+194,Type Conversion,0,,50
+195,Numbers & The Math Object,0,,50
+196,String Methods & Concatenation,0,,50
+197,What is the DOM ?>,1,https://www.udemy.com/tutorial/modern-javascript-from-the-beginning/what-is-the-dom/,51
+198,DOM Selectors For Multiple Elements,0,,51
+199,Traversing The DOM,0,,51
+200,Introduction,0,,52
+201,What is JavaScript?,0,,52
+202,JavaScript In Action,0,,52
+203,Adding JavaScript to the Website,0,,53
+204,Introducing Variables & Constants,0,,53
+205,Declaring & Defining Variables,0,,53
+206,Module Introduction,0,,54
+207,Efficient Development & Debugging - An Overview,0,,54
+208,Configuring the IDE Look & Feel,0,,54
+209,Welcome!,0,,55
+210,Grab the PDF Guide,0,,55
+211,Installing VSCode,1,https://www.udemy.com/tutorial/modern-javascript/installing-visual-studio-code/,56
+212,Install cmder,1,https://www.udemy.com/tutorial/modern-javascript/windows-only-install-cmder/,56
+213,Installing Node.js,0,,56
+214,"Logical ""And"" and ""Or"" Operators",0,,57
+215,Variable Scope: Part I,0,,57
+216,Variable Scope: Part II,0,,57
+217,How To Succeed In This Course,0,,58
+218,Join Our Online Classroom,0,,58
+219,Exercise: Meet The Community!,0,,58
+220,Inside the V8 Engine,0,,59
+221,Comparing Other Languages,0,,59
+222,Writing Optimized Code,0,,59
+223,Section Overview,0,,60
+224,Execution Context,0,,60
+225,Lexical Environment,0,,60
+226,How This Course Works?,0,,61
+227,"JS, ECMA, TC39 : What Do They Mean ?",0,,61
+228,The Tools you Need,0,,61
+229,Running Code in the JS Console,0,,62
+230,Introducing Numbers,0,,62
+231,NaN & Infinity,0,,62
+232,Booleans Intro,0,,63
+233,Strings,0,,63
+234,String Indices,0,,63
+235,What is React ?,1,https://www.udemy.com/tutorial/react-the-complete-guide-incl-redux/what-is-react/,64
+236,Why Should we Choose React?,1,https://www.udemy.com/tutorial/react-the-complete-guide-incl-redux/why-should-we-choose-react/,64
+237,Introduction,0,,64
+238,Module Introduction,0,,65
+239,"Understanding ""let"" and ""const""",0,,65
+240,Arrow Functions,0,,65
+241,Module Introduction,0,,66
+242,The Build Workflow,0,,66
+243,Using Create React App,0,,66
+244,Installing Node JS,0,,67
+245,Important Update About React App Generation,0,,67
+246,Generating a React Project,0,,67
+247,What is JSX?,0,,68
+248,Converting HTML to JSX,0,,68
+249,Inline Styling with JSX,0,,68
+250,Three Tenets of Components,0,,69
+251,Application Overview,0,,69
+252,Semantic UI CDN Link,0,,69
+253,Introduction!,0,,70
+254,Github Links,0,,70
+255,npx Create React App Generation,0,,71
+256,Project Generation,0,,71
+257,Our First Test,0,,71
+258,An Introduction to Higher Order Components,0,,72
+259,Connect - A Higher Order Component,0,,72
+260,App Overview,0,,72
+261,App User Flow Walkthrough,0,,73
+262,Tech Stack,0,,73
+263,App Mockups,0,,73
+264,Relationship Between Node and Express,0,,74
+265,Generating Express Apps,0,,74
+266,Express Route Handlers,0,,74
+267,The OAuth Flow,0,,75
+268,Overview of Passport JS,0,,75
+269,Passport Setup,0,,75
+270,Welcome & Asking good Questions,0,,76
+271,Why should I learn React ?,1,https://www.udemy.com/tutorial/react-2nd-edition/why-should-i-learn-react/,76
+272,Section Intro : Setting up Your Environment,0,,77
+273,Installing VSCode,0,,77
+274,Installing Node.js & Yarn,1,https://www.udemy.com/tutorial/react-2nd-edition/installing-nodejs-yarn/,77
+275,Exploring JSX,1,https://www.udemy.com/tutorial/react-2nd-edition/exploring-jsx/,78
+276,Conditional Rendering in JSX,0,,78
+277,ES6 Aside: const and let,0,,78
+278,Introduction,0,,79
+279,Links to Completed Code,0,,79
+280,Review of REST-ful Routing,0,,80
+281,Shortcomings of RESTful Routing,0,,80
+282,What is GraphQL,1,,81
+283,Async Resolve Functions,1,,81
+284,nodemon Hookup,0,,81
+285,Introducing Components,1,https://www.udemy.com/tutorial/modern-react-bootcamp/introducing-components/,82
+286,Setting Up Your Server,0,,82
+287,Writing Our First Component,0,,82
+288,Basics Rules of JSX,0,,83
+289,How JSX Works Behind the Scenes,0,,83
+290,Embedding JavaScript in JSX,0,,83
+291,Intro to React Props,0,,84
+292,Props are Immutable?,0,,84
+293,Other Types of Props,0,,84
+294,READ BEFORE YOU START!,0,,85
+295,My Resources Page (Former E-Book),0,,85
+296,Starting to fill the structure,0,,86
+297,Images and attributes,0,,86
+298,One more thing: links,0,,86
+299,Starting to make our webpage pretty: text,1,https://www.udemy.com/tutorial/design-and-develop-a-killer-website-with-html5-and-css3/starting-to-make-our-webpage-pretty-text/,87
+300,Classes and ID's,0,,87
+301,The CSS box model,0,,87
+302,Welcome to the Most Advanced CSS Course Ever!,0,,88
+303,READ BEFORE YOU START!,0,,88
+304,Setting up Our Tools,0,,88
+305,Creating Cool CSS Animations,1,https://www.udemy.com/tutorial/advanced-css-and-sass/creating-cool-css-animations/,89
+306,Building a Complex Animated Button - Part 1,0,,89
+307,Building a Complex Animated Button - Part 2,0,,89
+308,Behind the Scenes,1,https://www.udemy.com/tutorial/advanced-css-and-sass/how-css-works-behind-the-scenes-an-overview/,90
+309,"CSS Architecture, Components and BEM",0,,90
+310,Implementing BEM in the Natours Project,0,,90
+311,Course Introduction,0,,91
+312,Big Picture Overview of Course,0,,91
+313,Why HTML is Exciting,1,https://www.udemy.com/tutorial/web-design-for-beginners-real-world-coding-in-html-css/why-html-is-exciting/,92
+314,Hands On! Create your First HTML File,0,,92
+315,Russian Stacking Dolls: Bulleted Lists,0,,92
+316,Images,0,,93
+317,Audio Files,0,,93
+318,Video Files,0,,93
+319,Introduction,0,,94
+320,What is CSS ?,1,https://www.udemy.com/tutorial/css-the-complete-guide-incl-flexbox-grid-sass/what-is-css/,94
+321,Course Outline,0,,94
+322,Module Introduction,0,,95
+323,Understanding the Course Project Setup,0,,95
+324,Adding CSS to our Project with Inline Styles,0,,95
+325,Module Introduction,0,,96
+326,Introducing the CSS Box Model,0,,96
+327,Understanding the Box Model,0,,96
+328,Welcome To The Course,0,,97
+329,The Roles Of HTML & CSS In Web Development,0,,97
+330,Getting Setup With Visual Studio Code,0,,97
+331,Doctype & Basic Layout,0,,98
+332,Setting Up Live Server (VSCode Extension),0,,98
+333,Meta Tags & Search Engines,0,,98
+334,Section Intro,0,,99
+335,Implementing CSS,0,,99
+336,Basic CSS Selectors,0,,99
+337,"HTML Tags, Attributes & Elements",0,,100
+338,File & Folder Naming Conventions,0,,100
+339,Typical Website File & Folder Structure,0,,100
+340,Page Title,0,,101
+341,Headings,0,,101
+342,Paragraphs,0,,101
+343,Hyperlinks,0,,102
+344,Lists,0,,102
+345,Images,0,,102
+346,Welcome,0,,103
+347,Project Starter Boilerplate,0,,103
+348,Course Projects Code & Demos,0,,103
+349,Project Intro,0,,104
+350,Initial Cards,0,,104
+351,Expanding Effect,0,,104
+352,Project Intro,0,,105
+353,Creating the Steps,0,,105
+354,Step Functionality,0,,105
