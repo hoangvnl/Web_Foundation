@@ -29,4 +29,12 @@ module.exports = {
             return rows[0].SubcategoryName;
         }
     },
+    searchByName(name) {
+        return db.load(`select course.CourseName, course.CourseID, subcategory.SubcategoryName
+                        from course left join subcategory on course.SubcategoryID = subcategory.SubcategoryID
+                        where match(course.CourseName) against ('${name}')
+                        or match (subcategory.SubcategoryName) against('${name}')`);
+
+    },
+
 }

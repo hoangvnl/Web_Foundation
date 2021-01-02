@@ -17,6 +17,7 @@ router.get('/:param', async function (req, res) {
     const rating = await rating_module.singleByCourseID(course[0].CourseID);
     course[0]['totalRates'] = rating[0].TotalRates;
     course[0]['totalVotes'] = rating[0].TotalVotes;
+    course[0]['rate'] = rating[0].TotalRates / rating[0].TotalVotes;
     const content = await content_module.allWithCourseID(course[0].CourseID);
     course[0]['content'] = content;
     var isInWishlist = 0;
@@ -36,6 +37,7 @@ router.get('/:param', async function (req, res) {
     for (var count in course[0].content) {
         var contentTemp = course[0].content[count];
         var lecture = await lecture_module.allWithContentID(contentTemp.ContentID);
+
         course[0].content[count]['lecture'] = lecture;
     }
 
@@ -55,7 +57,6 @@ router.post('/addWishlist', isAuth, async function (req, res) {
     // console.log(req.body.isInWishlist);
     if (+req.body.isInWishlist) {
         await wishlist.del(entity);
-
     }
     else {
         await wishlist.add(entity);

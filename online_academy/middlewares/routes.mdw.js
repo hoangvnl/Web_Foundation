@@ -10,4 +10,5 @@ module.exports = function (app) {
     app.use('/join', require('../routes/authentication.route'));
     app.use('/user', require('../routes/user.route'));
 
+
 }

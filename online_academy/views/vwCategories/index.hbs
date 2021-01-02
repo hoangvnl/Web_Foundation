@@ -64,57 +64,69 @@
 {{/section}}
 <div class="mainContent">
     {{#if this.empty}}
-    <h1>Khong co du lieu</h1>
+    <h1>Sorry, we couldn't find any results for "{{this.searchText}}"</h1>
+    {{else}}
+
+    {{#if this.isSearch}}
+    <h1>Results for “{{this.searchText}}”:</h1>
     {{else}}
     <h1>All {{#each this.category}}
         {{CategoryName}} {{SubcategoryName}}
         {{/each}} Courses</h1>
     {{/if}}
-    <div class="content">
-        {{#each this.course}}
 
-        <a name="" id="" class="" href="/course/{{CourseName}}" role="button">
-            <div class="courseCard">
-                <div class="img">
-                    <img src="/public/{{CourseImage}}" alt="">
-                </div>
-                <div class="info w-100 d-flex">
-                    <div style="padding-right: 20rem;">
-                        <p><b class="courseName">{{CourseName}}</b></p>
-                        <p class="category">{{catName}}</p>
-                        <p class="instructor">
-                            {{lecturerName}}
-                        </p>
-                        <div class="d-block">
-                            <div class="rate d-flex text-center">
-                                <b>4.6</b>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star" aria-hidden="true"></i>
-                                <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                                <div class="rateCount">
-                                    ({{formatCount StudentCount}})
+
+
+    {{/if}}
+    <div class="d-flex">
+        {{#if this.isSearch}}
+        <div class="filter">
+            <p>hoho</p>
+        </div>
+        {{/if}}
+        <div class="content">
+            {{#each this.course}}
+
+            <a name="" id="" class="" href="/course/{{CourseName}}" role="button">
+                <div class="courseCard">
+                    <div class="img">
+                        <img src="/public/{{CourseImage}}" alt="">
+                    </div>
+                    <div class="info w-100 d-flex">
+                        <div style="padding-right: 20rem; width: 50rem;">
+                            <p><b class="courseName">{{CourseName}}</b></p>
+                            <p class="category">{{catName}}</p>
+                            <p class="instructor">
+                                {{lecturerName}}
+                            </p>
+                            <div class="d-block">
+                                <div class="rate d-flex text-center">
+                                    <b>{{formatRate rate}}</b>
+                                    {{> ratingStar}}
+                                    <div class="rateCount">
+                                        ({{formatCount StudentCount}})
+                                    </div>
                                 </div>
+                                <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
                             </div>
-                            <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
+                        </div>
+                        <div class="courseCost d-flex mt-4 text-right">
+                            <p>
+                                {{#compare SalePrice -1}}
+                                <b> ${{formatMoney Price}}</b><br><br>
+                                {{/compare}}
+                                {{#compare SalePrice -1 operator=">"}}
+                                <b> ${{formatMoney SalePrice}}</b><br><br>
+                                <del>${{formatMoney Price}}</del>
+                                {{/compare}}
+                            </p>
                         </div>
                     </div>
-                    <div class="courseCost d-flex mt-4 text-right">
-                        <p>
-                            {{#if SalePrice}}
-                            <b> ${{formatMoney SalePrice}}</b><br><br>
-                            <del>${{formatMoney Price}}</del>
-                            {{else}}
-                            <b> ${{formatMoney Price}}</b><br><br>
-                            {{/if}}
-
-                        </p>
-                    </div>
                 </div>
-            </div>
-        </a>
-        {{/each}}
+            </a>
+            {{/each}}
+
+        </div>
 
     </div>
 </div>
