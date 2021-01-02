@@ -5,9 +5,7 @@ const course_module = require('../models/courses.model');
 const lecturer_module = require('../models/lecturer.model');
 const router = express.Router();
 
-router.get('/detail', async function (req, res) {
-    res.render('vwCategories/detail');
-})
+
 
 router.get('/:cat/:subCat', async function (req, res) {
     const subCat = req.params.subCat;
@@ -17,9 +15,9 @@ router.get('/:cat/:subCat', async function (req, res) {
 
     for (var courseTemp in course) {
         course[+courseTemp]['lecturerName'] = await lecturer_module.getNameByCourseID(course[+courseTemp].CourseID);
-
+        course[+courseTemp]['catName'] = category[0].SubcategoryName;
     }
-    console.log(course);
+
     res.render('vwCategories/index', {
         category,
         course,
@@ -32,11 +30,11 @@ router.get('/:cat', async function (req, res) {
     const category = await category_module.singleByName(cat);
     const catID = await category_module.getIDByName(cat);
     const course = await course_module.allWithCatID(catID);
-    
 
     for (var courseTemp in course) {
         course[+courseTemp]['lecturerName'] = await lecturer_module.getNameByCourseID(course[+courseTemp].CourseID);
-        
+        const catName = await sub_category_module.getNameByID(course[+courseTemp].SubCategoryID);
+        course[+courseTemp]['catName'] = catName;
     }
 
     res.render('vwCategories/index', {

@@ -20,7 +20,7 @@ module.exports = {
             return rows[0].SubcategoryID;
         }
     },
-    async getName(id) {
+    async getNameByID(id) {
         const rows = await db.load(`select SubcategoryName from ${TBL_SUBCATEGORY} where SubcategoryID = ${id}`);
         if (rows.length === 0) {
             return null;

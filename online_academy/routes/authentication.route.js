@@ -59,8 +59,6 @@ router.get('/register', function (req, res) {
 })
 
 router.post('/register', async function (req, res) {
-
-    console.log(req.body);
     const hash = bcrypt.hashSync(req.body.Password, 7);
     const user = {
         UserName: req.body.UserName,

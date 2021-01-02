@@ -39,19 +39,52 @@
     }
 </style>
 {{/section}}
+
+{{#section 'js'}}
+<script>
+    $('#frmPassword').on('submit', function (e) {
+        e.preventDefault();
+        $('#currentInputPassword').prop('required', true);
+        $('#newInputPassword').prop('required', true);
+        $('#retypeInputPassword').prop('required', true);
+
+        const curPassword = $('#currentInputPassword').val();
+        const newPassword = $('#newInputPassword').val();
+        const retypePassword = $('#retypeInputPassword').val();
+        const id = $('#id').val();
+
+        if (newPassword != retypePassword) {
+            $('#validNewPassword').removeClass('d-none');
+            $('#validPassword').addClass('d-none');
+            return;
+        }
+
+        $.getJSON(`/user/is-right?id=${id}&password=${curPassword}`, function (data) {
+            if (data === true) {
+                console.log('vao r ma');
+                $('#frmPassword').off('submit').submit();
+            } else {
+                $('#validPassword').removeClass('d-none');
+            }
+        })
+    })
+</script>
+{{/section}}
 <div class="mainSection ">
-    <div class="sideNav position-absolute">
+    <div class="sideNav mt-3 position-absolute">
         <div class="user">
             <div class="avatar text-white text-center rounded-circle mx-auto">
                 VH
             </div>
-            <div class="userName"> Võ Nguyễn Lê Hoàng</div>
+            <div class="userName"> {{userName}}</div>
             <ul class="p-0">
                 <li>
-                    <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="#" role="button">Profile</a>
+                    <a name="" id="" class="btn btn-outline-secondary w-100 my-1 active" href="#"
+                        role="button">Profile</a>
                 </li>
                 <li>
-                    <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="#" role="button">Profile</a>
+                    <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="/user/wishlist"
+                        role="button">Wishlist</a>
                 </li>
                 <li>
                     <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="#" role="button">Profile</a>
@@ -63,27 +96,46 @@
     </div>
     <div class="formWrap">
         <h2>Public Profile</h2>
-        <form class="text-left">
+        <form id="frmName" method="POST" action="" class="text-left">
             <div class="form-group">
-                <label for="inputName">Basic:</label>
-                <input type="text" class="form-control" id="inputName" name="UserName" placeholder="Full Name">
+                <label for="inputName">Change Name:</label>
+                <input type="text" class="d-none" name="UserID" value="{{id}}">
+                <input type="text" class="form-control" id="inputName" name="UserName" placeholder="Full Name" required
+                    value="{{userName}}">
             </div>
-            <button type="submit" class="btn btn-danger">Save</button>
+            <button type="submit" class="btn btn-danger" formaction="/user/name">Save</button>
         </form>
-        <form class="text-left">
+        <form id="frmEmail" method="POST" action="" class="text-left">
             <div class="form-group">
                 <label for="inputEmail">Email:</label>
-                <input type="email" class="form-control" id="inputEmail" name="Email" placeholder="Email">
+                <input type="text" class="d-none" name="UserID" value="{{id}}">
+                <input type="email" class="form-control" id="inputEmail" name="Email" placeholder="Email" required
+                    value="{{email}}">
             </div>
-            <button type="submit" class="btn btn-danger">Save</button>
+            <button type="submit" class="btn btn-danger" formaction="/user/email">Save</button>
         </form>
-        <form class="text-left">
+        <form id="frmPassword" method="POST" action="/user/password" class="text-left">
+            <div>
+                <p id="validNewPassword" class="badge badge-danger w-100 text-left d-none" style="font-size: 1rem;">Your
+                    new password does not
+                    match
+                    confirmation.</p>
+                <p id="validPassword" class="badge badge-danger w-100 text-left d-none" style="font-size: 1rem;">Your
+                    password was incorrect..</p>
+
+            </div>
             <div class="form-group">
                 <label for="inputPassword">Password:</label>
-                <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="Password">
+                <input type="text" class="d-none" id="id" name="UserID" value="{{id}}">
+                <input type="password" class="form-control" id="currentInputPassword"
+                    placeholder="Enter Current Password">
+                <input type="password" class="form-control" id="newInputPassword" name="Password"
+                    placeholder="Enter New Password">
+                <input type="password" class="form-control" id="retypeInputPassword" placeholder="Re-type New Password">
             </div>
             <button type="submit" class="btn btn-danger">Save</button>
         </form>
+
     </div>
 
 </div>

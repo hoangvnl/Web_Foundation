@@ -51,8 +51,9 @@
 </script>
 <script>
 
+
     $(".collapsed").click(function () {
-        $('.rotate').toggleClass("down");
+        $(this).children('.rotate').toggleClass("down");
     })
 
     function changeDisplay() {
@@ -74,17 +75,27 @@
 </script>
 {{/section}}
 
+{{#each this.course}}
+
+
+
 <div class="mainContent">
     <div id="sideBar" class="position-absolute sideBarMenu shadow">
         <div class="card text-left">
             <div class="card-body">
                 <div class="card-title d-flex">
+                    {{#if SalePrice}}
                     <h1 class="d-flex">
-                        <b>$15.99&nbsp;</b>
+                        <b>${{formatMoney SalePrice}}&nbsp;</b>
                     </h1>
                     <h6 class="d-flex" style="line-height: 3rem;">
-                        <del>$179.99</del>&nbsp;91% off
+                        <del>${{formatMoney Price}}</del>&nbsp;
                     </h6>
+                    {{else}}
+                    <h1 class="d-flex">
+                        <b>${{formatMoney Price}}&nbsp;</b>
+                    </h1>
+                    {{/if}}
 
                 </div>
                 <p class="card-text">
@@ -101,28 +112,38 @@
     <div class="topContainer">
         <div class="card text-white bg-dark">
             <div class="card-body" style="margin: 4rem 39rem 1rem 8rem;">
-                <h1 class="card-title">C# Basics for Beginners: Learn C# Fundamentals by Coding</h1>
+                <h1 class="card-title">{{CourseName}}</h1>
                 <div style="color: orange;">4.5
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star" aria-hidden="true"></i>
                     <i class="fa fa-star-half-o" aria-hidden="true"></i>
-                    <span style="color: white;">(40,477 ratings)</span>
-                    <span style="color: white;">132,144 students</span>
+                    <span style="color: white;">({{formatCount totalRates}} ratings)</span>
+                    <span style="color: white;">{{formatCount StudentCount}} students</span>
                 </div>
                 <div class="teacher">
-                    <p>Created by <a href="#">Mosh Hamedani</a></p>
+                    <p>Created by <a href="#lecturer">{{lecturerName}}</a></p>
                 </div>
                 <div>
                     <p> <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                         Last updated 12/2020
                     </p>
                     <p>
-                        <button class="btn btn-outline-dark text-white">
+                    <form id="frmWishlist" action="/course/addWishlist" method="post">
+                        <input type="text" class="d-none" name="CourseID" value="{{CourseID}}">
+                        <input type="text" class="d-none" name="CourseName" value="{{CourseName}}">
+                        <input type="text" class="d-none" name="isInWishlist" value="{{../isInWishlist}}">
+                        <button type="submit" class="btn btn-outline-dark border-white text-white">
                             Wishlist
+                            {{#if ../isInWishlist}}
+                            <i class="fa fa-heart" style="color: red;" aria-hidden="true"></i>
+                            {{else}}
                             <i class="fa fa-heart-o" aria-hidden="true"></i>
+                            {{/if}}
                         </button>
+                    </form>
+
                     </p>
                 </div>
             </div>
@@ -202,36 +223,37 @@
         </div>
         <div class="courseContent mt-4">
             <h4>Course content</h4>
-            <div id="accordion">
-                <div class="card">
-                    <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                            <button class="btn btn-outline-light collapsed w-100 text-dark text-left"
-                                data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                                aria-controls="collapseOne">
-                                <i class="fa fa-arrow-down rotate"
-                                    style="animation-duration: 1s;animation-fill-mode: forwards;"></i>
-                                Welcome and Introduction
-                            </button>
-                        </h5>
-                    </div>
-                    <script>
-
-                    </script>
-
-                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
-                        <div class="card-body">
-                            1
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div id="accordion">
+                    {{#each content}}
+                    <div class="card">
+                        <div class="card-header" id="heading{{ContentID}}">
+                            <h5 class="mb-0">
+                                <button class="btn btn-outline-light collapsed w-100 text-dark text-left"
+                                    data-toggle="collapse" data-target="#collapse{{ContentID}}" aria-expanded="true"
+                                    aria-controls="collapse{{ContentID}}">
+                                    <i class="fa fa-arrow-down rotate"
+                                        style="animation-duration: 1s;animation-fill-mode: forwards;"></i>
+                                    {{ContentName}}
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapse{{ContentID}}" class="collapse" aria-labelledby="heading{{ContentID}}">
+                            {{#each lecture}}
+                            <div class="card-body my-0">
+                                {{LectureName}}
+                            </div>
+                            {{/each}}
                         </div>
                     </div>
+                    {{/each}}
                 </div>
-
-
             </div>
+
         </div>
         <div class="lecturer  mt-4">
             <h4>Lecturer </h4>
-            <h5> <a name="" id="" href="#" role="button">Jose Portilla</a></h5>
+            <h5> <a name="" id="lecturer" href="#" role="button">{{lecturerName}}</a></h5>
             <div class="d-flex">
                 <a href="#">
                     <img src="/public/images/courses/1/main.jpg" style="width: 150px;height: 150px;"
@@ -253,7 +275,7 @@
                     <li class="my-2">
                         <i class="fa fa-users mx-1" style="color: orange;" aria-hidden="true"></i>
                         <span>
-                            2,102,385 Students
+                            {{formatCount StudentCount}} Students
                         </span>
                     </li>
                     <li class="my-2">
@@ -436,3 +458,4 @@
         </div>
     </div>
 </div>
+{{/each}}

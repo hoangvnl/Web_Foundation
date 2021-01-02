@@ -30,6 +30,11 @@ module.exports = {
     },
     add(entity) {
         return db.add(entity, TBL_USERS);
-    }
+    },
+    patch(entity) {
+        const condition = { UserID: entity.UserID };
+        delete entity.UserID;
+        return db.patch(entity, condition, TBL_USERS);
+    },
 
 }

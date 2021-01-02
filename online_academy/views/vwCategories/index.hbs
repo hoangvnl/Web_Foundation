@@ -73,18 +73,15 @@
     <div class="content">
         {{#each this.course}}
 
-        <a name="" id="" class="" href="/courses/detail" role="button">
+        <a name="" id="" class="" href="/course/{{CourseName}}" role="button">
             <div class="courseCard">
                 <div class="img">
-
                     <img src="/public/{{CourseImage}}" alt="">
                 </div>
                 <div class="info w-100 d-flex">
                     <div style="padding-right: 20rem;">
                         <p><b class="courseName">{{CourseName}}</b></p>
-                        <p class="category">{{#each ../category}}
-                            {{CategoryName}} {{SubcategoryName}}
-                            {{/each}}</p>
+                        <p class="category">{{catName}}</p>
                         <p class="instructor">
                             {{lecturerName}}
                         </p>
@@ -97,7 +94,7 @@
                                 <i class="fa fa-star" aria-hidden="true"></i>
                                 <i class="fa fa-star-half-o" aria-hidden="true"></i>
                                 <div class="rateCount">
-                                    ({{StudentCount}})
+                                    ({{formatCount StudentCount}})
                                 </div>
                             </div>
                             <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
@@ -106,10 +103,10 @@
                     <div class="courseCost d-flex mt-4 text-right">
                         <p>
                             {{#if SalePrice}}
-                            <b> ${{format SalePrice}}</b><br><br>
-                            <del>${{format Price}}</del>
+                            <b> ${{formatMoney SalePrice}}</b><br><br>
+                            <del>${{formatMoney Price}}</del>
                             {{else}}
-                            <b> ${{format Price}}</b><br><br>
+                            <b> ${{formatMoney Price}}</b><br><br>
                             {{/if}}
 
                         </p>

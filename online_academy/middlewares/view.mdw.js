@@ -7,9 +7,12 @@ module.exports = function (app) {
         defaultLayout: 'main.hbs',
         helpers: {
             section: hbs_sections(),
-            format(val) {
+            formatMoney(val) {
                 return numeral(val).format('0,0.0');
-            }
+            },
+            formatCount(val) {
+                return numeral(val).format('0,0');
+            },
         }
     }));
 

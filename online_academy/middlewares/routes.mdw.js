@@ -6,6 +6,7 @@ module.exports = function (app) {
         res.render('test');
     });
     app.use('/courses', require('../routes/category.route'));
+    app.use('/course', require('../routes/course.route'));
     app.use('/join', require('../routes/authentication.route'));
     app.use('/user', require('../routes/user.route'));
 
