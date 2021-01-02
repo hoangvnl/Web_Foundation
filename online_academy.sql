@@ -25,6 +25,22 @@ USE `online_academy`;
 
 -- --------------------------------------------------------
 --
+-- Cấu trúc bảng cho bảng `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+	UserID int,
+    CourseID int
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Đang đổ dữ liệu cho bảng `wishlist`
+--
+
+
+
+-- --------------------------------------------------------
+--
 -- Cấu trúc bảng cho bảng `tokens`
 --
 
