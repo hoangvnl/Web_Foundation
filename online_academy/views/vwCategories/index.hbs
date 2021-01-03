@@ -94,7 +94,7 @@
     {{else}}
 
     {{#if this.isSearch}}
-    <h1>{{formatCount this.count}} results for “{{this.p}}”:</h1>
+    <h1>{{formatCount this.total}} results for “{{this.p}}”:</h1>
     {{else}}
     <h1>All {{#each this.category}}
         {{CategoryName}} {{SubcategoryName}}
@@ -103,9 +103,6 @@
 
     {{/if}}
     <div class="d-flex">
-
-
-
         <div class="content">
             {{#if this.isSearch}}
             {{#if this.empty}}
@@ -162,6 +159,44 @@
             {{/each}}
 
         </div>
-
     </div>
+    <nav class="float-right mt-4">
+        <ul class="pagination">
+            {{#if isSearch}}
+            <li class="page-item {{#if can_go_pre}}{{else}}disabled{{/if}}">
+                <a class="page-link" href="?page={{pre_page}}{{searchParam}}">Previous</a>
+            </li>
+            {{#each this.page_items}}
+            {{#if this.isActive}}
+            <li class="page-item active"><a class="page-link" href="javascript:;">{{value}}</a></li>
+            {{else}}
+            <li class="page-item"><a class="page-link" href="?page={{value}}{{../searchParam}}">{{value}}</a></li>
+            {{/if}}
+            {{/each}}
+            <li class="page-item {{#if can_go_next}}{{else}}disabled{{/if}}">
+                <a class="page-link" href="?page={{next_page}}{{searchParam}}">Next</a>
+            </li>
+
+
+            {{else}}
+            <li class="page-item {{#if can_go_pre}}{{else}}disabled{{/if}}">
+                <a class="page-link" href="?page={{pre_page}}">Previous</a>
+            </li>
+            {{#each this.page_items}}
+            {{#if this.isActive}}
+            <li class="page-item active"><a class="page-link" href="javascript:;">{{value}}</a></li>
+            {{else}}
+            <li class="page-item"><a class="page-link" href="?page={{value}}">{{value}}</a></li>
+            {{/if}}
+            {{/each}}
+
+            <li class="page-item {{#if can_go_next}}{{else}}disabled{{/if}}">
+                <a class="page-link" href="?page={{next_page}}">Next</a>
+            </li>
+            {{/if}}
+
+
+
+        </ul>
+    </nav>
 </div>

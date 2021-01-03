@@ -4,22 +4,38 @@ const sub_category_module = require('../models/subcategory.model');
 const course_module = require('../models/courses.model');
 const lecturer_module = require('../models/lecturer.model');
 const rating_module = require('../models/rating.model');
+const config = require('../config/default.json');
 const router = express.Router();
 
 router.get('/search', async function (req, res) {
     console.log(req.query);
+    const page = req.query.page || 1;
+    if (page <= 0) page = 1;
+    const offset = (page - 1) * config.pagination.limit;
     const p = req.query.p;
     const sort = req.query.sort;
     let rows;
     if (sort === 'rate') {
-        rows = await sub_category_module.searchByNameSortRate(p);
+        rows = await sub_category_module.searchPageByNameSortRate(p, offset);
     }
     else if (sort === 'cost') {
-        rows = await sub_category_module.searchByNameSortCost(p);
+        rows = await sub_category_module.searchPageByNameSortCost(p, offset);
     }
     else {
-        rows = await sub_category_module.searchByName(p);
+        rows = await sub_category_module.searchPageByName(p, offset);
     }
+    const total = await sub_category_module.countCourseSearchByName(p);
+    const nPages = Math.ceil(total / config.pagination.limit);
+    if (page > nPages) page = nPages;
+    const page_items = [];
+    for (var i = 1; i <= nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i == page,
+        }
+        page_items.push(item);
+    }
+
     let courseTemp = [];
     let course = [];
     for (var i in rows) {
@@ -35,6 +51,9 @@ router.get('/search', async function (req, res) {
         course[+i]['rate'] = rate;
     }
 
+    const searchParam = ('&p=' + p + '&sort=' + sort);
+
+
     res.render('vwCategories/index', {
         isSearch: true,
         course,
@@ -42,16 +61,37 @@ router.get('/search', async function (req, res) {
         rate: sort === 'rate',
         p,
         empty: rows.length === 0,
-        count: rows.length,
+        page_items,
+        next_page: +page + 1,
+        pre_page: +page - 1,
+        can_go_next: +page < +nPages,
+        can_go_pre: +page > 1,
+        total,
+        searchParam
     })
 
 })
 
 router.get('/:cat/:subCat', async function (req, res) {
+    const page = req.query.page || 1;
+    if (page <= 0) page = 1;
+    const offset = (page - 1) * config.pagination.limit;
     const subCat = req.params.subCat;
     const category = await sub_category_module.singleByName(subCat);
     const catID = await sub_category_module.getIDByName(subCat);
-    const course = await course_module.allWithSubCatID(catID);
+    const course = await course_module.pageWithSubCatID(catID, offset);
+    const total = await course_module.countAllWithSubCatID(catID);
+    const nPages = Math.ceil(total / config.pagination.limit);
+    if (page > nPages) page = nPages;
+    const page_items = [];
+    for (var i = 1; i <= nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i == page,
+        }
+        page_items.push(item);
+    }
+
 
     for (var courseTemp in course) {
         course[+courseTemp]['lecturerName'] = await lecturer_module.getNameByCourseID(course[+courseTemp].CourseID);
@@ -64,15 +104,33 @@ router.get('/:cat/:subCat', async function (req, res) {
     res.render('vwCategories/index', {
         category,
         course,
-
+        page_items,
+        next_page: +page + 1,
+        pre_page: +page - 1,
+        can_go_next: +page < +nPages,
+        can_go_pre: +page > 1,
     })
 })
 
 router.get('/:cat', async function (req, res) {
+    const page = req.query.page || 1;
+    if (page <= 0) page = 1;
+    const offset = (page - 1) * config.pagination.limit;
     const cat = req.params.cat;
     const category = await category_module.singleByName(cat);
     const catID = await category_module.getIDByName(cat);
-    const course = await course_module.allWithCatID(catID);
+    const course = await course_module.pageWithCatID(catID, offset);
+    const total = await course_module.countAllWithCatID(catID);
+    const nPages = Math.ceil(total / config.pagination.limit);
+    if (page > nPages) page = nPages;
+    const page_items = [];
+    for (var i = 1; i <= nPages; i++) {
+        const item = {
+            value: i,
+            isActive: i == page,
+        }
+        page_items.push(item);
+    }
 
     for (var courseTemp in course) {
         course[+courseTemp]['lecturerName'] = await lecturer_module.getNameByCourseID(course[+courseTemp].CourseID);
@@ -86,7 +144,11 @@ router.get('/:cat', async function (req, res) {
     res.render('vwCategories/index', {
         category,
         course,
-
+        page_items,
+        next_page: +page + 1,
+        pre_page: +page - 1,
+        can_go_next: +page < +nPages,
+        can_go_pre: +page > 1,
     })
 })
 

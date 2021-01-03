@@ -47,6 +47,8 @@
         -webkit-transform: rotate(180deg);
         transform: rotate(180deg);
     }
+
+    .previewButton {}
 </style>
 {{/section}}
 
@@ -88,18 +90,20 @@
         <div class="card text-left">
             <div class="card-body">
                 <div class="card-title d-flex">
-                    {{#if SalePrice}}
+                    {{#compare SalePrice -1}}
                     <h1 class="d-flex">
-                        <b>${{formatMoney SalePrice}}&nbsp;</b>
+                        <b>${{formatMoney Price}}&nbsp;</b>
+                    </h1>
+                    {{/compare}}
+                    {{#compare SalePrice -1 operator=">"}}
+                    h1 class="d-flex">
+                    <b>${{formatMoney SalePrice}}&nbsp;</b>
                     </h1>
                     <h6 class="d-flex" style="line-height: 3rem;">
                         <del>${{formatMoney Price}}</del>&nbsp;
                     </h6>
-                    {{else}}
-                    <h1 class="d-flex">
-                        <b>${{formatMoney Price}}&nbsp;</b>
-                    </h1>
-                    {{/if}}
+                    {{/compare}}
+
 
                 </div>
                 <p class="card-text">
@@ -153,53 +157,18 @@
         <div class="card border-dark" style="background-color: whitesmoke; max-height: 500px;">
             <div class="card-body" style="display: inline-block;">
                 <h4 class="card-title">What you'll learn</h4>
-                <ul class="d-flex" style="list-style-type:none;flex-flow: row wrap; justify-content: space-between;">
-                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
-                        <div class="d-flex" style="max-width: 280px;max-height: 100px;">
+                <ul class="d-flex" style="list-style-type:none;flex-flow: row wrap;">
+                    {{#each fulldes}}
+                    <li class="d-flex" style="font-size: .9rem; padding-right: 1rem;">
+                        <div class="d-flex" style="width: 280px;max-height: 100px;">
                             <i class="fa fa-check mt-1" aria-hidden="true"></i>
                             <p class="text-justify ml-1"
                                 style="white-space: normal; text-overflow: ellipsis; overflow-y: hidden; ">
-                                Understand the main interior design styles used in today’s homes in great detail, which
-                                include: Formal Interior Design Styles: Traditional, English Country, French </p>
+                                {{FullDes}}</p>
                         </div>
                     </li>
-                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
-                        <div class="d-flex" style="width: 280px;">
-                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
-                            <p class="text-justify ml-1">Select the common materials used in each of the main styles</p>
-                        </div>
-                    </li>
-                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
-                        <div class="d-flex" style="width: 280px;">
-                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
-                            <p class="text-justify ml-1">Select the commonly used patterns for each of the main styles
-                            </p>
-                        </div>
-                    </li>
-                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
-                        <div class="d-flex" style="width: 280px;">
-                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
-                            <p class="text-justify ml-1">Discover your interior design style personality</p>
-                        </div>
-                    </li>
-                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
-                        <div class="d-flex" style="width: 280px;">
-                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
-                            <p class="text-justify ml-1">hUnderstand the main interior design
-                                styles used in today’s
-                                homes in great detail, which include: Formal Interior Design Styles: Traditional,
-                                English Country, French, and Mediterranean; Casual Interior Design Styles</p>
-                        </div>
-                    </li>
-                    <li class="d-flex" style="margin-left: -2rem;font-size: .8rem;">
-                        <div class="d-flex" style="width: 280px;">
-                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
-                            <p class="text-justify ml-1">hUnderstand the main interior design
-                                styles used in today’s
-                                homes in great detail, which include: Formal Interior Design Styles: Traditional,
-                                English Country, French, and Mediterranean; Casual Interior Design Styles</p>
-                        </div>
-                    </li>
+                    {{/each}}
+
                 </ul>
             </div>
 
@@ -240,7 +209,19 @@
                         <div id="collapse{{ContentID}}" class="collapse" aria-labelledby="heading{{ContentID}}">
                             {{#each lecture}}
                             <div class="card-body my-0">
-                                {{LectureName}}
+                                {{#if Preview}}
+                                <button class="btn previewButton btn-link ml-1">
+                                    <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                    {{LectureName}}
+                                </button>
+                                {{else}}
+                                <span class="ml-sm-3">
+                                    <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                    {{LectureName}}
+                                </span>
+
+                                {{/if}}
+
                             </div>
                             {{/each}}
                         </div>

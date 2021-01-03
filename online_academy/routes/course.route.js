@@ -7,7 +7,7 @@ const content_module = require('../models/content.model');
 const lecture_module = require('../models/lecture.model');
 const isAuth = require('../middlewares/auth.mdw');
 const wishlist = require('../models/wishlist.model');
-
+const fulldes_module = require('../models/fulldes.model');
 
 
 router.get('/:param', async function (req, res) {
@@ -20,6 +20,7 @@ router.get('/:param', async function (req, res) {
     course[0]['rate'] = rating[0].TotalRates / rating[0].TotalVotes;
     const content = await content_module.allWithCourseID(course[0].CourseID);
     course[0]['content'] = content;
+    course[0]['fulldes'] = await fulldes_module.allByCourseID(course[0].CourseID);
     var isInWishlist = 0;
 
     if (req.session.isAuth) {
