@@ -94,10 +94,11 @@
                     </div>
                 </li>
 
-                <form class="form-inline flex-fill" method="POST" action="/courses/results">
+                <form id="frmSearch" class="form-inline flex-fill" method="GET" action="/courses/search/">
                     <input class="form-control mr-sm-2 pl-sm-5 border" style="min-width: 100% ;border-radius:20px"
-                        type="search" placeholder="Search" aria-label="Search" name="searchText">
+                        value="{{this.p}}" type="search" placeholder="Search" aria-label="Search" name="p">
                     </input>
+                    <input type="checkbox" hidden id="sort" checked name="sort" value="default">
                     <i class="fa fa-search fa-lg ml-3 position-absolute" role="button" aria-hidden="true"></i>
 
                 </form>

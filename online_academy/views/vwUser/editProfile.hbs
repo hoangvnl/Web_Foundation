@@ -61,7 +61,6 @@
 
         $.getJSON(`/user/is-right?id=${id}&password=${curPassword}`, function (data) {
             if (data === true) {
-                console.log('vao r ma');
                 $('#frmPassword').off('submit').submit();
             } else {
                 $('#validPassword').removeClass('d-none');

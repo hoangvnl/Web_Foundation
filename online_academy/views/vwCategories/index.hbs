@@ -60,31 +60,66 @@
     img {
         width: 100%
     }
+
+    .filter {
+        margin-bottom: 1rem;
+    }
 </style>
+{{/section}}
+{{#section 'js'}}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script>
+
+    $('#frmSearch').on('submit', function (e) {
+        e.preventDefault();
+        if (!$('input[name=p]').val()) {
+            return;
+        }
+        $('#frmSearch').off('submit').submit();
+    })
+    $('select').on('change', function () {
+        if (this.value == 'cost') {
+            $('input[name=sort]').val('cost');
+        }
+        else if (this.value == 'rate') {
+            $('input[name=sort]').val('rate');
+        }
+        $('#frmSearch').submit();
+    });
+</script>
 {{/section}}
 <div class="mainContent">
     {{#if this.empty}}
-    <h1>Sorry, we couldn't find any results for "{{this.searchText}}"</h1>
+    <h1>Sorry, we couldn't find any results for "{{p}}"</h1>
     {{else}}
 
     {{#if this.isSearch}}
-    <h1>Results for “{{this.searchText}}”:</h1>
+    <h1>{{formatCount this.count}} results for “{{this.p}}”:</h1>
     {{else}}
     <h1>All {{#each this.category}}
         {{CategoryName}} {{SubcategoryName}}
         {{/each}} Courses</h1>
     {{/if}}
 
-
-
     {{/if}}
     <div class="d-flex">
-        {{#if this.isSearch}}
-        <div class="filter">
-            <p>hoho</p>
-        </div>
-        {{/if}}
+
+
+
         <div class="content">
+            {{#if this.isSearch}}
+            {{#if this.empty}}
+            {{else}}
+            <div class="filter position-relative">
+                <select class="form-control w-auto ">
+                    <option disabled>Sort</option>
+                    <option value="default" selected>Most Revelant</option>
+                    <option value="rate" {{#if rate}} selected {{/if}}>Rating Decrease</option>
+                    <option value="cost" {{#if cost}} selected {{/if}}>Cost Increase</option>
+                </select>
+            </div>
+            {{/if}}
+            {{/if}}
             {{#each this.course}}
 
             <a name="" id="" class="" href="/course/{{CourseName}}" role="button">

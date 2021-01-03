@@ -150,6 +150,7 @@ INSERT INTO `course` (`CourseID`, `CourseImage`, `CourseName`, `ShortDes`, `Stud
 (34, 'images/courses/34/main.jpg', 'Build Websites from Scratch with HTML & CSS', 'Learn Web Development Essentials and Become a Web Developer From Scratch in this Complete HTML & CSS Beginner\'s Course', 64924, 3000000, 300000, '0000-00-00 00:00:00.000000', 5, 1908),
 (35, 'images/courses/35/main.jpg', '50 Projects In 50 Days - HTML, CSS & JavaScript', 'Sharpen your skills by building 50 quick, unique & fun mini projects', 9489, 3000000, 300000, '0000-00-00 00:00:00.000000', 5, 1809);
 
+
 -- --------------------------------------------------------
 
 --
@@ -1054,8 +1055,8 @@ ALTER TABLE `category`
 -- Chỉ mục cho bảng `course`
 --
 ALTER TABLE `course`
-  ADD PRIMARY KEY (`CourseID`);
-
+	ADD PRIMARY KEY (`CourseID`),
+	ADD FULLTEXT (`CourseName`);
 --
 -- Chỉ mục cho bảng `course_content`
 --
@@ -1096,7 +1097,8 @@ ALTER TABLE `rating`
 -- Chỉ mục cho bảng `subcategory`
 --
 ALTER TABLE `subcategory`
-  ADD PRIMARY KEY (`SubcategoryID`);
+  ADD PRIMARY KEY (`SubcategoryID`),
+  ADD FULLTEXT (`SubcategoryName`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ

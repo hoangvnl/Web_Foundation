@@ -6,9 +6,20 @@ const lecturer_module = require('../models/lecturer.model');
 const rating_module = require('../models/rating.model');
 const router = express.Router();
 
-router.post('/results', async function (req, res) {
-    console.log(req.body);
-    const rows = await sub_category_module.searchByName(req.body.searchText);
+router.get('/search', async function (req, res) {
+    console.log(req.query);
+    const p = req.query.p;
+    const sort = req.query.sort;
+    let rows;
+    if (sort === 'rate') {
+        rows = await sub_category_module.searchByNameSortRate(p);
+    }
+    else if (sort === 'cost') {
+        rows = await sub_category_module.searchByNameSortCost(p);
+    }
+    else {
+        rows = await sub_category_module.searchByName(p);
+    }
     let courseTemp = [];
     let course = [];
     for (var i in rows) {
@@ -27,8 +38,11 @@ router.post('/results', async function (req, res) {
     res.render('vwCategories/index', {
         isSearch: true,
         course,
-        searchText: req.body.searchText,
+        cost: sort === 'cost',
+        rate: sort === 'rate',
+        p,
         empty: rows.length === 0,
+        count: rows.length,
     })
 
 })
