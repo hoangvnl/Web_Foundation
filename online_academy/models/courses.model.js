@@ -43,7 +43,7 @@ module.exports = {
     singleByName(name) {
         return db.load(`SELECT *
         FROM ${TBL_COURSE} 
-        WHERE CourseName = '${name}';`);
+        WHERE CourseName = "${name}";`);
     },
 
 }

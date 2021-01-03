@@ -162,7 +162,12 @@
     </div>
     <nav class="float-right mt-4">
         <ul class="pagination">
+            {{#if this.empty}}
+
+            {{else}}
             {{#if isSearch}}
+
+
             <li class="page-item {{#if can_go_pre}}{{else}}disabled{{/if}}">
                 <a class="page-link" href="?page={{pre_page}}{{searchParam}}">Previous</a>
             </li>
@@ -194,7 +199,7 @@
                 <a class="page-link" href="?page={{next_page}}">Next</a>
             </li>
             {{/if}}
-
+            {{/if}}
 
 
         </ul>

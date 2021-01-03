@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get('/search', async function (req, res) {
     console.log(req.query);
-    const page = req.query.page || 1;
+    var page = req.query.page || 1;
     if (page <= 0) page = 1;
     const offset = (page - 1) * config.pagination.limit;
     const p = req.query.p;
