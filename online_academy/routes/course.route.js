@@ -22,6 +22,7 @@ router.get('/:param', async function (req, res) {
     course[0]['content'] = content;
     course[0]['fulldes'] = await fulldes_module.allByCourseID(course[0].CourseID);
     var isInWishlist = 0;
+    var isInCart = 0;
 
     if (req.session.isAuth) {
         const userID = req.session.userAuth.UserID;
@@ -32,6 +33,11 @@ router.get('/:param', async function (req, res) {
         }
         else {
             isInWishlist = 0;
+        }
+
+        for (temp of req.session.cart) {
+            if (temp.CourseID === course[0].CourseID)
+                isInCart = 1;
         }
     }
 
@@ -44,7 +50,8 @@ router.get('/:param', async function (req, res) {
 
     res.render('vwCourse/detail', {
         course,
-        isInWishlist
+        isInWishlist,
+        isInCart,
     });
 })
 

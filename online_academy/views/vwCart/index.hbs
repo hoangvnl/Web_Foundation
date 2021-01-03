@@ -1,0 +1,83 @@
+{{#section 'css'}}
+<style>
+    .header {
+        background: #505763;
+    }
+
+    .titleHeader {
+        margin-left: 10rem;
+    }
+
+    .mainContent {
+        margin: 0 10rem;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: black;
+    }
+
+    img {
+        width: 16rem;
+        padding: 10px;
+    }
+
+    .info {
+        font-size: 0.8rem;
+        max-width: 30rem;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+</style>
+{{/section}}
+{{#section 'js'}}
+<script>
+    $('.removeButton').on('click', function () {
+        const id = $(this).data('name');
+        $('#txtCourseID').val(id);
+        $('#frmRemove').submit();
+    })
+</script>
+{{/section}}
+<div class="header w-100 text-white py-5">
+    <h1 class="titleHeader">Shopping Cart</h1>
+</div>
+<div class="mainContent my-5 d-flex">
+    <div class="w-100">
+        <form id="frmRemove" action="/cart/remove" method="post">
+            <input type="hidden" id="txtCourseID" name="CourseName">
+        </form>
+        <h3>{{count}} Course in Cart</h3>
+        <div class="cartItems mt-3">
+            <ul style="margin-left: -2.5rem;">
+                {{#each this.course}}
+                <li style="width: 60rem;">
+                    <div class="card d-flex flex-row">
+                        <div style="width: 17rem;">
+                            <a name="" id="" href="#" role="button">
+                                <img src="/public/{{CourseImage}}" alt="">
+                            </a>
+                        </div>
+                        <div class="pt-1" style="width: 34rem;">
+                            <a name="" id="" href="#" role="button" style="color: black;">
+                                <h5>{{CourseName}}</h5>
+                                <p style="max-width: 20rem;">{{ShortDes}}</p>
+                            </a>
+                        </div>
+                        <div class="float-right text-right ">
+                            <span><a data-name="{{CourseName}}" class="removeButton text-danger" name="" id=""
+                                    href="javascript:;" role="button">Remove</a></span>
+                        </div>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+    </div>
+    <div class="costSideBar">
+
+    </div>
+
+</div>

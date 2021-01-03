@@ -96,8 +96,8 @@
                     </h1>
                     {{/compare}}
                     {{#compare SalePrice -1 operator=">"}}
-                    h1 class="d-flex">
-                    <b>${{formatMoney SalePrice}}&nbsp;</b>
+                    <h1 class="d-flex">
+                        <b>${{formatMoney SalePrice}}&nbsp;</b>
                     </h1>
                     <h6 class="d-flex" style="line-height: 3rem;">
                         <del>${{formatMoney Price}}</del>&nbsp;
@@ -107,12 +107,21 @@
 
                 </div>
                 <p class="card-text">
-                    <button class="btn btn-danger w-100 my-3">
-                        <b>Add to cart</b>
-                    </button>
-                    <button class="btn btn-outline-primary w-100 ">
-                        <b>Buy now</b>
-                    </button>
+                    {{#if ../isInCart}}
+                    <a name="" id="" class="btn btn-danger w-100 mt-sm-4" href="/cart" role="button"><b>Go to
+                            cart</b></a>
+                    {{else}}
+                <form action="/cart/add" method="post">
+                    <input type="text" name="CourseName" hidden value="{{CourseName}}">
+                    <button class="btn btn-danger w-100 my-3" type="submit"><b>Add to cart</b></button>
+                </form>
+                {{/if}}
+
+                <form action="/cart/buy" method="post">
+                    <input type="text" name="CourseName" hidden value="{{CourseName}}">
+                    <button class="btn btn-outline-primary w-100 " type="submit"><b>Buy now</b></button>
+                </form>
+
                 </p>
             </div>
         </div>

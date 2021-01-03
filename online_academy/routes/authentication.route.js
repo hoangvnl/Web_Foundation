@@ -36,6 +36,7 @@ router.post('/login', async function (req, res) {
 
     req.session.isAuth = true;
     req.session.userAuth = user;
+    req.session.cart = [];
 
     let url = req.session.retUrl || '/';
     res.redirect(url);
@@ -45,6 +46,7 @@ router.post('/logout', async function (req, res) {
 
     req.session.isAuth = false;
     req.session.userAuth = null;
+    req.session.cart = [];
     res.redirect(req.headers.referer);
 })
 

@@ -23,6 +23,7 @@
             color: dodgerblue;
         }
 
+
         .dropright>li:hover>.submenu {
             display: block;
         }
@@ -106,9 +107,13 @@
                 <a name="" id="" class="btn mx-2" href="#" role="button">
                     <span>Teach on Online Academy</span>
                 </a>
-                <a name="" id="" class="btn mx-2" href="#" role="button">
+                <a name="" id="" class="btn mx-2" href="/cart" role="button">
                     <i class="cart fa fa-shopping-cart fa-lg" aria-hidden="true">
                     </i>
+                    {{#compare cartCount 0 operator=">"}}
+                    <span style="color: white;"
+                        class="badge badge-danger position-absolute mt-3 pr-1 rounded-circle">{{cartCount}}</span>
+                    {{/compare}}
                 </a>
 
 

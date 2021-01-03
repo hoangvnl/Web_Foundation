@@ -1,4 +1,5 @@
 const categoryModel = require('../models/category.model');
+const cartModel = require('../models/cart.model');
 
 module.exports = function (app) {
     app.use(async function (req, res, next) {
@@ -7,6 +8,12 @@ module.exports = function (app) {
 
         res.locals.isAuth = req.session.isAuth;
         res.locals.userAuth = req.session.userAuth;
+
+        if (typeof (req.session.cart) === 'undefined')
+            res.locals.cartCount = 0;
+        else {
+            res.locals.cartCount = cartModel.count(req.session.cart);
+        }
         next();
     })
 
