@@ -505,7 +505,7 @@ INSERT INTO `fulldes` (`FullDesID`, `CourseID`, `FullDes`) VALUES
 CREATE TABLE `joincourse` (
   `UserID` int(10) NOT NULL,
   `CourseID` int(10) NOT NULL,
-  `Date` date NOT NULL
+  `JoinDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------

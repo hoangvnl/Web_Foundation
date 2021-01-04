@@ -13,10 +13,15 @@
 <script src="https://cdn.tiny.cloud/1/ezd73nxbzc7bu6e86g2l82jbbffke0mwevwrnyvc5q8h89j6/tinymce/5/tinymce.min.js"
     referrerpolicy="origin"></script>
 <script>
-    $('#courImage').fileinput({
+    $('#courseImage').fileinput({
         theme: 'fa',
         dropZoneEnabled: false,
     });
+    $('.lectureVideo').fileinput({
+        theme: 'fa',
+        dropZoneEnabled: false,
+    });
+
 </script>
 <script>
     tinymce.init({
@@ -29,27 +34,67 @@
         ],
     });
 </script>
+<script>
+    $('#addCourseContent').on('click', function () {
+        $('#courseContents').append($('#contents').clone());
+    })
+    $('#addLecture').click(function () {
+        const clone = $(this).parent('#contents').children('#contentLectures').children('#lecture').clone();
+        $(this).parent('#contents').append('hasd');
+    }) 
+</script>
 {{/section}}
+
 <div class="mainForm">
     <form action="" method="POST">
         <div class="card">
             <h2 class="card-header text-center">Create Your Course</h2>
             <div class="card-body">
                 <div class="form-group">
-                    <h4>Course Image</h4>
-                    <input type="file" name="CourseImage" id="courImage">
-                    <h4>Course Name</h4>
-                    <input type="text" class="form-control" name="CourseName" id="courseName">
-                    <h4>Short Description</h4>
-                    <input type="text" name="ShortDes" class="form-control" id="shortDes">
-                    <h4>Price</h4>
-                    <input type="text" name="Price" class="form-control" id="price">
-                    <h4>Course Content</h4>
+                    <div class="card-body">
+                        <h4>Course Image</h4>
+                        <input type="file" name="CourseImage" id="courseImage">
+                    </div>
+                    <div class="card-body">
+                        <h4>Course Name</h4>
+                        <input type="text" class="form-control" name="CourseName" id="courseName">
+                    </div>
+                    <div class="card-body">
+                        <h4>Short Description</h4>
+                        <input type="text" name="ShortDes" class="form-control" id="shortDes">
+                    </div>
+                    <div class="card-body">
+                        <h4>Price</h4>
+                        <input type="text" name="Price" class="form-control" id="price">
+                    </div>
+                    <div class="card-body">
+                        <h4>Course Content</h4>
+                        <div id="courseContents">
+                            <div id="contents" class="my-3 border-bottom pb-3">
+                                <input type="text" class="form-control" name="ContentName" placeholder="Content Name">
+                                <div class="form-group ml-5" id="contentLectures">
+                                    <div class="my-2" id="lecture">
+                                        <input type="text" class="form-control mb-1" name="LectureName"
+                                            placeholder="Lecture Name">
+                                        <input type="file" class="lectureVideo" name="CourseImage">
+                                    </div>
+                                </div>
+                                <button type="button" id="addLecture" class="btn btn-primary ml-5">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    Add Lecture
+                                </button>
+                            </div>
+                        </div>
+                        <button type="button" id="addCourseContent" class=" btn btn-primary">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Add Course Content
+                        </button>
+                    </div>
 
                 </div>
                 <div class="form-group">
                     <label for="txtFullDes">
-                        <h4>Edit Your Course</h4>
+                        <h4>Describe Your Course</h4>
                     </label>
                     <textarea class="form-control" name="FullDes" id="txtFullDes" cols="30" rows="10"></textarea>
                 </div>

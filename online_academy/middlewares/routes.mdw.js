@@ -12,6 +12,8 @@ module.exports = function (app) {
     app.use('/user', require('../routes/user.route'));
     app.use('/cart', isAuth, require('../routes/cart.route'));
     app.use('/lecturer', require('../routes/lecturer.route'));
+    app.use('/khoa', require('../routes/khoa.route'));
+
 
 
 
