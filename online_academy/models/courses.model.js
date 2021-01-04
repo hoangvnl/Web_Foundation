@@ -41,9 +41,14 @@ module.exports = {
                         where p1.UserID = ${id} and p2.CourseID = p1.CourseID`);
     },
     singleByName(name) {
-        return db.load(`SELECT *
+        return db.load(`SELECT *, DATE_FORMAT(UpdatedAt,'%m/%Y') AS UpdatedDate
         FROM ${TBL_COURSE} 
         WHERE CourseName = "${name}";`);
+    },
+    singleByID(id) {
+        return db.load(`SELECT *
+        FROM ${TBL_COURSE} 
+        WHERE CourseID = ${id};`);
     },
 
 

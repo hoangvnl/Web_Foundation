@@ -1,5 +1,3 @@
-const { mode } = require("crypto-js");
-
 module.exports = {
     add(cart, item) {
         cart.push(item);
@@ -14,5 +12,18 @@ module.exports = {
     },
     count(cart) {
         return cart.length;
+    },
+    total(cart) {
+        let price = 0, off = 0;
+        for (item of cart) {
+            if (+item.SalePrice != -1) {
+                price += (+item.SalePrice);
+                off += (+item.Price);
+            }
+            else {
+                price += Price;
+            }
+        }
+        return { price, off };
     }
 }

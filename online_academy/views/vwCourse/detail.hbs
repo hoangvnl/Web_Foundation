@@ -27,7 +27,6 @@
 
     .reviewItemAvatar {
         display: block;
-        width: 9rem;
         height: 3rem;
         background-color: green;
         line-height: 3rem;
@@ -53,11 +52,9 @@
 {{/section}}
 
 {{#section 'js'}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
-
-
     $(".collapsed").click(function () {
         $(this).children('.rotate').toggleClass("down");
     })
@@ -78,14 +75,47 @@
     $(function () {
         changeDisplay();
     })
+
+
+    $('#buy').on('click', function () {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Buy it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Success!',
+                    text: "You have bought this course.",
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'OK!'
+                }).then((result) => {
+                    $('#frmBuy').submit();
+                })
+
+            }
+        })
+    })
+
+    $('#buyNotAuth').on('click', function () {
+        $('#frmBuy').submit();
+    })
+
 </script>
 {{/section}}
 
 {{#each this.course}}
-
-
-
 <div class="mainContent">
+
+    {{#if ../isBought}}
+
+    {{else}}
     <div id="sideBar" class="position-absolute sideBarMenu shadow">
         <div class="card text-left">
             <div class="card-body">
@@ -117,19 +147,26 @@
                 </form>
                 {{/if}}
 
-                <form action="/cart/buy" method="post">
-                    <input type="text" name="CourseName" hidden value="{{CourseName}}">
-                    <button class="btn btn-outline-primary w-100 " type="submit"><b>Buy now</b></button>
+                <form id="frmBuy" action="/cart/buy/{{CourseName}}" method="post">
                 </form>
+                <button id="{{#if ../isAuth}}buy{{else}}buyNotAuth{{/if}}" class="btn btn-outline-primary w-100"><b>Buy
+                        now</b></button>
 
                 </p>
             </div>
         </div>
     </div>
+    {{/if}}
+
     <div class="topContainer">
         <div class="card text-white bg-dark">
-            <div class="card-body" style="margin: 4rem 39rem 1rem 8rem;">
+            <div class="card-body" style="margin: {{#if ../isBought}}
+    4rem 8rem 4rem 8rem
+{{else}}
+    4rem 39rem 1rem 8rem
+{{/if}};">
                 <h1 class="card-title">{{CourseName}}</h1>
+                <h5 class="card-title">{{ShortDes}}</h5>
                 <div style="color: orange;">{{formatRate rate}}
                     {{> ratingStar}}
                     <span style="color: white;">({{formatCount totalRates}} ratings)</span>
@@ -140,7 +177,7 @@
                 </div>
                 <div>
                     <p> <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                        Last updated 12/2020
+                        Last updated {{UpdatedDate}}
                     </p>
                     <p>
                     <form id="frmWishlist" action="/course/addWishlist" method="post">
@@ -162,7 +199,12 @@
 
         </div>
     </div>
-    <div class="botContainer" style="margin: 1rem 39rem 1rem 8rem;">
+    <div class="botContainer" style="margin: {{#if ../isBought}}
+    4rem 8rem 4rem 8rem
+{{else}}
+    4rem 39rem 1rem 8rem
+{{/if}};">
+        <h4>Description</h4>
         <div class="card border-dark" style="background-color: whitesmoke; max-height: 500px;">
             <div class="card-body" style="display: inline-block;">
                 <h4 class="card-title">What you'll learn</h4>
@@ -182,22 +224,7 @@
             </div>
 
         </div>
-        <div class="description mt-4">
-            <h4>Description</h4>
-            <p>With so many different interior design styles available today, do you find yourself getting overwhelmed
-                and unsure of how to choose a style or pull off a style well in your own home? It becomes even more
-                complicated when you want to mix different interior design styles but are unsure of how to do that so it
-                looks fabulous and well pulled together, instead of flat out chaotic. <br>
 
-                To that end, this course has been created to help you understand the defining characteristics of 18
-                different popular interior design styles today so that you can either create one of those styles in your
-                own home or learn how to easily and effectively mix different styles on your own. <br>
-
-                Please note that this course only covers the characteristics of various interior design styles. It does
-                NOT provide information on how to pull together a room (e.g., furniture layouts, rug sizes, etc.). That
-                information can be found in my course "How to Design a Room in 10 Easy Steps"
-            </p>
-        </div>
         <div class="courseContent mt-4">
             <h4>Course content</h4>
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -388,10 +415,15 @@
 
             </div>
         </div>
+
         <div class="reviews my-4">
             <h4>Reviews</h4>
             <div class="reviewItem">
-                <div class="reviewItemAvatar text-center text-white align-content-center rounded-circle">
+                <div class="reviewItemAvatar text-center text-white align-content-center rounded-circle" style="width: {{#if ../isBought}}
+        6rem
+        {{else}}
+        9rem
+        {{/if}};">
                     HT
                 </div>
                 <div>

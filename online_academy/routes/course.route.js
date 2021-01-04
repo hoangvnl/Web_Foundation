@@ -8,6 +8,7 @@ const lecture_module = require('../models/lecture.model');
 const isAuth = require('../middlewares/auth.mdw');
 const wishlist = require('../models/wishlist.model');
 const fulldes_module = require('../models/fulldes.model');
+const joincourseModel = require('../models/joincourse.model');
 
 
 router.get('/:param', async function (req, res) {
@@ -23,6 +24,15 @@ router.get('/:param', async function (req, res) {
     course[0]['fulldes'] = await fulldes_module.allByCourseID(course[0].CourseID);
     var isInWishlist = 0;
     var isInCart = 0;
+    var isBought = false;
+    if (typeof (req.session.userAuth) !== 'undefined' && req.session.userAuth !== null) {
+        const user = req.session.userAuth;
+        const joinCourse = await joincourseModel.allByUserID(user.UserID);
+        for (var i in joinCourse) {
+            if (+joinCourse[i].CourseID === +course[0].CourseID)
+                isBought = true;
+        }
+    }
 
     if (req.session.isAuth) {
         const userID = req.session.userAuth.UserID;
@@ -52,6 +62,7 @@ router.get('/:param', async function (req, res) {
         course,
         isInWishlist,
         isInCart,
+        isBought,
     });
 })
 

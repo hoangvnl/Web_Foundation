@@ -34,7 +34,16 @@ router.post('/login', async function (req, res) {
         });
     }
 
-    req.session.isAuth = true;
+    if (+(user.Permission) === 0) {
+        req.session.isAuth = true;
+
+    }
+    else if (+(user.Permission) === 1) {
+        req.session.isLecturer = true;
+    }
+    else req.session.isAdmin = true;
+
+
     req.session.userAuth = user;
     req.session.cart = [];
 

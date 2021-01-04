@@ -4,6 +4,9 @@ const isAuth = require('../middlewares/auth.mdw');
 const userModel = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const coursesModel = require('../models/courses.model');
+const joincourseModel = require('../models/joincourse.model');
+const lecturerModel = require('../models/lecturer.model');
+const subcategoryModel = require('../models/subcategory.model');
 
 router.get('/edit-profile', isAuth, function (req, res) {
     const user = (req.session.userAuth);
@@ -19,7 +22,35 @@ router.get('/edit-profile', isAuth, function (req, res) {
 router.get('/wishlist', isAuth, async function (req, res) {
     const user = (req.session.userAuth);
     const course = await coursesModel.allInWishlistByUserID(user.UserID);
+
+    for (var i in course) {
+        course[+i]['lecturerName'] = await lecturerModel.getNameByCourseID(course[+i].CourseID);
+        const catName = await subcategoryModel.getNameByID(course[+i].SubCategoryID);
+        course[+i]['catName'] = catName;
+    }
+
     res.render('vwUser/wishlist', {
+        course,
+        userName: user.UserName,
+        email: user.Email,
+        id: user.UserID,
+    });
+
+})
+
+router.get('/my-course', isAuth, async function (req, res) {
+    const user = (req.session.userAuth);
+    console.log(user.UserID);
+    const courseID = await joincourseModel.allByUserID(user.UserID);
+    var course = [];
+
+    for (var i in courseID) {
+        console.log(courseID[i].CourseID);
+        var courseTemp = await coursesModel.singleByID(courseID[+i].CourseID);
+        course.push(courseTemp[0]);
+    }
+
+    res.render('vwUser/myCourse', {
         course,
         userName: user.UserName,
         email: user.Email,

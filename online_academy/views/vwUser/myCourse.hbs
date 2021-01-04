@@ -1,0 +1,170 @@
+{{#section 'css'}}
+<style>
+    .mainContent {
+        margin: 4rem 8rem;
+    }
+
+    .content {
+        margin: 0rem 2rem;
+    }
+
+    a:hover {
+        text-decoration: none;
+        color: black;
+    }
+
+    .courseCard {
+        border-bottom: whitesmoke;
+
+        border-style: none none solid none;
+        display: flex;
+    }
+
+    .courseName {
+        font-size: 1.4rem;
+        color: lightslategray;
+    }
+
+    .info>div>p {
+        color: black;
+        font-size: 1rem;
+    }
+
+    .info>.courseCost {
+        line-height: 0.7rem;
+    }
+
+    .instructor {
+        color: gray;
+    }
+
+    .rate {
+        color: orange;
+        font-size: 1.2rem;
+        line-height: 1rem;
+    }
+
+    .rateCount {
+        color: gray;
+        line-height: 1rem;
+        margin-left: 1rem;
+    }
+
+    .img {
+        width: 50rem;
+        height: 17rem;
+        margin-right: 1rem;
+    }
+
+    img {
+        width: 100%
+    }
+
+    .mainSection {
+        margin: 2rem 12rem;
+        padding-left: 20rem;
+        position: relative;
+        border-style: solid none solid solid;
+        border-width: 1px;
+    }
+
+    .formWrap {
+        position: relative;
+        text-align: center;
+        border-style: none solid;
+        border-width: 1px;
+    }
+
+    .formWrap>form {
+        padding: 1rem 8rem;
+    }
+
+    .user {
+        text-align: center;
+        margin-left: -20rem;
+
+
+    }
+
+    .avatar {
+        width: 120px;
+        height: 120px;
+        font-size: 2rem;
+        line-height: 120px;
+        background-color: cornflowerblue;
+    }
+
+    ul {
+        list-style-type: none;
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script>
+
+</script>
+{{/section}}
+<div class="mainSection ">
+    <div class="sideNav mt-3 position-absolute">
+        <div class="user">
+            <div class="avatar text-white text-center rounded-circle mx-auto">
+                VH
+            </div>
+            <div class="userName"> {{userName}}</div>
+            <ul class="p-0">
+                <li>
+                    <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="/user/edit-profile"
+                        role="button">Profile</a>
+                </li>
+                <li>
+                    <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="/user/wishlist"
+                        role="button">Wishlist</a>
+                </li>
+                <li>
+                    <a name="" id="" class="btn btn-outline-secondary w-100 my-1 active" href="javascript:;"
+                        role="button">My
+                        Course</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="formWrap">
+        <h2>My Wishlist</h2>
+        <div class="content">
+            {{#each this.course}}
+            <a name="" id="" class="" href="/course/{{CourseName}}" role="button">
+                <div class="courseCard">
+                    <div class="img">
+                        <img src="/public/{{CourseImage}}" alt="">
+                    </div>
+                    <div class="info w-100 d-flex text-left">
+                        <div style="padding-right: 3rem;">
+                            <p><b class="courseName">{{CourseName}}</b></p>
+                            <p class="category">{{catName}}</p>
+                            <p class="instructor">
+                                {{lecturerName}}
+                            </p>
+                            <div class="d-block">
+                                <div class="rate d-flex text-center">
+                                    <b>4.6</b>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                    <div class="rateCount">
+                                        ({{formatCount StudentCount}})
+                                    </div>
+                                </div>
+                                <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+            {{/each}}
+        </div>
+    </div>
+</div>

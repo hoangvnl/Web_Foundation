@@ -11,6 +11,7 @@ module.exports = function (app) {
     app.use('/join', require('../routes/authentication.route'));
     app.use('/user', require('../routes/user.route'));
     app.use('/cart', isAuth, require('../routes/cart.route'));
+    app.use('/lecturer', require('../routes/lecturer.route'));
 
 
 

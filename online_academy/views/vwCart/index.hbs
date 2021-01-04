@@ -27,8 +27,22 @@
         max-width: 30rem;
     }
 
+    .removeButton {
+        font-size: 1.1rem;
+        line-height: 3rem;
+    }
+
     ul {
         list-style-type: none;
+    }
+
+    .costSideBar>p {
+        font-size: 1.1rem;
+        line-height: .9rem;
+    }
+
+    h1 {
+        font-size: 3.2rem;
     }
 </style>
 {{/section}}
@@ -53,22 +67,34 @@
         <div class="cartItems mt-3">
             <ul style="margin-left: -2.5rem;">
                 {{#each this.course}}
-                <li style="width: 60rem;">
+                <li style="width: 62rem;">
                     <div class="card d-flex flex-row">
                         <div style="width: 17rem;">
-                            <a name="" id="" href="#" role="button">
+                            <a name="" id="" href="/course/{{CourseName}}" role="button">
                                 <img src="/public/{{CourseImage}}" alt="">
                             </a>
                         </div>
-                        <div class="pt-1" style="width: 34rem;">
-                            <a name="" id="" href="#" role="button" style="color: black;">
+                        <div class="pt-1" style="width: 33rem;">
+                            <a name="" id="" href="/course/{{CourseName}}" role="button" style="color: black;">
                                 <h5>{{CourseName}}</h5>
                                 <p style="max-width: 20rem;">{{ShortDes}}</p>
                             </a>
                         </div>
-                        <div class="float-right text-right ">
-                            <span><a data-name="{{CourseName}}" class="removeButton text-danger" name="" id=""
-                                    href="javascript:;" role="button">Remove</a></span>
+                        <div class="text-right ">
+                            <span><a data-name="{{CourseName}}" class="removeButton text-danger text-center" name=""
+                                    id="" href="javascript:;" role="button">Remove</a></span>
+                        </div>
+                        <div class="text-right ml-5">
+                            <a name="" id="" href="/course/{{CourseName}}" role="button">
+                                {{#compare SalePrice -1}}
+                                <p class="text-danger"><b>${{formatMoney Price}}</b><br></p>
+                                {{/compare}}
+                                {{#compare SalePrice -1 operator=">"}}
+                                <p class="text-danger"><b>${{formatMoney SalePrice}}</b><br>
+                                    <del class="text-dark">${{formatMoney Price}}</del>
+                                </p>
+                                {{/compare}}
+                            </a>
                         </div>
                     </div>
                 </li>
@@ -76,8 +102,18 @@
             </ul>
         </div>
     </div>
-    <div class="costSideBar">
+    {{#compare count 0 operator=">"}}
+    <div class="costSideBar w-100 ml-4 mt-4">
+        <p>Total: <br>
+        <h1><b>${{formatMoney total.price}}</b></h1>
+        <p><del>${{formatMoney total.off}}</del></p>
+        </p>
 
+        <form action="/cart/buy" method="post">
+            <button type="submit" class="btn btn-danger w-100">Buy</button>
+        </form>
     </div>
+    {{/compare}}
+
 
 </div>

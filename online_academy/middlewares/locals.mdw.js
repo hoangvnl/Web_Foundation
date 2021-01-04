@@ -5,8 +5,13 @@ module.exports = function (app) {
     app.use(async function (req, res, next) {
         if (typeof (req.session.isAuth) === 'undefined')
             req.session.isAuth = false;
+        if (typeof (req.session.isLecturer) === 'undefined')
+            req.session.isLecturer = false;
+        if (typeof (req.session.isAdmin) === 'undefined')
+            req.session.isAdmin = false;
 
         res.locals.isAuth = req.session.isAuth;
+        res.locals.isLecturer = req.session.isLecturer;
         res.locals.userAuth = req.session.userAuth;
 
         if (typeof (req.session.cart) === 'undefined')

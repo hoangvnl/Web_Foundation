@@ -3,6 +3,7 @@ const hbs_sections = require('express-handlebars-sections');
 const numeral = require('numeral');
 const Handlebars = require("handlebars");
 const ratingStar = require('../views/partials/ratingStar.hbs');
+const dateFormat = require("dateformat");
 Handlebars.registerPartial("ratingStar", ratingStar);
 
 Handlebars.registerHelper('compare', function (lvalue, rvalue, options) {
@@ -51,6 +52,9 @@ module.exports = function (app) {
             formatRate(val) {
                 return numeral(val).format('0.0');
             },
+            formatDate(val) {
+                return dateFormat(val, "longDate");
+            }
         }
     }));
 
