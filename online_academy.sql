@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 01, 2021 lúc 03:53 PM
+-- Thời gian đã tạo: Th1 04, 2021 lúc 08:02 AM
 -- Phiên bản máy phục vụ: 10.4.17-MariaDB
 -- Phiên bản PHP: 7.4.13
 
@@ -20,59 +20,9 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `online_academy`
 --
-CREATE DATABASE IF NOT EXISTS `online_academy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `online_academy`;
 
 -- --------------------------------------------------------
---
--- Cấu trúc bảng cho bảng `wishlist`
---
 
-CREATE TABLE `wishlist` (
-	UserID int,
-    CourseID int
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `wishlist`
---
-
-
-
--- --------------------------------------------------------
---
--- Cấu trúc bảng cho bảng `tokens`
---
-
-CREATE TABLE `tokens` (
-	UserID int,
-    Token varchar(50)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `tokens`
---
-
-
-
--- --------------------------------------------------------
---
--- Cấu trúc bảng cho bảng `users`
---
-CREATE TABLE `users` (
-	UserID INT AUTO_INCREMENT PRIMARY KEY not null,
-	Email varchar(50) DEFAULT NULL,
-    Password varchar(255) DEFAULT NULL,
-    UserName varchar(50) DEFAULT NULL,
-    Permission int(6) DEFAULT NULL,
-    Verification int(6) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Đang đổ dữ liệu cho bảng `users`
---
-
--- --------------------------------------------------------
 --
 -- Cấu trúc bảng cho bảng `category`
 --
@@ -114,31 +64,31 @@ CREATE TABLE `course` (
 --
 
 INSERT INTO `course` (`CourseID`, `CourseImage`, `CourseName`, `ShortDes`, `StudentCount`, `Price`, `SalePrice`, `UpdatedAt`, `SubCategoryID`, `View`) VALUES
-(1, 'images/courses/1/main.jpg', 'Flutter & Dart - The Complete Guide [2020 Edition]', 'A Complete Guide to the Flutter SDK & Flutter Framework for building native iOS and Android apps', 111900, 3000000, 300000, '0000-00-00 00:00:00.000000', 1, 1000),
-(2, 'images/courses/2/main.jpg', 'The Complete 2020 Flutter Development Bootcamp with Dart', 'Officially created in collaboration with the Google Flutter team.', 84899, 3000000, 300000, '0000-00-00 00:00:00.000000', 1, 2000),
-(3, 'images/courses/3/main.jpg', 'Dart and Flutter: The Complete Developer\'s Guide', 'Everything you need to know for building mobile apps with Flutter and Dart, including RxDart and Animations!', 20074, 3000000, 300000, '0000-00-00 00:00:00.000000', 1, 2000),
-(4, 'images/courses/4/main.jpg', 'Flutter & Dart - The Complete Flutter App Development Course', 'Build Flutter iOS and Android Apps with a Single Codebase: Learn Google\'s Flutter Mobile Development Framework & Dart', 17851, 3000000, 300000, '0000-00-00 00:00:00.000000', 1, 2500),
-(5, 'images/courses/5/main.png', 'Flutter & Firebase: Build a Complete App for iOS & Android', 'Learn Dart, Flutter & Firebase by Google, and build a real-world, production ready app', 7642, 3000000, 300000, '0000-00-00 00:00:00.000000', 1, 2500),
-(6, 'images/courses/6/main.jpg', 'The Complete Flutter UI Masterclass | iOS, Android, & Web', 'Learn how to build beautiful and responsive iOS, Android, and Web user interfaces using Flutter and Dart!', 2023, 1200000, -1, '0000-00-00 00:00:00.000000', 1, 3000),
-(7, 'images/courses/7/main.jpg', 'Master Flutter - Learn Dart & Flutter by Developing 5 Apps', 'Learn Google Flutter & Dart by Developing 5 Real Life & Enterprise Apps including UI, App Dashboard and API', 1373, 3000000, 300000, '0000-00-00 00:00:00.000000', 1, 3000),
-(8, 'images/courses/8/main.jpg', 'The Complete Android N Developer Course', 'Learn Android App Development with Android 7 Nougat by building real apps including Uber, Whatsapp and Instagram!', 147909, 3000000, 300000, '0000-00-00 00:00:00.000000', 2, 1800),
-(9, 'images/courses/9/main.jpg', 'The Complete Android Oreo Developer Course - Build 23 Apps!', 'Learn Android O App Development using Java & Kotlin - build real apps including Super Mario Run, Whatsapp and Instagram!', 68517, 3000000, 300000, '0000-00-00 00:00:00.000000', 2, 1800),
-(10, 'images/courses/10/main.jpg', 'Android Java Masterclass - Become an App Developer', 'Improve your career options by learning Android app Development. Master Android Studio and build your first app today', 56288, 2300000, 230000, '0000-00-00 00:00:00.000000', 2, 2300),
-(11, 'images/courses/11/main.jpg', 'The Comprehensive Android Development Masterclass', 'Master New Android API\'s like ROOM Database, ML Kit Face Recognition, Firestore, Firebase, Maps and Android Studio IDE', 11872, 3000000, 300000, '0000-00-00 00:00:00.000000', 2, 2300),
-(12, 'images/courses/12/main.jpg', 'Android O & Java - The Complete Android Development Bootcamp', 'Learn Android O app development from beginning to end. Learn to code in Java while building fun Android O projects.', 34714, 3000000, 300000, '0000-00-00 00:00:00.000000', 2, 1450),
-(13, 'images/courses/13/main.jpg', 'Android App Development Masterclass using Kotlin', 'Learn Kotlin Android App Development And Become an Android Developer. Incl. Kotlin Tutorial and Android Tutorial Videos', 26759, 2300000, 230000, '0000-00-00 00:00:00.000000', 2, 1450),
-(14, 'images/courses/14/main.jpg', 'The Complete Android R + Java Developer Course™ : 2020', 'In this course, you\'ll learn Android Development and get to build your own Android R apps by using Java.', 31225, 3000000, 300000, '0000-00-00 00:00:00.000000', 2, 1203),
-(15, 'images/courses/15/main.jpg', 'The Complete JavaScript Course 2020: From Zero to Expert!', 'The modern JavaScript course for everyone! Master JavaScript with projects, challenges and theory. Many courses in one!', 384225, 3000000, 300000, '0000-00-00 00:00:00.000000', 3, 1203),
-(16, 'images/courses/16/main.jpg', 'JavaScript: Understanding the Weird Parts', 'An advanced JavaScript course for everyone! Scope, closures, prototypes, \'this\', build your own framework, and more.', 155488, 3000000, 300000, '0000-00-00 00:00:00.000000', 3, 1100),
-(17, 'images/courses/17/main.jpg', 'Modern JavaScript From The Beginning', 'Learn and build projects with pure JavaScript (No frameworks or libraries)', 75217, 3000000, 300000, '0000-00-00 00:00:00.000000', 3, 1100),
-(18, 'images/courses/18/main.jpg', 'JavaScript - The Complete Guide 2021 (Beginner + Advanced)', 'Modern JavaScript from the beginning - all the way up to JS expert level! THE must-have JavaScript resource in 2020.', 61438, 3000000, 300000, '0000-00-00 00:00:00.000000', 3, 2300),
-(19, 'images/courses/19/main.jpg', 'The Modern JavaScript Bootcamp', 'Learn JavaScript by building real-world apps. Includes 3 real-world projects, 80 programming challenges, and ES6/ES7!', 40753, 3000000, 300000, '0000-00-00 00:00:00.000000', 3, 2300),
-(20, 'images/courses/20/main.jpg', 'JavaScript: The Advanced Concepts', 'Learn modern advanced JavaScript practices and be in the top 10% of JavaScript developers', 37959, 3000000, 300000, '0000-00-00 00:00:00.000000', 3, 3100),
-(21, 'images/courses/21/main.jpg', 'The Modern Javascript Bootcamp Course (2020)', 'The most up-to-date JS resource online! Master Javascript by building a beautiful portfolio of projects!', 32327, 3000000, 300000, '0000-00-00 00:00:00.000000', 3, 3100),
-(22, 'images/courses/22/main.jpg', 'React - The Complete Guide (incl Hooks, React Router, Redux)', 'Dive in and learn React.js from scratch! Learn Reactjs, Hooks, Redux, React Routing, Animations, Next.js and way more!', 99032, 3000000, 300000, '0000-00-00 00:00:00.000000', 4, 3200),
-(23, 'images/courses/23/main.jpg', 'Modern React with Redux [2020 Update]', 'Master React v16.6.3 and Redux with React Router, Webpack, and Create-React-App. Includes Hooks!', 217685, 3000000, 300000, '0000-00-00 00:00:00.000000', 4, 3200),
-(24, 'images/courses/24/main.jpg', 'Advanced React and Redux', 'Walkthroughs on advanced React v16.6.3 and Redux v4.0.0 - Authentication, Testing, Middlewares, HOC\'s, and Deployment', 68806, 3000000, 300000, '0000-00-00 00:00:00.000000', 4, 2800),
-(25, 'images/courses/25/main.jpg', 'Node with React: Fullstack Web Development', 'Build and deploy fullstack web apps with NodeJS, React, Redux, Express, and MongoDB.', 69067, 3000000, 300000, '0000-00-00 00:00:00.000000', 4, 2800),
+(1, 'images/courses/1/main.jpg', 'Flutter & Dart - The Complete Guide [2020 Edition]', 'A Complete Guide to the Flutter SDK & Flutter Framework for building native iOS and Android apps', 111900, 3000000, 300000, '2020-01-11 13:56:47.000000', 1, 1000),
+(2, 'images/courses/2/main.jpg', 'The Complete 2020 Flutter Development Bootcamp with Dart', 'Officially created in collaboration with the Google Flutter team.', 84899, 3000000, 300000, '2020-12-15 13:57:41.000000', 1, 2000),
+(3, 'images/courses/3/main.jpg', 'Dart and Flutter: The Complete Developer\'s Guide', 'Everything you need to know for building mobile apps with Flutter and Dart, including RxDart and Animations!', 20074, 3000000, 300000, '2020-12-10 13:57:55.000000', 1, 2000),
+(4, 'images/courses/4/main.jpg', 'Flutter & Dart - The Complete Flutter App Development Course', 'Build Flutter iOS and Android Apps with a Single Codebase: Learn Google\'s Flutter Mobile Development Framework & Dart', 17851, 3000000, 300000, '2020-06-10 13:58:09.000000', 1, 2500),
+(5, 'images/courses/5/main.png', 'Flutter & Firebase: Build a Complete App for iOS & Android', 'Learn Dart, Flutter & Firebase by Google, and build a real-world, production ready app', 7642, 3000000, 300000, '2020-12-11 13:58:16.000000', 1, 2500),
+(6, 'images/courses/6/main.jpg', 'The Complete Flutter UI Masterclass | iOS, Android, & Web', 'Learn how to build beautiful and responsive iOS, Android, and Web user interfaces using Flutter and Dart!', 2023, 1200000, -1, '2020-10-14 13:58:37.000000', 1, 3000),
+(7, 'images/courses/7/main.jpg', 'Master Flutter - Learn Dart & Flutter by Developing 5 Apps', 'Learn Google Flutter & Dart by Developing 5 Real Life & Enterprise Apps including UI, App Dashboard and API', 1373, 3000000, 300000, '2020-10-14 13:58:41.000000', 1, 3000),
+(8, 'images/courses/8/main.jpg', 'The Complete Android N Developer Course', 'Learn Android App Development with Android 7 Nougat by building real apps including Uber, Whatsapp and Instagram!', 147909, 3000000, 300000, '2019-08-13 13:59:09.000000', 2, 1800),
+(9, 'images/courses/9/main.jpg', 'The Complete Android Oreo Developer Course - Build 23 Apps!', 'Learn Android O App Development using Java & Kotlin - build real apps including Super Mario Run, Whatsapp and Instagram!', 68517, 3000000, 300000, '2020-10-07 13:59:17.000000', 2, 1800),
+(10, 'images/courses/10/main.jpg', 'Android Java Masterclass - Become an App Developer', 'Improve your career options by learning Android app Development. Master Android Studio and build your first app today', 56288, 2300000, 230000, '2020-06-14 13:59:22.000000', 2, 2300),
+(11, 'images/courses/11/main.jpg', 'The Comprehensive Android Development Masterclass', 'Master New Android API\'s like ROOM Database, ML Kit Face Recognition, Firestore, Firebase, Maps and Android Studio IDE', 11872, 3000000, 300000, '2020-04-01 13:59:29.000000', 2, 2300),
+(12, 'images/courses/12/main.jpg', 'Android O & Java - The Complete Android Development Bootcamp', 'Learn Android O app development from beginning to end. Learn to code in Java while building fun Android O projects.', 34714, 3000000, 300000, '2020-11-16 13:59:34.000000', 2, 1450),
+(13, 'images/courses/13/main.jpg', 'Android App Development Masterclass using Kotlin', 'Learn Kotlin Android App Development And Become an Android Developer. Incl. Kotlin Tutorial and Android Tutorial Videos', 26759, 2300000, 230000, '2020-12-22 13:59:41.000000', 2, 1450),
+(14, 'images/courses/14/main.jpg', 'The Complete Android R + Java Developer Course™ : 2020', 'In this course, you\'ll learn Android Development and get to build your own Android R apps by using Java.', 31225, 3000000, 300000, '2020-12-15 13:59:45.000000', 2, 1203),
+(15, 'images/courses/15/main.jpg', 'The Complete JavaScript Course 2020: From Zero to Expert!', 'The modern JavaScript course for everyone! Master JavaScript with projects, challenges and theory. Many courses in one!', 384225, 3000000, 300000, '2020-10-21 13:59:49.000000', 3, 1203),
+(16, 'images/courses/16/main.jpg', 'JavaScript: Understanding the Weird Parts', 'An advanced JavaScript course for everyone! Scope, closures, prototypes, \'this\', build your own framework, and more.', 155488, 3000000, 300000, '2020-11-10 13:59:53.000000', 3, 1100),
+(17, 'images/courses/17/main.jpg', 'Modern JavaScript From The Beginning', 'Learn and build projects with pure JavaScript (No frameworks or libraries)', 75217, 3000000, 300000, '2020-12-22 13:59:56.000000', 3, 1100),
+(18, 'images/courses/18/main.jpg', 'JavaScript - The Complete Guide 2021 (Beginner + Advanced)', 'Modern JavaScript from the beginning - all the way up to JS expert level! THE must-have JavaScript resource in 2020.', 61438, 3000000, 300000, '2020-11-09 13:59:59.000000', 3, 2300),
+(19, 'images/courses/19/main.jpg', 'The Modern JavaScript Bootcamp', 'Learn JavaScript by building real-world apps. Includes 3 real-world projects, 80 programming challenges, and ES6/ES7!', 40753, 3000000, 300000, '2020-11-26 14:00:03.000000', 3, 2300),
+(20, 'images/courses/20/main.jpg', 'JavaScript: The Advanced Concepts', 'Learn modern advanced JavaScript practices and be in the top 10% of JavaScript developers', 37959, 3000000, 300000, '2020-12-30 14:00:07.000000', 3, 3100),
+(21, 'images/courses/21/main.jpg', 'The Modern Javascript Bootcamp Course (2020)', 'The most up-to-date JS resource online! Master Javascript by building a beautiful portfolio of projects!', 32327, 3000000, 300000, '2020-11-11 14:00:11.000000', 3, 3100),
+(22, 'images/courses/22/main.jpg', 'React - The Complete Guide (incl Hooks, React Router, Redux)', 'Dive in and learn React.js from scratch! Learn Reactjs, Hooks, Redux, React Routing, Animations, Next.js and way more!', 99032, 3000000, 300000, '2020-11-25 14:00:14.000000', 4, 3200),
+(23, 'images/courses/23/main.jpg', 'Modern React with Redux [2020 Update]', 'Master React v16.6.3 and Redux with React Router, Webpack, and Create-React-App. Includes Hooks!', 217685, 3000000, 300000, '2020-11-19 14:00:18.000000', 4, 3200),
+(24, 'images/courses/24/main.jpg', 'Advanced React and Redux', 'Walkthroughs on advanced React v16.6.3 and Redux v4.0.0 - Authentication, Testing, Middlewares, HOC\'s, and Deployment', 68806, 3000000, 300000, '2020-12-09 14:00:20.000000', 4, 2800),
+(25, 'images/courses/25/main.jpg', 'Node with React: Fullstack Web Development', 'Build and deploy fullstack web apps with NodeJS, React, Redux, Express, and MongoDB.', 69067, 3000000, 300000, '2020-12-09 14:00:23.000000', 4, 2800),
 (26, 'images/courses/26/main.jpg', 'The Complete React Developer Course (w/ Hooks and Redux)', 'Learn how to build and launch React web applications using React, Redux, Webpack, React-Router, and more!', 65012, 3000000, 300000, '0000-00-00 00:00:00.000000', 4, 2900),
 (27, 'images/courses/27/main.jpg', 'GraphQL with React: The Complete Developers Guide', 'Learn and master GraphQL by building real web apps with React and Node', 42339, 3000000, 300000, '0000-00-00 00:00:00.000000', 4, 2900),
 (28, 'images/courses/28/main.jpg', 'The Modern React Bootcamp (Hooks, Context, NextJS, Router)', 'Just published! Follow the same curriculum I teach my students in SF. 10+ projects including one HUGE application!', 23345, 3000000, 300000, '0000-00-00 00:00:00.000000', 4, 3000),
@@ -149,7 +99,6 @@ INSERT INTO `course` (`CourseID`, `CourseImage`, `CourseName`, `ShortDes`, `Stud
 (33, 'images/courses/33/main.jpg', 'Modern HTML & CSS From The Beginning (Including Sass)', 'Build modern responsive websites & UIs with HTML5, CSS3 & Sass! Learn Flex & CSS Grid', 45455, 3000000, 300000, '0000-00-00 00:00:00.000000', 5, 1750),
 (34, 'images/courses/34/main.jpg', 'Build Websites from Scratch with HTML & CSS', 'Learn Web Development Essentials and Become a Web Developer From Scratch in this Complete HTML & CSS Beginner\'s Course', 64924, 3000000, 300000, '0000-00-00 00:00:00.000000', 5, 1908),
 (35, 'images/courses/35/main.jpg', '50 Projects In 50 Days - HTML, CSS & JavaScript', 'Sharpen your skills by building 50 quick, unique & fun mini projects', 9489, 3000000, 300000, '0000-00-00 00:00:00.000000', 5, 1809);
-
 
 -- --------------------------------------------------------
 
@@ -546,6 +495,18 @@ INSERT INTO `fulldes` (`FullDesID`, `CourseID`, `FullDes`) VALUES
 (187, 35, 'Perfect for beginners looking for things to build unique projects in a short timeframe'),
 (188, 35, 'Modern styling with flexbox, CSS animations, custom properties, etc'),
 (189, 35, 'DOM manipulation, events, array methods, HTTP requests & more');
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `joincourse`
+--
+
+CREATE TABLE `joincourse` (
+  `UserID` int(10) NOT NULL,
+  `CourseID` int(10) NOT NULL,
+  `Date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1041,6 +1002,43 @@ INSERT INTO `subcategory` (`SubcategoryID`, `SubcategoryName`, `CategoryID`) VAL
 (4, 'React', 1),
 (5, 'Css', 1);
 
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `tokens`
+--
+
+CREATE TABLE `tokens` (
+  `UserID` int(11) DEFAULT NULL,
+  `Token` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `users`
+--
+
+CREATE TABLE `users` (
+  `UserID` int(11) NOT NULL,
+  `Email` varchar(50) DEFAULT NULL,
+  `Password` varchar(255) DEFAULT NULL,
+  `UserName` varchar(50) DEFAULT NULL,
+  `Permission` int(6) DEFAULT NULL,
+  `Verification` int(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `wishlist`
+--
+
+CREATE TABLE `wishlist` (
+  `UserID` int(11) DEFAULT NULL,
+  `CourseID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Chỉ mục cho các bảng đã đổ
 --
@@ -1055,8 +1053,9 @@ ALTER TABLE `category`
 -- Chỉ mục cho bảng `course`
 --
 ALTER TABLE `course`
-	ADD PRIMARY KEY (`CourseID`),
-	ADD FULLTEXT (`CourseName`);
+  ADD PRIMARY KEY (`CourseID`);
+ALTER TABLE `course` ADD FULLTEXT KEY `CourseName` (`CourseName`);
+
 --
 -- Chỉ mục cho bảng `course_content`
 --
@@ -1074,6 +1073,12 @@ ALTER TABLE `course_lecturer`
 --
 ALTER TABLE `fulldes`
   ADD PRIMARY KEY (`FullDesID`);
+
+--
+-- Chỉ mục cho bảng `joincourse`
+--
+ALTER TABLE `joincourse`
+  ADD PRIMARY KEY (`UserID`,`CourseID`);
 
 --
 -- Chỉ mục cho bảng `lecture`
@@ -1097,8 +1102,14 @@ ALTER TABLE `rating`
 -- Chỉ mục cho bảng `subcategory`
 --
 ALTER TABLE `subcategory`
-  ADD PRIMARY KEY (`SubcategoryID`),
-  ADD FULLTEXT (`SubcategoryName`);
+  ADD PRIMARY KEY (`SubcategoryID`);
+ALTER TABLE `subcategory` ADD FULLTEXT KEY `SubcategoryName` (`SubcategoryName`);
+
+--
+-- Chỉ mục cho bảng `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`UserID`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -1151,6 +1162,12 @@ ALTER TABLE `rating`
 --
 ALTER TABLE `subcategory`
   MODIFY `SubcategoryID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
