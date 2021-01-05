@@ -15,13 +15,12 @@ thêm cột status vào course
 
 làm SQL:
 	Hiển thị 3-4 khoá học nổi bật nhất trong tuần qua
-	Hiển thị 10 khoá học được xem nhiều nhất (ở mọi lĩnh vực)
-	Hiển thị 10 khoá học mới nhất (ở mọi lĩnh vực)
-	Hiển thị danh sách lĩnh vực được đăng ký học nhiều nhất trong tuần qua
-	đếm reviews, số học sinh, số courses, số rating của giáo viên
-	(Short description)
+	+ Hiển thị 10 khoá học được xem nhiều nhất (ở mọi lĩnh vực)
+	+ Hiển thị 10 khoá học mới nhất (ở mọi lĩnh vực)
+	+ Hiển thị danh sách lĩnh vực được đăng ký học nhiều nhất trong tuần qua
+	+ đếm reviews, số học sinh, số courses, số rating của giáo viên
 	isBestseller và isNew cho course
-	5 khoá học khác cùng lĩnh vực được mua nhiều nhất
+	+ 5 khoá học khác cùng lĩnh vực được mua nhiều nhất
 
 đi đánh giá
 
@@ -32,11 +31,6 @@ http://localhost:3000/khoa/des
 
 4.6 sao totalvotes student
 tinh ra sao totalrate/totalvote
-
-JoinCourse UserID CourseID Date
-Course
-
-updateAt 
 
 nổi bật nhất: rate cao nhất 
 xem nhiều nhất: view
