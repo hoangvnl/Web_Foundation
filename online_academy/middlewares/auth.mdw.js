@@ -1,8 +1,5 @@
-module.exports = function isAuth(req, res, next) {
-    if (req.session.isAuth === false) {
-        req.session.retUrl = req.originalUrl;
-        return res.redirect('/join/login');
-    }
-
-    next();
-}
+module.exports = function (app) {
+  app.get("/admin", function (req, res) {
+    res.render("home", { layout: "admin-main.hbs" });
+  });
+};

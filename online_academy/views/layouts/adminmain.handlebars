@@ -91,49 +91,43 @@
           <div class="position-sticky pt-3">
             <ul class="nav flex-column">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">
-                  <div class="row">
-                    <div class="col-1">
-                      <i class="fa fa-home" aria-hidden="true"></i>
-                    </div>
-                    <div class="col">Dashboard</div>
-                  </div>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/admin/categories">
                   <div class="row">
                     <div class="col-1">
                       <i class="fa fa-th" aria-hidden="true"></i>
                     </div>
                     <div class="col">Categories</div>
                   </div>
-                  <!-- <i class="fa fa-file" aria-hidden="true"></i>
-                  Orders -->
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/admin/courses">
                   <div class="row">
                     <div class="col-1">
                       <i class="fa fa-file" aria-hidden="true"></i>
                     </div>
                     <div class="col">Courses</div>
                   </div>
-                  <!-- <i class="fa fa-file" aria-hidden="true"></i>
-                  Orders -->
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="/admin/accounts">
                   <div class="row">
                     <div class="col-1">
                       <i class="fa fa-user-circle" aria-hidden="true"></i>
                     </div>
-                    <div class="col">Accounts</div>
+                    <div class="col">Students</div>
                   </div>
-                  <!-- <i class="fa fa-file" aria-hidden="true"></i>
-                  Orders -->
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/instructors">
+                  <div class="row">
+                    <div class="col-1">
+                      <i class="fa fa-chalkboard-teacher" aria-hidden="true"></i>
+                    </div>
+                    <div class="col">Instructors</div>
+                  </div>
                 </a>
               </li>
             </ul>
@@ -141,7 +135,7 @@
         </nav>
 
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-          <div
+          <!-- <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
           >
             <h1 class="h2">Dashboard</h1>
@@ -162,6 +156,9 @@
                 This week
               </button>
             </div>
+          </div> -->
+          <div class="bodyContainer">
+              {{{body}}}
           </div>
 
           <canvas
