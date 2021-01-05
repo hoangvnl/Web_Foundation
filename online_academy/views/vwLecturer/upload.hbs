@@ -17,10 +17,7 @@
         theme: 'fa',
         dropZoneEnabled: false,
     });
-    $('.lectureVideo').fileinput({
-        theme: 'fa',
-        dropZoneEnabled: false,
-    });
+
 
 </script>
 <script>
@@ -35,25 +32,64 @@
     });
 </script>
 <script>
-    $('#addCourseContent').on('click', function () {
-        $('#courseContents').append($('#contents').clone());
+    $('.addCourseContent').on('click', function () {
+        var i = $('.contents').length;
+        var clone = $('#contents').clone().prop('hidden', false);
+        var child = $(clone).children('#contentLectures').children('#lecture');
+        $(child).children('.lectureName').attr('name', 'LectureName' + i);
+        $(child).find('.lectureVideo').attr('name', 'LectureVideo' + i);
+        $(child).find('.lh4').append('1');
+        $('.courseContents').append(clone);
+        $('.removeLecture').off('click').click(function () {
+            $(this).parent().parent('#lecture').remove();
+            $('.courseContents>.contents').each(function (i) {
+                $(this).find('.lectureName').attr('name', 'LectureName' + i);
+                $(this).find('.lectureVideo').attr('name', 'LectureVideo' + i);
+            })
+        })
+        $(child).find('.lectureVideo').fileinput({
+            theme: 'fa',
+            dropZoneEnabled: false,
+        });
+        $('.addLecture').off('click').click(function () {
+            var cloneLecture = $('#lecture').clone();
+            var cloneLectureTemp = $(this).siblings('#contentLectures').children('#lecture').clone();
+            $(cloneLecture).find('.lh4').append($(this).siblings('#contentLectures').children('#lecture').length + 1);
+            $(cloneLecture).children('.lectureName').attr('name', $(cloneLectureTemp).children('.lectureName').attr('name'));
+            $(cloneLecture).find('.lectureVideo').attr('name', $(cloneLectureTemp).find('.lectureVideo').attr('name'));
+            $(cloneLecture).find('.lectureVideo').off('fileinput').fileinput({
+                theme: 'fa',
+                dropZoneEnabled: false,
+            });
+            var num = $(cloneLecture).children('.lh4');
+            $(this).siblings('#contentLectures').append(cloneLecture);
+            $('.removeLecture').off('click').click(function () {
+                $(this).parent().parent('#lecture').remove();
+            })
+        })
+        $('.removeContent').off('click').click(function () {
+            $(this).parent().remove();
+            $('.courseContents>.contents').each(function (i) {
+                $(this).find('.lectureName').attr('name', 'LectureName' + i);
+                $(this).find('.lectureVideo').attr('name', 'LectureVideo' + i);
+            })
+        })
     })
-    $('#addLecture').click(function () {
-        const clone = $(this).parent('#contents').children('#contentLectures').children('#lecture').clone();
-        $(this).parent('#contents').append('hasd');
-    }) 
+
+
+
 </script>
 {{/section}}
 
 <div class="mainForm">
-    <form action="" method="POST">
+    <form id="frmUpload" action="" method="POST" enctype="multipart/form-data">
         <div class="card">
             <h2 class="card-header text-center">Create Your Course</h2>
             <div class="card-body">
                 <div class="form-group">
                     <div class="card-body">
                         <h4>Course Image</h4>
-                        <input type="file" name="CourseImage" id="courseImage">
+                        <input type="file" class="file" name="CourseImage" id="courseImage">
                     </div>
                     <div class="card-body">
                         <h4>Course Name</h4>
@@ -69,37 +105,51 @@
                     </div>
                     <div class="card-body">
                         <h4>Course Content</h4>
-                        <div id="courseContents">
-                            <div id="contents" class="my-3 border-bottom pb-3">
-                                <input type="text" class="form-control" name="ContentName" placeholder="Content Name">
-                                <div class="form-group ml-5" id="contentLectures">
+                        <div class="courseContents" id="courseContents">
+                            <div id="contents" hidden class="contents my-3 border-bottom pb-3 card">
+                                <button type="button" class="btn btn-outline-danger removeContent position-absolute "
+                                    style="margin-left: -2.5rem;">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                                <input type="text" class="form-control" name="ContentName" id="contentName"
+                                    placeholder="Content Name">
+                                <div class="form-group ml-5 card-body" id="contentLectures">
                                     <div class="my-2" id="lecture">
-                                        <input type="text" class="form-control mb-1" name="LectureName"
+                                        <span class="h4 d-flex">
+                                            <div class="lh4">
+                                                Lecture
+                                            </div>
+                                            <button type="button" class="btn btn-outline-danger removeLecture ml-3">
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </button>
+                                        </span>
+                                        <input type="text" class="form-control mb-1 lectureName" name="LectureName"
                                             placeholder="Lecture Name">
-                                        <input type="file" class="lectureVideo" name="CourseImage">
+                                        <input type="file" class="lectureVideo" name="LectureVideo">
                                     </div>
                                 </div>
-                                <button type="button" id="addLecture" class="btn btn-primary ml-5">
+                                <button type="button" class="addLecture btn btn-primary ml-5" style="width: 10rem;">
                                     <i class="fa fa-plus" aria-hidden="true"></i>
                                     Add Lecture
                                 </button>
                             </div>
+
                         </div>
-                        <button type="button" id="addCourseContent" class=" btn btn-primary">
+                        <button type="button" id="addCourseContent" class="addCourseContent btn btn-primary">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             Add Course Content
                         </button>
                     </div>
 
-                </div>
-                <div class="form-group">
-                    <label for="txtFullDes">
-                        <h4>Describe Your Course</h4>
-                    </label>
-                    <textarea class="form-control" name="FullDes" id="txtFullDes" cols="30" rows="10"></textarea>
+                    <div class="form-group card-body">
+                        <label for="txtFullDes">
+                            <h4>Describe Your Course</h4>
+                        </label>
+                        <textarea class="form-control" name="FullDes" id="txtFullDes" cols="30" rows="10"></textarea>
+                    </div>
                 </div>
             </div>
-            <div class="card-footer">
+            <div class="card-footer ">
                 <button type="submit" class="btn btn-primary">
                     <i class="fa fa-check" aria-hidden="true"></i>
                     Save
@@ -107,4 +157,5 @@
             </div>
         </div>
     </form>
+
 </div>

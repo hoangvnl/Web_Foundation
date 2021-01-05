@@ -133,8 +133,6 @@
                         <del>${{formatMoney Price}}</del>&nbsp;
                     </h6>
                     {{/compare}}
-
-
                 </div>
                 <p class="card-text">
                     {{#if ../isInCart}}
@@ -205,25 +203,8 @@
     4rem 39rem 1rem 8rem
 {{/if}};">
         <h4>Description</h4>
-        <div class="card border-dark" style="background-color: whitesmoke; max-height: 500px;">
-            <div class="card-body" style="display: inline-block;">
-                <h4 class="card-title">What you'll learn</h4>
-                <ul class="d-flex" style="list-style-type:none;flex-flow: row wrap;">
-                    {{#each fulldes}}
-                    <li class="d-flex" style="font-size: .9rem; padding-right: 1rem;">
-                        <div class="d-flex" style="width: 280px;max-height: 100px;">
-                            <i class="fa fa-check mt-1" aria-hidden="true"></i>
-                            <p class="text-justify ml-1"
-                                style="white-space: normal; text-overflow: ellipsis; overflow-y: hidden; ">
-                                {{FullDes}}</p>
-                        </div>
-                    </li>
-                    {{/each}}
 
-                </ul>
-            </div>
-
-        </div>
+        {{{Description}}}
 
         <div class="courseContent mt-4">
             <h4>Course content</h4>
@@ -272,20 +253,20 @@
             <h5> <a name="" id="lecturer" href="#" role="button">{{lecturerName}}</a></h5>
             <div class="d-flex">
                 <a href="#">
-                    <img src="/public/images/courses/1/main.jpg" style="width: 150px;height: 150px;"
-                        class="rounded-circle" alt="">
+                    <img src="/public/images/user.png" style="width: 150px;height: 150px;" class="rounded-circle"
+                        alt="">
                 </a>
                 <ul style="list-style-type: none;">
                     <li class="my-2">
                         <i class="fa fa-star mx-1" style="color: orange;" aria-hidden="true"></i>
                         <span>
-                            4.6 Lecturer Rating
+                            {{formatRate ../countRating}} Lecturer Rating
                         </span>
                     </li>
                     <li class="my-2">
                         <i class="fa fa-certificate mx-1" style="color: orange;" aria-hidden="true"></i>
                         <span>
-                            687,667 Reviews
+                            {{formatCount ../countReview}} Reviews
                         </span>
                     </li>
                     <li class="my-2">
@@ -297,24 +278,12 @@
                     <li class="my-2">
                         <i class="fa fa-play-circle mx-1" style="color: orange;" aria-hidden="true"></i>
                         <span>
-                            31 Courses
+                            {{formatCount ../countCourse}} Courses
                         </span>
                     </li>
                 </ul>
             </div>
-            <p>
-                Jose Marcial Portilla has a BS and MS in Mechanical Engineering from Santa Clara University and years of
-                experience as a professional instructor and trainer for Data Science and programming. He has
-                publications and patents in various fields such as microfluidics, materials science, and data science
-                technologies. Over the course of his career he has developed a skill set in analyzing data and he hopes
-                to use his experience in teaching and data science to help other people learn the power of programming
-                the ability to analyze data, as well as present the data in clear and beautiful visualizations.
-                Currently he works as the Head of Data Science for Pierian Data Inc. and provides in-person data science
-                and python programming training courses to employees working at top companies, including General
-                Electric, Cigna, The New York Times, Credit Suisse, McKinsey and many more. Feel free to contact him on
-                LinkedIn for more information on in-person training sessions or group training sessions in Las Vegas,
-                NV.
-            </p>
+
         </div>
         <div class="studentFeedback mt-4">
             <h4>Student Feedback</h4>
@@ -473,6 +442,37 @@
                 </div>
             </div>
         </div>
+
+        <h4>Top 5 Course In Same Category</h4>
+        <div class="col-sm">
+            {{#each fiveCourse}}
+            <a class="btn card text-left d-inline-flex" style="width: 15.1rem;height: 27rem;"
+                href="/course/{{CourseName}}" role="button">
+                <img src="/public/{{CourseImage}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h6 class="card-title">{{CourseName}}</h6>
+                    <p style="font-size: 0.8rem;">{{lecturerName}}</p>
+                    <p style="font-size: 0.8rem;color: orange;">
+                        <span style="color:rgb(189, 125, 8)">{{formatRate rate}} </span>
+                        {{> ratingStar}}
+                        <i>({{formatCount StudentCount}})</i>
+                    </p>
+                    <p style="font-size: 0.8rem;">
+                        {{#compare SalePrice -1}}
+                        <b> ${{formatMoney Price}}</b><br><br>
+                        {{/compare}}
+                        {{#compare SalePrice -1 operator=">"}}
+                        <b> ${{formatMoney SalePrice}}</b><br><br>
+                        <del>${{formatMoney Price}}</del>
+                        {{/compare}}
+                    </p>
+                </div>
+            </a>
+            {{/each}}
+        </div>
     </div>
+
+
+</div>
 </div>
 {{/each}}
