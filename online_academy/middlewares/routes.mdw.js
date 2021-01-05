@@ -1,8 +1,5 @@
 const isAuth = require("./auth.mdw");
 module.exports = function (app) {
-  app.get("/", function (req, res) {
-    res.render("home");
-  });
   app.get("/test", function (req, res) {
     res.render("test");
   });
@@ -14,4 +11,5 @@ module.exports = function (app) {
   app.use("/lecturer", require("../routes/lecturer.route"));
   app.use("/khoa", require("../routes/khoa.route"));
   app.use('/admin', require('../routes/admin.route'));
+  app.use('/', require('../routes/home.route'));
 };
