@@ -3,7 +3,7 @@ const util = require("util");
 var pool = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "",
+  password: "1234",
   database: "online_academy",
 });
 

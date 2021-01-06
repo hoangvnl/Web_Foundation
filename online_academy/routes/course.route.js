@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const course_module = require('../models/courses.model');
-const lecturer_module = require('../models/lecturer.model');
 const rating_module = require('../models/rating.model');
 const content_module = require('../models/content.model');
 const lecture_module = require('../models/lecture.model');
@@ -9,12 +8,23 @@ const isAuth = require('../middlewares/auth.mdw');
 const wishlist = require('../models/wishlist.model');
 const fulldes_module = require('../models/fulldes.model');
 const joincourseModel = require('../models/joincourse.model');
+const lecturerModel = require('../models/lecturer.model');
+const topModel = require('../models/top.model');
+const subcategoryModel = require('../models/subcategory.model');
+const coursesModel = require('../models/courses.model');
+const ratingModel = require('../models/rating.model');
 
 
 router.get('/:param', async function (req, res) {
     const param = req.params.param;
     const course = await course_module.singleByName(param);
-    course[0]['lecturerName'] = await lecturer_module.getNameByCourseID(course[0].CourseID);
+    course[0]['lecturerName'] = await lecturerModel.getNameByCourseID(course[0].CourseID);
+    console.log(course[0].lecturerName);
+    const lecturer = await lecturerModel.singleByName(course[0].lecturerName);
+    const countStudent = await lecturerModel.countStudent(lecturer[0].LecturerID);
+    const countCourse = await lecturerModel.countCourse(lecturer[0].LecturerID);
+    const countRating = await lecturerModel.countRating(lecturer[0].LecturerID);
+    const countReview = await lecturerModel.countReview(lecturer[0].LecturerID);
     const rating = await rating_module.singleByCourseID(course[0].CourseID);
     course[0]['totalRates'] = rating[0].TotalRates;
     course[0]['totalVotes'] = rating[0].TotalVotes;
@@ -58,11 +68,34 @@ router.get('/:param', async function (req, res) {
         course[0].content[count]['lecture'] = lecture;
     }
 
+    const fiveCourseID = await topModel.fiveCourseSameCat(course[0].CourseID);
+    var fiveCourse = [];
+
+    for (var i in fiveCourseID) {
+        var courseTemp = await coursesModel.singleByID(fiveCourseID[i].CourseID);
+        fiveCourse.push(courseTemp[0]);
+    }
+
+    for (var i in fiveCourse) {
+        fiveCourse[+i]['lecturerName'] = await lecturerModel.getNameByCourseID(fiveCourse[+i].CourseID);
+        var rating2 = await ratingModel.singleByCourseID(fiveCourse[+i].CourseID);
+        rate = rating2[0].TotalRates / rating2[0].TotalVotes;
+        fiveCourse[+i]['rate'] = rate;
+    }
+
+    console.log(fiveCourse);
+
+    course[0]['fiveCourse'] = fiveCourse;
+
     res.render('vwCourse/detail', {
         course,
         isInWishlist,
         isInCart,
         isBought,
+        countStudent,
+        countCourse,
+        countReview,
+        countRating,
     });
 })
 
