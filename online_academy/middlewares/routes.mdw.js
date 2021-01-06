@@ -14,4 +14,7 @@ module.exports = function (app) {
   app.use("/lecturer", require("../routes/lecturer.route"));
   app.use("/khoa", require("../routes/khoa.route"));
   app.use('/admin', require('../routes/admin.route'));
+  app.use('/admin/categories', require('../routes/admin/category.route'));
+  app.use('/admin/subcategories', require('../routes/admin/subcategory.route'));
+  
 };

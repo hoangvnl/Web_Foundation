@@ -1,0 +1,32 @@
+<form method="POST" action="">
+  <div class="card">
+    <h5 class="card-header">
+      New Subcategory
+    </h5>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="txtSubCatName">Subcategory</label>
+        <input type="text" class="form-control" id="txtSubCatName" name="SubcategoryName" autofocus>
+        <label for="catSelect">Category</label>
+        <select name="CategoryID" id="catSelect" class="form-control">
+          {{#each this.categories}}
+            <option value="{{CategoryID}}">
+              {{CategoryName}}
+            </option>
+          {{/each}}
+        </select>
+
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <a class="btn btn-outline-secondary" href="/admin/subcategories" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to List
+      </a>
+      <button type="submit" class="btn btn-dark">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </div>
+  </div>
+</form>

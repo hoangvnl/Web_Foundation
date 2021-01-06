@@ -1,0 +1,37 @@
+<form method="POST">
+  <div class="card">
+    <h5 class="card-header">
+      Subcategory
+    </h5>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="txtSubID">SubID</label>
+        <input type="text" class="form-control" id="txtSubID" name="SubcategoryID" value="{{this.subcategory.SubcategoryID}}" readonly>
+      </div>
+      <div class="form-group">
+        <label for="txtSubName">Subcategory</label>
+        <input type="text" class="form-control" id="txtSubName" name="SubcategoryName" value="{{this.subcategory.SubcategoryName}}"
+          autofocus>
+      </div>
+      <div class="form-group collapse">
+        <label for="txtCatID">Subcategory</label>
+        <input type="text" class="form-control" id="txtCatID" name="CategoryID" value="{{this.subcategory.CategoryID}}" readonly>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <a class="btn btn-outline-secondary" href="/admin/subcategories" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to List
+      </a>
+      
+      <button type="submit" class="btn btn-outline-dark" formaction="/admin/subcategories/del" {{#if this.isActive}}disabled{{/if}}>
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        Delete
+      </button>
+      <button type="submit" class="btn btn-dark" formaction="/admin/subcategories/patch">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </div>
+  </div>
+</form>

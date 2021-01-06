@@ -1,10 +1,10 @@
 <div class="card">
   <h5 class="card-header d-flex justify-content-between">
-    Categories
-    {{!-- <a class="btn btn-outline-dark" href="/admin/categories/add" role="button">
+    Subcategories
+    <a class="btn btn-outline-dark" href="/admin/subcategories/add" role="button">
       <i class="fa fa-plus" aria-hidden="true"></i>
-      Add Category
-    </a> --}}
+      Add Subcategory
+    </a>
   </h5>
   {{#if this.empty}}
   <div class="card-body">
@@ -15,24 +15,22 @@
     <table class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">ID</th>
-          <th scope="col">Category</th>
+          <th scope="col">#</th>
+          <th scope="col">Subcategory</th>
+          <th scope="col">CategoryID</th>
           <th scope="col">&nbsp;</th>
         </tr>
       </thead>
       <tbody>
-        {{#each this.categories}}
+        {{#each this.subcategories}}
         <tr>
-          <th scope="row">{{CategoryID}}</th>
-          <td>{{CategoryName}}</td>
+          <th scope="row">{{SubcategoryID}}</th>
+          <td>{{SubcategoryName}}</td>
+          <td>{{CategoryID}}</td>
           <td class="text-right">
-            <div class="text-secondary">
-                <i class="fas fa-pencil-alt"></i>
-            </div>
-            {{!-- <a class="btn btn-sm btn-secondary" href="/admin/categories/{CategoryID}" role="button" title="Edit Category">
+            <a class="btn btn-sm btn-dark" href="/admin/subcategories/{{SubcategoryID}}" role="button" title="Edit Category">
               <i class="fas fa-pencil-alt"></i>
-            </a> --}}
-            
+            </a>
           </td>
         </tr>
         {{/each}}
