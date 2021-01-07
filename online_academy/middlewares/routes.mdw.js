@@ -1,4 +1,5 @@
 const isAuth = require("./auth.mdw");
+const isLecturer = require('./lecturer.mdw');
 module.exports = function (app) {
   app.get("/test", function (req, res) {
     res.render("test");
@@ -8,7 +9,7 @@ module.exports = function (app) {
   app.use("/join", require("../routes/authentication.route"));
   app.use("/user", require("../routes/user.route"));
   app.use("/cart", isAuth, require("../routes/cart.route"));
-  app.use("/lecturer", require("../routes/lecturer.route"));
+  app.use("/lecturer", isLecturer, require("../routes/lecturer.route"));
   app.use("/khoa", require("../routes/khoa.route"));
 
   // admin
@@ -18,5 +19,6 @@ module.exports = function (app) {
   app.use('/admin/courses', require('../routes/admin/course.route'));
   app.use('/admin/accounts', require('../routes/admin/account.route'));
   
+
   app.use('/', require('../routes/home.route'));
 };

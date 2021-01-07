@@ -1,0 +1,283 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+<style>
+    .mainForm {
+        margin: 1rem 4rem;
+    }
+
+    .sideBar {
+        width: 15rem;
+        margin-top: 5rem;
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/js/fileinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/themes/fa/theme.min.js"></script>
+<script>
+
+
+    $('.addCourseContent').on('click', function () {
+        var i = $('.contents').length;
+        var clone = $('#contents').clone().prop('hidden', false);
+        var child = $(clone).children('#contentLectures').children('#lecture');
+        $(child).children('.lectureName').attr('name', 'LectureName' + i);
+        $(child).find('.preview').attr('name', 'Preview' + i);
+        $(child).find('.lectureVideo').attr('name', 'LectureVideo' + i);
+        $(child).find('.lh4').append('1');
+        $('.courseContents').append(clone);
+        $('.removeLecture').off('click').click(function () {
+            $(this).parent().parent('#lecture').remove();
+            $('.courseContents>.contents').each(function (i) {
+                $(this).find('.lectureName').attr('name', 'LectureName' + i);
+                $(this).find('.preview').attr('name', 'Preview' + i);
+                $(this).find('.lectureVideo').attr('name', 'LectureVideo' + i);
+            })
+        })
+        $(child).find('.lectureVideo').fileinput({
+            theme: 'fa',
+            dropZoneEnabled: false,
+        });
+        $(child).find("#flexSwitchCheckChecked").off('change').on('change', function () {
+            if ($(this).is(':checked')) {
+                $(this).siblings('#flexSwitchCheckCheckedFalse').prop('checked', false);
+            } else {
+                $(this).siblings('#flexSwitchCheckCheckedFalse').prop('checked', true);
+            }
+        });
+        $('.addLecture').off('click').click(function () {
+            var cloneLecture = $('#lecture').clone();
+            var cloneLectureTemp = $(this).siblings('#contentLectures').children('#lecture').clone();
+            $(cloneLecture).find('.lh4').append($(this).siblings('#contentLectures').children('#lecture').length + 1);
+            $(cloneLecture).children('.lectureName').attr('name', $(cloneLectureTemp).children('.lectureName').attr('name'));
+            $(cloneLecture).find('.preview').attr('name', $(cloneLectureTemp).find('.preview').attr('name'));
+            $(cloneLecture).find('.lectureVideo').attr('name', $(cloneLectureTemp).find('.lectureVideo').attr('name'));
+            $(cloneLecture).find('.lectureVideo').off('fileinput').fileinput({
+                theme: 'fa',
+                dropZoneEnabled: false,
+            });
+            $(cloneLecture).find("#flexSwitchCheckChecked").off('change').on('change', function () {
+                if ($(this).is(':checked')) {
+                    $(this).siblings('#flexSwitchCheckCheckedFalse').prop('checked', false);
+                } else {
+                    $(this).siblings('#flexSwitchCheckCheckedFalse').prop('checked', true);
+                }
+            });
+            var num = $(cloneLecture).children('.lh4');
+            $(this).siblings('#contentLectures').append(cloneLecture);
+            $('.removeLecture').off('click').click(function () {
+                var parent = $(this).parent().parent().parent();
+                $(this).parent().parent('#lecture').remove();
+                $(parent).children("#lecture").each(function (i) {
+                    $(this).find('.lh4').html('Lecture ' + (i + 1))
+                })
+            })
+
+        })
+        $('.removeContent').off('click').click(function () {
+            $(this).parent().remove();
+            $('.courseContents>.contents').each(function (i) {
+                $(this).find('.lectureName').attr('name', 'LectureName' + i);
+                $(this).find('.preview').attr('name', 'Preview' + i);
+                $(this).find('.lectureVideo').attr('name', 'LectureVideo' + i);
+            })
+        })
+    })
+
+    $('.courseContents>.contents').each(function (i) {
+        $(this).find('.lectureName').attr('name', 'LectureName' + i);
+        $(this).find('.preview').attr('name', 'Preview' + i);
+        $(this).find('#flexSwitchCheckChecked').each(function (i) {
+            if ($(this).is(':checked')) {
+                $(this).siblings('#flexSwitchCheckCheckedFalse').prop('checked', false);
+            } else {
+                $(this).siblings('#flexSwitchCheckCheckedFalse').prop('checked', true);
+            }
+        })
+        $(this).find("#flexSwitchCheckChecked").off('change').on('change', function () {
+            if ($(this).is(':checked')) {
+                $(this).siblings('#flexSwitchCheckCheckedFalse').prop('checked', false);
+            } else {
+                $(this).siblings('#flexSwitchCheckCheckedFalse').prop('checked', true);
+            }
+        });
+        $(this).find('.lectureVideo').attr('name', 'LectureVideo' + i);
+        $(this).find('.removeContent').off('click').click(function () {
+            $(this).parent().remove();
+            $('.courseContents>.contents').each(function (i) {
+                $(this).find('.lectureName').attr('name', 'LectureName' + i);
+                $(this).find('.preview').attr('name', 'Preview' + i);
+                $(this).find('.lectureVideo').attr('name', 'LectureVideo' + i);
+            })
+        })
+        $(this).find('.addLecture').off('click').click(function () {
+            var cloneLecture = $('#lecture').clone();
+            var cloneLectureTemp = $(this).siblings('#contentLectures').children('#lecture').clone();
+            $(cloneLecture).find('.lh4').append($(this).siblings('#contentLectures').children('#lecture').length + 1);
+            $(cloneLecture).children('.lectureName').attr('name', $(cloneLectureTemp).children('.lectureName').attr('name'));
+            $(cloneLecture).find('.preview').attr('name', $(cloneLectureTemp).find('.preview').attr('name'));
+            $(cloneLecture).find('.lectureVideo').attr('name', $(cloneLectureTemp).find('.lectureVideo').attr('name'));
+            $(cloneLecture).find('.lectureVideo').off('fileinput').fileinput({
+                theme: 'fa',
+                dropZoneEnabled: false,
+            });
+            var num = $(cloneLecture).children('.lh4');
+            $(this).siblings('#contentLectures').append(cloneLecture);
+            $('.removeLecture').off('click').click(function () {
+                var parent = $(this).parent().parent().parent();
+                $(this).parent().parent('#lecture').remove();
+                $(parent).children("#lecture").each(function (i) {
+                    $(this).find('.lh4').html('Lecture ' + (i + 1))
+                })
+            })
+        })
+        $(this).find('#lecture').each(function (j) {
+            if (i !== 0) {
+                $(this).find('.lh4').html('Lecture ' + (j + 1));
+                $(this).find('.lectureVideo').off('fileinput').fileinput({
+                    theme: 'fa',
+                    dropZoneEnabled: false,
+                });
+            }
+        })
+    })
+    $('.removeLecture').off('click').click(function () {
+        var parent = $(this).parent().parent().parent();
+        $(this).parent().parent('#lecture').remove();
+        $(parent).children("#lecture").each(function (i) {
+            $(this).find('.lh4').html('Lecture ' + (i + 1))
+        })
+    })
+    var num = 0;
+    $('#frmUpload').on('submit', function (e) {
+        e.preventDefault();
+        $('.lectureVideo').each(function (i) {
+            $(this).attr('name', 'LectureVideo' + i);
+            num++;
+        })
+        $('#frmUpload').attr('action', $('#frmUpload').attr('action') + num);
+        $('#frmUpload').off('submit').submit();
+    })
+
+
+</script>
+{{/section}}
+
+
+<div class="d-flex">
+    <div class="sideBar pl-3">
+        <a name="" id="" class="btn btn-outline-primary w-100" href="/lecturer/course" role="button">
+            <i class="fa fa-backward mr-1" aria-hidden="true"></i>
+            Back to Course
+        </a>
+        <a name="" id="" class="btn btn-outline-primary my-2 w-100" href="{{url}}/basic" role="button">
+            Landing Page
+        </a>
+        <a name="" id="" class="btn btn-outline-primary w-100" href="javasript:;" role="button">
+            Curriculum
+        </a>
+    </div>
+    <div class="mainForm w-100 shadow">
+        <form id="frmUpload" action="{{url}}/curriculum?num=" method="POST" enctype="multipart/form-data">
+            <div class="card">
+                <h2 class="card-header text-center">Create Your Course</h2>
+                <div class="card-body">
+                    <div class="form-group ml-4">
+                        <h4>Course Content</h4>
+                        <div class="courseContents" id="courseContents">
+                            <div id="contents" hidden class="contents my-3 border-bottom pb-3 card">
+                                <button type="button" class="btn btn-outline-danger removeContent position-absolute "
+                                    style="margin-left: -2.5rem;">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                                <input type="text" class="form-control" name="ContentName" id="contentName"
+                                    placeholder="Content Name">
+                                <div class="form-group ml-5 card-body" id="contentLectures">
+                                    <div class="my-2" id="lecture">
+                                        <span class="h4 d-flex">
+                                            <div class="lh4">
+                                                Lecture
+                                            </div>
+                                            <button type="button" class="btn btn-outline-danger removeLecture ml-3">
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </button>
+                                        </span>
+                                        <input type="text" class="form-control mb-1 lectureName" name="LectureName"
+                                            placeholder="Lecture Name">
+                                        <input type="file" class="lectureVideo" name="LectureVideo">
+                                        <div class="form-check form-switch mt-1">
+                                            <input class="form-check-input preview" name="Preivew" type="checkbox"
+                                                id="flexSwitchCheckChecked" value="true">
+                                            <label class="form-check-label" for="flexSwitchCheckChecked">Preview</label>
+                                            <input class="form-check-input preview" name="Preivew" type="checkbox"
+                                                id="flexSwitchCheckCheckedFalse" value="false" hidden>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="addLecture btn btn-primary ml-5" style="width: 10rem;">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    Add Lecture
+                                </button>
+                            </div>
+                            {{#each content}}
+                            <div id="contents" class="contents my-3 border-bottom pb-3 card">
+                                <button type="button" class="btn btn-outline-danger removeContent position-absolute "
+                                    style="margin-left: -2.5rem;">
+                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                </button>
+                                <input type="text" class="form-control" name="ContentName" id="contentName"
+                                    placeholder="Content Name" value="{{ContentName}}">
+                                <div class="form-group ml-5 card-body" id="contentLectures">
+                                    {{#each lecture}}
+                                    <div class="my-2" id="lecture">
+                                        <span class="h4 d-flex">
+                                            <div class="lh4">
+                                                Lecture
+                                            </div>
+                                            <button type="button" class="btn btn-outline-danger removeLecture ml-3">
+                                                <i class="fa fa-times" aria-hidden="true"></i>
+                                            </button>
+                                        </span>
+                                        <input type="text" class="form-control mb-1 lectureName" name="LectureName"
+                                            placeholder="Lecture Name" value="{{LectureName}}">
+                                        <input type="file" class="lectureVideo" name="LectureVideo">
+                                        <button type="button" class="btn btn-outline-primary my-1">Change video</button>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input preview" name="Preivew" type="checkbox"
+                                                id="flexSwitchCheckChecked" value="true" {{#compare Preview 1}} checked
+                                                {{/compare}}>
+                                            <label class="form-check-label" for="flexSwitchCheckChecked">Preview</label>
+                                            <input class="form-check-input preview" name="Preivew" type="checkbox"
+                                                id="flexSwitchCheckCheckedFalse" value="false" hidden>
+
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                                <button type="button" class="addLecture btn btn-primary ml-5" style="width: 10rem;">
+                                    <i class="fa fa-plus" aria-hidden="true"></i>
+                                    Add Lecture
+                                </button>
+                            </div>
+                            {{/each}}
+                        </div>
+                        <button type="button" id="addCourseContent" class="addCourseContent btn btn-primary">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            Add Course Content
+                        </button>
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

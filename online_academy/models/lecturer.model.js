@@ -4,6 +4,9 @@ module.exports = {
     singleByName(name) {
         return db.load(`select * from lecturer where LecturerName = "${name}"`);
     },
+    singleByUserID(id) {
+        return db.load(`select * from lecturer where UserID = "${id}"`);
+    },
     async getNameByCourseID(id) {
         const rows = await db.load(`SELECT p1.LecturerName
         FROM lecturer p1, course_lecturer p2

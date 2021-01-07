@@ -5,6 +5,7 @@ const crypto = require('crypto');
 const nodemailer = require('nodemailer');
 const userModel = require('../models/user.model');
 const tokenModel = require('../models/token.model');
+const lecturerModel = require('../models/lecturer.model');
 
 router.get('/login', async function (req, res) {
     res.render('vwAuthentication/login');
@@ -34,26 +35,46 @@ router.post('/login', async function (req, res) {
         });
     }
 
+    req.session.userAuth = user;
+    console.log(user);
+
     if (+(user.Permission) === 0) {
         req.session.isAuth = true;
-
+        console.log('student');
     }
     else if (+(user.Permission) === 1) {
         req.session.isLecturer = true;
+        var lecturer = await lecturerModel.singleByUserID(req.session.userAuth.UserID);
+        req.session.userAuth['LecturerID'] = lecturer[0].LecturerID;
     }
     else req.session.isAdmin = true;
 
 
-    req.session.userAuth = user;
     req.session.cart = [];
 
     let url = req.session.retUrl || '/';
-    res.redirect(url);
+
+    if (req.session.isLecturer === true) {
+        res.redirect('/lecturer/course');
+    }
+    else if (req.session.isAdmin === true) {
+        res.redirect('/admin');
+    }
+    else {
+
+        if (url.indexOf('/lecturer')) {
+            url = '/';
+        }
+
+        res.redirect(url);
+    }
 })
 
 router.post('/logout', async function (req, res) {
 
     req.session.isAuth = false;
+    req.session.isLecturer = false;
+    req.session.isAdmin = false;
     req.session.userAuth = null;
     req.session.cart = [];
     res.redirect(req.headers.referer);

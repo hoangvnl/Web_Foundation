@@ -1,0 +1,123 @@
+{{#section 'css'}}
+
+<style>
+    .carousel-item {
+        height: 100vh;
+
+    }
+
+    .mainContent {
+        width: 60rem;
+        margin-top: 10rem;
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script>
+    var checkitem = function () {
+        var $this;
+        $this = $("#carouselExampleIndicators");
+        if ($this.find('.first').hasClass("active")) {
+            $this.children(".left").hide();
+            $this.children(".right").hide();
+            $this.find('.continue').html('Next');
+            if ($.trim($('#courseName').val()) == '') {
+                $this.children(".right").hide();
+            }
+            else
+                $this.children(".right").show();
+        } else if ($this.find('.last').hasClass("active")) {
+            $this.children(".right").hide();
+            $this.find('.continue').html('Continue');
+            $this.children(".left").show();
+            if ($('#subcategoryID').val()) {
+                $this.children(".right").show();
+
+            }
+        }
+    };
+
+    $('#courseName').on('input', function (e) {
+        var $this = $("#carouselExampleIndicators");
+        if ($.trim($('#courseName').val()) == '') {
+            $this.children(".right").hide();
+        }
+        else
+            $this.children(".right").show();
+    });
+    $('#subcategoryID').change(function () {
+        var $this = $("#carouselExampleIndicators");
+        $this.children(".right").show();
+    })
+
+    checkitem();
+    $("#carouselExampleIndicators").on("slid.bs.carousel", "", checkitem);
+
+    $('#frmCreate').on('keyup keypress', function (e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            return false;
+        }
+    });
+
+    $('.right').on('click', function () {
+        if ($(this).find('.continue').html() == 'Continue') {
+            $('#frmCreate').submit();
+        }
+
+    })
+
+</script>
+{{/section}}
+
+<div class="mainContent mx-auto">
+    <form id="frmCreate" action="" method="post">
+        <div id="carouselExampleIndicators" class="carousel slide form-group" data-ride="carousel" data-interval="false"
+            data-wrap="false">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item first px-5 text-center text-danger active">
+                    <label for="courseName" class="form-label">
+                        <h1>Your Course's Name</h1>
+                    </label>
+                    <input type="text" id="courseName" name="CourseName" class="form-control">
+                </div>
+                <div class="carousel-item last px-5 text-center text-danger">
+                    <label for="courseName" class="form-label">
+                        <h1>Category</h1>
+                    </label>
+                    <div>
+                        <select class="form-select w-100" style="font-size: 1.5rem;" aria-label="Default select example"
+                            name="SubcategoryID" id="subcategoryID">
+                            <option disabled selected>Choose category</option>
+                            {{#each lcCategories}}
+                            {{#each subs}}
+                            <option value="{{SubcategoryID}}">{{SubcategoryName}}</option>
+                            {{/each}}
+                            {{/each}}
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+            <a class="carousel-control-prev left" href="#carouselExampleIndicators"
+                style="height: 4rem;margin-top: 20rem;" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon " aria-hidden="true"
+                    style="font-size: 1.5rem;color: black;margin-left: -10rem;">Previous</span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next right" href="#carouselExampleIndicators"
+                style="height: 4rem;margin-top: 20rem;" role="button" data-slide="next">
+                <span class="carousel-control-next-icon continue" aria-hidden="true"
+                    style="font-size: 1.5rem;color: black;margin-right: -3rem;">Next</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </form>
+</div>
