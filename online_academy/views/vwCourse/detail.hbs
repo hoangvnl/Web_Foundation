@@ -226,6 +226,12 @@
                         <div id="collapse{{ContentID}}" class="collapse" aria-labelledby="heading{{ContentID}}">
                             {{#each lecture}}
                             <div class="card-body my-0">
+                                {{#if isBought}}
+                                <button class="btn previewButton btn-link ml-1">
+                                    <i class="fa fa-play-circle" aria-hidden="true"></i>
+                                    {{LectureName}}
+                                </button>
+                                {{else}}
                                 {{#if Preview}}
                                 <button class="btn previewButton btn-link ml-1">
                                     <i class="fa fa-play-circle" aria-hidden="true"></i>
@@ -238,7 +244,7 @@
                                 </span>
 
                                 {{/if}}
-
+                                {{/if}}
                             </div>
                             {{/each}}
                         </div>

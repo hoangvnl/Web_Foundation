@@ -19,21 +19,21 @@ router.get('/:param', async function (req, res) {
     const param = req.params.param;
     const course = await course_module.singleByName(param);
     course[0]['lecturerName'] = await lecturerModel.getNameByCourseID(course[0].CourseID);
-    console.log(course[0].lecturerName);
+    // console.log(course[0].lecturerName);
     const lecturer = await lecturerModel.singleByName(course[0].lecturerName);
     const countStudent = await lecturerModel.countStudent(lecturer[0].LecturerID);
     const countCourse = await lecturerModel.countCourse(lecturer[0].LecturerID);
     const countRating = await lecturerModel.countRating(lecturer[0].LecturerID);
     const countReview = await lecturerModel.countReview(lecturer[0].LecturerID);
     const rating = await rating_module.singleByCourseID(course[0].CourseID);
+    console.log(rating);
     if (rating.length > 0) {
-
         course[0]['totalRates'] = rating[0].TotalRates;
         course[0]['totalVotes'] = rating[0].TotalVotes;
+        course[0]['rate'] = rating[0].TotalRates / rating[0].TotalVotes;
     }
     else {
         course[0]['rate'] = 0;
-
     }
     const content = await content_module.allWithCourseID(course[0].CourseID);
     course[0]['content'] = content;
@@ -89,7 +89,7 @@ router.get('/:param', async function (req, res) {
         fiveCourse[+i]['rate'] = rate;
     }
 
-    console.log(fiveCourse);
+    // console.log(fiveCourse);
 
     course[0]['fiveCourse'] = fiveCourse;
 

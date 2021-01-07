@@ -41,13 +41,14 @@ router.get('/search', async function (req, res) {
     for (var i in rows) {
         courseTemp[+i] = await course_module.singleByName(rows[i].CourseName);
     }
-    console.log(courseTemp);
+    // console.log(courseTemp);
     for (var i in rows) {
         course[i] = courseTemp[i][0];
         course[+i]['lecturerName'] = await lecturer_module.getNameByCourseID(course[+i].CourseID);
         const catName = await sub_category_module.getNameByID(course[+i].SubCategoryID);
         course[+i]['catName'] = catName;
         var rating = await rating_module.singleByCourseID(course[+i].CourseID);
+        console.log(rating);
         if (rating.length > 0) {
             var rate = rating[0].TotalRates / rating[0].TotalVotes;
             course[+i]['rate'] = rate;
@@ -58,7 +59,7 @@ router.get('/search', async function (req, res) {
     }
 
     const searchParam = ('&p=' + p + '&sort=' + sort);
-    console.log(course);
+    // console.log(course);
 
     res.render('vwCategories/index', {
         isSearch: true,

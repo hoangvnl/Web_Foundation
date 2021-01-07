@@ -139,7 +139,12 @@
                                         ({{formatCount StudentCount}})
                                     </div>
                                 </div>
+                                {{#compare isBestSeller 1}}
                                 <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
+                                {{/compare}}
+                                {{#compare isNew 1}}
+                                <p class="badge badge-danger mt-5 text-left d-inline-block ">New</p>
+                                {{/compare}}
                             </div>
                         </div>
                         <div class="courseCost d-flex mt-4 text-right">
