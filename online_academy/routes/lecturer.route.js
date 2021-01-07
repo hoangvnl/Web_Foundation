@@ -2,10 +2,14 @@ const express = require('express');
 const router = express.Router();
 const multer = require('multer');
 const path = require('path');
+const dateFormat = require("dateformat");
 const contentModel = require('../models/content.model');
 const coursesModel = require('../models/courses.model');
+const course_lecturerModel = require('../models/course_lecturer.model');
 const lectureModel = require('../models/lecture.model');
 const lecturerModel = require('../models/lecturer.model');
+
+var now = new Date();
 
 const storageImage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -33,9 +37,10 @@ router.get('/', function (req, res) {
 
 router.get('/course', async function (req, res) {
     const user = req.session.userAuth;
-    // const lecturer = await lecturerModel.singleByUserID(user.UserID);
-    const course = await coursesModel.allByLecturerID(2);
+
+    const course = await coursesModel.allByLecturerID(user.LecturerID);
     res.render('vwLecturer/Course/course', {
+        layout: 'lecturer',
         course
     });
 })
@@ -43,12 +48,21 @@ router.get('/course', async function (req, res) {
 router.get('/course/create', function (req, res) {
     res.render('vwLecturer/Course/create');
 })
+
 router.post('/course/create', async function (req, res) {
     console.log(req.body);
     //CourseName, Subcategory
-    await coursesModel.add(req.body);
+    var entity = req.body;
+    entity['Description'] = '';
+    entity['CreatedAt'] = dateFormat(now, 'isoDate');
+    console.log(entity);
+    await coursesModel.add(entity);
+    var course = await coursesModel.singleByName(entity.CourseName);
+    var newEntity = { CourseID: course[0].CourseID, LecturerID: req.session.userAuth.LecturerID };
+    await course_lecturerModel.add(newEntity);
+    console.log(entity.CourseName);
     // const course = coursesModel.singleByName(req.body.CourseName);
-    res.redirect('/lecturer/course/' + req.body.CourseName + '/basic');
+    res.redirect('/lecturer/course/' + entity.CourseName + '/basic');
 })
 
 router.get('/course/:param/basic', async function (req, res) {

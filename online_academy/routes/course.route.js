@@ -26,9 +26,15 @@ router.get('/:param', async function (req, res) {
     const countRating = await lecturerModel.countRating(lecturer[0].LecturerID);
     const countReview = await lecturerModel.countReview(lecturer[0].LecturerID);
     const rating = await rating_module.singleByCourseID(course[0].CourseID);
-    course[0]['totalRates'] = rating[0].TotalRates;
-    course[0]['totalVotes'] = rating[0].TotalVotes;
-    course[0]['rate'] = rating[0].TotalRates / rating[0].TotalVotes;
+    if (rating.length > 0) {
+
+        course[0]['totalRates'] = rating[0].TotalRates;
+        course[0]['totalVotes'] = rating[0].TotalVotes;
+    }
+    else {
+        course[0]['rate'] = 0;
+
+    }
     const content = await content_module.allWithCourseID(course[0].CourseID);
     course[0]['content'] = content;
     course[0]['fulldes'] = await fulldes_module.allByCourseID(course[0].CourseID);

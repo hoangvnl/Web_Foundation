@@ -8,7 +8,7 @@ const config = require('../config/default.json');
 const router = express.Router();
 
 router.get('/search', async function (req, res) {
-    console.log(req.query);
+    // console.log(req.query);
     var page = req.query.page || 1;
     if (page <= 0) page = 1;
     const offset = (page - 1) * config.pagination.limit;
@@ -35,24 +35,30 @@ router.get('/search', async function (req, res) {
         }
         page_items.push(item);
     }
-
+    // console.log(rows);
     let courseTemp = [];
     let course = [];
     for (var i in rows) {
         courseTemp[+i] = await course_module.singleByName(rows[i].CourseName);
     }
+    console.log(courseTemp);
     for (var i in rows) {
         course[i] = courseTemp[i][0];
         course[+i]['lecturerName'] = await lecturer_module.getNameByCourseID(course[+i].CourseID);
         const catName = await sub_category_module.getNameByID(course[+i].SubCategoryID);
         course[+i]['catName'] = catName;
         var rating = await rating_module.singleByCourseID(course[+i].CourseID);
-        var rate = rating[0].TotalRates / rating[0].TotalVotes;
-        course[+i]['rate'] = rate;
+        if (rating.length > 0) {
+            var rate = rating[0].TotalRates / rating[0].TotalVotes;
+            course[+i]['rate'] = rate;
+        }
+        else {
+            course[+i]['rate'] = 0;
+        }
     }
 
     const searchParam = ('&p=' + p + '&sort=' + sort);
-
+    console.log(course);
 
     res.render('vwCategories/index', {
         isSearch: true,

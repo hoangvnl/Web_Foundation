@@ -9,7 +9,7 @@ module.exports = function (app) {
   app.use("/join", require("../routes/authentication.route"));
   app.use("/user", require("../routes/user.route"));
   app.use("/cart", isAuth, require("../routes/cart.route"));
-  app.use("/lecturer", require("../routes/lecturer.route"));
+  app.use("/lecturer", isLecturer, require("../routes/lecturer.route"));
   app.use("/khoa", require("../routes/khoa.route"));
   app.use('/admin', require('../routes/admin.route'));
   app.use('/admin/categories', require('../routes/admin/category.route'));

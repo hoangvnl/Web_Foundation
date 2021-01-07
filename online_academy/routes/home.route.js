@@ -8,6 +8,10 @@ const router = express.Router();
 router.get('/', async function (req, res) {
     const top10AllCat = await topModel.top10AllCat();
     const top10NewAllCat = await topModel.top10NewAllCat();
+    if (req.session.isLecturer === true) {
+        req.session.isLecturer = false;
+        req.session.userAuth = null;
+    }
 
     for (var i in top10AllCat) {
         top10AllCat[+i]['lecturerName'] = await lecturerModel.getNameByCourseID(top10AllCat[+i].CourseID);

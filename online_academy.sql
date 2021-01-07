@@ -53,14 +53,14 @@ CREATE TABLE `course` (
   `ShortDes` varchar(120) DEFAULT NULL,
   `StudentCount` int(6) DEFAULT NULL,
   `Price` int(7) DEFAULT NULL,
-  `SalePrice` int(6) DEFAULT NULL,
+  `SalePrice` int(6) DEFAULT -1,
   `UpdatedAt` datetime(6) DEFAULT NULL,
   `SubCategoryID` int(10) DEFAULT NULL,
   `View` int(4) DEFAULT NULL,
-  `Description` varchar(1500) NOT NULL,
+  `Description` varchar(1500) DEFAULT NULL,
   `CreatedAt` date DEFAULT NULL,
-  `isNew` int(1) NOT NULL,
-  `isBestSeller` int(11) NOT NULL
+  `isNew` int(1) DEFAULT NULL,
+  `isBestSeller` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -539,7 +539,7 @@ CREATE TABLE `lecture` (
   `LectureID` int(10) NOT NULL,
   `LectureName` varchar(76) DEFAULT NULL,
   `Preview` int(1) DEFAULT NULL,
-  `VideoLink` varchar(128) DEFAULT NULL,
+  `VideoLink` varchar(255) DEFAULT NULL,
   `ContentID` int(10) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
