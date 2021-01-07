@@ -47,6 +47,14 @@ router.post('/login', async function (req, res) {
     req.session.userAuth = user;
     req.session.cart = [];
 
+    if (req.session.isLecturer === true) {
+        res.redirect('/lecturer/course');
+    }
+    if (req.session.isAdmin === true) {
+        res.redirect('/admin');
+    }
+
+
     let url = req.session.retUrl || '/';
     res.redirect(url);
 })

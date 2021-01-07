@@ -1,0 +1,43 @@
+{{#section 'css'}}
+<style>
+    .mainContent {
+        margin: 4rem 8rem;
+    }
+
+    img {
+        background-color: gray;
+        height: 10rem;
+    }
+
+    .courseItem {
+        margin: 1rem 0rem;
+        color: black
+    }
+
+    a:hover {
+        text-decoration: none;
+    }
+</style>
+{{/section}}
+
+<div class="mainContent">
+    <div class="d-flex justify-content-between">
+        <h3>Courses</h3>
+        <a name="" id="" class="btn btn-outline-danger float-right" href="/lecturer/course/create" role="button">
+            <i class="fa fa-plus mr-1" aria-hidden="true"></i>
+            Create new course
+        </a>
+    </div>
+    {{#each course}}
+    <a href="/lecturer/course/{{CourseName}}/basic" role="button">
+        <div class="card courseItem">
+            <div class="card-body  d-inline-flex flex-row">
+                <img src="/public/{{CourseImage}}" alt="...">
+                <div class="ml-2 mt-1 ">
+                    <h4 class="card-title courseName">{{CourseName}}</h4>
+                </div>
+            </div>
+        </div>
+    </a>
+    {{/each}}
+</div>

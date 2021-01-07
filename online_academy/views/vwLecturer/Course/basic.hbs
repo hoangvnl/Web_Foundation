@@ -1,0 +1,144 @@
+{{#section 'css'}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/css/fileinput.min.css">
+<style>
+    .mainForm {
+        margin: 1rem 4rem;
+    }
+
+    img {
+        height: 20rem;
+    }
+
+    .sideBar {
+        width: 15rem;
+        margin-top: 5rem;
+    }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/js/fileinput.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/5.1.3/themes/fa/theme.min.js"></script>
+<script src="https://cdn.tiny.cloud/1/ezd73nxbzc7bu6e86g2l82jbbffke0mwevwrnyvc5q8h89j6/tinymce/5/tinymce.min.js"
+    referrerpolicy="origin"></script>
+
+
+<script>
+    tinymce.init({
+        selector: '#txtDes',
+        height: 600,
+        plugins: 'paste image link autolink lists table media',
+        menubar: false,
+        toolbar: [
+            'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+        ],
+    });
+
+    $('#changeImageButton').on('click', function () {
+        $('#showContainer').append($('#imageContainer').clone().prop('hidden', false));
+        $('#changeImageButton').prop('hidden', true);
+        $('#cancelChangeImageButton').prop('hidden', false);
+        $('#curCourseImage').prop('hidden', true);
+        $('#showContainer').find('.courseImage').fileinput({
+            theme: 'fa',
+            dropZoneEnabled: false,
+            allowedFileExtensions: ['png', 'jpg', 'gif'],
+        });
+    })
+    $('#cancelChangeImageButton').click(function () {
+        $('#showContainer').children($('#imageContainer')).remove();
+        $('#changeImageButton').prop('hidden', false);
+        $('#cancelChangeImageButton').prop('hidden', true);
+        $('#curCourseImage').prop('hidden', false);
+    })
+
+
+</script>
+
+{{/section}}
+
+{{#each course}}
+
+<div class="d-flex">
+    <div class="sideBar pl-3">
+        <a name="" id="" class="btn btn-outline-primary w-100" href="/lecturer/course" role="button">
+            <i class="fa fa-backward mr-1" aria-hidden="true"></i>
+            Back to Course
+        </a>
+        <a name="" id="" class="btn btn-outline-primary my-2 w-100" href="javasript:;" role="button">
+            Landing Page
+        </a>
+        <a name="" id="" class="btn btn-outline-primary w-100" href="{{../url}}/curriculum" role="button">
+            Curriculum
+        </a>
+    </div>
+
+    <div class="mainForm w-100 shadow">
+        <form id="frmUpload" action="" method="POST" enctype="multipart/form-data">
+            <div class="card">
+                <h2 class="card-header text-center">Course landing page</h2>
+                <div class="card-body">
+                    <div class="form-group">
+                        <div class="card-body">
+                            <h4>Course Image</h4>
+                            <img src="/public/{{CourseImage}}" id="curCourseImage" alt="">
+                            <div id="imageContainer" hidden>
+                                <input type="file" class="courseImage" name="CourseImage" id="courseImage">
+                            </div>
+                            <div id="showContainer">
+                            </div>
+                            <button id="changeImageButton" type="button" class="btn btn-primary mt-3">
+                                Change Course Image</button>
+                            <button id="cancelChangeImageButton" type="button" hidden
+                                class="btn btn-outline-danger">Cancel</button>
+                        </div>
+
+                        <div class="card-body">
+                            <h4>Course Name</h4>
+                            <input type="text" class="form-control" name="CourseName" id="courseName"
+                                value="{{CourseName}}">
+                        </div>
+
+                        <div class="card-body">
+                            <select class="form-select" aria-label="Default select example">
+                                <option disabled>Choose category</option>
+                                {{#each ../lcCategories}}
+                                {{#each subs}}
+                                <option value="{{SubcategoryID}}" {{#compare SubcategoryID ../SubcategoryID}} selected
+                                    {{/compare}}>{{SubcategoryName}}</option>
+                                {{/each}}
+                                {{/each}}
+                            </select>
+                        </div>
+
+                        <div class="card-body">
+                            <h4>Short Description</h4>
+                            <input type="text" name="ShortDes" class="form-control" id="shortDes" value="{{ShortDes}}">
+                        </div>
+
+                        <div class="card-body">
+                            <h4>Price</h4>
+                            <input type="text" name="Price" class="form-control" id="price" value="{{Price}}">
+                        </div>
+
+                        <div class="form-group card-body">
+                            <label for="txtDes">
+                                <h4>Describe Your Course</h4>
+                            </label>
+                            <textarea class="form-control" name="Description" id="txtDes" cols="30"
+                                rows="10">{{{Description}}}</textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer ">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                        Save
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+{{/each}}

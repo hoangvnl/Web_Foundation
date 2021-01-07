@@ -50,6 +50,19 @@ module.exports = {
         FROM ${TBL_COURSE} 
         WHERE CourseID = ${id};`);
     },
-
-
+    allByLecturerID(id) {
+        return db.load(`select * 
+        from ${TBL_COURSE} 
+         where CourseID in (select CourseID 
+                            from course_lecturer p2
+                            where p2.LecturerID = ${id})`)
+    },
+    patch(entity) {
+        const condition = { CourseID: entity.CourseID };
+        delete entity.CourseID;
+        return db.patch(entity, condition, TBL_COURSE);
+    },
+    add(entity) {
+        return db.add(entity, TBL_COURSE);
+    }
 }

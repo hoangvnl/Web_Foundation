@@ -1,4 +1,5 @@
 const isAuth = require("./auth.mdw");
+const isLecturer = require('./lecturer.mdw');
 module.exports = function (app) {
   app.get("/test", function (req, res) {
     res.render("test");
@@ -13,6 +14,6 @@ module.exports = function (app) {
   app.use('/admin', require('../routes/admin.route'));
   app.use('/admin/categories', require('../routes/admin/category.route'));
   app.use('/admin/subcategories', require('../routes/admin/subcategory.route'));
-  
+
   app.use('/', require('../routes/home.route'));
 };
