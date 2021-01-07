@@ -1,0 +1,51 @@
+<form method="POST">
+  <div class="card">
+    <h5 class="card-header">
+      Accounts Editor
+    </h5>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="txtUserID">UserID</label>
+        <input type="text" class="form-control" id="txtUserID" name="UserID" value="{{this.account.UserID}}" readonly>
+      </div>
+      <div class="form-group">
+        <label for="txtUserName">User Name</label>
+        <input type="text" class="form-control" id="txtUserName" name="UserName" value="{{this.account.UserName}}"
+          autofocus>
+      </div>
+      <div class="form-group">
+        <label for="txtEmail">User Email</label>
+        <input type="text" class="form-control" id="txtEmail" name="Email" value="{{this.account.Email}}"
+          autofocus>
+      </div>
+      <div class="form-group">
+        <label for="txtSubID2">Current Permission</label>
+        <input type="text" class="form-control" id="txtSubID2" name="CurrentPermission" value="{{this.account.current_permission}}" readonly>
+      </div>
+      <div class="form-group">
+        <label for="permissionSelect">Change Permission Into</label>
+        <select name="Permission" id="permissionSelect" class="form-control">
+          <option value="0">Student</option>
+          <option value="1">Lecturer</option>
+          <option value="2">Admin</option>
+        </select>
+      </div>
+
+    </div>
+    <div class="card-footer text-muted">
+      <a class="btn btn-outline-secondary" href="/admin/accounts" role="button">
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to List
+      </a>
+      
+      <button type="submit" class="btn btn-outline-dark" formaction="/admin/accounts/del">
+        <i class="fa fa-trash" aria-hidden="true"></i>
+        Delete
+      </button>
+      <button type="submit" class="btn btn-dark" formaction="/admin/accounts/patch">
+        <i class="fa fa-check" aria-hidden="true"></i>
+        Save
+      </button>
+    </div>
+  </div>
+</form>

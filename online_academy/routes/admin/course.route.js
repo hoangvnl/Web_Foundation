@@ -3,68 +3,32 @@ const router = express.Router();
 const courseModel = require('../../models/admin/course.model');
 
 router.get('/', async function (req, res) {
-    const rows = await courseModel.all();
+    const courses = await courseModel.all();
+
+    for(var i = 0; i < courses.length; i++) {
+        const lecturers = await courseModel.getLecturersByID(courses[i].CourseID);
+        courses[i]['lecturers'] = lecturers;
+    }
 
     res.locals.lcIsCourses = true;
     res.render('vwAdmin/vwCourses/index', {
         title: 'admincourses',
         layout: 'adminmain',
-        courses: rows,
-        empty: rows.length === 0
+        courses,
+        empty: courses.length === 0
     });
 })
-
-// add
-router.get('/add', async function (req, res) {
-    res.locals.lcIsSubCategories = true;
-    
-    
-    const catRows = await categoryModel.all();
-    res.render('vwAdmin/vwSubCategories/add', {
-        title: 'adminsubcategories',
-        layout: 'adminmain',
-        categories: catRows
-    });
-})
-router.post('/add', async function (req, res) {
-    res.locals.lcIsSubCategories = true;
-
-    const ret = await subcategoryModel.add(req.body);
-    
-    const catRows = await categoryModel.all();
-    res.render('vwAdmin/vwSubCategories/add', {
-        title: 'adminsubcategories',
-        layout: 'adminmain',
-        categories: catRows
-    });
-  });
-
-// edit
-router.get("/:id", async function (req, res) {
-    const id = req.params.id;
-    const subcategory = await subcategoryModel.single(id);
-    if (subcategory === null) {
-        return res.redirect("/admin/subcategories");
-    }
-
-    const isDeletable = await subcategoryModel.isDeletable(id);
-    const isActive = !isDeletable;
-
-    const catRows = await categoryModel.all();
-
-    res.locals.lcIsSubCategories = true;
-    res.render("vwAdmin/vwSubCategories/edit", {
-        title: 'adminsubcategories',
-        layout: 'adminmain',
-        subcategory,
-        isActive
-    });
-});
 
 // del
 router.post("/del", async function (req, res) {
-    const ret = await subcategoryModel.del(req.body);
+    // const ret = await subcategoryModel.del(req.body);
+    console.log(req.body);
     res.redirect("/admin/subcategories");
+});
+router.post("/del/:id", async function (req, res) {
+    // console.log(req.params.id);
+    const ret = await courseModel.del(req.params.id);
+    res.redirect("/admin/courses");
 });
 
 //update

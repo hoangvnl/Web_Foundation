@@ -1,0 +1,183 @@
+<div class="d-flex flex-row bd-highlight mt-3 mr-2 justify-content-between">
+  <h5 class="ml-3">ACCOUNT MANAGEMENT BOARD</h5>
+  <a class="btn btn-dark" href="/admin/accounts/add" role="button">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    Add Account
+  </a>
+</div>
+
+<div class="d-grid gap-3">
+  <div class="p-2 bg-muted">
+    <div class="card h-100 mb-100 shadow">
+      <h5 class="card-header bg-dark text-light d-flex justify-content-between">
+        Student Accounts
+        {{! <a class="btn btn-outline-dark" href="/admin/categories/add" role="button">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      Add Category
+    </a> }}
+      </h5>
+      {{#if this.sempty}}
+        <div class="card-body">
+          <p class="card-text">
+            Không có dữ liệu.
+          </p>
+        </div>
+      {{else}}
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">
+                  ID
+                </th>
+                <th scope="col">
+                  User Name
+                </th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each this.students}}
+                <tr>
+                  <th scope="row">
+                    {{UserID}}
+                  </th>
+                  <td>
+                    {{UserName}}
+                  </td>
+                  <td class="text-right">
+                    <a
+                      class="btn btn-sm btn-dark"
+                      href="/admin/accounts/{{UserID}}"
+                      role="button"
+                      title="Edit Accounts"
+                    >
+                      <i class="fas fa-pencil-alt"></i>
+                    </a>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      {{/if}}
+      {{! <div class="card-footer text-muted">
+    Footer
+  </div> }}
+    </div>
+  </div>
+  <div class="p-2 bg-muted">
+    <div class="card h-100 mb-100 shadow">
+      <h5 class="card-header bg-dark text-light d-flex justify-content-between">
+        Lecturer Accounts
+      </h5>
+      {{#if this.lempty}}
+        <div class="card-body">
+          <p class="card-text">
+            Không có dữ liệu.
+          </p>
+        </div>
+      {{else}}
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">
+                  ID
+                </th>
+                <th scope="col">
+                  User Name
+                </th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each this.lecturers}}
+                <tr>
+                  <th scope="row">
+                    {{UserID}}
+                  </th>
+                  <td>
+                    {{UserName}}
+                  </td>
+                  <td class="text-right">
+                    <a
+                      class="btn btn-sm btn-dark"
+                      href="/admin/accounts/{{UserID}}"
+                      role="button"
+                      title="Edit Accounts"
+                    >
+                      <i class="fas fa-pencil-alt"></i>
+                    </a>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      {{/if}}
+      {{! <div class="card-footer text-muted">
+    Footer
+  </div> }}
+    </div>
+  </div>
+  <div class="p-2 bg-muted">
+    <div class="card h-100 mb-100 shadow">
+      <h5 class="card-header bg-dark text-light d-flex justify-content-between">
+        Admin
+        {{! <a class="btn btn-outline-dark" href="/admin/categories/add" role="button">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      Add Category
+    </a> }}
+      </h5>
+      {{#if this.aempty}}
+        <div class="card-body">
+          <p class="card-text">
+            Không có dữ liệu.
+          </p>
+        </div>
+      {{else}}
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">
+                  ID
+                </th>
+                <th scope="col">
+                  User Name
+                </th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each this.admins}}
+                <tr>
+                  <th scope="row">
+                    {{UserID}}
+                  </th>
+                  <td>
+                    {{UserName}}
+                  </td>
+                  <td class="text-right">
+                    <a
+                      class="btn btn-sm btn-dark"
+                      href="/admin/accounts/{{UserID}}"
+                      role="button"
+                      title="Edit Accounts"
+                    >
+                      <i class="fas fa-pencil-alt"></i>
+                    </a>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      {{/if}}
+      {{! <div class="card-footer text-muted">
+    Footer
+  </div> }}
+    </div>
+  </div>
+</div>

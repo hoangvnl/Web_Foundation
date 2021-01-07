@@ -1,0 +1,96 @@
+const express = require('express');
+const router = express.Router();
+const accountModel = require('../../models/admin/account.model');
+const bcrypt = require('bcryptjs');
+
+router.get('/', async function (req, res) {
+    const rows = await accountModel.all();
+
+    //xu li permission
+    let students = [];
+    let lecturers = [];
+    let admins = [];
+    for(var i = 0; i < rows.length; i++) {
+        const permission = rows[i]['Permission'];
+        if(permission == 0) {
+            students.push(rows[i]);
+        } else if(permission == 1) {
+            lecturers.push(rows[i]);
+        } else {
+            admins.push(rows[i]);
+        }
+    }
+
+    res.locals.lcIsAccounts = true;
+    res.render('vwAdmin/vwAccounts/index', {
+        title: 'adminaccounts',
+        layout: 'adminmain',
+        students,
+        lecturers,
+        admins,
+        sempty: students.length === 0,
+        lempty: lecturers.length === 0,
+        aempty: admins.length === 0
+    });
+})
+
+// add
+router.get('/add', async function (req, res) {
+    res.locals.lcIsAccounts = true;
+    res.render('vwAdmin/vwAccounts/add', {
+        title: 'adminaccounts',
+        layout: 'adminmain'
+    });
+})
+router.post('/add', async function (req, res) {
+    res.locals.lcIsAccounts = true;
+
+    // const ret = await subcategoryModel.add(req.body);
+    
+    // const catRows = await categoryModel.all();
+    req.body['Verification'] = '1';
+    req.body.Password = bcrypt.hashSync(req.body.Password, 7);
+
+    //if lecturer
+    // if(req.body['Permission'])
+
+    console.log(req.body);
+    res.render('vwAdmin/vwAccounts/add', {
+        title: 'adminaccounts',
+        layout: 'adminmain'
+    });
+  });
+
+// edit
+router.get("/:id", async function (req, res) {
+    const id = req.params.id;
+    const account = await accountModel.single(id);
+    if (account === null) {
+        return res.redirect("/admin/accounts");
+    }
+
+    account['current_permission'] = await accountModel.getStatus(id);
+
+    res.locals.lcIsAccounts = true;
+    res.render("vwAdmin/vwAccounts/edit", {
+        title: 'adminaccounts',
+        layout: 'adminmain',
+        account
+    });
+});
+
+// del
+router.post("/del", async function (req, res) {
+    delete req.body.CurrentPermission;
+    const ret = await accountModel.del(req.body);
+    res.redirect("/admin/accounts");
+});
+
+//update
+router.post("/patch", async function (req, res) {
+    delete req.body.CurrentPermission;
+    const ret = await accountModel.patch(req.body);
+    res.redirect("/admin/accounts");
+});
+
+module.exports = router;

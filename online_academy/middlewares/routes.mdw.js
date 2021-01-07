@@ -10,10 +10,13 @@ module.exports = function (app) {
   app.use("/cart", isAuth, require("../routes/cart.route"));
   app.use("/lecturer", require("../routes/lecturer.route"));
   app.use("/khoa", require("../routes/khoa.route"));
+
+  // admin
   app.use('/admin', require('../routes/admin.route'));
   app.use('/admin/categories', require('../routes/admin/category.route'));
   app.use('/admin/subcategories', require('../routes/admin/subcategory.route'));
   app.use('/admin/courses', require('../routes/admin/course.route'));
+  app.use('/admin/accounts', require('../routes/admin/account.route'));
   
   app.use('/', require('../routes/home.route'));
 };
