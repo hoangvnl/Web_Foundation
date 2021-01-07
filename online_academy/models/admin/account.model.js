@@ -11,6 +11,10 @@ module.exports = {
     return db.del(condition, TBL_ACCOUNTS); 
   },
 
+  add(entity) {
+    return db.add(entity, TBL_ACCOUNTS); 
+  },
+
   async single(id) {
     const rows = await db.load(`select * from ${TBL_ACCOUNTS} where UserID = ${id}`);
     // const rows = await db.load(`select * from ${TBL_CATEGORIES} where CatID = ${id}`);

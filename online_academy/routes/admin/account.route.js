@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const accountModel = require('../../models/admin/account.model');
+const lecturerModel = require('../../models/admin/lecturer.model');
 const bcrypt = require('bcryptjs');
 
 router.get('/', async function (req, res) {
@@ -45,16 +46,23 @@ router.get('/add', async function (req, res) {
 router.post('/add', async function (req, res) {
     res.locals.lcIsAccounts = true;
 
-    // const ret = await subcategoryModel.add(req.body);
     
     // const catRows = await categoryModel.all();
     req.body['Verification'] = '1';
     req.body.Password = bcrypt.hashSync(req.body.Password, 7);
+    const ret = await accountModel.add(req.body);
+    
 
     //if lecturer
-    // if(req.body['Permission'])
+    if(req.body['Permission'] == '1'){
+        const rows = await accountModel.all();
+        var lecturer;
+        lecturer.UserID = rows[rows.length - 1].UserID;
+        lecturer.LecturerName = rows[rows.length - 1].UserName;
+        const ret2 = await lecturerModel.add(lecturer);
+    }
 
-    console.log(req.body);
+    
     res.render('vwAdmin/vwAccounts/add', {
         title: 'adminaccounts',
         layout: 'adminmain'
