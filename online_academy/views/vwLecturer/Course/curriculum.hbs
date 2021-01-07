@@ -11,6 +11,12 @@
         width: 15rem;
         margin-top: 5rem;
     }
+
+    video {
+        width: 500px;
+        height: 400px;
+        width: 100%;
+    }
 </style>
 {{/section}}
 
@@ -162,6 +168,24 @@
         $('#frmUpload').off('submit').submit();
     })
 
+    $('.changeVideoButton').on('click', function () {
+        $(this).prop('hidden', true);
+        $(this).siblings('.cancelChangeVideoButton').prop('hidden', false);
+        $(this).siblings('.curVideoContainer').children('.video').prop('hidden', true);
+        $(this).siblings('.curVideoContainer').append(`<div class="newVideoContainer"></div>`);
+        $(this).siblings('.curVideoContainer').children('.newVideoContainer').append($('#lectureVideo').clone());
+        $(this).siblings('.curVideoContainer').find('#lectureVideo').fileinput({
+            theme: 'fa',
+            dropZoneEnabled: false,
+        });
+    })
+    $('.cancelChangeVideoButton').on('click', function () {
+        $(this).prop('hidden', true);
+        $(this).siblings('.changeVideoButton').prop('hidden', false);
+        $(this).siblings('.curVideoContainer').children('.video').prop('hidden', false);
+        $(this).siblings('.curVideoContainer').children('.newVideoContainer').remove();
+
+    })
 
 </script>
 {{/section}}
@@ -207,7 +231,7 @@
                                         </span>
                                         <input type="text" class="form-control mb-1 lectureName" name="LectureName"
                                             placeholder="Lecture Name">
-                                        <input type="file" class="lectureVideo" name="LectureVideo">
+                                        <input type="file" id="lectureVideo" class="lectureVideo" name="LectureVideo">
                                         <div class="form-check form-switch mt-1">
                                             <input class="form-check-input preview" name="Preivew" type="checkbox"
                                                 id="flexSwitchCheckChecked" value="true">
@@ -243,17 +267,31 @@
                                         </span>
                                         <input type="text" class="form-control mb-1 lectureName" name="LectureName"
                                             placeholder="Lecture Name" value="{{LectureName}}">
-                                        <input type="file" class="lectureVideo" name="LectureVideo">
-                                        <button type="button" class="btn btn-outline-primary my-1">Change video</button>
-                                        <div class="form-check form-switch">
-                                            <input class="form-check-input preview" name="Preivew" type="checkbox"
-                                                id="flexSwitchCheckChecked" value="true" {{#compare Preview 1}} checked
-                                                {{/compare}}>
-                                            <label class="form-check-label" for="flexSwitchCheckChecked">Preview</label>
-                                            <input class="form-check-input preview" name="Preivew" type="checkbox"
-                                                id="flexSwitchCheckCheckedFalse" value="false" hidden>
+                                        {{#compare VideoLink '' operator=">"}}
+                                        <div class="curVideoContainer">
+                                            <video src="/public/videos/{{VideoLink}}" class="video mx-auto"
+                                                controls></video>
 
                                         </div>
+                                        <button type="button"
+                                            class="btn btn-outline-primary my-1 changeVideoButton">Change video</button>
+                                        <button type="button"
+                                            class="btn btn-outline-danger my-1 cancelChangeVideoButton"
+                                            hidden>Cancel</button>
+                                        {{/compare}}
+                                        {{#compare VideoLink '' operator="<="}} <input type="file" class="lectureVideo"
+                                            name="LectureVideo">
+                                            {{/compare}}
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input preview" name="Preivew" type="checkbox"
+                                                    id="flexSwitchCheckChecked" value="true" {{#compare Preview 1}}
+                                                    checked {{/compare}}>
+                                                <label class="form-check-label"
+                                                    for="flexSwitchCheckChecked">Preview</label>
+                                                <input class="form-check-input preview" name="Preivew" type="checkbox"
+                                                    id="flexSwitchCheckCheckedFalse" value="false" hidden>
+
+                                            </div>
                                     </div>
                                     {{/each}}
                                 </div>

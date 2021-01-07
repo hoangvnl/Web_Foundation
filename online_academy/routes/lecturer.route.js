@@ -71,7 +71,8 @@ router.get('/course/:param/basic', async function (req, res) {
     const course = await coursesModel.singleByName(param);
     res.render('vwLecturer/Course/basic', {
         course,
-        url
+        url,
+        layout: 'lecturer',
     })
 })
 
@@ -86,56 +87,153 @@ router.get('/course/:param/curriculum', async function (req, res) {
     res.render('vwLecturer/Course/curriculum', {
         course,
         content,
-        url
+        url,
+        layout: 'lecturer',
     })
 })
 
 
 router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res) {
-    const param = req.params.param;
     var num = +req.query.num;
-    console.log(num);
+    // console.log(num);
     for (i = 1; i < num; i++) {
         fields.push({ name: 'LectureVideo' + i, maxCount: 10 });
     }
 
-    uploadVideo.fields(fields)(req, res, function (err) {
+    uploadVideo.fields(fields)(req, res, async function (err) {
         if (err) {
             res.send(err);
         } else {
-            console.log(req.body);
+            var param = req.params.param;
+            var course = await coursesModel.singleByName(param);
+            var curContent = await contentModel.allWithCourseID(course[0].CourseID);
+            var contentName = req.body.ContentName;
+            console.log('contentName:');
+            console.log(contentName);
+            //delete các lecture hiện tại theo ContentID
+            for (i = 1; i < curContent.length; i++) {
+                await lectureModel.delAllByContentID(curContent[i].ContentID);
+            }
+            //delete các content hiện tại theo CourseID
+            await contentModel.delAllByCourseID(course[0].CourseID);
+
+            //thêm mới content theo CourseID
+            for (i = 1; i < contentName.length; i++) {
+                await contentModel.add({ ContentName: contentName[i], CourseID: course[0].CourseID });
+            }
+            var videoNum = 0;
+            // console.log('reqbody');
+            // console.log(req.body['LectureName1']);
+            //thêm các lecture theo ContentID
+            for (i = 1; i < contentName.length; i++) {
+                //i = 1 2 3 
+                var content = await contentModel.singleByNameAndCourseID(contentName[i], course[0].CourseID);
+                console.log('content');
+                console.log(content);
+                console.log(req.body);
+                var lecture = req.body['LectureName' + i];
+                var length = 0;
+                console.log(lecture);
+                if (typeof (lecture) === 'string') {
+                    for (j = 0; j < 1; j++) {
+
+                        var Preview = 0;
+                        if (req.body['Preview' + i] === 'true') Preview = 1;
+
+                        var VideoLink = null;
+                        videoNum++;
+                        if (typeof (req.files['LectureVideo' + videoNum]) !== 'undefined') {
+                            VideoLink = req.files['LectureVideo' + videoNum].path;
+                        }
+                        console.log('entity');
+                        console.log(lecture);
+                        console.log(content.ContentID);
+                        console.log(Preview);
+                        console.log(VideoLink);
+                        await lectureModel.add({ LectureName: lecture, ContentID: content.ContentID, Preview, VideoLink });
+                    }
+                }
+                else {
+                    for (j = 0; j < lecture.length; j++) {
+                        //j = 0 1
+                        //j = 0 1 2
+                        //j = 0 1 2
+                        var Preview = 0;
+                        if (req.body['Preview' + i][j] === 'true') Preview = 1;
+                        console.log(req.body['Preview' + i]);
+                        var VideoLink = null;
+                        videoNum++;
+                        if (typeof (req.files['LectureVideo' + videoNum]) !== 'undefined') {
+                            VideoLink = req.files['LectureVideo' + videoNum][0].filename;
+                        }
+                        console.log('entity');
+                        console.log(lecture[j]);
+                        console.log(content.ContentID);
+                        console.log(Preview);
+                        console.log(VideoLink);
+                        await lectureModel.add({ LectureName: lecture[j], ContentID: content.ContentID, Preview, VideoLink });
+                    }
+                }
+
+                // for (j = 0; j < lecture.length; j++) {
+                //     //j = 0 1
+                //     //j = 0 1 2
+                //     //j = 0 1 2
+                //     var Preview = 0;
+                //     if (req.body['Preview' + i][j] === 'true') Preview = 1;
+                //     console.log(req.body['Preview' + i]);
+                //     var VideoLink = null;
+                //     videoNum++;
+                //     if (typeof (req.files['LectureVideo' + videoNum]) !== 'undefined') {
+                //         VideoLink = req.files['LectureVideo' + videoNum].path;
+                //     }
+                //     console.log('entity');
+                //     console.log(lecture[j]);
+                //     console.log(content.ContentID);
+                //     console.log(Preview);
+                //     console.log(VideoLink);
+                //     await lectureModel.add({ LectureName: lecture[j], ContentID: content.ContentID, Preview, VideoLink });
+                // }
+            }
+
             for (i = 1; i <= fields.length; i++) {
-                console.log(req.files['LectureVideo' + i]);
-            }
+                if (typeof (req.files['LectureVideo' + i]) !== 'undefined') {
 
+                    console.log(req.files['LectureVideo' + i][0].filename);
+                }
+
+            }
+            const pos = req.originalUrl.indexOf('?num=');
+            const url = req.originalUrl.slice(0, pos - 11);
+            course = await coursesModel.singleByName(param);
+            content = await contentModel.allWithCourseID(course[0].CourseID);
+            for (var i in content) {
+                content[i]['lecture'] = await lectureModel.allWithContentID(content[i].ContentID);
+            }
+            res.render('vwLecturer/Course/curriculum', {
+                course,
+                content,
+                url,
+                layout: 'lecturer',
+            })
         }
     })
 
 
-    var num = 0;
-    var contentName = req.body.ContentName;
-    for (var i in contentName) {
-        var lectureTemp = req.body['LectureName' + i];
-        if (lectureTemp.length === 0) num++;
-        else {
-            for (var j = 0; j < lectureTemp.length; j++) {
-                num++;
-            }
-        }
+    // var num = 0;
+    // var contentName = req.body.ContentName;
+    // for (var i in contentName) {
+    //     var lectureTemp = req.body['LectureName' + i];
+    //     if (lectureTemp.length === 0) num++;
+    //     else {
+    //         for (var j = 0; j < lectureTemp.length; j++) {
+    //             num++;
+    //         }
+    //     }
 
-    }
-    const pos = req.originalUrl.indexOf('?num=');
-    const url = req.originalUrl.slice(0, pos - 11);
-    const course = await coursesModel.singleByName(param);
-    const content = await contentModel.allWithCourseID(course[0].CourseID);
-    for (var i in content) {
-        content[i]['lecture'] = await lectureModel.allWithContentID(content[i].ContentID);
-    }
-    res.render('vwLecturer/Course/curriculum', {
-        course,
-        content,
-        url
-    })
+    // }
+
+
 
 
 })

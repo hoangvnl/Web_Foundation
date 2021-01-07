@@ -64,5 +64,9 @@ module.exports = {
     },
     add(entity) {
         return db.add(entity, TBL_COURSE);
-    }
+    },
+    del(entity) {
+        const condition = { CourseID: entity.CourseID };
+        return db.del(condition, TBL_COURSE);
+    },
 }
