@@ -133,16 +133,26 @@
                   </div>
                 </a>
               </li>
-              {{!-- <li class="nav-item">
-                <a class="nav-link" href="/admin/instructors">
-                  <div class="row">
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/lecturers">
+                  <div class="row {{#if lcIsLecturers}} dark-text {{/if}}">
                     <div class="col-1">
                       <i class="fa fa-chalkboard-teacher" aria-hidden="true"></i>
                     </div>
-                    <div class="col">Instructors</div>
+                    <div class="col">Lecturers</div>
                   </div>
                 </a>
-              </li> --}}
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/admin/students">
+                  <div class="row {{#if lcIsStudents}} dark-text {{/if}}">
+                    <div class="col-1">
+                      <i class="fas fa-user-graduate    "></i>
+                    </div>
+                    <div class="col">Students</div>
+                  </div>
+                </a>
+              </li>
             </ul>
           </div>
         </nav>

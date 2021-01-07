@@ -1,0 +1,206 @@
+<form method="POST">
+  <div class="card">
+    <h5 class="card-header">
+      Lecturer Editor
+    </h5>
+    <div class="card-body">
+      <div class="form-group">
+        <span>
+          About <span class="font-weight-bold">{{this.lecturer.LecturerName}}</span> :
+        </span>
+        
+        <div class="border bg-light">
+          <div>
+            <i
+              class="fa fa-star mx-1"
+              style="color: orange;"
+              aria-hidden="true"
+            ></i>
+            <span class="font-weight-bold">
+              {{formatRate this.countRating}}
+            </span>
+            <span>
+              Lecturer Rating
+            </span>
+          </div>
+          <div>
+            <i
+              class="fa fa-certificate mx-1"
+              style="color: orange;"
+              aria-hidden="true"
+            ></i>
+            <span class="font-weight-bold">
+              {{formatCount this.countReview}}
+            </span>
+            <span>
+              Reviews
+            </span>
+          </div>
+          <div>
+            <i
+              class="fa fa-users mx-1"
+              style="color: orange;"
+              aria-hidden="true"
+            ></i>
+            <span class="font-weight-bold">
+              {{formatCount this.countStudent}}
+            </span>
+            <span>
+              Students
+            </span>
+          </div>
+          <div>
+            <i
+              class="fa fa-play-circle mx-1"
+              style="color: orange;"
+              aria-hidden="true"
+            ></i>
+            <span class="font-weight-bold">
+              {{formatCount this.countCourse}}
+            </span>
+            <span>
+              Courses
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="txtLecturerID">
+          LecturerID
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="txtLecturerID"
+          name="LecturerID"
+          value="{{this.lecturer.LecturerID}}"
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtLecturerName">
+          Lecturer Name
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="txtLecturerName"
+          name="LecturerName"
+          value="{{this.lecturer.LecturerName}}"
+          autofocus
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtCurrentUserID">
+          Current AccountID
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="txtCurrentUserID"
+          name="CurrentUserID"
+          {{#if this.lecturer.UserID}}
+            value="{{this.lecturer.UserID}}"
+          {{else}}
+            value="--"
+            
+          {{/if}}
+          
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtUserID">AccountID</label>
+        <select name="UserID" id="txtUserID" class="form-control">
+            <option value="0" selected>--</option>
+            {{#each this.users}}
+                <option value="{{UserID}}">{{UserID}}</option>
+            {{/each}}
+        </select>
+      </div>
+      <div class="form-group">
+        <p> <span class="font-weight-bold">{{this.lecturer.LecturerName}}</span>'s Courses :</p>
+        {{#if this.cempty}}
+          <p class="font-italic text-muted">No course!</p>
+        {{else}}
+          <form method="POST">
+      
+      <div class="card-body">
+        <div class="row">
+        {{#each this.courses}}
+        
+        <div class="col-sm-4 mb-3">
+            <div class="form-group collapse">
+                <label for="txtCourseID">CourseID</label>
+                <input type="text" class="form-control" id="txtCourseID" name="CourseID" value="{{CourseID}}" readonly>
+            </div>
+            <div class="card h-100 shadow">
+            <div class="card-header bg-dark">
+              <div class="d-flex flex-row bd-highlight   justify-content-between">
+              <span class="text-light">ID</span>
+              <span class="badge bg-secondary text-light">{{CourseID}}</span>
+              
+            </div>
+            </div>
+            <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}"
+                title="{{CourseName}}">
+            <div class="card-body">
+                <h6 class="card-title">{{CourseName}}</h6>
+                {{#each lecturers}}
+                    <span class="badge bg-dark text-light">{{LecturerName}}</span>
+                {{/each}}
+                <p class="card-text">
+                {{ShortDes}}
+                </p>
+                
+            </div>
+            <div class="card-footer">
+                <button type="submit" class="btn btn-outline-dark" formaction="/admin/courses/del/{{CourseID}}" {{#if this.isActive}}disabled{{/if}}>
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                    Delete
+                </button>
+            </div>
+                        </div>
+                    </div>
+        
+                {{/each}}
+                </div>
+            </div>
+        </form>
+        {{/if}}
+        
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <a
+        class="btn btn-outline-secondary"
+        href="/admin/lecturers"
+        role="button"
+      >
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to List
+      </a>
+      <button
+        type="submit"
+        class="btn btn-outline-dark"
+        formaction="/admin/lecturers/del"
+        {{#if this.cempty}}
+          
+        {{else}}
+          disabled
+        {{/if}}
+      >
+        <i class="fas fa-user-alt-slash"></i>
+        Delete
+      </button>
+      <button
+        type="submit"
+        class="btn btn-dark"
+        formaction="/admin/lecturers/patch"
+      >
+        <i class="fas fa-user-check"></i>
+        Save
+      </button>
+    </div>
+  </div>
+</form>

@@ -15,6 +15,11 @@ module.exports = {
   del(id) {
     const condition = {CourseID: id};
     return db.del(condition, TBL_COURSES); 
+  },
+
+  getAllByLecturerID(id) {
+    return db.load(`SELECT * from ${TBL_COURSES} where CourseID in (SELECT CourseID FROM ${TBL_COURSE_LECTURER} where LecturerID = ${id})
+    `)
   }
 
 };

@@ -1,0 +1,72 @@
+<div class="p-2 bg-muted">
+    <div class="card  mb-100 shadow">
+        <h5 class="card-header bg-dark text-light d-flex justify-content-between">
+            Lecturers
+            <a class="btn btn-light" href="/admin/lecturers/add" role="button">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                Add Lecturer
+            </a>
+        </h5>
+      {{#if this.empty}}
+        <div class="card-body">
+          <p class="card-text">
+            Không có dữ liệu.
+          </p>
+        </div>
+      {{else}}
+        <div class="card-body">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">
+                  ID
+                </th>
+                <th scope="col">
+                  Lecturer's Name
+                </th>
+                <th scope="col">
+                  UserID
+                </th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each this.lecturers}}
+                <tr>
+                  <th scope="row">
+                    {{LecturerID}}
+                  </th>
+                  <td>
+                    {{LecturerName}}
+                  </td>
+                  {{#if UserID}}
+                    <th scope="row">
+                    {{UserID}}
+                  </th>
+                  {{else}}
+                  <th scope="row">
+                    -
+                  </th>
+                  {{/if}}
+                  
+                  <td class="text-right">
+                    <a
+                      class="btn btn-sm btn-dark"
+                      href="/admin/lecturers/{{LecturerID}}"
+                      role="button"
+                      title="Edit Accounts"
+                    >
+                      <i class="fas fa-user-edit    "></i>
+                    </a>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      {{/if}}
+      {{! <div class="card-footer text-muted">
+    Footer
+  </div> }}
+    </div>
+  </div>

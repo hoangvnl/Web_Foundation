@@ -1,5 +1,6 @@
 const db = require('../../utils/db')
 const TBL_ACCOUNTS = 'users';
+const TBL_LECTURER = 'lecturer';
 
 module.exports = {
   all() {
@@ -48,6 +49,11 @@ module.exports = {
     const condition = {UserID: entity.UserID};
     delete entity.UserID;
     return db.patch(entity, condition, TBL_ACCOUNTS);
+  },
+
+  getAvailableLecturer() {
+    return db.load(`SELECT * FROM ${TBL_ACCOUNTS} where UserID not in (select UserID from ${TBL_LECTURER})
+    `);
   }
 
 };

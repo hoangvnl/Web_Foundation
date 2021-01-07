@@ -8,20 +8,28 @@
   </div>
   {{else}}
   <form method="POST">
+      
       <div class="card-body">
         <div class="row">
         {{#each this.courses}}
+        
         <div class="col-sm-4 mb-3">
             <div class="form-group collapse">
                 <label for="txtCourseID">CourseID</label>
                 <input type="text" class="form-control" id="txtCourseID" name="CourseID" value="{{CourseID}}" readonly>
             </div>
-            <div class="card h-100">
+            <div class="card h-100 shadow">
+            <div class="card-header bg-dark">
+              <div class="d-flex flex-row bd-highlight   justify-content-between">
+              <span class="text-light">ID</span>
+              <span class="badge bg-secondary text-light">{{CourseID}}</span>
+              
+            </div>
+            </div>
             <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}"
                 title="{{CourseName}}">
             <div class="card-body">
                 <h6 class="card-title">{{CourseName}}</h6>
-                {{!-- <h5 class="card-title text-danger">{{formatMoney Price}}</h5> --}}
                 {{#each lecturers}}
                     <span class="badge bg-dark text-light">{{LecturerName}}</span>
                 {{/each}}
@@ -45,7 +53,5 @@
   </form>
   
   {{/if}}
-  <div class="card-footer text-muted">
-    Footer
-  </div>
+  
 </div>

@@ -1217,8 +1217,6 @@ ALTER TABLE `users`
 --
 -- Các ràng buộc cho bảng `course`
 --
-ALTER TABLE `course`
-  ADD CONSTRAINT `course_ibfk_1` FOREIGN KEY (`CourseID`) REFERENCES `rating` (`CourseID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

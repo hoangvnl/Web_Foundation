@@ -13,16 +13,21 @@ module.exports = {
 
   add(entity) {
     return db.add(entity, TBL_LECTURERS); 
-  }
+  },
 
-//   async single(id) {
-//     const rows = await db.load(`select * from ${TBL_LECTURERS} where UserID = ${id}`);
-//     // const rows = await db.load(`select * from ${TBL_CATEGORIES} where CatID = ${id}`);
-//     if(rows.length === 0) {
-//       return null;
-//     }
-//     return rows[0];
-//   },
+  async single(id) {
+    const rows = await db.load(`select * from ${TBL_LECTURERS} where LecturerID = ${id}`);
+    // const rows = await db.load(`select * from ${TBL_CATEGORIES} where CatID = ${id}`);
+    if(rows.length === 0) {
+      return null;
+    }
+    return rows[0];
+  },
+  patch(entity) {
+    const condition = {LecturerID: entity.LecturerID};
+    delete entity.LecturerID;
+    return db.patch(entity, condition, TBL_LECTURERS);
+  }
 
 //   async getStatus(id) {
 //     const rows = await db.load(`select * from ${TBL_LECTURERS} where UserID = ${id}`);

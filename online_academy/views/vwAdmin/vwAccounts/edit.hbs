@@ -5,7 +5,7 @@
     </h5>
     <div class="card-body">
       <div class="form-group">
-        <label for="txtUserID">UserID</label>
+        <label for="txtUserID">AccountID</label>
         <input type="text" class="form-control" id="txtUserID" name="UserID" value="{{this.account.UserID}}" readonly>
       </div>
       <div class="form-group">
@@ -39,7 +39,7 @@
       </a>
       
       <button type="submit" class="btn btn-outline-dark" formaction="/admin/accounts/del">
-        <i class="fa fa-trash" aria-hidden="true"></i>
+        <i class="fas fa-user-alt-slash    "></i>
         Delete
       </button>
       <button type="submit" class="btn btn-dark" formaction="/admin/accounts/patch">
