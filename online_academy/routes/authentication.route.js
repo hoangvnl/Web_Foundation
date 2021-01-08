@@ -46,6 +46,7 @@ router.post('/login', async function (req, res) {
         req.session.isLecturer = true;
         var lecturer = await lecturerModel.singleByUserID(req.session.userAuth.UserID);
         req.session.userAuth['LecturerID'] = lecturer[0].LecturerID;
+        req.session.userAuth['LecturerName'] = lecturer[0].LecturerName;
     }
     else req.session.isAdmin = true;
 

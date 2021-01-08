@@ -1,4 +1,5 @@
 const db = require('../utils/db');
+const TBL_LECTURER = 'lecturer';
 
 module.exports = {
     singleByName(name) {
@@ -34,6 +35,11 @@ module.exports = {
     async countRating(id) {
         const rows = await db.load(`select round((sum(r.TotalRates) / sum(r.TotalVotes)),1) as ratings from rating r where r.CourseID IN (select cl.CourseID from course_lecturer cl where cl.LecturerID = '${id}')`);
         return rows[0].ratings;
-    }
+    },
+    patch(entity) {
+        const condition = { LecturerID: entity.LecturerID };
+        delete entity.LecturerID;
+        return db.patch(entity, condition, TBL_LECTURER);
+    },
 
 }

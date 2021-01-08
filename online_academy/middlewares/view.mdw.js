@@ -3,8 +3,10 @@ const hbs_sections = require('express-handlebars-sections');
 const numeral = require('numeral');
 const Handlebars = require("handlebars");
 const ratingStar = require('../views/partials/ratingStar.hbs');
+const ratingStarUpperCase = require('../views/partials/ratingStarUpperCase.hbs');
 const dateFormat = require("dateformat");
 Handlebars.registerPartial("ratingStar", ratingStar);
+Handlebars.registerPartial("ratingStarUpperCase", ratingStarUpperCase);
 
 Handlebars.registerHelper('compare', function (lvalue, rvalue, options) {
 

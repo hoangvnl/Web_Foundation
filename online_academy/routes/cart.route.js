@@ -4,6 +4,7 @@ const course_module = require('../models/courses.model');
 const cart_module = require('../models/cart.model');
 const joincourse_module = require('../models/joincourse.model');
 const dateFormat = require("dateformat");
+const coursesModel = require('../models/courses.model');
 
 
 router.get('/', function (req, res) {
@@ -36,6 +37,7 @@ router.post('/buy', async function (req, res) {
         const CourseID = course[i].CourseID;
         const entity = { UserID, CourseID, JoinDate };
         await joincourse_module.add(entity);
+
     }
     res.redirect(req.headers.referer);
 })
@@ -51,6 +53,11 @@ router.post('/:buy/:CourseName', async function (req, res) {
     const JoinDate = dateFormat(now, "isoDate");
     const entity = { UserID, CourseID, JoinDate };
     await joincourse_module.add(entity);
+    const entityCourse = {
+        CourseID,
+        StudentCount: course[0].StudentCount + 1,
+    }
+    await coursesModel.patch(entityCourse);
     res.redirect(req.headers.referer);
 })
 module.exports = router;

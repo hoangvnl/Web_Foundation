@@ -24,7 +24,53 @@ CREATE DATABASE IF NOT EXISTS `online_academy` DEFAULT CHARACTER SET utf8mb4 COL
 USE `online_academy`;
 
 -- --------------------------------------------------------
+--
+-- Cấu trúc bảng cho bảng `review`
+--
 
+--
+-- Cấu trúc bảng cho bảng `category`
+--
+
+--
+-- Cấu trúc bảng cho bảng `category`
+--
+
+create table review(
+	`ReviewID` int(10) NOT NULL auto_increment,
+	`UserID` int(10) NOT NULL,
+	`CourseID` int(10) not null,
+	`Rate` int(6) NOT NULL,
+	`Comment` varchar(50) default null,
+    primary key(`ReviewID`)
+    )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Đang đổ dữ liệu cho bảng `review`
+--
+
+
+
+-- --------------------------------------------------------
+
+--
+-- Đang đổ dữ liệu cho bảng `category`
+--
+
+INSERT INTO `category` (`CategoryID`, `CategoryName`) VALUES
+(1, 'Web Development'),
+(2, 'Mobile Development');
+
+-- --------------------------------------------------------
+--
+-- Đang đổ dữ liệu cho bảng `category`
+--
+
+INSERT INTO `category` (`CategoryID`, `CategoryName`) VALUES
+(1, 'Web Development'),
+(2, 'Mobile Development');
+
+-- --------------------------------------------------------
 --
 -- Cấu trúc bảng cho bảng `category`
 --
@@ -511,15 +557,15 @@ INSERT INTO `fulldes` (`FullDesID`, `CourseID`, `FullDes`) VALUES
 CREATE TABLE `joincourse` (
   `UserID` int(10) NOT NULL,
   `CourseID` int(10) NOT NULL,
-  `Date` date NOT NULL,
-  `CurrentLecture` int(10) NOT NULL
+  `JoinDate` date NOT NULL,
+  `CurrentLecture` int(10) Default NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Đang đổ dữ liệu cho bảng `joincourse`
 --
 
-INSERT INTO `joincourse` (`UserID`, `CourseID`, `Date`, `CurrentLecture`) VALUES
+INSERT INTO `joincourse` (`UserID`, `CourseID`, `JoinDate`, `CurrentLecture`) VALUES
 (1, 1, '2020-12-23', 0),
 (1, 2, '2021-01-04', 0),
 (1, 3, '2021-01-04', 0),
