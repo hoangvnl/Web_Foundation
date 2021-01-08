@@ -96,8 +96,17 @@ router.post("/del", async function (req, res) {
 
 //update
 router.post("/patch", async function (req, res) {
-    delete req.body.CurrentPermission;
-    const ret = await accountModel.patch(req.body);
+    
+    const account = req.body;
+    delete account.CurrentPermission;
+    
+    if(account['isRePass'] == 'true') {
+        account['Password'] = '1234';
+        account['Password'] = bcrypt.hashSync(account['Password'], 7);
+    }
+    // delete account.CourseID;
+    delete account.isRePass;
+    const ret = await accountModel.patch(account);
     res.redirect("/admin/accounts");
 });
 

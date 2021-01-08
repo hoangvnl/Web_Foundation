@@ -52,8 +52,7 @@ module.exports = {
   },
 
   getAvailableLecturer() {
-    return db.load(`SELECT * FROM ${TBL_ACCOUNTS} where UserID not in (select UserID from ${TBL_LECTURER})
-    `);
+    return db.load(`SELECT * FROM ${TBL_ACCOUNTS} where UserID not in (select UserID from ${TBL_LECTURER}) and Permission = 1`);
   }
 
 };

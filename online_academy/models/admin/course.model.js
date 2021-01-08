@@ -2,6 +2,7 @@ const db = require('../../utils/db')
 const TBL_COURSES = 'course'; 
 const TBL_LECTURER = 'lecturer';
 const TBL_COURSE_LECTURER = 'course_lecturer';
+const TBL_JOINCOURSE = 'joincourse';
 
 module.exports = {
   all() {
@@ -20,6 +21,10 @@ module.exports = {
   getAllByLecturerID(id) {
     return db.load(`SELECT * from ${TBL_COURSES} where CourseID in (SELECT CourseID FROM ${TBL_COURSE_LECTURER} where LecturerID = ${id})
     `)
+  },
+
+  getAllByUserID(id) {
+    return db.load(`select * from ${TBL_COURSES} where CourseID in (select CourseID from ${TBL_JOINCOURSE} where UserID = ${id})`);
   }
 
 };

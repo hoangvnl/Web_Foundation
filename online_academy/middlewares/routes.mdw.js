@@ -19,6 +19,7 @@ module.exports = function (app) {
   app.use('/admin/courses', require('../routes/admin/course.route'));
   app.use('/admin/accounts', require('../routes/admin/account.route'));
   app.use('/admin/lecturers',require('../routes/admin/lecturer.route'));
+  app.use('/admin/students',require('../routes/admin/student.route'));
   
 
   app.use('/', require('../routes/home.route'));

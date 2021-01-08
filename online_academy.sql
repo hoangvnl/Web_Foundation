@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 07, 2021 lúc 06:15 AM
+-- Thời gian đã tạo: Th1 08, 2021 lúc 05:22 AM
 -- Phiên bản máy phục vụ: 10.4.17-MariaDB
 -- Phiên bản PHP: 7.4.13
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `online_academy`
 --
+CREATE DATABASE IF NOT EXISTS `online_academy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `online_academy`;
 
 -- --------------------------------------------------------
 
@@ -1043,7 +1045,8 @@ INSERT INTO `tokens` (`UserID`, `Token`) VALUES
 (1, 'ac5642f52950fe5b9fc38dad3fdeeabf'),
 (2, '04f88e8dac6d0b49f75540a2d75dee78'),
 (3, 'cf867a3c203a6021a37190c354bc4157'),
-(4, 'be3bd7addea2318c7c3460fc2d51465d');
+(4, 'be3bd7addea2318c7c3460fc2d51465d'),
+(5, '7f5efcc42526e9adeb38884bb251d419');
 
 -- --------------------------------------------------------
 
@@ -1065,7 +1068,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserID`, `Email`, `Password`, `UserName`, `Permission`, `Verification`) VALUES
-(1, 'anhkhoatranle30@gmail.com', '$2a$07$Iuq9U9hLly8xb7sR3B5o5.t2IqrhJ/BCDwOlaAXsnLEjrcceXWfXC', 'Tran Le Anh Khoa', 2, 1),
+(0, 'anhkhoatranle30@gmail.com', '$2a$07$Iuq9U9hLly8xb7sR3B5o5.t2IqrhJ/BCDwOlaAXsnLEjrcceXWfXC', 'admin', 2, 1),
+(1, 'test@gmail.com', '$2a$07$JgdV9dkD1OCwxqYNUuuimObOSReFRreIzm2LJFcFdjf5SGy4TucNq', 'test user 2', 0, 1),
 (2, 'anhkhoatran330@gmail.com', '$2a$07$dwQShdhTtqQB.IP/HDBk4O3R0cHbQIDuA6YXXQuFs7SCCVRj7.Tsu', 'Test User', 0, 1),
 (4, 'hoanglecturer@gmail.com', '$2a$07$TEjN86NYvv5dLqE4ZNVE6uwf1naJohSyOekfvlp7fzsCXyy.koOWG', 'Stephen Grider', 1, 1);
 
@@ -1190,7 +1194,7 @@ ALTER TABLE `lecture`
 -- AUTO_INCREMENT cho bảng `lecturer`
 --
 ALTER TABLE `lecturer`
-  MODIFY `LecturerID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `LecturerID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT cho bảng `rating`
@@ -1208,15 +1212,7 @@ ALTER TABLE `subcategory`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- Các ràng buộc cho các bảng đã đổ
---
-
---
--- Các ràng buộc cho bảng `course`
---
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

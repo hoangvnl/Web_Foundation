@@ -1,0 +1,127 @@
+<form method="POST">
+  <div class="card">
+    <h5 class="card-header">
+      Student Editor
+    </h5>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="txtUserID" class="font-weight-bold">
+          Student's AccountID
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="txtUserID"
+          name="UserID"
+          value="{{this.student.UserID}}"
+          readonly
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtUserName" class="font-weight-bold">
+          Student Name
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="txtUserName"
+          name="UserName"
+          value="{{this.student.UserName}}"
+          autofocus
+        />
+      </div>
+      <div class="form-group">
+        <label for="txtEmail" class="font-weight-bold">
+          Email
+        </label>
+        <input
+          type="text"
+          class="form-control"
+          id="txtEmail"
+          name="Email"
+          value="{{this.student.Email}}"
+          autofocus
+        />
+      </div>
+        <div class="form-check form-group">
+            <input name="isRePass" class="form-check-input" type="checkbox" value="true" id="flexCheckDefault">
+            <label class="form-check-label" for="flexCheckDefault">
+                <span class="font-weight-bold">Reset Password</span>  into '1234'
+            </label>
+        </div>
+      <div class="form-group">
+        <span class="font-weight-bold">{{this.student.UserName}}</span>'s Courses :
+        {{#if this.cempty}}
+          <p class="font-italic text-muted">No course!</p>
+        {{else}}
+        <form method="POST">
+            <div class="card-body">
+                <div class="row">
+                    {{#each this.courses}}
+                    <div class="col-sm-4 mb-3">
+                        <div class="form-group collapse">
+                            <label for="txtCourseID">CourseID</label>
+                            <input type="text" class="form-control" id="txtCourseID" name="CourseID" value="{{CourseID}}" readonly>
+                        </div>
+                        <div class="card h-100 shadow">
+                            <div class="card-header bg-dark">
+                                <div class="d-flex flex-row bd-highlight   justify-content-between">
+                                    <span class="text-light">ID</span>
+                                    <span class="badge bg-secondary text-light">{{CourseID}}</span>
+                                </div>
+                            </div>
+                            <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}"
+                                title="{{CourseName}}">
+                            <div class="card-body">
+                                <h6 class="card-title">{{CourseName}}</h6>
+                                {{#each lecturers}}
+                                    <span class="badge bg-dark text-light">{{LecturerName}}</span>
+                                {{/each}}
+                                <p class="card-text">
+                                {{ShortDes}}
+                                </p>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-outline-dark" formaction="/admin/students/courses/del/{{userid}}/{{CourseID}}" {{#if this.isActive}}disabled{{/if}}>
+                                    <i class="fas fa-backspace    "></i>
+                                    Detach
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </form>
+        {{/if}}
+        
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+      <a
+        class="btn btn-outline-secondary"
+        href="/admin/students"
+        role="button"
+      >
+        <i class="fa fa-backward" aria-hidden="true"></i>
+        Back to List
+      </a>
+      <button
+        type="submit"
+        class="btn btn-outline-dark"
+        formaction="/admin/students/del"
+      >
+        <i class="fas fa-user-alt-slash"></i>
+        Delete
+      </button>
+      <button
+        type="submit"
+        class="btn btn-dark"
+        formaction="/admin/students/patch"
+      >
+        <i class="fas fa-user-check"></i>
+        Save
+      </button>
+    </div>
+  </div>
+</form>
