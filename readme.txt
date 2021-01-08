@@ -1,5 +1,12 @@
 TO DO:
 
+isNew -> CourseID
+isBestSeller -> CourseID
+
+
+
+------------------------------------------------------------------------
+
 login admin
 thêm 1 trường description co duong link
 

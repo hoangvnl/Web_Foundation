@@ -48,7 +48,9 @@ router.post('/login', async function (req, res) {
         req.session.userAuth['LecturerID'] = lecturer[0].LecturerID;
         req.session.userAuth['LecturerName'] = lecturer[0].LecturerName;
     }
-    else req.session.isAdmin = true;
+    else {
+        req.session.isAdmin = true;
+    }
 
 
     req.session.cart = [];
@@ -75,9 +77,13 @@ router.post('/logout', async function (req, res) {
 
     req.session.isAuth = false;
     req.session.isLecturer = false;
-    req.session.isAdmin = false;
+
     req.session.userAuth = null;
     req.session.cart = [];
+    if (req.session.isAdmin === true) {
+        req.session.isAdmin = false;
+        res.redirect('/');
+    }
     res.redirect(req.headers.referer);
 })
 
@@ -86,7 +92,6 @@ router.get('/register', function (req, res) {
         res.render('vwAuthentication/register');
     }
     else {
-
         res.redirect('/');
     }
 })

@@ -20,6 +20,10 @@ const userModel = require('../models/user.model');
 router.get('/:param', async function (req, res) {
     const param = req.params.param;
     const course = await course_module.singleByName(param);
+
+    var entityView = { CourseID: course[0].CourseID, View: course[0].view + 1 };
+    await coursesModel.patch(entityView);//update view
+
     course[0]['lecturerName'] = await lecturerModel.getNameByCourseID(course[0].CourseID);
     // console.log(course[0].lecturerName);
     const lecturer = await lecturerModel.singleByName(course[0].lecturerName);
