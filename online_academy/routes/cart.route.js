@@ -36,6 +36,7 @@ router.post('/buy', async function (req, res) {
         const CourseID = course[i].CourseID;
         const entity = { UserID, CourseID, JoinDate };
         await joincourse_module.add(entity);
+
     }
     res.redirect(req.headers.referer);
 })

@@ -3,11 +3,13 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const dateFormat = require("dateformat");
+const bcrypt = require('bcryptjs');
 const contentModel = require('../models/content.model');
 const coursesModel = require('../models/courses.model');
 const course_lecturerModel = require('../models/course_lecturer.model');
 const lectureModel = require('../models/lecture.model');
 const lecturerModel = require('../models/lecturer.model');
+const userModel = require('../models/user.model');
 
 var now = new Date();
 
@@ -108,8 +110,8 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
             var course = await coursesModel.singleByName(param);
             var curContent = await contentModel.allWithCourseID(course[0].CourseID);
             var contentName = req.body.ContentName;
-            console.log('contentName:');
-            console.log(contentName);
+            // console.log('contentName:');
+            // console.log(contentName);
             //delete các lecture hiện tại theo ContentID
             for (i = 1; i < curContent.length; i++) {
                 await lectureModel.delAllByContentID(curContent[i].ContentID);
@@ -128,9 +130,9 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
             for (i = 1; i < contentName.length; i++) {
                 //i = 1 2 3 
                 var content = await contentModel.singleByNameAndCourseID(contentName[i], course[0].CourseID);
-                console.log('content');
-                console.log(content);
-                console.log(req.body);
+                // console.log('content');
+                // console.log(content);
+                // console.log(req.body);
                 var lecture = req.body['LectureName' + i];
                 var length = 0;
                 console.log(lecture);
@@ -145,19 +147,16 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
                         if (typeof (req.files['LectureVideo' + videoNum]) !== 'undefined') {
                             VideoLink = req.files['LectureVideo' + videoNum].path;
                         }
-                        console.log('entity');
-                        console.log(lecture);
-                        console.log(content.ContentID);
-                        console.log(Preview);
-                        console.log(VideoLink);
+                        // console.log('entity');
+                        // console.log(lecture);
+                        // console.log(content.ContentID);
+                        // console.log(Preview);
+                        // console.log(VideoLink);
                         await lectureModel.add({ LectureName: lecture, ContentID: content.ContentID, Preview, VideoLink });
                     }
                 }
                 else {
                     for (j = 0; j < lecture.length; j++) {
-                        //j = 0 1
-                        //j = 0 1 2
-                        //j = 0 1 2
                         var Preview = 0;
                         if (req.body['Preview' + i][j] === 'true') Preview = 1;
                         console.log(req.body['Preview' + i]);
@@ -174,38 +173,20 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
                         await lectureModel.add({ LectureName: lecture[j], ContentID: content.ContentID, Preview, VideoLink });
                     }
                 }
-
-                // for (j = 0; j < lecture.length; j++) {
-                //     //j = 0 1
-                //     //j = 0 1 2
-                //     //j = 0 1 2
-                //     var Preview = 0;
-                //     if (req.body['Preview' + i][j] === 'true') Preview = 1;
-                //     console.log(req.body['Preview' + i]);
-                //     var VideoLink = null;
-                //     videoNum++;
-                //     if (typeof (req.files['LectureVideo' + videoNum]) !== 'undefined') {
-                //         VideoLink = req.files['LectureVideo' + videoNum].path;
-                //     }
-                //     console.log('entity');
-                //     console.log(lecture[j]);
-                //     console.log(content.ContentID);
-                //     console.log(Preview);
-                //     console.log(VideoLink);
-                //     await lectureModel.add({ LectureName: lecture[j], ContentID: content.ContentID, Preview, VideoLink });
-                // }
             }
 
-            for (i = 1; i <= fields.length; i++) {
-                if (typeof (req.files['LectureVideo' + i]) !== 'undefined') {
+            // for (i = 1; i <= fields.length; i++) {
+            //     if (typeof (req.files['LectureVideo' + i]) !== 'undefined') {
 
-                    console.log(req.files['LectureVideo' + i][0].filename);
-                }
+            //         console.log(req.files['LectureVideo' + i][0].filename);
+            //     }
 
-            }
+            // }
             const pos = req.originalUrl.indexOf('?num=');
             const url = req.originalUrl.slice(0, pos - 11);
             course = await coursesModel.singleByName(param);
+            entity = { CourseID: course[0].CourseID, UpdatedAt: dateFormat(now, 'isoDate') };
+            await coursesModel.patch(entity);
             content = await contentModel.allWithCourseID(course[0].CourseID);
             for (var i in content) {
                 content[i]['lecture'] = await lectureModel.allWithContentID(content[i].ContentID);
@@ -218,24 +199,6 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
             })
         }
     })
-
-
-    // var num = 0;
-    // var contentName = req.body.ContentName;
-    // for (var i in contentName) {
-    //     var lectureTemp = req.body['LectureName' + i];
-    //     if (lectureTemp.length === 0) num++;
-    //     else {
-    //         for (var j = 0; j < lectureTemp.length; j++) {
-    //             num++;
-    //         }
-    //     }
-
-    // }
-
-
-
-
 })
 router.post('/course/:param/basic', async function (req, res) {
     uploadImage.single('CourseImage')(req, res, async function (err) {
@@ -262,6 +225,63 @@ router.post('/course/:param/basic', async function (req, res) {
 
 })
 
+router.get('/edit-profile', function (req, res) {
+    var user = req.session.userAuth;
+    res.render('vwLecturer/Profile/editProfile', {
+        layout: 'lecturer',
+        id: user.UserID,
+        email: user.Email,
+        userName: user.UserName
+    });
+})
+
+router.post('/name', async function (req, res) {
+    const id = req.session.userAuth.UserID;
+    var entity = { LecturerID: req.session.userAuth.LecturerID, LecturerName: req.body.UserName };
+    await lecturerModel.path(entity);
+    await userModel.patch(req.body);
+    var user = await userModel.singleByID(id);
+    var lecturer = await lecturerModel.singleByUserID(req.session.userAuth.UserID);
+    user['LecturerID'] = lecturer[0].LecturerID;
+    user['LecturerName'] = lecturer[0].LecturerName;
+    req.session.userAuth = user;
+    res.redirect('/lecturer/edit-profile');
+})
+router.post('/email', async function (req, res) {
+    console.log(req.body);
+    const id = req.session.userAuth.UserID;
+    await userModel.patch(req.body);
+    var user = await userModel.singleByID(id);
+    var lecturer = await lecturerModel.singleByUserID(req.session.userAuth.UserID);
+    user['LecturerID'] = lecturer[0].LecturerID;
+    user['LecturerName'] = lecturer[0].LecturerName;
+    req.session.userAuth = user;
+    res.redirect('/lecturer/edit-profile');
+})
+router.post('/password', async function (req, res) {
+    const id = req.session.userAuth.UserID;
+    req.body.Password = bcrypt.hashSync(req.body.Password, 7);
+    await userModel.patch(req.body);
+    var user = await userModel.singleByID(id);
+    var lecturer = await lecturerModel.singleByUserID(req.session.userAuth.UserID);
+    user['LecturerID'] = lecturer[0].LecturerID;
+    user['LecturerName'] = lecturer[0].LecturerName;
+    req.session.userAuth = user;
+    res.redirect('/lecturer/edit-profile');
+})
+
+router.get('/is-right', async function (req, res) {
+    const id = req.query.id;
+    const password = req.query.password;
+    const user = await userModel.singleByID(id);
+    const ret = bcrypt.compareSync(password, user.Password);
+    if (ret === false) {
+        return res.json(false);
+    }
+    else {
+        return res.json(true);
+    }
+})
 
 
 module.exports = router;

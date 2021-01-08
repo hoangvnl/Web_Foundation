@@ -13,6 +13,8 @@ const topModel = require('../models/top.model');
 const subcategoryModel = require('../models/subcategory.model');
 const coursesModel = require('../models/courses.model');
 const ratingModel = require('../models/rating.model');
+const reviewModel = require('../models/review.model');
+const userModel = require('../models/user.model');
 
 
 router.get('/:param', async function (req, res) {
@@ -26,7 +28,14 @@ router.get('/:param', async function (req, res) {
     const countRating = await lecturerModel.countRating(lecturer[0].LecturerID);
     const countReview = await lecturerModel.countReview(lecturer[0].LecturerID);
     const rating = await rating_module.singleByCourseID(course[0].CourseID);
-    console.log(rating);
+    const review = await reviewModel.allByCourseID(course[0].CourseID);
+
+    for (i = 0; i < review.length; i++) {
+        var userTemp = await userModel.singleByID(review[i].UserID);
+        review[i]['UserName'] = userTemp.UserName;
+    }
+
+    // console.log(rating);
     if (rating.length > 0) {
         course[0]['totalRates'] = rating[0].TotalRates;
         course[0]['totalVotes'] = rating[0].TotalVotes;
@@ -35,6 +44,9 @@ router.get('/:param', async function (req, res) {
     else {
         course[0]['rate'] = 0;
     }
+
+    course[0]['review'] = review;
+
     const content = await content_module.allWithCourseID(course[0].CourseID);
     course[0]['content'] = content;
     course[0]['fulldes'] = await fulldes_module.allByCourseID(course[0].CourseID);
@@ -125,5 +137,21 @@ router.post('/addWishlist', isAuth, async function (req, res) {
     res.redirect(url);
 })
 
+router.post('/review', isAuth, async function (req, res) {
+    const user = req.session.userAuth;
+    const courseID = req.body.CourseID;
+    const entity = {
+        UserID: user.UserID,
+        CourseID: courseID,
+        Rate: +(req.body.rating),
+        Comment: req.body.Comment
+    };
+
+    await reviewModel.add(entity);
+
+
+    let url = '/course/' + req.body.CourseName;
+    res.redirect(url);
+})
 
 module.exports = router;
