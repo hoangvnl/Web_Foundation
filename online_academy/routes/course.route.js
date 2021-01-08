@@ -140,7 +140,7 @@ router.post('/addWishlist', isAuth, async function (req, res) {
 router.post('/review', isAuth, async function (req, res) {
     const user = req.session.userAuth;
     const courseID = req.body.CourseID;
-    const entity = {
+    var entity = {
         UserID: user.UserID,
         CourseID: courseID,
         Rate: +(req.body.rating),
@@ -148,7 +148,12 @@ router.post('/review', isAuth, async function (req, res) {
     };
 
     await reviewModel.add(entity);
-
+    const rating = await ratingModel.singleByCourseID(courseID);
+    entity = {
+        CourseID: courseID,
+        TotalVotes: rating[0].TotalVotes + 1,
+    }
+    await ratingModel.patch(entity);
 
     let url = '/course/' + req.body.CourseName;
     res.redirect(url);
