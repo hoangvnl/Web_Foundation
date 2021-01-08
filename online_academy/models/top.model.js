@@ -53,5 +53,8 @@ LIMIT 5
 ) AS t
 )
 LIMIT 5`)
+    },
+    courseOfTheWeek() {
+        return db.load(`select * from course left join rating on course.CourseID = rating.CourseID order by (rating.totalRates/rating.totalVotes) desc limit 3`);
     }
 }

@@ -31,7 +31,6 @@ router.get('/', async function (req, res) {
         second4AllCat.push(top10AllCat[i + 4]);
     }
 
-
     for (var i in top10NewAllCat) {
         top10NewAllCat[+i]['lecturerName'] = await lecturerModel.getNameByCourseID(top10NewAllCat[+i].CourseID);
         const catName = await subcategoryModel.getNameByID(top10NewAllCat[+i].SubCategoryID);
@@ -51,6 +50,11 @@ router.get('/', async function (req, res) {
     }
 
 
+    // var catOfTheWeek = await topModel.categoryOfTheWeek();
+    var courseOfTheWeek = await topModel.courseOfTheWeek();
+
+
+
     res.render('home', {
         first4AllCat,
         second4AllCat,
@@ -58,6 +62,8 @@ router.get('/', async function (req, res) {
         first4NewAllCat,
         second4NewAllCat,
         final2NewAllCat,
+        // catOfTheWeek,
+        courseOfTheWeek,
     });
 });
 

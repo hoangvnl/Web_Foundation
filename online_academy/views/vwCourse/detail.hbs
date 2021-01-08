@@ -114,12 +114,39 @@
         color: #FFED85;
     }
 </style>
+<link href="https://vjs.zencdn.net/7.10.2/video-js.css" rel="stylesheet" />
 {{/section}}
 
 {{#section 'js'}}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://vjs.zencdn.net/7.10.2/video.min.js"></script>
 <script>
+
+    $('#myModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        var recipient = button.data('src') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+
+        modal.find('.videoContainer').children().remove();
+        var video = $('<video />', {
+            src: recipient,
+            type: 'video/mp4',
+            controls: true,
+            class: 'video-js',
+            width: '100%',
+            height: '300'
+        });
+        video.appendTo($('.videoContainer'));
+    })
+    $('#myModal').on('hide.bs.modal', function (e) {
+        // a poor man's stop video
+        var modal = $(this)
+        modal.find('.videoContainer').children().remove();
+    })
+
     $(".collapsed").click(function () {
         $(this).children('.rotate').toggleClass("down");
     })
@@ -195,6 +222,9 @@
             })
         }
     })
+
+
+
 
 </script>
 {{/section}}
@@ -283,11 +313,8 @@
 
         </div>
     </div>
-    <div class="botContainer" style="margin: {{#if ../isBought}}
-    4rem 8rem 4rem 8rem
-{{else}}
-    4rem 39rem 1rem 8rem
-{{/if}};">
+    <div class="botContainer"
+        style="margin: {{#if ../isBought}}4rem 8rem 4rem 8rem{{else}}4rem 39rem 1rem 8rem{{/if}};">
         <h4>Description</h4>
 
         {{{Description}}}
@@ -311,15 +338,22 @@
                         </div>
                         <div id="collapse{{ContentID}}" class="collapse" aria-labelledby="heading{{ContentID}}">
                             {{#each lecture}}
+
+                            {{#compare LectureName '' operator=">"}}
                             <div class="card-body my-0">
+
                                 {{#if ../../../isBought}}
-                                <button class="btn previewButton btn-link ml-1">
+                                <button class="btn previewButton btn-link ml-1" type="button" data-toggle="modal"
+                                    data-src="/public/videos/test.mp4" data-target="#myModal">
                                     <i class="fa fa-play-circle" aria-hidden="true"></i>
                                     {{LectureName}}
                                 </button>
                                 {{else}}
+
+
                                 {{#if Preview}}
-                                <button class="btn previewButton btn-link ml-1">
+                                <button class="btn previewButton btn-link ml-1" type="button" data-toggle="modal"
+                                    data-src="/public/videos/test.mp4" data-target="#myModal">
                                     <i class="fa fa-play-circle" aria-hidden="true"></i>
                                     {{LectureName}}
                                 </button>
@@ -332,17 +366,59 @@
                                 {{/if}}
                                 {{/if}}
                             </div>
+                            {{/compare}}
+
+
                             {{/each}}
                         </div>
                     </div>
                     {{/each}}
                 </div>
             </div>
-
         </div>
+
+
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content" style="background-color: black;">
+                    <div class="videoContainer">
+                    </div>
+                    <div class="lectureContainer">
+                        {{#each content}}
+                        {{#each lecture}}
+                        {{#compare LectureName '' operator=">"}}
+                        {{#if ../../../isBought}}
+                        <button class="btn d-flex btn-dark w-100 my-1" type="button"
+                            style="height: 3rem;font-size: 1.1rem;line-height: 2.5rem;">
+                            <i class="fa fa-play-circle-o fa-lg mx-3" aria-hidden="true"
+                                style="line-height: 2.5rem;"></i>
+                            <span class="mr-4"> {{LectureName}}</span>
+                        </button>
+                        {{else}}
+                        {{#if Preview}}
+                        <button class="btn d-flex btn-dark w-100 my-1" type="button"
+                            style="height: 3rem;font-size: 1.1rem;line-height: 2.5rem;">
+                            <i class="fa fa-play-circle-o fa-lg mx-3" aria-hidden="true"
+                                style="line-height: 2.5rem;"></i>
+                            <span class="mr-4">{{LectureName}}</span>
+                        </button>
+                        {{/if}}
+                        {{/if}}
+                        {{/compare}}
+                        {{/each}}
+                        {{/each}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
         <div class="lecturer  mt-4">
             <h4>Lecturer </h4>
-            <h5> <a name="" id="lecturer" href="#" role="button">{{lecturerName}}</a></h5>
+            <h4> <span style="color: rgb(13, 13, 131);">{{lecturerName}}</span></h4>
             <div class="d-flex">
                 <a href="#">
                     <img src="/public/images/user.png" style="width: 150px;height: 150px;" class="rounded-circle"
@@ -493,8 +569,7 @@
                     </div>
 
                     <div class="w-100 d-flex flex-column form-group">
-                        <div id="rating" class="d-inline-block text-left my-1 form-group"
-                            style="margin-right: 67.52rem;">
+                        <div id="rating" class="d-inline-block text-left my-1 form-group" style="margin-right: 65rem;">
                             <input type="radio" id="star5" name="rating" value="5" />
                             <label class="full" for="star5" title="Awesome - 5 stars"></label>
 

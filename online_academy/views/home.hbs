@@ -40,6 +40,41 @@
     </div>
 </div>
 
+<div class="container">
+    <h1>TOP COURSES OF WEEK</h1>
+
+    <div class="">
+        <div class="col-sm"></div>
+        {{#each courseOfTheWeek}}
+        <a class="btn card text-left d-inline-flex" style="width: 22rem; height: 27rem;" href="/course/{{CourseName}}"
+            role="button">
+            <img src="/public/{{CourseImage}}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h6 class="card-title">{{CourseName}}</h6>
+                <p style="font-size: 0.8rem;">{{lecturerName}}</p>
+                <p style="font-size: 0.8rem;color: orange;">
+                    <span style="color:rgb(189, 125, 8)">{{formatRate rate}} </span>
+                    {{> ratingStar}}
+                    <i>({{formatCount StudentCount}})</i>
+                </p>
+                <p style="font-size: 0.8rem;">
+                    {{#compare SalePrice -1}}
+                    <b> ${{formatMoney Price}}</b><br><br>
+                    {{/compare}}
+                    {{#compare SalePrice -1 operator=">"}}
+                    <b> ${{formatMoney SalePrice}}</b><br><br>
+                    <del>${{formatMoney Price}}</del>
+                    {{/compare}}
+
+                </p>
+            </div>
+        </a>
+        {{/each}}
+    </div>
+
+
+
+</div>
 
 
 
@@ -150,7 +185,7 @@
         </a>
     </div>
 </div>
-</div>
+
 
 <div class="container">
     <h1>TOP 10 NEW COURSES</h1>

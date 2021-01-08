@@ -65,7 +65,7 @@ router.post('/login', async function (req, res) {
     }
     else {
 
-        if (url.indexOf('/lecturer')) {
+        if (url.indexOf('/lecturer') > 0) {
             url = '/';
         }
 
