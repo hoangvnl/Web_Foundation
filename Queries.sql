@@ -1,4 +1,6 @@
-﻿--Hiển thị 10 khoá học được xem nhiều nhất (ở mọi lĩnh vực)
+﻿-- 3-4 khóa học nổi bật nhất (theo rate)
+select * from course left join rating on course.CourseID = rating.CourseID order by (rating.totalRates/rating.totalVotes) desc limit 3
+--Hiển thị 10 khoá học được xem nhiều nhất (ở mọi lĩnh vực)
 SELECT * FROM course ORDER BY VIEW DESC LIMIT 10
 --Hiển thị 10 khoá học mới nhất (ở mọi lĩnh vực)
 SELECT * from course order by CreatedAt DESC limit 10
