@@ -35,10 +35,13 @@ router.get('/:param', async function (req, res) {
     const review = await reviewModel.allByCourseID(course[0].CourseID);
 
     for (i = 0; i < review.length; i++) {
+        review[i]['rate'] = +review[i].Rate;
+    }
+
+    for (i = 0; i < review.length; i++) {
         var userTemp = await userModel.singleByID(review[i].UserID);
         review[i]['UserName'] = userTemp.UserName;
     }
-
     // console.log(rating);
     if (rating.length > 0) {
         course[0]['totalRates'] = rating[0].TotalRates;
@@ -48,7 +51,7 @@ router.get('/:param', async function (req, res) {
     else {
         course[0]['rate'] = 0;
     }
-
+    console.log(review);
     course[0]['review'] = review;
 
     const content = await content_module.allWithCourseID(course[0].CourseID);

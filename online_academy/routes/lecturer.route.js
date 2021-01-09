@@ -48,7 +48,9 @@ router.get('/course', async function (req, res) {
 })
 
 router.get('/course/create', function (req, res) {
-    res.render('vwLecturer/Course/create');
+    res.render('vwLecturer/Course/create', {
+        layout: 'lecturer',
+    });
 })
 
 router.post('/course/create', async function (req, res) {
