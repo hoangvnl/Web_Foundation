@@ -56,5 +56,17 @@ LIMIT 5`)
     },
     courseOfTheWeek() {
         return db.load(`select * from course left join rating on course.CourseID = rating.CourseID order by (rating.totalRates/rating.totalVotes) desc limit 3`);
+    },
+    categoryOfTheWeek() {
+        return db.load(`SELECT
+        subcategory.SubcategoryID, COUNT(*)
+    FROM
+        subcategory
+    LEFT JOIN course ON course.SubCategoryID = subcategory.SubcategoryID
+    LEFT JOIN joincourse ON joincourse.CourseID = course.CourseID
+    WHERE
+        WEEK(JoinDate) = WEEK(CURRENT_DATE) AND MONTH(JoinDate) = MONTH(CURRENT_DATE)
+    GROUP BY
+        subcategory.SubcategoryID`);
     }
 }

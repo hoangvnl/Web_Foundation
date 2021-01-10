@@ -1,5 +1,25 @@
+{{#section 'css'}}
+<style>
+    .catOfTheWeek {
+        width: 15rem;
+
+        font-size: 1.2rem;
+        line-height: 3rem;
+    }
+
+    .welcomeImg {
+        width: 100%;
+        height: 40rem;
+    }
+
+    .container {
+        margin-top: 2rem;
+    }
+</style>
+{{/section}}
+
 <div>
-    <h1 class="text-center text-danger">TOP COURSES OF THE WEEK</h1>
+    <h1 class="text-center text-danger">WELCOME TO ONLINE ACADEMY</h1>
 
     <div id="demo" class="carousel slide mx-auto w-75 h-40" data-ride="carousel">
 
@@ -7,46 +27,37 @@
         <ul class="carousel-indicators">
             <li data-target="#demo" data-slide-to="0" class="active"></li>
             <li data-target="#demo" data-slide-to="1"></li>
-            <li data-target="#demo" data-slide-to="2"></li>
         </ul>
 
         <!-- The slideshow -->
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <a href="https://www.udemy.com/course/python-the-complete-python-developer-course/" target="_blank"><img
-                        src="https://hackr.io/blog/best-python-courses/thumbnail/large" alt="Best-Python-Course"></a>
+                <img class="welcomeImg" src="/public/images/welcome1.jpg" alt="">
             </div>
             <div class="carousel-item">
-                <a href="https://alison.com/fr/cours/developpement-web-selecteurs-css3-avances-et-elements-html5-revise"
-                    target="_blank"><img src="https://idesignschool.org/images/web-development.jpg"
-                        alt="Best-Web-Course"></a>
+                <img class="welcomeImg" src="/public/images/welcome2.jpg" alt="">
             </div>
-            <div class="carousel-item">
-                <a href="https://alison.com/fr/cours/developpement-web-selecteurs-css3-avances-et-elements-html5-revise"
-                    target="_blank"><img src="https://miro.medium.com/max/1024/1*6l15igU_z2Uj15SzOGx1Iw.png"
-                        alt="Best-Web-Course"></a>
-            </div>
+
         </div>
 
 
         <!-- Left and right controls -->
         <a class="carousel-control-prev" href="#demo" data-slide="prev">
-            <span class="fas fa-angle-double-left" style="color:cyan; font-size:3rem"></span>
+            <span class="fa fa-angle-double-left" style="color:cyan; font-size:3rem"></span>
         </a>
         <a class="carousel-control-next" href="#demo" data-slide="next">
-            <span class="fas fa-angle-double-right" style="color:cyan; font-size:3rem"></span>
+            <span class="fa fa-angle-double-right" style="color:cyan; font-size:3rem"></span>
         </a>
 
     </div>
 </div>
 
 <div class="container">
-    <h1>TOP COURSES OF WEEK</h1>
+    <h3>TOP COURSES OF WEEK</h3>
 
     <div class="">
-        <div class="col-sm"></div>
         {{#each courseOfTheWeek}}
-        <a class="btn card text-left d-inline-flex" style="width: 22rem; height: 27rem;" href="/course/{{CourseName}}"
+        <a class="btn card text-left d-inline-flex" style="width: 22.8rem; height: 27rem;" href="/course/{{CourseName}}"
             role="button">
             <img src="/public/{{CourseImage}}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -71,15 +82,23 @@
         </a>
         {{/each}}
     </div>
-
-
-
 </div>
 
+<div class="container">
+    <h3>TOP CATEOGORIES OF WEEK</h3>
 
+    <div class="d-flex justify-content-around">
+        <a name="" id="" class="btn btn-secondary mx-auto catOfTheWeek" href="javascript:;" role="button"> React</a>
+        <a name="" id="" class="btn btn-secondary mx-auto catOfTheWeek" href="javascript:;" role="button"> Css</a>
+        <a name="" id="" class="btn btn-secondary mx-auto catOfTheWeek" href="javascript:;" role="button"> Android
+            Development</a>
+        <a name="" id="" class="btn btn-secondary mx-auto catOfTheWeek" href="javascript:;" role="button">
+            JavaScript</a>
+    </div>
+</div>
 
 <div class="container">
-    <h1>TOP 10 COURSES OF ALL CATEGORIES</h1>
+    <h3>TOP 10 COURSES OF ALL CATEGORIES</h3>
     <div id="carouselTop10AllControls" class="carousel slide w-100" data-ride="carousel">
         <div class="carousel-inner d-inline-flex justify-content-between">
             <div class="carousel-item active">
@@ -188,7 +207,7 @@
 
 
 <div class="container">
-    <h1>TOP 10 NEW COURSES</h1>
+    <h3>TOP 10 NEW COURSES</h3>
     <div id="carouselTop10NewAllControls" class="carousel slide w-100" data-ride="carousel">
         <div class="carousel-inner d-inline-flex justify-content-between">
             <div class="carousel-item active">

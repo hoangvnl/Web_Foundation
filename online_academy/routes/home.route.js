@@ -50,7 +50,7 @@ router.get('/', async function (req, res) {
     }
 
 
-    // var catOfTheWeek = await topModel.categoryOfTheWeek();
+    var categoryOfTheWeek = await topModel.categoryOfTheWeek();
     var courseOfTheWeek = await topModel.courseOfTheWeek();
 
 
@@ -62,7 +62,7 @@ router.get('/', async function (req, res) {
         first4NewAllCat,
         second4NewAllCat,
         final2NewAllCat,
-        // catOfTheWeek,
+        categoryOfTheWeek,
         courseOfTheWeek,
     });
 });
