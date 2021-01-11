@@ -40,16 +40,20 @@ router.post('/login', async function (req, res) {
 
     if (+(user.Permission) === 0) {
         req.session.isAuth = true;
+        req.session.isLecturer = false;
         console.log('student');
     }
     else if (+(user.Permission) === 1) {
         req.session.isLecturer = true;
+        req.session.isAuth = false;
         var lecturer = await lecturerModel.singleByUserID(req.session.userAuth.UserID);
         req.session.userAuth['LecturerID'] = lecturer[0].LecturerID;
         req.session.userAuth['LecturerName'] = lecturer[0].LecturerName;
     }
     else {
         req.session.isAdmin = true;
+        req.session.isLecturer = false;
+        req.session.isAuth = false;
     }
 
 

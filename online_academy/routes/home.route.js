@@ -14,6 +14,11 @@ router.get('/', async function (req, res) {
         req.session.isLecturer = false;
         req.session.userAuth = null;
     }
+    if (req.session.isAdmin === true) {
+        req.session.isAdmin = false;
+        req.session.userAuth = null;
+    }
+
 
     for (var i in top10AllCat) {
         top10AllCat[+i]['lecturerName'] = await lecturerModel.getNameByCourseID(top10AllCat[+i].CourseID);
