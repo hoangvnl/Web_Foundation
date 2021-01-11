@@ -31,7 +31,7 @@ const storageVideo = multer.diskStorage({
 });
 const uploadImage = multer({ storage: storageImage });
 const uploadVideo = multer({ storage: storageVideo });
-var fields = [];
+
 
 router.get('/', function (req, res) {
     res.redirect('/lecturer/course');
@@ -99,7 +99,8 @@ router.get('/course/:param/curriculum', async function (req, res) {
 
 router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res) {
     var num = +req.query.num;
-    // console.log(num);
+    var fields = [];
+    console.log('num = ' + num);
     for (i = 1; i < num; i++) {
         fields.push({ name: 'LectureVideo' + i, maxCount: 10 });
     }
@@ -111,13 +112,40 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
             var param = req.params.param;
             var course = await coursesModel.singleByName(param);
             var curContent = await contentModel.allWithCourseID(course[0].CourseID);
+            console.log(curContent);
             var contentName = req.body.ContentName;
             // console.log('contentName:');
             // console.log(contentName);
             //delete các lecture hiện tại theo ContentID
-            for (i = 1; i < curContent.length; i++) {
+            console.log('fields = ' + fields.length);
+
+            console.log('video dau');
+            for (i = 1; i <= fields.length; i++) {
+                console.log('LectureVideo' + i + ' ' + req.files['LectureVideo' + i]);
+            }
+
+            var videoCountTempGetLink = 0;
+            for (i = 0; i < curContent.length; i++) {
+                var lectureTempGetLink = await lectureModel.allWithContentID(curContent[i].ContentID);
+                for (j = 0; j < lectureTempGetLink.length; j++) {
+                    videoCountTempGetLink++;
+                    if (lectureTempGetLink[j].VideoLink != null && typeof (req.files['LectureVideo' + videoCountTempGetLink]) === 'undefined') {
+                        req.files['LectureVideo' + videoCountTempGetLink] = {};
+
+                        req.files['LectureVideo' + videoCountTempGetLink]['filename'] = lectureTempGetLink[j].VideoLink;
+                    }
+                }
+
                 await lectureModel.delAllByContentID(curContent[i].ContentID);
             }
+
+            console.log('video sau');
+            for (i = 1; i <= fields.length; i++) {
+
+                console.log(req.files['LectureVideo' + i]);
+
+            }
+
             //delete các content hiện tại theo CourseID
             await contentModel.delAllByCourseID(course[0].CourseID);
 
@@ -136,8 +164,9 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
                 // console.log(content);
                 // console.log(req.body);
                 var lecture = req.body['LectureName' + i];
-                var length = 0;
-                console.log(lecture);
+                if (typeof (lecture) === 'undefined') lecture = '';
+                // console.log(lecture);
+                // var length = 0;
                 if (typeof (lecture) === 'string') {
                     for (j = 0; j < 1; j++) {
 
@@ -147,13 +176,19 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
                         var VideoLink = null;
                         videoNum++;
                         if (typeof (req.files['LectureVideo' + videoNum]) !== 'undefined') {
-                            VideoLink = req.files['LectureVideo' + videoNum].path;
+                            if (typeof (req.files['LectureVideo' + videoNum][0]) === 'undefined') {
+
+                                VideoLink = req.files['LectureVideo' + videoNum].filename;
+                            }
+                            else {
+                                VideoLink = req.files['LectureVideo' + videoNum][0].filename;
+                            }
                         }
                         // console.log('entity');
                         // console.log(lecture);
                         // console.log(content.ContentID);
                         // console.log(Preview);
-                        // console.log(VideoLink);
+                        console.log(VideoLink);
                         await lectureModel.add({ LectureName: lecture, ContentID: content.ContentID, Preview, VideoLink });
                     }
                 }
@@ -161,16 +196,22 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
                     for (j = 0; j < lecture.length; j++) {
                         var Preview = 0;
                         if (req.body['Preview' + i][j] === 'true') Preview = 1;
-                        console.log(req.body['Preview' + i]);
+                        // console.log(req.body['Preview' + i]);
                         var VideoLink = null;
                         videoNum++;
                         if (typeof (req.files['LectureVideo' + videoNum]) !== 'undefined') {
-                            VideoLink = req.files['LectureVideo' + videoNum][0].filename;
+                            if (typeof (req.files['LectureVideo' + videoNum][0]) === 'undefined') {
+
+                                VideoLink = req.files['LectureVideo' + videoNum].filename;
+                            }
+                            else {
+                                VideoLink = req.files['LectureVideo' + videoNum][0].filename;
+                            }
                         }
-                        console.log('entity');
-                        console.log(lecture[j]);
-                        console.log(content.ContentID);
-                        console.log(Preview);
+                        // console.log('entity');
+                        // console.log(lecture[j]);
+                        // console.log(content.ContentID);
+                        // console.log(Preview);
                         console.log(VideoLink);
                         await lectureModel.add({ LectureName: lecture[j], ContentID: content.ContentID, Preview, VideoLink });
                     }

@@ -231,7 +231,10 @@
                                         </span>
                                         <input type="text" class="form-control mb-1 lectureName" name="LectureName"
                                             placeholder="Lecture Name">
-                                        <input type="file" id="lectureVideo" class="lectureVideo" name="LectureVideo">
+                                        <div class="videoContainer">
+                                            <input type="file" id="lectureVideo" class="lectureVideo"
+                                                name="LectureVideo">
+                                        </div>
                                         <div class="form-check form-switch mt-1">
                                             <input class="form-check-input preview" name="Preivew" type="checkbox"
                                                 id="flexSwitchCheckChecked" value="true">
@@ -279,19 +282,19 @@
                                             class="btn btn-outline-danger my-1 cancelChangeVideoButton"
                                             hidden>Cancel</button>
                                         {{/compare}}
-                                        {{#compare VideoLink '' operator="<="}} <input type="file" class="lectureVideo"
-                                            name="LectureVideo">
-                                            {{/compare}}
-                                            <div class="form-check form-switch">
-                                                <input class="form-check-input preview" name="Preivew" type="checkbox"
-                                                    id="flexSwitchCheckChecked" value="true" {{#compare Preview 1}}
-                                                    checked {{/compare}}>
-                                                <label class="form-check-label"
-                                                    for="flexSwitchCheckChecked">Preview</label>
-                                                <input class="form-check-input preview" name="Preivew" type="checkbox"
-                                                    id="flexSwitchCheckCheckedFalse" value="false" hidden>
+                                        <div class="videoContainer" {{#compare VideoLink '' operator=">" }} hidden
+                                            {{/compare}}>
+                                            <input type="file" class="lectureVideo" name="LectureVideo">
+                                        </div>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input preview" name="Preivew" type="checkbox"
+                                                id="flexSwitchCheckChecked" value="true" {{#compare Preview 1}} checked
+                                                {{/compare}}>
+                                            <label class="form-check-label" for="flexSwitchCheckChecked">Preview</label>
+                                            <input class="form-check-input preview" name="Preivew" type="checkbox"
+                                                id="flexSwitchCheckCheckedFalse" value="false" hidden>
 
-                                            </div>
+                                        </div>
                                     </div>
                                     {{/each}}
                                 </div>

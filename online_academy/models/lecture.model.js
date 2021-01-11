@@ -13,7 +13,6 @@ module.exports = {
         WHERE ContentID = ${id}`);
     },
     add(entity) {
-        console.log('da vao add');
         return db.add(entity, TBL_LECTURE);
     },
     patch(entity) {
