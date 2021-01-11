@@ -59,7 +59,7 @@ LIMIT 5`)
     },
     categoryOfTheWeek() {
         return db.load(`SELECT
-        subcategory.SubcategoryID, COUNT(*)
+        subcategory.SubcategoryID,subcategory.SubcategoryName,subcategory.CategoryID, COUNT(*)
     FROM
         subcategory
     LEFT JOIN course ON course.SubCategoryID = subcategory.SubcategoryID

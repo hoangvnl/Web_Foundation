@@ -85,16 +85,17 @@
 </div>
 
 <div class="container">
-    <h3>TOP CATEOGORIES OF WEEK</h3>
+    <h3>TOP CATEGORIES OF WEEK</h3>
+
+    {{#each categoryOfTheWeek}}
+
 
     <div class="d-flex justify-content-around">
-        <a name="" id="" class="btn btn-secondary mx-auto catOfTheWeek" href="javascript:;" role="button"> React</a>
-        <a name="" id="" class="btn btn-secondary mx-auto catOfTheWeek" href="javascript:;" role="button"> Css</a>
-        <a name="" id="" class="btn btn-secondary mx-auto catOfTheWeek" href="javascript:;" role="button"> Android
-            Development</a>
-        <a name="" id="" class="btn btn-secondary mx-auto catOfTheWeek" href="javascript:;" role="button">
-            JavaScript</a>
+        <a name="" id="" class="btn btn-secondary mx-auto catOfTheWeek"
+            href="/courses/{{categoryName}}/{{SubcategoryName}}" role="button"> {{SubcategoryName}}</a>
+
     </div>
+    {{/each}}
 </div>
 
 <div class="container">

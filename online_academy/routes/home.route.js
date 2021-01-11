@@ -1,4 +1,5 @@
 const express = require('express');
+const categoryModel = require('../models/category.model');
 const lecturerModel = require('../models/lecturer.model');
 const ratingModel = require('../models/rating.model');
 const subcategoryModel = require('../models/subcategory.model');
@@ -51,6 +52,12 @@ router.get('/', async function (req, res) {
 
 
     var categoryOfTheWeek = await topModel.categoryOfTheWeek();
+    for (i = 0; i < categoryOfTheWeek.length; i++) {
+        var catTemp = await categoryModel.single(categoryOfTheWeek[i].CategoryID);
+        categoryOfTheWeek[i]['categoryName'] = catTemp[0].CategoryName;
+    }
+
+    console.log(categoryOfTheWeek);
     var courseOfTheWeek = await topModel.courseOfTheWeek();
 
 

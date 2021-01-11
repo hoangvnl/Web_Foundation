@@ -159,6 +159,7 @@ router.post('/review', isAuth, async function (req, res) {
     entity = {
         CourseID: courseID,
         TotalVotes: rating[0].TotalVotes + 1,
+        TotalRates: rating[0].TotalRates + (+(req.body.rating)),
     }
     await ratingModel.patch(entity);
 
