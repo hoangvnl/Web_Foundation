@@ -1,5 +1,14 @@
 TO DO:
+tạo cột status là đã hoàn thành chưa trong bảng course
 
+
+theo dõi nếu người dùng xem video thì hiện đã đem
+
+
+
+
+
+-------------------------------------------
 isNew -> CourseID
 isBestSeller -> CourseID
 
