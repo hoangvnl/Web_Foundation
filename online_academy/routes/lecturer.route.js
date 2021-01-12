@@ -111,8 +111,12 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
         } else {
             var param = req.params.param;
             var course = await coursesModel.singleByName(param);
+            if (req.body.Completed == 1) {
+                var entityCourse = { CourseID: course[0].CourseID, Completed: 1 };
+                await coursesModel.patch(entityCourse);
+            }
             var curContent = await contentModel.allWithCourseID(course[0].CourseID);
-            console.log(curContent);
+            // console.log(curContent);
             var contentName = req.body.ContentName;
             // console.log('contentName:');
             // console.log(contentName);

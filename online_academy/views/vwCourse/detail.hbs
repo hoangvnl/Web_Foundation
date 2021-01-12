@@ -306,6 +306,12 @@
                 <div>
                     <p> <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                         Last updated {{UpdatedDate}}
+                        {{#compare Completed 0}}
+                        <span class="text-danger">
+                            (Not compeleted)
+                        </span>
+                        {{/compare}}
+
                     </p>
                     <p>
                     <form id="frmWishlist" action="/course/addWishlist" method="post">
