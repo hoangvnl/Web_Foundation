@@ -7,5 +7,7 @@ module.exports = {
     },
     allByUserID(id) {
         return db.load(`select * from ${TBL_JOINCOURSE} where UserID = ${id}`)
-    }
+    },
+
+
 }

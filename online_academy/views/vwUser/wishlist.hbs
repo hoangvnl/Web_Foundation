@@ -150,12 +150,8 @@
                             </p>
                             <div class="d-block">
                                 <div class="rate d-flex text-center">
-                                    <b>4.6</b>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                    <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                                    <b>{{formatRate rate}}</b>
+                                    {{> ratingStar}}
                                     <div class="rateCount">
                                         ({{formatCount StudentCount}})
                                     </div>

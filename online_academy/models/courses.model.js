@@ -69,4 +69,10 @@ module.exports = {
         const condition = { CourseID: entity.CourseID };
         return db.del(condition, TBL_COURSE);
     },
+    findIDByLectureID(id) {
+        return db.load(`select course.CourseID
+        from course left join course_content on course.CourseID = course_content.CourseID
+                    left join lecture on lecture.ContentID = course_content.ContentID
+        where lecture.LectureID = ${id}`)
+    }
 }

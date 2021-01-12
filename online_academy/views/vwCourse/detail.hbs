@@ -239,9 +239,17 @@
         video.appendTo($('.videoContainer'));
     })
 
+    $('.viewButton').on('click', function () {
+        var button = $(this);
+        var id = button.data('id');
+        $.post('/course/watch/' + id)
+    })
+
 
 </script>
 {{/section}}
+
+<form id="frmWatch" action="" method="post"></form>
 
 {{#each this.course}}
 <div class="mainContent">
@@ -341,6 +349,7 @@
 
         <div class="courseContent mt-4">
             <h4>Course content</h4>
+
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                 <div id="accordion">
                     {{#each content}}
@@ -363,11 +372,18 @@
                             <div class="card-body my-0">
 
                                 {{#if ../../../isBought}}
-                                <button class="btn previewButton btn-link ml-1" type="button" data-toggle="modal"
-                                    data-src="/public/videos/{{VideoLink}}" data-target="#myModal">
+                                <button class="btn viewButton btn-link ml-1" type="button" data-id="{{LectureID}}"
+                                    data-toggle="modal" data-src="/public/videos/{{VideoLink}}" data-target="#myModal">
                                     <i class="fa fa-play-circle" aria-hidden="true"></i>
                                     {{LectureName}}
                                 </button>
+
+                                {{#if isWatch}}
+                                <span>(Watched)</span>
+
+
+
+                                {{/if}}
                                 {{else}}
 
 
@@ -409,8 +425,8 @@
                         {{#each lecture}}
                         {{#compare LectureName '' operator=">"}}
                         {{#if ../../../isBought}}
-                        <button class="btn videoButton d-flex btn-dark w-100 my-1"
-                            data-src="/public/videos/{{VideoLink}}" type="button"
+                        <button class="btn videoButton viewButton d-flex btn-dark w-100 my-1"
+                            data-src="/public/videos/{{VideoLink}}" type="button" data-id="{{LectureID}}"
                             style="height: 3rem;font-size: 1.1rem;line-height: 2.5rem;">
                             <i class="fa fa-play-circle-o fa-lg mx-3" aria-hidden="true"
                                 style="line-height: 2.5rem;"></i>

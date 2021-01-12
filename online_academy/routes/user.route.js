@@ -7,6 +7,7 @@ const coursesModel = require('../models/courses.model');
 const joincourseModel = require('../models/joincourse.model');
 const lecturerModel = require('../models/lecturer.model');
 const subcategoryModel = require('../models/subcategory.model');
+const rating_module = require('../models/rating.model');
 
 router.get('/edit-profile', isAuth, function (req, res) {
     const user = (req.session.userAuth);
@@ -27,6 +28,9 @@ router.get('/wishlist', isAuth, async function (req, res) {
         course[+i]['lecturerName'] = await lecturerModel.getNameByCourseID(course[+i].CourseID);
         const catName = await subcategoryModel.getNameByID(course[+i].SubCategoryID);
         course[+i]['catName'] = catName;
+        var rating = await rating_module.singleByCourseID(course[+i].CourseID);
+        var rate = rating[0].TotalRates / rating[0].TotalVotes;
+        course[+i]['rate'] = rate;
     }
 
     res.render('vwUser/wishlist', {
@@ -48,6 +52,9 @@ router.get('/my-course', isAuth, async function (req, res) {
         console.log(courseID[i].CourseID);
         var courseTemp = await coursesModel.singleByID(courseID[+i].CourseID);
         course.push(courseTemp[0]);
+        var rating = await rating_module.singleByCourseID(course[+i].CourseID);
+        var rate = rating[0].TotalRates / rating[0].TotalVotes;
+        course[+i]['rate'] = rate;
     }
 
     res.render('vwUser/myCourse', {

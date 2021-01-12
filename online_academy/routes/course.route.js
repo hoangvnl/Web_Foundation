@@ -15,6 +15,8 @@ const coursesModel = require('../models/courses.model');
 const ratingModel = require('../models/rating.model');
 const reviewModel = require('../models/review.model');
 const userModel = require('../models/user.model');
+const contentModel = require('../models/content.model');
+const watchedLectureModel = require('../models/watchedLecture.model');
 
 
 router.get('/:param', async function (req, res) {
@@ -51,7 +53,7 @@ router.get('/:param', async function (req, res) {
     else {
         course[0]['rate'] = 0;
     }
-    console.log(review);
+    // console.log(review);
     course[0]['review'] = review;
 
     const content = await content_module.allWithCourseID(course[0].CourseID);
@@ -67,6 +69,7 @@ router.get('/:param', async function (req, res) {
             if (+joinCourse[i].CourseID === +course[0].CourseID)
                 isBought = true;
         }
+
     }
 
     if (req.session.isAuth) {
@@ -90,6 +93,15 @@ router.get('/:param', async function (req, res) {
         var contentTemp = course[0].content[count];
         var lecture = await lecture_module.allWithContentID(contentTemp.ContentID);
 
+        for (i = 0; i < lecture.length; i++) {
+            if (await watchedLectureModel.checkIsWatched(lecture[i].LectureID)) {
+                lecture[i]['isWatch'] = true;
+            }
+            else {
+                lecture[i]['isWatch'] = false;
+            }
+        }
+
         course[0].content[count]['lecture'] = lecture;
     }
 
@@ -110,6 +122,7 @@ router.get('/:param', async function (req, res) {
 
     // console.log(fiveCourse);
 
+
     course[0]['fiveCourse'] = fiveCourse;
 
     res.render('vwCourse/detail', {
@@ -121,7 +134,28 @@ router.get('/:param', async function (req, res) {
         countCourse,
         countReview,
         countRating,
+
     });
+})
+
+router.post('/watch/:param', async function (req, res) {
+    var param = req.params.param;//LectureID
+    console.log(param);
+    if (req.session.isAuth) {
+        var user = req.session.userAuth;
+        var courseID = await coursesModel.findIDByLectureID(param);
+        courseID = courseID[0].CourseID;
+        var curLecture = await watchedLectureModel.allByUserIDAndCourseID(user.UserID, courseID);
+        // console.log(curLecture);
+        for (i = 0; i < curLecture.length; i++) {
+            if (+curLecture[i].CurrentLecture === +param)
+                return;
+        }
+        var entity = { UserID: user.UserID, CourseID: courseID, CurrentLecture: +param };
+        await watchedLectureModel.add(entity);
+    }
+
+
 })
 
 router.post('/addWishlist', isAuth, async function (req, res) {

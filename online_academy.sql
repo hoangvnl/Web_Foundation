@@ -23,17 +23,19 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `online_academy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `online_academy`;
 
+
+-- Cấu trúc bảng cho bảng `watched_lecture`
+--
+CREATE TABLE `watched_lecture` (
+  `UserID` int(10) NOT NULL,
+  `CourseID` int(10) NOT NULL,
+  `CurrentLecture` int(10) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- --------------------------------------------------------
 --
+
 -- Cấu trúc bảng cho bảng `review`
---
-
---
--- Cấu trúc bảng cho bảng `category`
---
-
---
--- Cấu trúc bảng cho bảng `category`
 --
 
 create table review(
@@ -51,24 +53,9 @@ create table review(
 
 
 
--- --------------------------------------------------------
 
---
--- Đang đổ dữ liệu cho bảng `category`
---
 
-INSERT INTO `category` (`CategoryID`, `CategoryName`) VALUES
-(1, 'Web Development'),
-(2, 'Mobile Development');
 
--- --------------------------------------------------------
---
--- Đang đổ dữ liệu cho bảng `category`
---
-
-INSERT INTO `category` (`CategoryID`, `CategoryName`) VALUES
-(1, 'Web Development'),
-(2, 'Mobile Development');
 
 -- --------------------------------------------------------
 --
