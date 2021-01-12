@@ -65,6 +65,10 @@ router.get('/', async function (req, res) {
 
     console.log(categoryOfTheWeek);
     var courseOfTheWeek = await topModel.courseOfTheWeek();
+    for (i = 0; i < courseOfTheWeek.length; i++) {
+        var ratingTempCourseOfTheWeek = await ratingModel.singleByCourseID(courseOfTheWeek[i].CourseID);
+        courseOfTheWeek[i]['rate'] = ratingTempCourseOfTheWeek[0].TotalRates / ratingTempCourseOfTheWeek[0].TotalVotes;
+    }
 
 
 
