@@ -14,6 +14,10 @@ module.exports = {
     },
     add(entity) {
         return db.add(entity, TBL_TOKENS);
-    }
+    },
+    del(entity) {
+        const condition = { UserID: entity.UserID };
+        return db.del(condition, TBL_TOKENS);
+    },
 
 }

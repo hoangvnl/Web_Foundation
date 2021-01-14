@@ -57,7 +57,7 @@
 
     <div class="">
         {{#each courseOfTheWeek}}
-        <a class="btn card text-left d-inline-flex" style="width: 22.8rem; height: 27rem;" href="/course/{{CourseName}}"
+        <a class="btn card text-left d-inline-flex" style="width: 22.8rem; height: 29rem;" href="/course/{{CourseName}}"
             role="button">
             <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}" style="height: 190.5px;">
             <div class="card-body">
@@ -76,8 +76,12 @@
                     <b> ${{formatMoney SalePrice}}</b><br><br>
                     <del>${{formatMoney Price}}</del>
                     {{/compare}}
-
                 </p>
+                {{#if isBestSeller}}
+                <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
+                {{else}}
+                <p>khong</p>
+                {{/if}}
             </div>
         </a>
         {{/each}}
@@ -105,7 +109,7 @@
             <div class="carousel-item active">
                 <div class="col-sm"></div>
                 {{#each first4AllCat}}
-                <a class="btn card text-left d-inline-flex" style="width: 17rem; height: 27rem;"
+                <a class="btn card text-left d-inline-flex" style="width: 17rem; height: 29rem;"
                     href="/course/{{CourseName}}" role="button">
                     <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
                     <div class="card-body">
@@ -124,8 +128,15 @@
                             <b> ${{formatMoney SalePrice}}</b><br><br>
                             <del>${{formatMoney Price}}</del>
                             {{/compare}}
-
                         </p>
+                        <div class="flex-column-reverse">
+                            {{#if isBestSeller}}
+                            <p class="badge badge-warning">Bestseller</p>
+                            {{/if}}
+                            {{#if isNew}}
+                            <p class="badge badge-danger">New</p>
+                            {{/if}}
+                        </div>
                     </div>
                 </a>
                 {{/each}}
@@ -134,7 +145,7 @@
             <div class="carousel-item">
                 <div class="col-sm">
                     {{#each second4AllCat}}
-                    <a class="btn card text-left d-inline-flex" style="width: 16.5rem;height: 27rem;"
+                    <a class="btn card text-left d-inline-flex" style="width: 16.5rem;height: 29rem;"
                         href="/course/{{CourseName}}" role="button">
                         <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
                         <div class="card-body">
@@ -153,8 +164,15 @@
                                 <b> ${{formatMoney SalePrice}}</b><br><br>
                                 <del>${{formatMoney Price}}</del>
                                 {{/compare}}
-
                             </p>
+                            <div class="flex-column-reverse">
+                                {{#if isBestSeller}}
+                                <p class="badge badge-warning">Bestseller</p>
+                                {{/if}}
+                                {{#if isNew}}
+                                <p class="badge badge-danger">New</p>
+                                {{/if}}
+                            </div>
                         </div>
                     </a>
                     {{/each}}
@@ -164,7 +182,7 @@
             <div class="carousel-item">
                 <div class="col-sm d-flex justify-content-around">
                     {{#each final2AllCat}}
-                    <a class="btn card text-left d-inline-flex" style="width: 17rem;height: 27rem;"
+                    <a class="btn card text-left d-inline-flex" style="width: 17rem;height: 29rem;"
                         href="/course/{{CourseName}}" role="button">
                         <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
                         <div class="card-body">
@@ -183,8 +201,15 @@
                                 <b> ${{formatMoney SalePrice}}</b><br><br>
                                 <del>${{formatMoney Price}}</del>
                                 {{/compare}}
-
                             </p>
+                            <div class="flex-column-reverse">
+                                {{#if isBestSeller}}
+                                <p class="badge badge-warning">Bestseller</p>
+                                {{/if}}
+                                {{#if isNew}}
+                                <p class="badge badge-danger">New</p>
+                                {{/if}}
+                            </div>
                         </div>
                     </a>
                     {{/each}}
@@ -214,7 +239,7 @@
             <div class="carousel-item active">
                 <div class="col-sm"></div>
                 {{#each first4NewAllCat}}
-                <a class="btn card text-left d-inline-flex" style="width: 17rem; height: 27rem;"
+                <a class="btn card text-left d-inline-flex" style="width: 17rem; height: 29rem;"
                     href="/course/{{CourseName}}" role="button">
                     <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}"
                         style="height: 170.5px;">
@@ -234,8 +259,15 @@
                             <b> ${{formatMoney SalePrice}}</b><br><br>
                             <del>${{formatMoney Price}}</del>
                             {{/compare}}
-
                         </p>
+                        <div class="flex-column-reverse">
+                            {{#if isBestSeller}}
+                            <p class="badge badge-warning">Bestseller</p>
+                            {{/if}}
+                            {{#if isNew}}
+                            <p class="badge badge-danger">New</p>
+                            {{/if}}
+                        </div>
                     </div>
                 </a>
                 {{/each}}
@@ -244,7 +276,7 @@
             <div class="carousel-item">
                 <div class="col-sm">
                     {{#each second4NewAllCat}}
-                    <a class="btn card text-left d-inline-flex" style="width: 16.5rem;height: 27rem;"
+                    <a class="btn card text-left d-inline-flex" style="width: 16.5rem;height: 29rem;"
                         href="/course/{{CourseName}}" role="button">
                         <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
                         <div class="card-body">
@@ -263,8 +295,16 @@
                                 <b> ${{formatMoney SalePrice}}</b><br><br>
                                 <del>${{formatMoney Price}}</del>
                                 {{/compare}}
-
                             </p>
+                            <div class="flex-column-reverse">
+                                {{#if isBestSeller}}
+                                <p class="badge badge-warning">Bestseller</p>
+                                {{/if}}
+                                {{#if isNew}}
+                                <p class="badge badge-danger">New</p>
+                                {{/if}}
+                            </div>
+
                         </div>
                     </a>
                     {{/each}}
@@ -274,7 +314,7 @@
             <div class="carousel-item">
                 <div class="col-sm d-flex justify-content-around">
                     {{#each final2NewAllCat}}
-                    <a class="btn card text-left d-inline-flex" style="width: 17rem;height: 27rem;"
+                    <a class="btn card text-left d-inline-flex" style="width: 17rem;height: 29rem;"
                         href="/course/{{CourseName}}" role="button">
                         <img src="public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
                         <div class="card-body">
@@ -293,8 +333,15 @@
                                 <b> ${{formatMoney SalePrice}}</b><br><br>
                                 <del>${{formatMoney Price}}</del>
                                 {{/compare}}
-
                             </p>
+                            <div class="flex-column-reverse">
+                                {{#if isBestSeller}}
+                                <p class="badge badge-warning">Bestseller</p>
+                                {{/if}}
+                                {{#if isNew}}
+                                <p class="badge badge-danger">New</p>
+                                {{/if}}
+                            </div>
                         </div>
                     </a>
                     {{/each}}

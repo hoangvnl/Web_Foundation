@@ -7,6 +7,7 @@ const topModel = require('../models/top.model');
 const router = express.Router();
 
 router.get('/', async function (req, res) {
+    var newCourse = await topModel.getNewCourse();
     const top10AllCat = await topModel.top10AllCat();
     const top10NewAllCat = await topModel.top10NewAllCat();
     if (req.session.isLecturer === true) {
@@ -27,7 +28,25 @@ router.get('/', async function (req, res) {
         var rating = await ratingModel.singleByCourseID(top10AllCat[+i].CourseID);
         var rate = rating[0].TotalRates / rating[0].TotalVotes;
         top10AllCat[+i]['rate'] = rate;
+
+
+        for (j = 0; j < newCourse.length; j++) {
+            if (top10AllCat[+i].CourseID === newCourse[j].CourseID) {
+                top10AllCat[+i]['isNew'] = true;
+            }
+        }
+
+        var bestsellerCourse = await topModel.getBestSeller(top10AllCat[+i].SubCategoryID);
+
+        for (j = 0; j < bestsellerCourse.length; j++) {
+            if (top10AllCat[+i].CourseID === bestsellerCourse[j].CourseID) {
+                top10AllCat[+i]['isBestSeller'] = true;
+
+            }
+
+        }
     }
+    // console.log(top10AllCat);
     var first4AllCat = [];
     var second4AllCat = [];
     var final2AllCat = [];
@@ -37,6 +56,8 @@ router.get('/', async function (req, res) {
         first4AllCat.push(top10AllCat[i]);
         second4AllCat.push(top10AllCat[i + 4]);
     }
+    // console.log(first4AllCat);
+
 
     for (var i in top10NewAllCat) {
         top10NewAllCat[+i]['lecturerName'] = await lecturerModel.getNameByCourseID(top10NewAllCat[+i].CourseID);
@@ -45,6 +66,23 @@ router.get('/', async function (req, res) {
         var rating = await ratingModel.singleByCourseID(top10NewAllCat[+i].CourseID);
         var rate = rating[0].TotalRates / rating[0].TotalVotes;
         top10NewAllCat[+i]['rate'] = rate;
+
+        for (j = 0; j < newCourse.length; j++) {
+            if (top10NewAllCat[+i].CourseID === newCourse[j].CourseID) {
+                top10NewAllCat[+i]['isNew'] = true;
+            }
+
+        }
+
+        var bestsellerCourse = await topModel.getBestSeller(top10NewAllCat[+i].SubCategoryID);
+
+        for (j = 0; j < bestsellerCourse.length; j++) {
+            if (top10NewAllCat[+i].CourseID === bestsellerCourse[j].CourseID) {
+                top10NewAllCat[+i]['isBestSeller'] = true;
+
+            }
+
+        }
     }
     var first4NewAllCat = [];
     var second4NewAllCat = [];
@@ -63,7 +101,7 @@ router.get('/', async function (req, res) {
         categoryOfTheWeek[i]['categoryName'] = catTemp[0].CategoryName;
     }
 
-    console.log(categoryOfTheWeek);
+    // console.log(categoryOfTheWeek);
     var courseOfTheWeek = await topModel.courseOfTheWeek();
     for (i = 0; i < courseOfTheWeek.length; i++) {
         var ratingTempCourseOfTheWeek = await ratingModel.singleByCourseID(courseOfTheWeek[i].CourseID);

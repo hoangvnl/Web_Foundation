@@ -81,7 +81,6 @@ router.post('/logout', async function (req, res) {
 
     req.session.isAuth = false;
     req.session.isLecturer = false;
-
     req.session.userAuth = null;
     req.session.cart = [];
     if (req.session.isAdmin === true) {
@@ -155,11 +154,14 @@ router.get('/:confirmation/:token', async function (req, res) {
 
     }
     else {
+
         const user = await userModel.singleByID(row.UserID);
         userModel.verify(user.UserID);
         req.session.retUrl = req.headers.referer;
         console.log(req.session.retUrl);
         req.session.confirmed = true;
+        var entity = { UserID: user.UserID };
+        await tokenModel.del(entity);
         res.render('vwAuthentication/confirmed');
     }
 

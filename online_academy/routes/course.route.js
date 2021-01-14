@@ -100,6 +100,7 @@ router.get('/:param', async function (req, res) {
             else {
                 lecture[i]['isWatch'] = false;
             }
+
         }
 
         course[0].content[count]['lecture'] = lecture;

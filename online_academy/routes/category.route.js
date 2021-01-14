@@ -5,6 +5,7 @@ const course_module = require('../models/courses.model');
 const lecturer_module = require('../models/lecturer.model');
 const rating_module = require('../models/rating.model');
 const config = require('../config/default.json');
+const topModel = require('../models/top.model');
 const router = express.Router();
 
 router.get('/search', async function (req, res) {
@@ -15,6 +16,8 @@ router.get('/search', async function (req, res) {
     const p = req.query.p;
     const sort = req.query.sort;
     let rows;
+    var newCourse = await topModel.getNewCourse();
+    // console.log(newCourse);
     if (sort === 'rate') {
         rows = await sub_category_module.searchPageByNameSortRate(p, offset);
     }
@@ -48,7 +51,7 @@ router.get('/search', async function (req, res) {
         const catName = await sub_category_module.getNameByID(course[+i].SubCategoryID);
         course[+i]['catName'] = catName;
         var rating = await rating_module.singleByCourseID(course[+i].CourseID);
-        console.log(rating);
+        // console.log(rating);
         if (rating.length > 0) {
             var rate = rating[0].TotalRates / rating[0].TotalVotes;
             course[+i]['rate'] = rate;
@@ -56,7 +59,25 @@ router.get('/search', async function (req, res) {
         else {
             course[+i]['rate'] = 0;
         }
+
+        for (j = 0; j < newCourse.length; j++) {
+            if (course[i].CourseID == newCourse[j].CourseID) {
+                course[i]['isNew'] = true;
+            }
+
+        }
+
+        var bestsellerCourse = await topModel.getBestSeller(course[i].SubCategoryID);
+
+        for (j = 0; j < bestsellerCourse.length; j++) {
+            if (course[i].CourseID == bestsellerCourse[j].CourseID) {
+                course[i]['isBestSeller'] = true;
+            }
+
+        }
     }
+
+
 
     const searchParam = ('&p=' + p + '&sort=' + sort);
     // console.log(course);
@@ -99,13 +120,31 @@ router.get('/:cat/:subCat', async function (req, res) {
         page_items.push(item);
     }
 
-
+    var newCourse = await topModel.getNewCourse();
     for (var courseTemp in course) {
         course[+courseTemp]['lecturerName'] = await lecturer_module.getNameByCourseID(course[+courseTemp].CourseID);
         course[+courseTemp]['catName'] = category[0].SubcategoryName;
         var rating = await rating_module.singleByCourseID(course[+courseTemp].CourseID);
         var rate = rating[0].TotalRates / rating[0].TotalVotes;
         course[+courseTemp]['rate'] = rate;
+
+        for (j = 0; j < newCourse.length; j++) {
+            if (course[+courseTemp].CourseID == newCourse[j].CourseID) {
+                course[+courseTemp]['isNew'] = true;
+            }
+
+        }
+
+        var bestsellerCourse = await topModel.getBestSeller(course[+courseTemp].SubCategoryID);
+
+        for (j = 0; j < bestsellerCourse.length; j++) {
+            if (course[+courseTemp].CourseID == bestsellerCourse[j].CourseID) {
+                course[+courseTemp]['isBestSeller'] = true;
+            }
+
+        }
+
+
     }
 
     res.render('vwCategories/index', {
@@ -129,6 +168,7 @@ router.get('/:cat', async function (req, res) {
     const course = await course_module.pageWithCatID(catID, offset);
     const total = await course_module.countAllWithCatID(catID);
     const nPages = Math.ceil(total / config.pagination.limit);
+    var newCourse = await topModel.getNewCourse();
     if (page > nPages) page = nPages;
     const page_items = [];
     for (var i = 1; i <= nPages; i++) {
@@ -146,6 +186,21 @@ router.get('/:cat', async function (req, res) {
         var rating = await rating_module.singleByCourseID(course[+courseTemp].CourseID);
         var rate = rating[0].TotalRates / rating[0].TotalVotes;
         course[+courseTemp]['rate'] = rate;
+        for (j = 0; j < newCourse.length; j++) {
+            if (course[+courseTemp].CourseID == newCourse[j].CourseID) {
+                course[+courseTemp]['isNew'] = true;
+            }
+
+        }
+
+        var bestsellerCourse = await topModel.getBestSeller(course[+courseTemp].SubCategoryID);
+
+        for (j = 0; j < bestsellerCourse.length; j++) {
+            if (course[+courseTemp].CourseID == bestsellerCourse[j].CourseID) {
+                course[+courseTemp]['isBestSeller'] = true;
+            }
+
+        }
     }
 
     res.render('vwCategories/index', {

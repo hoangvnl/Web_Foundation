@@ -12,5 +12,8 @@ module.exports = {
         delete entity.CourseID;
         return db.patch(entity, condition, TBL_RATING);
     },
+    add(entity) {
+        return db.add(entity, TBL_RATING);
+    },
 
 }
