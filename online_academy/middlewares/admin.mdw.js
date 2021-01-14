@@ -1,7 +1,8 @@
-module.exports = function(app) {
-    app.get('/', function (req, res) {
-        res.render('vwAdmin/home', { 
-          title: 'admin page', 
-          layout:'adminmain'});
-    })
+module.exports = function isAdmin(req, res, next) {
+    if (req.session.isAdmin === false) {
+        req.session.retUrl = req.originalUrl;
+        return res.redirect('/join/login');
+    }
+
+    next();
 }

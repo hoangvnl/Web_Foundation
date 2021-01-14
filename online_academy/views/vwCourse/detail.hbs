@@ -260,6 +260,9 @@
     <div id="sideBar" class="position-absolute sideBarMenu shadow">
         <div class="card text-left">
             <div class="card-body">
+                <div>
+                    <img src="/public/{{CourseImage}}" alt="" class="w-100">
+                </div>
                 <div class="card-title d-flex">
                     {{#compare SalePrice -1}}
                     <h1 class="d-flex">
@@ -292,6 +295,8 @@
                         now</b></button>
 
                 </p>
+
+
             </div>
         </div>
     </div>
@@ -452,11 +457,11 @@
 
 
 
-        <div class="lecturer  mt-4">
+        <div class="lecturer  mt-4" id="lecturer">
             <h4>Lecturer </h4>
             <h4> <span style="color: rgb(13, 13, 131);">{{lecturerName}}</span></h4>
             <div class="d-flex">
-                <a href="#">
+                <a href="javascript:;">
                     <img src="/public/images/user.png" style="width: 150px;height: 150px;" class="rounded-circle"
                         alt="">
                 </a>
@@ -504,8 +509,8 @@
                 <div class="d-block w-100">
                     <div class="d-flex flex-row mt-2">
                         <div class="progress ml-3" style="width: 500px;">
-                            <div class="progress-bar" role="progressbar" style="width: 84%" aria-valuenow="28"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{../rate_5}}%"
+                                aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <span class="d-inline-flex float-right mx-2">
                             <i class="fa fa-star float-right" aria-hidden="true"></i>
@@ -515,13 +520,13 @@
                             <i class="fa fa-star float-right" aria-hidden="true"></i>
                         </span>
                         <span style="margin-top: -.3rem;">
-                            84%
+                            {{../rate_5}}%
                         </span>
                     </div>
                     <div class="d-flex flex-row mt-2">
                         <div class="progress ml-3" style="width: 500px;">
-                            <div class="progress-bar" role="progressbar" style="width: 12%" aria-valuenow="28"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{../rate_4}}%"
+                                aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <span class="d-inline-flex float-right mx-2" style="color: orange;">
                             <i class="fa fa-star float-right" aria-hidden="true"></i>
@@ -531,13 +536,13 @@
                             <i class="fa fa-star-o float-right" aria-hidden="true"></i>
                         </span>
                         <span style="margin-top: -.3rem;">
-                            12%
+                            {{../rate_4}}%
                         </span>
                     </div>
                     <div class="d-flex flex-row mt-2">
                         <div class="progress ml-3" style="width: 500px;">
-                            <div class="progress-bar" role="progressbar" style="width: 2%" aria-valuenow="28"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{../rate_3}}%"
+                                aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <span class="d-inline-flex float-right mx-2" style="color: orange;">
                             <i class="fa fa-star float-right" aria-hidden="true"></i>
@@ -547,13 +552,13 @@
                             <i class="fa fa-star-o float-right" aria-hidden="true"></i>
                         </span>
                         <span style="margin-top: -.3rem;">
-                            2%
+                            {{../rate_3}}%
                         </span>
                     </div>
                     <div class="d-flex flex-row mt-2">
                         <div class="progress ml-3" style="width: 500px;">
-                            <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="28"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{../rate_2}}%"
+                                aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <span class="d-inline-flex float-right mx-2" style="color: orange;">
                             <i class="fa fa-star float-right" aria-hidden="true"></i>
@@ -563,13 +568,13 @@
                             <i class="fa fa-star-o float-right" aria-hidden="true"></i>
                         </span>
                         <span style="margin-top: -.3rem;">
-                            1%
+                            {{../rate_2}}%
                         </span>
                     </div>
                     <div class="d-flex flex-row mt-2">
                         <div class="progress ml-3" style="width: 500px;">
-                            <div class="progress-bar" role="progressbar" style="width: 1%" aria-valuenow="28"
-                                aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: {{../rate_1}}%"
+                                aria-valuenow="28" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                         <span class="d-inline-flex float-right mx-2" style="color: orange;">
                             <i class="fa fa-star float-right" aria-hidden="true"></i>
@@ -579,7 +584,7 @@
                             <i class="fa fa-star-o float-right" aria-hidden="true"></i>
                         </span>
                         <span style="margin-top: -.3rem;">
-                            1%
+                            {{../rate_1}}%
                         </span>
                     </div>
 
@@ -592,16 +597,17 @@
         <div class="reviews my-4">
             <h4>Reviews</h4>
             {{#if ../isBought}}
+
             <form id="frmReview" action="/course/review" method="post">
                 <input type="text" class="d-none" name="CourseID" value="{{CourseID}}">
                 <input type="text" class="d-none" name="CourseName" value="{{CourseName}}">
                 <div class="reviewItem flex-column">
                     <div class="d-flex">
                         <div class="reviewItemAvatar text-center text-white align-content-center rounded-circle"
-                            style="width: {{#if ../isBought}} 3rem{{else}}9rem{{/if}};">
+                            style="width: 3rem;">
                             User
                         </div>
-                        <b style="line-height: 3rem;">Name</b>
+                        <b style="line-height: 3rem;">{{userName}}</b>
                     </div>
 
                     <div class="w-100 d-flex flex-column form-group">
@@ -618,7 +624,7 @@
                             <input type="radio" id="star2" name="rating" value="2" />
                             <label class="full" for="star2" title="Kinda bad - 2 stars"></label>
 
-                            <input type="radio" id="star1" name="rating" value="1" requireds />
+                            <input type="radio" id="star1" name="rating" value="1" />
                             <label class="full" for="star1" title="Sucks big time - 1 star"></label>
                         </div>
                         <div class="form-group w-100">
@@ -628,7 +634,8 @@
                     </div>
                     <button id="submitReviewButton" type="button" class="btn btn-outline-success w-25">Post</button>
                 </div>
-            </form> {{/if}}
+            </form>
+            {{/if}}
             {{#each review}}
             <div class="reviewItem">
                 <div class="reviewItemAvatar text-center text-white align-content-center rounded-circle"

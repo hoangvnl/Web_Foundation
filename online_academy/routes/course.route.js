@@ -22,7 +22,6 @@ const watchedLectureModel = require('../models/watchedLecture.model');
 router.get('/:param', async function (req, res) {
     const param = req.params.param;
     const course = await course_module.singleByName(param);
-
     var entityView = { CourseID: course[0].CourseID, View: +(course[0].View) + 1 };
     await coursesModel.patch(entityView);//update view
 
@@ -35,6 +34,7 @@ router.get('/:param', async function (req, res) {
     const countReview = await lecturerModel.countReview(lecturer[0].LecturerID);
     const rating = await rating_module.singleByCourseID(course[0].CourseID);
     const review = await reviewModel.allByCourseID(course[0].CourseID);
+
 
     for (i = 0; i < review.length; i++) {
         review[i]['rate'] = +review[i].Rate;
@@ -56,12 +56,43 @@ router.get('/:param', async function (req, res) {
     // console.log(review);
     course[0]['review'] = review;
 
+    var rate_5 = 0;
+    var rate_4 = 0;
+    var rate_3 = 0;
+    var rate_2 = 0;
+    var rate_1 = 0;
+
+    for (i = 0; i < review.length; i++) {
+        if (review[i].rate === 5) {
+            rate_5++;
+        }
+        if (review[i].rate === 4) {
+            rate_4++;
+        }
+        if (review[i].rate === 3) {
+            rate_3++;
+        }
+        if (review[i].rate === 2) {
+            rate_2++;
+        }
+        if (review[i].rate === 1) {
+            rate_1++;
+        }
+    }
+
+    rate_5 = rate_5 / review.length * 100;
+    rate_4 = rate_4 / review.length * 100;
+    rate_3 = rate_3 / review.length * 100;
+    rate_2 = rate_2 / review.length * 100;
+    rate_1 = rate_1 / review.length * 100;
+
     const content = await content_module.allWithCourseID(course[0].CourseID);
     course[0]['content'] = content;
     course[0]['fulldes'] = await fulldes_module.allByCourseID(course[0].CourseID);
     var isInWishlist = 0;
     var isInCart = 0;
     var isBought = false;
+    var reviewed;
     if (typeof (req.session.userAuth) !== 'undefined' && req.session.userAuth !== null) {
         const user = req.session.userAuth;
         const joinCourse = await joincourseModel.allByUserID(user.UserID);
@@ -69,7 +100,9 @@ router.get('/:param', async function (req, res) {
             if (+joinCourse[i].CourseID === +course[0].CourseID)
                 isBought = true;
         }
-
+        course[0]['userName'] = user.UserName;
+        reviewed = await reviewModel.getReviewIfReviewed(user.UserID, course[0].CourseID);
+        console.log(reviewed);
     }
 
     if (req.session.isAuth) {
@@ -100,11 +133,12 @@ router.get('/:param', async function (req, res) {
             else {
                 lecture[i]['isWatch'] = false;
             }
-
         }
 
         course[0].content[count]['lecture'] = lecture;
     }
+
+
 
     const fiveCourseID = await topModel.fiveCourseSameCat(course[0].CourseID);
     var fiveCourse = [];
@@ -131,11 +165,16 @@ router.get('/:param', async function (req, res) {
         isInWishlist,
         isInCart,
         isBought,
+        reviewed,
         countStudent,
         countCourse,
         countReview,
         countRating,
-
+        rate_5,
+        rate_4,
+        rate_3,
+        rate_2,
+        rate_1,
     });
 })
 
