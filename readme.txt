@@ -1,5 +1,5 @@
 TO DO:
-tạo cột status là đã hoàn thành chưa trong bảng course
+- tạo cột isCompleted là đã hoàn thành chưa trong bảng course
 
 thêm ảnh add cart
 isAdmin
