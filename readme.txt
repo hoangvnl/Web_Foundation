@@ -8,6 +8,11 @@ video link: 2 cái course đầu + 3 video để demo
 
 (sửa cái buy)
 
+Khoa
+	_ Khóa tài khoản học viên + giảng viên
+	_ Filter theo linh vuc
+	_ Disable khoa hoc
+
 anhkhoatranle30@gmail.com
 1234
 
