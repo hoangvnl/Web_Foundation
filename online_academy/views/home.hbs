@@ -1,9 +1,8 @@
 {{#section 'css'}}
 <style>
     .catOfTheWeek {
-        width: 15rem;
-
-        font-size: 1.2rem;
+        width: 13rem;
+        font-size: 1.1rem;
         line-height: 3rem;
     }
 
@@ -14,6 +13,10 @@
 
     .container {
         margin-top: 2rem;
+    }
+
+    .badge {
+        font-size: 0.8rem;
     }
 </style>
 {{/section}}
@@ -77,11 +80,12 @@
                     <del>${{formatMoney Price}}</del>
                     {{/compare}}
                 </p>
-                {{#if isBestSeller}}
+                {{#compare isBestSeller 1}}
                 <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
-                {{else}}
-                <p>khong</p>
-                {{/if}}
+                {{/compare}}
+                {{#compare isNew 1}}
+                <p class="badge badge-danger mt-5 text-left d-inline-block ">New</p>
+                {{/compare}}
             </div>
         </a>
         {{/each}}
@@ -99,6 +103,8 @@
             href="/courses/{{categoryName}}/{{SubcategoryName}}" role="button"> {{SubcategoryName}}</a>
 
         {{/each}}
+
+
     </div>
 </div>
 

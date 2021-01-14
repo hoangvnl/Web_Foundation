@@ -145,12 +145,10 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
 
                 await lectureModel.delAllByContentID(curContent[i].ContentID);
             }
-
+            console.log('fields: ' + fields.length);
             console.log('video sau');
             for (i = 1; i <= fields.length; i++) {
-
-                console.log(req.files['LectureVideo' + i]);
-
+                console.log('LectureVideo' + i + ' ' + req.files['LectureVideo' + i]);
             }
 
             //delete các content hiện tại theo CourseID
@@ -162,7 +160,7 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
             }
             var videoNum = 0;
             // console.log('reqbody');
-            // console.log(req.body['LectureName1']);
+            // console.log(req.body)
             //thêm các lecture theo ContentID
             for (i = 1; i < contentName.length; i++) {
                 //i = 1 2 3 
@@ -171,10 +169,11 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
                 // console.log(content);
                 // console.log(req.body);
                 var lecture = req.body['LectureName' + i];
-                if (typeof (lecture) === 'undefined') lecture = '';
-                // console.log(lecture);
-                // var length = 0;
-                if (typeof (lecture) === 'string') {
+                if (typeof (lecture) === 'undefined') {
+                    lecture = '';
+                    await lectureModel.add({ LectureName: lecture, ContentID: content.ContentID });
+                }
+                else if (typeof (lecture) === 'string') {
                     for (j = 0; j < 1; j++) {
 
                         var Preview = 0;
@@ -195,7 +194,7 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
                         // console.log(lecture);
                         // console.log(content.ContentID);
                         // console.log(Preview);
-                        console.log(VideoLink);
+                        // console.log(VideoLink);
                         await lectureModel.add({ LectureName: lecture, ContentID: content.ContentID, Preview, VideoLink });
                     }
                 }
@@ -219,7 +218,7 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
                         // console.log(lecture[j]);
                         // console.log(content.ContentID);
                         // console.log(Preview);
-                        console.log(VideoLink);
+                        // console.log(VideoLink);
                         await lectureModel.add({ LectureName: lecture[j], ContentID: content.ContentID, Preview, VideoLink });
                     }
                 }

@@ -7,18 +7,7 @@ module.exports = {
     top10NewAllCat() {
         return db.load('SELECT * from course order by CreatedAt DESC limit 10');
     },
-    topCatOfWeek() {
-        return db.load(`SELECT
-        subcategory.SubcategoryID, COUNT(*)
-    FROM
-        subcategory
-    LEFT JOIN course ON course.SubCategoryID = subcategory.SubcategoryID
-    LEFT JOIN joincourse ON joincourse.CourseID = course.CourseID
-    WHERE
-        WEEK(DATE) = WEEK(CURRENT_DATE) AND MONTH(DATE) = MONTH(CURRENT_DATE)
-    GROUP BY
-        subcategory.SubcategoryID`)
-    },
+
     fiveCourseSameCat(id) {
         return db.load(`SELECT
 CourseID
@@ -67,7 +56,8 @@ LIMIT 5`)
     WHERE
         WEEK(JoinDate) = WEEK(CURRENT_DATE) AND MONTH(JoinDate) = MONTH(CURRENT_DATE)
     GROUP BY
-        subcategory.SubcategoryID`);
+        subcategory.SubcategoryID
+    LIMIT 5`);
     },
     getNewCourse() {
         return db.load(`SELECT CourseID FROM course WHERE WEEK(CreatedAt) = WEEK(CURRENT_DATE) AND YEAR(CreatedAt) = YEAR(CURRENT_DATE) AND MONTH(CreatedAt) = MONTH(CURRENT_DATE)`);

@@ -30,7 +30,6 @@
         width: 120px;
         height: 120px;
 
-
     }
 
     ul {
@@ -71,8 +70,9 @@
 <div class="mainSection ">
     <div class="sideNav mt-3 position-absolute">
         <div class="user">
-            <div class="avatar text-white text-center mx-auto">
-                <img src="/public/images/user.png" alt="" style="width: 120px;">
+            <div class="avatar text-white text-center mx-auto rounded-circle">
+                <span class="badge badge-primary w-100 h-100 rounded-circle"
+                    style="font-size: 5rem;padding: 1rem;">{{shortName}}</span>
             </div>
             <div class="userName"> {{userName}}</div>
             <ul class="p-0">
@@ -82,7 +82,7 @@
                 </li>
                 <li>
                     <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="/user/wishlist"
-                        role="button">Wishlist</a>
+                        role="button">Watch List</a>
                 </li>
                 <li>
                     <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="/user/my-course"
