@@ -4,10 +4,14 @@ const isAuth = require('../middlewares/auth.mdw');
 const userModel = require('../models/user.model');
 const bcrypt = require('bcryptjs');
 const coursesModel = require('../models/courses.model');
+const nodemailer = require('nodemailer');
 const joincourseModel = require('../models/joincourse.model');
 const lecturerModel = require('../models/lecturer.model');
 const subcategoryModel = require('../models/subcategory.model');
 const rating_module = require('../models/rating.model');
+const crypto = require('crypto');
+const tokenModel = require('../models/token.model');
+
 
 router.get('/edit-profile', isAuth, function (req, res) {
     const user = (req.session.userAuth);
@@ -77,10 +81,46 @@ router.post('/name', async function (req, res) {
 router.post('/email', async function (req, res) {
     console.log(req.body);
     const id = req.body.UserID;
+    delete req.body.CurEmail;
+    req.body['Verification'] = 0;
     await userModel.patch(req.body);
+    req.session.isAuth = false;
+    req.session.isLecturer = false;
+    req.session.userAuth = null;
     const user = await userModel.singleByID(id);
-    req.session.userAuth = user;
-    res.redirect('/user/edit-profile');
+    const newToken = {
+        UserID: user.UserID,
+        Token: crypto.randomBytes(16).toString('hex')
+    };
+
+    await tokenModel.add(newToken);
+
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'onlineacademy388421@gmail.com',
+            pass: 'onlineacademy'
+        }
+    });
+    var mailOptions = {
+        from: 'onlineacademy388421@gmail.com',
+        to: user.Email,
+        subject: 'Account Verification Token',
+        text: 'Hello,\n\n' + 'Please verify your account by clicking the link: \nhttp:\/\/' + req.headers.host + '\/join\/confirmation\/' + newToken.Token + '\n'
+    };
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+        }
+    });
+
+
+    res.render('vwAuthentication/pending', {
+        user
+    });
+
 })
 router.post('/password', async function (req, res) {
     const id = req.body.UserID;

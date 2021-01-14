@@ -68,5 +68,11 @@ LIMIT 5`)
         WEEK(JoinDate) = WEEK(CURRENT_DATE) AND MONTH(JoinDate) = MONTH(CURRENT_DATE)
     GROUP BY
         subcategory.SubcategoryID`);
+    },
+    getNewCourse() {
+        return db.load(`SELECT CourseID FROM course WHERE WEEK(CreatedAt) = WEEK(CURRENT_DATE) AND YEAR(CreatedAt) = YEAR(CURRENT_DATE) AND MONTH(CreatedAt) = MONTH(CURRENT_DATE)`);
+    },
+    getBestSeller(SubCatID) {
+        return db.load(`SELECT CourseID FROM course WHERE SubcategoryID = ${SubCatID} ORDER BY course.StudentCount DESC LIMIT 3`);
     }
 }

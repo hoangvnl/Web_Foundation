@@ -10,6 +10,7 @@ const course_lecturerModel = require('../models/course_lecturer.model');
 const lectureModel = require('../models/lecture.model');
 const lecturerModel = require('../models/lecturer.model');
 const userModel = require('../models/user.model');
+const ratingModel = require('../models/rating.model');
 
 var now = new Date();
 
@@ -65,6 +66,8 @@ router.post('/course/create', async function (req, res) {
     var newEntity = { CourseID: course[0].CourseID, LecturerID: req.session.userAuth.LecturerID };
     await course_lecturerModel.add(newEntity);
     console.log(entity.CourseName);
+    var entityRating = { CourseID: course[0].CourseID, TotalVotes: 0, TotalRates: 0 };
+    await ratingModel.add(entityRating);
     // const course = coursesModel.singleByName(req.body.CourseName);
     res.redirect('/lecturer/course/' + entity.CourseName + '/basic');
 })

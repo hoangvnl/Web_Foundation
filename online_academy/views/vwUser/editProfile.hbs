@@ -29,9 +29,8 @@
     .avatar {
         width: 120px;
         height: 120px;
-        font-size: 2rem;
-        line-height: 120px;
-        background-color: cornflowerblue;
+
+
     }
 
     ul {
@@ -72,7 +71,7 @@
 <div class="mainSection ">
     <div class="sideNav mt-3 position-absolute">
         <div class="user">
-            <div class="avatar text-white text-center rounded-circle mx-auto">
+            <div class="avatar text-white text-center mx-auto">
                 <img src="/public/images/user.png" alt="" style="width: 120px;">
             </div>
             <div class="userName"> {{userName}}</div>
@@ -109,8 +108,10 @@
             <div class="form-group">
                 <label for="inputEmail">Email:</label>
                 <input type="text" class="d-none" name="UserID" value="{{id}}">
-                <input type="email" class="form-control" id="inputEmail" name="Email" placeholder="Email" required
-                    value="{{email}}">
+                <input type="email" class="form-control mb-2" id="inputEmail" name="CurEmail" placeholder="Email"
+                    value="{{email}}" readonly>
+                <input type="email" class="form-control" id="inputNewEmail" name="Email" placeholder="New Email"
+                    required>
             </div>
             <button type="submit" class="btn btn-danger" formaction="/user/email">Save</button>
         </form>
