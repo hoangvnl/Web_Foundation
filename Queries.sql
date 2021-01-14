@@ -1,4 +1,21 @@
-﻿-- 3-4 khóa học nổi bật nhất (theo rate)
+﻿-- isNew
+--chạy những dòng này để bổ sung khóa học mới nhất vào
+UPDATE `course` SET `CreatedAt` = '2020-01-14' WHERE 1
+UPDATE `course` SET `CreatedAt` = '2021-01-14' WHERE `course`.`CourseID` = 1
+UPDATE `course` SET `CreatedAt` = '2021-01-14' WHERE `course`.`CourseID` = 7
+UPDATE `course` SET `CreatedAt` = '2021-01-14' WHERE `course`.`CourseID` = 10
+UPDATE `course` SET `CreatedAt` = '2021-01-14' WHERE `course`.`CourseID` = 17
+UPDATE `course` SET `CreatedAt` = '2021-01-14' WHERE `course`.`CourseID` = 30
+-- chạy dòng này để lấy ra những khóa học isNew
+SELECT CourseID FROM `course` WHERE WEEK(CreatedAt) = WEEK(CURRENT_DATE) AND YEAR(CreatedAt) = YEAR(CURRENT_DATE) AND MONTH(CreatedAt) = MONTH(CURRENT_DATE)
+
+--isBestSeller
+--này chỉ cho truy vấn tới một subcat cụ thể :((
+SELECT CourseID FROM `course` WHERE SubcategoryID = '1' ORDER BY course.StudentCount DESC LIMIT 3
+--mỗi sản phầm lấy courseID với subCatID để kiểm tra nhe m
+
+
+-- 3-4 khóa học nổi bật nhất (theo rate)
 select * from course left join rating on course.CourseID = rating.CourseID order by (rating.totalRates/rating.totalVotes) desc limit 3
 --Hiển thị 10 khoá học được xem nhiều nhất (ở mọi lĩnh vực)
 SELECT * FROM course ORDER BY VIEW DESC LIMIT 10
