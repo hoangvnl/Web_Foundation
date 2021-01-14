@@ -1,7 +1,18 @@
 TO DO:
 tạo cột status là đã hoàn thành chưa trong bảng course
 
+thêm ảnh add cart
+isAdmin
+tạo db review + user
+video link: 2 cái course đầu + 3 video để demo
 
+(sửa cái buy)
+
+anhkhoatranle30@gmail.com
+1234
+
+
+-----------------
 theo dõi nếu người dùng xem video thì hiện đã đem
 
 
