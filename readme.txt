@@ -3,15 +3,17 @@ TO DO:
 
 thêm ảnh add cart
 isAdmin
-tạo db review + user
-video link: 2 cái course đầu + 3 video để demo
+
+
 
 (sửa cái buy)
 
 Khoa
-	_ Khóa tài khoản học viên + giảng viên
-	_ Filter theo linh vuc
-	_ Disable khoa hoc
+	_ Khóa tài khoản học viên + giảng viên : done
+	_ Filter theo linh vuc : done
+	_ Disable khoa hoc : done
+	_ tạo db review + user : done
+	_ video link 3 video để demo : done
 
 anhkhoatranle30@gmail.com
 1234

@@ -1,6 +1,27 @@
 <div class="card">
-  <h5 class="card-header">
-    Courses
+  <h5 class="card-header d-flex justify-content-between">
+            Courses
+            {{!-- <a class="btn btn-light" href="/admin/lecturers/add" role="button">
+                <i class="fa fa-user-plus" aria-hidden="true"></i>
+                Add Lecturer
+            </a> --}}
+            <div class="w-10">
+            <select class="form-control w-10" name="formal" onchange="javascript:handleSelect(this)">
+              <option value="" disabled selected>--</option>
+              <option value="/admin/courses">All Courses</option>
+              {{#each this.subcategories}}
+                <option value="/admin/courses/filter/{{SubcategoryID}}">{{SubcategoryName}}</option>
+              {{/each}}
+            </select>              
+            </div>
+            
+
+            <script type="text/javascript">
+              function handleSelect(elm)
+              {
+                window.location = elm.value;
+              }
+            </script>
   </h5>
   {{#if this.empty}}
   <div class="card-body">
@@ -8,7 +29,7 @@
   </div>
   {{else}}
   <form method="POST">
-      
+      <div class="card-body"> <span style="font-weight: bold;">{{this.subName}}</span> Courses </div>
       <div class="card-body">
         <div class="row">
         {{#each this.courses}}
@@ -39,10 +60,23 @@
                 
             </div>
             <div class="card-footer">
-                <button type="submit" class="btn btn-outline-dark" formaction="/admin/courses/del/{{CourseID}}" {{#if this.isActive}}disabled{{/if}}>
+                {{#if isDisabled}}
+                  <button type="submit" class="btn btn btn-dark text-light" formaction="/admin/courses/enable/{{CourseID}}" {{#if this.isActive}}disabled{{/if}}>
+                      <i class="fa fa-check-circle" aria-hidden="true"></i>
+                      Enable
+                  </button>
+                {{else}}
+                  <button type="submit" class="btn btn btn-dark text-light" formaction="/admin/courses/disable/{{CourseID}}" {{#if this.isActive}}disabled{{/if}}>
+                      <i class="fa fa-ban" aria-hidden="true"></i>
+                      Disable
+                  </button>
+                {{/if}}
+                
+                <button type="submit" class="btn btn-outline-dark " formaction="/admin/courses/del/{{CourseID}}" {{#if this.isActive}}disabled{{/if}}>
                     <i class="fa fa-trash" aria-hidden="true"></i>
                     Delete
                 </button>
+                
             </div>
             </div>
         </div>

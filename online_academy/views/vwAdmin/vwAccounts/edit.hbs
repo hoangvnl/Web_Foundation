@@ -43,6 +43,20 @@
         <i class="fa fa-backward" aria-hidden="true"></i>
         Back to List
       </a>
+
+      {{#compare this.account.Permission  2 operator="!="}}
+      {{#if this.account.isLocked}}
+        <button type="submit" class="btn btn-outline-dark" formaction="/admin/accounts/unlock">
+          <i class="fa fa-unlock" aria-hidden="true"></i>
+          Unlock
+        </button>
+      {{else}}
+        <button type="submit" class="btn btn-outline-dark" formaction="/admin/accounts/lock">
+          <i class="fas fa-user-lock    "></i>
+          Lock
+        </button>
+      {{/if}}
+      {{/compare}}
       
       <button type="submit" class="btn btn-outline-dark" formaction="/admin/accounts/del">
         <i class="fas fa-user-alt-slash    "></i>

@@ -78,7 +78,7 @@ router.get("/:id", async function (req, res) {
     }
 
     account['current_permission'] = await accountModel.getStatus(id);
-
+    // console.log(account);
     res.locals.lcIsAccounts = true;
     res.render("vwAdmin/vwAccounts/edit", {
         title: 'adminaccounts',
@@ -109,5 +109,31 @@ router.post("/patch", async function (req, res) {
     const ret = await accountModel.patch(account);
     res.redirect("/admin/accounts");
 });
+
+//lock
+router.post("/lock", async function (req, res) {
+    // console.log(req.body);
+    const account = {
+        UserID: req.body.UserID,
+        isLocked: '1'
+    };
+    // console.log(account);
+    const ret = await accountModel.patch(account);
+
+    res.redirect("/admin/accounts");
+})
+//unlock account
+router.post("/unlock", async function (req, res) {
+    // console.log(req.body);
+    const account = {
+        UserID: req.body.UserID,
+        isLocked: '0'
+    };
+    // console.log(account);
+    const ret = await accountModel.patch(account);
+
+    res.redirect("/admin/accounts");
+})
+
 
 module.exports = router;

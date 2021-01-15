@@ -155,6 +155,17 @@
                 
             </div>
             <div class="card-footer">
+                {{#if isDisabled}}
+              <button type="submit" class="btn btn btn-dark text-light" formaction="/admin/courses/enable/{{CourseID}}" {{#if this.isActive}}disabled{{/if}}>
+                  <i class="fa fa-check-circle" aria-hidden="true"></i>
+                  Enable
+              </button>
+            {{else}}
+              <button type="submit" class="btn btn btn-dark text-light" formaction="/admin/courses/disable/{{CourseID}}" {{#if this.isActive}}disabled{{/if}}>
+                  <i class="fa fa-ban" aria-hidden="true"></i>
+                  Disable
+              </button>
+            {{/if}}
                 <button type="submit" class="btn btn-outline-dark" formaction="/admin/courses/del/{{CourseID}}" {{#if this.isActive}}disabled{{/if}}>
                     <i class="fa fa-trash" aria-hidden="true"></i>
                     Delete

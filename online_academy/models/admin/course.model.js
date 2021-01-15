@@ -9,6 +9,10 @@ module.exports = {
     return db.load(`select * from ${TBL_COURSES}`);
   },
 
+  allBySubcategory(subID) {
+    return db.load(`select * from ${TBL_COURSES} where SubCategoryID = ${subID}`);
+  },
+
   getLecturersByID(id) {
     return db.load(`select * from ${TBL_LECTURER} where LecturerID in (SELECT LecturerID FROM ${TBL_COURSE_LECTURER} WHERE CourseID = ${id})`);
   },
@@ -25,6 +29,12 @@ module.exports = {
 
   getAllByUserID(id) {
     return db.load(`select * from ${TBL_COURSES} where CourseID in (select CourseID from ${TBL_JOINCOURSE} where UserID = ${id})`);
+  },
+
+  patch(entity) {
+    const condition = {CourseID: entity.CourseID};
+    delete entity.CourseID;
+    return db.patch(entity, condition, TBL_COURSES);
   }
 
 };
