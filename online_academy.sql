@@ -533,7 +533,7 @@ CREATE TABLE `joincourse` (
 -- Đang đổ dữ liệu cho bảng `joincourse`
 --
 
-INSERT INTO `joincourse` (`UserID`, `CourseID`, `JoinDate`, `CurrentLecture`) VALUES
+INSERT INTO `joincourse` (`UserID`, `CourseID`, `JoinDate`) VALUES
 (1, 1, '2020-12-23'),
 (1, 2, '2021-01-04'),
 (1, 3, '2021-01-04'),
