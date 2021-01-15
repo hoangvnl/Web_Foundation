@@ -25,8 +25,19 @@
             if ($.trim($('#courseName').val()) == '') {
                 $this.children(".right").hide();
             }
-            else
-                $this.children(".right").show();
+            else {
+                const name = $('#courseName').val();
+                console.log(name);
+                $.getJSON(`/lecturer/is-right-course-name?name=${name}`, function (data) {
+                    if (data === true) {
+                        $('#validName').prop('hidden', true);
+                        $this.children(".right").show();
+                    }
+                    else {
+                        $('#validName').prop('hidden', false);
+                    }
+                })
+            }
         } else if ($this.find('.last').hasClass("active")) {
             $this.children(".right").hide();
             $this.find('.continue').html('Continue');
@@ -43,14 +54,25 @@
         if ($.trim($('#courseName').val()) == '') {
             $this.children(".right").hide();
         }
-        else
-            $this.children(".right").show();
+        else {
+            const name = $('#courseName').val();
+            console.log(name);
+            $.getJSON(`/lecturer/is-right-course-name?name=${name}`, function (data) {
+                if (data === true) {
+                    $('#validName').prop('hidden', true);
+                    $this.children(".right").show();
+                }
+                else {
+                    $('#validName').prop('hidden', false);
+                }
+            })
+
+        }
     });
     $('#subcategoryID').change(function () {
         var $this = $("#carouselExampleIndicators");
         $this.children(".right").show();
     })
-
     checkitem();
     $("#carouselExampleIndicators").on("slid.bs.carousel", "", checkitem);
 
@@ -86,6 +108,9 @@
                         <h1>Your Course's Name</h1>
                     </label>
                     <input type="text" id="courseName" name="CourseName" class="form-control">
+                    <p id="validName" hidden class="text-danger text-left">This name is invalid.&nbsp; Please use other
+                        name!
+                    </p>
                 </div>
                 <div class="carousel-item last px-5 text-center text-danger">
                     <label for="courseName" class="form-label">

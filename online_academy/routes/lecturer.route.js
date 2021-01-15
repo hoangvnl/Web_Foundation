@@ -336,5 +336,19 @@ router.get('/is-right', async function (req, res) {
     }
 })
 
+router.get('/is-right-course-name', async function (req, res) {
+    const name = req.query.name;
+    var rows = await coursesModel.singleByName(name);
+    console.log(rows.length);
+    if (rows.length > 0) {
+        console.log(false);
+        return res.json(false);
+    }
+    else {
+        console.log(true);
+        return res.json(true);
+    }
+})
+
 
 module.exports = router;
