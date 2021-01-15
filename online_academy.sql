@@ -1702,6 +1702,19 @@ ALTER TABLE `users`
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
+
+
+-- AUTO_INCREMENT cho bảng `course_content`
+--
+ALTER TABLE `course_content`
+  MODIFY `ContentID` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `lecture`
+--
+ALTER TABLE `lecture`
+  MODIFY `LectureID` int(10) NOT NULL AUTO_INCREMENT;
+
+
 --
 -- AUTO_INCREMENT cho bảng `user`
 --
