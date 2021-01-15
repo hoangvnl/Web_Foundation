@@ -75,6 +75,10 @@ router.get('/search', async function (req, res) {
             }
 
         }
+
+        if (course[i].isDisabled === 1) {
+            delete course[i];
+        }
     }
 
 
@@ -121,29 +125,32 @@ router.get('/:cat/:subCat', async function (req, res) {
     }
 
     var newCourse = await topModel.getNewCourse();
-    for (var courseTemp in course) {
-        course[+courseTemp]['lecturerName'] = await lecturer_module.getNameByCourseID(course[+courseTemp].CourseID);
-        course[+courseTemp]['catName'] = category[0].SubcategoryName;
-        var rating = await rating_module.singleByCourseID(course[+courseTemp].CourseID);
+    for (var i in course) {
+        course[+i]['lecturerName'] = await lecturer_module.getNameByCourseID(course[+i].CourseID);
+        course[+i]['catName'] = category[0].SubcategoryName;
+        var rating = await rating_module.singleByCourseID(course[+i].CourseID);
         var rate = rating[0].TotalRates / rating[0].TotalVotes;
-        course[+courseTemp]['rate'] = rate;
+        course[+i]['rate'] = rate;
 
         for (j = 0; j < newCourse.length; j++) {
-            if (course[+courseTemp].CourseID == newCourse[j].CourseID) {
-                course[+courseTemp]['isNew'] = true;
+            if (course[+i].CourseID == newCourse[j].CourseID) {
+                course[+i]['isNew'] = true;
             }
 
         }
 
-        var bestsellerCourse = await topModel.getBestSeller(course[+courseTemp].SubCategoryID);
+        var bestsellerCourse = await topModel.getBestSeller(course[+i].SubCategoryID);
 
         for (j = 0; j < bestsellerCourse.length; j++) {
-            if (course[+courseTemp].CourseID == bestsellerCourse[j].CourseID) {
-                course[+courseTemp]['isBestSeller'] = true;
+            if (course[+i].CourseID == bestsellerCourse[j].CourseID) {
+                course[+i]['isBestSeller'] = true;
             }
 
         }
 
+        if (course[+i].isDisabled === 1) {
+            delete course[i];
+        }
 
     }
 
@@ -179,27 +186,31 @@ router.get('/:cat', async function (req, res) {
         page_items.push(item);
     }
 
-    for (var courseTemp in course) {
-        course[+courseTemp]['lecturerName'] = await lecturer_module.getNameByCourseID(course[+courseTemp].CourseID);
-        const catName = await sub_category_module.getNameByID(course[+courseTemp].SubCategoryID);
-        course[+courseTemp]['catName'] = catName;
-        var rating = await rating_module.singleByCourseID(course[+courseTemp].CourseID);
+    for (var i in course) {
+        course[+i]['lecturerName'] = await lecturer_module.getNameByCourseID(course[+i].CourseID);
+        const catName = await sub_category_module.getNameByID(course[+i].SubCategoryID);
+        course[+i]['catName'] = catName;
+        var rating = await rating_module.singleByCourseID(course[+i].CourseID);
         var rate = rating[0].TotalRates / rating[0].TotalVotes;
-        course[+courseTemp]['rate'] = rate;
+        course[+i]['rate'] = rate;
         for (j = 0; j < newCourse.length; j++) {
-            if (course[+courseTemp].CourseID == newCourse[j].CourseID) {
-                course[+courseTemp]['isNew'] = true;
+            if (course[+i].CourseID == newCourse[j].CourseID) {
+                course[+i]['isNew'] = true;
             }
 
         }
 
-        var bestsellerCourse = await topModel.getBestSeller(course[+courseTemp].SubCategoryID);
+        var bestsellerCourse = await topModel.getBestSeller(course[+i].SubCategoryID);
 
         for (j = 0; j < bestsellerCourse.length; j++) {
-            if (course[+courseTemp].CourseID == bestsellerCourse[j].CourseID) {
-                course[+courseTemp]['isBestSeller'] = true;
+            if (course[+i].CourseID == bestsellerCourse[j].CourseID) {
+                course[+i]['isBestSeller'] = true;
             }
 
+        }
+
+        if (course[+i].isDisabled === 1) {
+            delete course[i];
         }
     }
 

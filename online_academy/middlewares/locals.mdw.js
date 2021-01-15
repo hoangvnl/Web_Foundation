@@ -14,7 +14,7 @@ module.exports = function (app) {
         res.locals.isLecturer = req.session.isLecturer;
         res.locals.userAuth = req.session.userAuth;
 
-        if (res.locals.isAuth) {
+        if (res.locals.isAuth || res.locals.isLecturer) {
             var name = res.locals.userAuth.UserName;
             var shortName;
             var pos = name.lastIndexOf(" ");
@@ -25,6 +25,7 @@ module.exports = function (app) {
                 shortName = name.substr(pos, 2);
             }
             res.locals.userAuth['shortName'] = shortName;
+            console.log(shortName);
         }
 
         if (typeof (req.session.cart) === 'undefined')

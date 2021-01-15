@@ -26,6 +26,23 @@ USE `online_academy`;
 -- --------------------------------------------------------
 
 --
+-- Cấu trúc bảng cho bảng `watched_lecture`
+--
+
+CREATE TABLE `watched_lecture` (
+  `UserID` int(10) NOT NULL,
+  `CourseID` int(10) NOT NULL,
+  `CurrentLecture` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+--
+-- Đang đổ dữ liệu cho bảng `watched_lecture`
+--
+
+
+-- ---------------------------------------------------------
+--
 -- Cấu trúc bảng cho bảng `category`
 --
 
@@ -513,8 +530,7 @@ INSERT INTO `fulldes` (`FullDesID`, `CourseID`, `FullDes`) VALUES
 CREATE TABLE `joincourse` (
   `UserID` int(10) NOT NULL,
   `CourseID` int(10) NOT NULL,
-  `JoinDate` date NOT NULL,
-  `CurrentLecture` int(10) DEFAULT NULL
+  `JoinDate` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -522,16 +538,16 @@ CREATE TABLE `joincourse` (
 --
 
 INSERT INTO `joincourse` (`UserID`, `CourseID`, `JoinDate`, `CurrentLecture`) VALUES
-(1, 1, '2020-12-23', 0),
-(1, 2, '2021-01-04', 0),
-(1, 3, '2021-01-04', 0),
-(1, 12, '2021-01-05', 148),
-(1, 14, '2021-01-01', 0),
-(1, 25, '2021-01-02', 0),
-(2, 2, '2021-01-01', 0),
-(2, 12, '2021-01-01', 0),
-(2, 23, '2020-12-09', 245),
-(2, 25, '2021-01-02', 262);
+(1, 1, '2020-12-23'),
+(1, 2, '2021-01-04'),
+(1, 3, '2021-01-04'),
+(1, 12, '2021-01-05'),
+(1, 14, '2021-01-01'),
+(1, 25, '2021-01-02'),
+(2, 2, '2021-01-01'),
+(2, 12, '2021-01-01'),
+(2, 23, '2020-12-09'),
+(2, 25, '2021-01-02');
 
 -- --------------------------------------------------------
 
@@ -1691,7 +1707,16 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
 --
+-- AUTO_INCREMENT cho bảng `user`
+--
+ALTER TABLE `users`
+  MODIFY `UserID` int(10) NOT NULL AUTO_INCREMENT;
 
+--
+-- AUTO_INCREMENT cho bảng `course`
+--
+ALTER TABLE `course`
+  MODIFY `CourseID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT cho bảng `category`
 --

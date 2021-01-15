@@ -1,4 +1,13 @@
 TO DO:
+
+isCompleted theo dõi học sinh
+xóa isNew, isCompleted trong course
+
+bug:
+ 'Android O & Java - The Complete Android Development Bootcamp' có price = 0, saleprice = 300000
+
+
+-----------------------------------
 - tạo cột isCompleted là đã hoàn thành chưa trong bảng course
 
 thêm ảnh add cart

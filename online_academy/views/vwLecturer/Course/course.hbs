@@ -36,6 +36,12 @@
                 <img src="/public/{{CourseImage}}" alt="...">
                 <div class="ml-2 mt-1 ">
                     <h4 class="card-title courseName">{{CourseName}}</h4>
+                    {{#compare isCompleted 1}}
+                    <p class="text-success">(Completed)</p>
+                    {{/compare}}
+                    {{#compare isCompleted 0}}
+                    <p class="text-danger">(Not Completed)</p>
+                    {{/compare}}
                 </div>
             </div>
         </div>

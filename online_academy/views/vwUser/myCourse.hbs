@@ -15,9 +15,8 @@
 
     .courseCard {
         border-bottom: whitesmoke;
-
         border-style: none none solid none;
-        display: flex;
+
     }
 
     .courseName {
@@ -52,12 +51,13 @@
 
     .img {
         width: 50rem;
-        height: 17rem;
+        height: 15rem;
         margin-right: 1rem;
     }
 
     img {
         width: 100%;
+        height: 100%;
     }
 
     .mainSection {
@@ -134,40 +134,59 @@
         </div>
     </div>
     <div class="formWrap">
-        <h2>My Watch List</h2>
+        <h2>My Course</h2>
         <div class="content">
             {{#each this.course}}
             <a name="" id="" class="" href="/course/{{CourseName}}" role="button">
-                <div class="courseCard">
-                    <div class="img">
-                        <img src="/public/{{CourseImage}}" alt="">
-                    </div>
-                    <div class="info w-100 d-flex text-left">
-                        <div style="padding-right: 3rem;">
-                            <p><b class="courseName">{{CourseName}}</b></p>
-                            <p class="category">{{catName}}</p>
-                            <p class="instructor">
-                                {{lecturerName}}
-                            </p>
-                            <div class="d-block">
-                                <div class="rate d-flex text-center">
-                                    <b>{{formatRate rate}}</b>
-                                    {{> ratingStar}}
-                                    <div class="rateCount">
-                                        ({{formatCount StudentCount}})
+                <div class="courseCard my-3">
+                    <div class="d-flex">
+                        <div class="img">
+                            <img src="/public/{{CourseImage}}" alt="">
+                        </div>
+                        <div class="info w-100 d-flex text-left">
+                            <div style="padding-right: 3rem;">
+                                <p><b class="courseName">{{CourseName}}</b></p>
+                                <p class="category">{{catName}}</p>
+                                <p class="instructor">
+                                    {{lecturerName}}
+                                </p>
+                                <div class="d-block">
+                                    <div class="rate d-flex text-center">
+                                        <b>{{formatRate rate}}</b>
+                                        {{> ratingStar}}
+                                        <div class="rateCount">
+                                            ({{formatCount StudentCount}})
+                                        </div>
                                     </div>
+                                    <div class="mt-4">
+                                        {{#compare isBestSeller 1}}
+                                        <p class="badge badge-warning  text-left d-inline-block ">Bestseller</p>
+                                        {{/compare}}
+                                        {{#compare isNew 1}}
+                                        <p class="badge badge-danger text-left d-inline-block ">New</p>
+                                        {{/compare}}
+                                    </div>
+
                                 </div>
-                                {{#compare isBestSeller 1}}
-                                <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
-                                {{/compare}}
-                                {{#compare isNew 1}}
-                                <p class="badge badge-danger mt-5 text-left d-inline-block ">New</p>
-                                {{/compare}}
                             </div>
                         </div>
-
+                    </div>
+                    <div class="progress my-2" style="height: 20px;">
+                        {{#compare progress 100}}
+                        <div class="progress-bar bg-success" role="progressbar" style="width:{{progress}}%;"
+                            aria-valuemin="0" aria-valuemax="100" style="opacity: 30%;"></div>
+                        <span class="position-absolute text-white mx-auto h6 w-100"
+                            style="line-height: 19px;"><b>{{formatCount progress}}%</b></span>
+                        {{/compare}}
+                        {{#compare progress 100 operator="!="}}
+                        <div class="progress-bar" role="progressbar" style="width:{{progress}}%;" aria-valuemin="0"
+                            aria-valuemax="100" style="opacity: 30%;"></div>
+                        <span class="position-absolute text-dark mx-auto h6 w-100"
+                            style="line-height: 19px;"><b>{{formatCount progress}}%</b></span>
+                        {{/compare}}
                     </div>
                 </div>
+
             </a>
             {{/each}}
         </div>

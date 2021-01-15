@@ -60,6 +60,9 @@ router.post('/course/create', async function (req, res) {
     var entity = req.body;
     entity['Description'] = '';
     entity['CreatedAt'] = dateFormat(now, 'isoDate');
+    entity['UpdatedAt'] = entity.CreatedAt;
+    entity['isCompleted'] = 0;
+    entity['isDisabled'] = 0;
     console.log(entity);
     await coursesModel.add(entity);
     var course = await coursesModel.singleByName(entity.CourseName);
@@ -91,6 +94,7 @@ router.get('/course/:param/curriculum', async function (req, res) {
     for (var i in content) {
         content[i]['lecture'] = await lectureModel.allWithContentID(content[i].ContentID);
     }
+    console.log(course);
     res.render('vwLecturer/Course/curriculum', {
         course,
         content,
@@ -115,7 +119,7 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
             var param = req.params.param;
             var course = await coursesModel.singleByName(param);
             if (req.body.Completed == 1) {
-                var entityCourse = { CourseID: course[0].CourseID, Completed: 1 };
+                var entityCourse = { CourseID: course[0].CourseID, isCompleted: 1 };
                 await coursesModel.patch(entityCourse);
             }
             var curContent = await contentModel.allWithCourseID(course[0].CourseID);

@@ -278,6 +278,8 @@
                     </h6>
                     {{/compare}}
                 </div>
+
+                {{#compare isCompleted 1}}
                 <p class="card-text">
                     {{#if ../isInCart}}
                     <a name="" id="" class="btn btn-danger w-100 mt-sm-4" href="/cart" role="button"><b>Go to
@@ -295,6 +297,11 @@
                         now</b></button>
 
                 </p>
+                {{/compare}}
+
+                {{#compare isCompleted 0}}
+                <p class="card-text text-danger h5 text-center">(This course is still in progress)</p>
+                {{/compare}}
 
 
             </div>
@@ -319,11 +326,6 @@
                 <div>
                     <p> <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                         Last updated {{UpdatedDate}}
-                        {{#compare Completed 0}}
-                        <span class="text-danger">
-                            (Not compeleted)
-                        </span>
-                        {{/compare}}
 
                     </p>
                     <p>
@@ -332,7 +334,7 @@
                         <input type="text" class="d-none" name="CourseName" value="{{CourseName}}">
                         <input type="text" class="d-none" name="isInWishlist" value="{{../isInWishlist}}">
                         <button type="submit" class="btn btn-outline-dark border-white text-white">
-                            Wishlist
+                            Watchlist
                             {{#if ../isInWishlist}}
                             <i class="fa fa-heart" style="color: red;" aria-hidden="true"></i>
                             {{else}}
@@ -433,7 +435,11 @@
                             style="height: 3rem;font-size: 1.1rem;line-height: 2.5rem;">
                             <i class="fa fa-play-circle-o fa-lg mx-3" aria-hidden="true"
                                 style="line-height: 2.5rem;"></i>
-                            <span class="mr-4"> {{LectureName}}</span>
+                            <span class="mr-3"> {{LectureName}}</span>
+                            {{#if isWatch}}
+                            <span class="text-success">(Watched)</span>
+
+                            {{/if}}
                         </button>
                         {{else}}
                         {{#if Preview}}

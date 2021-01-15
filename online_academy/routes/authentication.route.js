@@ -109,7 +109,8 @@ router.post('/register', async function (req, res) {
         Password: hash,
         Permission: 0,
         Email: req.body.Email,
-        Verification: 0
+        Verification: 0,
+        isLocked: 0,
     }
 
     await userModel.add(user);

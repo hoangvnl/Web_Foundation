@@ -13,6 +13,9 @@ const crypto = require('crypto');
 const tokenModel = require('../models/token.model');
 const topModel = require('../models/top.model');
 const wishlistModel = require('../models/wishlist.model');
+const contentModel = require('../models/content.model');
+const lectureModel = require('../models/lecture.model');
+const watchedLectureModel = require('../models/watchedLecture.model');
 
 
 router.get('/edit-profile', isAuth, function (req, res) {
@@ -55,6 +58,10 @@ router.get('/wishlist', isAuth, async function (req, res) {
             }
 
         }
+
+        if (course[+i].isDisabled === 1) {
+            delete course[i];
+        }
     }
     console.log(course);
     res.render('vwUser/wishlist', {
@@ -76,7 +83,7 @@ router.post('/wishlist', isAuth, async function (req, res) {
 
 router.get('/my-course', isAuth, async function (req, res) {
     const user = (req.session.userAuth);
-    console.log(user.UserID);
+    // console.log(user.UserID);
     const courseID = await joincourseModel.allByUserID(user.UserID);
     var course = [];
     var newCourse = await topModel.getNewCourse();
@@ -85,6 +92,9 @@ router.get('/my-course', isAuth, async function (req, res) {
         // console.log(courseID[i].CourseID);
         var courseTemp = await coursesModel.singleByID(courseID[+i].CourseID);
         course.push(courseTemp[0]);
+        course[+i]['lecturerName'] = await lecturerModel.getNameByCourseID(course[+i].CourseID);
+        const catName = await subcategoryModel.getNameByID(course[+i].SubCategoryID);
+        course[+i]['catName'] = catName;
         var rating = await rating_module.singleByCourseID(course[+i].CourseID);
         var rate = rating[0].TotalRates / rating[0].TotalVotes;
         course[+i]['rate'] = rate;
@@ -104,6 +114,22 @@ router.get('/my-course', isAuth, async function (req, res) {
             }
 
         }
+
+        if (course[+i].isDisabled === 1) {
+            delete course[i];
+        }
+
+
+        var contentByCourseID = await contentModel.allWithCourseID(course[i].CourseID);
+        var countLecture = 0;
+        for (j = 0; j < contentByCourseID.length; j++) {
+            var lectureByContentID = await lectureModel.allWithContentID(contentByCourseID[j].ContentID);
+            countLecture += lectureByContentID.length;
+        }
+        var watched = await watchedLectureModel.allByUserIDAndCourseID(user.UserID, course[i].CourseID);
+        var progress = watched.length / countLecture * 100;
+        console.log(progress);
+        course[i]['progress'] = progress;
     }
 
 

@@ -313,8 +313,10 @@
                             </button>
                             <div>
                                 <input class="form-check-input completed" name="Completed" type="checkbox"
-                                    id="flexSwitchCompleted" value="1">
+                                    id="flexSwitchCompleted" value="1" {{#each course}} {{#compare isCompleted 1 }}
+                                    checked {{/compare}} {{/each}}>
                                 <label class="form-check-label" for="flexSwitchCompleted">Completed</label>
+
                             </div>
                         </div>
                     </div>
