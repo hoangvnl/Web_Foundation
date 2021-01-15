@@ -93,7 +93,9 @@
 
     }
 
-
+    .badge {
+        font-size: 1rem;
+    }
 
     ul {
         list-style-type: none;
@@ -109,9 +111,9 @@
 <div class="mainSection ">
     <div class="sideNav mt-3 position-absolute">
         <div class="user">
-            <div class="avatar text-white text-center rounded-circle mx-auto">
-                <img src="/public/images/user.png" alt="">
-
+            <div class="avatar text-center mx-auto rounded-circle">
+                <span class="badge badge-primary w-100 h-100 rounded-circle"
+                    style="font-size: 5rem;padding: 1rem;">{{shortName}}</span>
             </div>
             <div class="userName"> {{userName}}</div>
             <ul class="p-0">
@@ -121,7 +123,7 @@
                 </li>
                 <li>
                     <a name="" id="" class="btn btn-outline-secondary w-100 my-1 active" href="javascript:;"
-                        role="button">Wishlist</a>
+                        role="button">Watch List</a>
                 </li>
                 <li>
                     <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="/user/my-course"
@@ -131,11 +133,11 @@
         </div>
     </div>
     <div class="formWrap">
-        <h2>My Wishlist</h2>
+        <h2>My Watch List</h2>
         <div class="content">
             {{#each this.course}}
             <a name="" id="" class="" href="/course/{{CourseName}}" role="button">
-                <div class="courseCard">
+                <div class="courseCard my-2">
                     <div class="img">
                         <img src="/public/{{CourseImage}}" alt="">
                     </div>
@@ -154,8 +156,20 @@
                                         ({{formatCount StudentCount}})
                                     </div>
                                 </div>
-                                <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
+                                {{#compare isBestSeller 1}}
+                                <p class="badge badge-warning mt-4 text-left d-inline-block ">Bestseller</p>
+                                {{/compare}}
+                                {{#compare isNew 1}}
+                                <p class="badge badge-danger mt-4 text-left d-inline-block ">New</p>
+                                {{/compare}}
+
                             </div>
+                        </div>
+                        <div class="mb-2">
+                            <form action="" method="post" class="h-100">
+                                <input type="text" value="{{CourseID}}" name="CourseID" hidden>
+                                <button class="btn btn-outline-danger h-100 removeWL" type="submit">X</button>
+                            </form>
                         </div>
 
                     </div>

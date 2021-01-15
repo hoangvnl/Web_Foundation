@@ -106,6 +106,22 @@ router.get('/', async function (req, res) {
     for (i = 0; i < courseOfTheWeek.length; i++) {
         var ratingTempCourseOfTheWeek = await ratingModel.singleByCourseID(courseOfTheWeek[i].CourseID);
         courseOfTheWeek[i]['rate'] = ratingTempCourseOfTheWeek[0].TotalRates / ratingTempCourseOfTheWeek[0].TotalVotes;
+        for (j = 0; j < newCourse.length; j++) {
+            if (courseOfTheWeek[+i].CourseID === newCourse[j].CourseID) {
+                courseOfTheWeek[+i]['isNew'] = true;
+            }
+
+        }
+
+        var bestsellerCourse = await topModel.getBestSeller(courseOfTheWeek[+i].SubCategoryID);
+
+        for (j = 0; j < bestsellerCourse.length; j++) {
+            if (courseOfTheWeek[+i].CourseID === bestsellerCourse[j].CourseID) {
+                courseOfTheWeek[+i]['isBestSeller'] = true;
+
+            }
+
+        }
     }
 
 

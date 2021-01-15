@@ -57,7 +57,7 @@
     }
 
     img {
-        width: 100%
+        width: 100%;
     }
 
     .mainSection {
@@ -87,6 +87,10 @@
 
     }
 
+    .badge {
+        font-size: 1rem;
+    }
+
     .avatar {
         width: 120px;
         height: 120px;
@@ -107,8 +111,9 @@
 <div class="mainSection ">
     <div class="sideNav mt-3 position-absolute">
         <div class="user">
-            <div class="avatar text-white text-center mx-auto">
-                <img src="/public/images/user.png" alt="">
+            <div class="avatar text-center mx-auto rounded-circle">
+                <span class="badge badge-primary w-100 h-100 rounded-circle"
+                    style="font-size: 5rem;padding: 1rem;">{{shortName}}</span>
             </div>
             <div class="userName"> {{userName}}</div>
             <ul class="p-0">
@@ -118,7 +123,7 @@
                 </li>
                 <li>
                     <a name="" id="" class="btn btn-outline-secondary w-100 my-1" href="/user/wishlist"
-                        role="button">Wishlist</a>
+                        role="button">Watch List</a>
                 </li>
                 <li>
                     <a name="" id="" class="btn btn-outline-secondary w-100 my-1 active" href="javascript:;"
@@ -129,7 +134,7 @@
         </div>
     </div>
     <div class="formWrap">
-        <h2>My Wishlist</h2>
+        <h2>My Watch List</h2>
         <div class="content">
             {{#each this.course}}
             <a name="" id="" class="" href="/course/{{CourseName}}" role="button">
@@ -152,7 +157,12 @@
                                         ({{formatCount StudentCount}})
                                     </div>
                                 </div>
+                                {{#compare isBestSeller 1}}
                                 <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
+                                {{/compare}}
+                                {{#compare isNew 1}}
+                                <p class="badge badge-danger mt-5 text-left d-inline-block ">New</p>
+                                {{/compare}}
                             </div>
                         </div>
 

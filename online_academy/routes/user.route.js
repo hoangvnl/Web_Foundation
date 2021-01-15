@@ -11,6 +11,8 @@ const subcategoryModel = require('../models/subcategory.model');
 const rating_module = require('../models/rating.model');
 const crypto = require('crypto');
 const tokenModel = require('../models/token.model');
+const topModel = require('../models/top.model');
+const wishlistModel = require('../models/wishlist.model');
 
 
 router.get('/edit-profile', isAuth, function (req, res) {
@@ -18,6 +20,7 @@ router.get('/edit-profile', isAuth, function (req, res) {
     res.render('vwUser/editProfile', {
         user,
         userName: user.UserName,
+        shortName: res.locals.userAuth.shortName,
         email: user.Email,
         id: user.UserID,
 
@@ -27,6 +30,7 @@ router.get('/edit-profile', isAuth, function (req, res) {
 router.get('/wishlist', isAuth, async function (req, res) {
     const user = (req.session.userAuth);
     const course = await coursesModel.allInWishlistByUserID(user.UserID);
+    var newCourse = await topModel.getNewCourse();
 
     for (var i in course) {
         course[+i]['lecturerName'] = await lecturerModel.getNameByCourseID(course[+i].CourseID);
@@ -35,15 +39,39 @@ router.get('/wishlist', isAuth, async function (req, res) {
         var rating = await rating_module.singleByCourseID(course[+i].CourseID);
         var rate = rating[0].TotalRates / rating[0].TotalVotes;
         course[+i]['rate'] = rate;
-    }
 
+        for (j = 0; j < newCourse.length; j++) {
+            if (course[+i].CourseID === newCourse[j].CourseID) {
+                course[+i]['isNew'] = true;
+            }
+        }
+
+        var bestsellerCourse = await topModel.getBestSeller(course[+i].SubCategoryID);
+
+        for (j = 0; j < bestsellerCourse.length; j++) {
+            if (course[+i].CourseID === bestsellerCourse[j].CourseID) {
+                course[+i]['isBestSeller'] = true;
+
+            }
+
+        }
+    }
+    console.log(course);
     res.render('vwUser/wishlist', {
         course,
         userName: user.UserName,
+        shortName: res.locals.userAuth.shortName,
         email: user.Email,
         id: user.UserID,
     });
 
+})
+router.post('/wishlist', isAuth, async function (req, res) {
+    const user = (req.session.userAuth);
+    var entityWL = { UserID: user.UserID, CourseID: req.body.CourseID };
+    await wishlistModel.del(entityWL);
+
+    res.redirect('/user/wishlist')
 })
 
 router.get('/my-course', isAuth, async function (req, res) {
@@ -51,19 +79,38 @@ router.get('/my-course', isAuth, async function (req, res) {
     console.log(user.UserID);
     const courseID = await joincourseModel.allByUserID(user.UserID);
     var course = [];
+    var newCourse = await topModel.getNewCourse();
 
     for (var i in courseID) {
-        console.log(courseID[i].CourseID);
+        // console.log(courseID[i].CourseID);
         var courseTemp = await coursesModel.singleByID(courseID[+i].CourseID);
         course.push(courseTemp[0]);
         var rating = await rating_module.singleByCourseID(course[+i].CourseID);
         var rate = rating[0].TotalRates / rating[0].TotalVotes;
         course[+i]['rate'] = rate;
+
+        for (j = 0; j < newCourse.length; j++) {
+            if (course[+i].CourseID === newCourse[j].CourseID) {
+                course[+i]['isNew'] = true;
+            }
+        }
+
+        var bestsellerCourse = await topModel.getBestSeller(course[+i].SubCategoryID);
+
+        for (j = 0; j < bestsellerCourse.length; j++) {
+            if (course[+i].CourseID === bestsellerCourse[j].CourseID) {
+                course[+i]['isBestSeller'] = true;
+
+            }
+
+        }
     }
+
 
     res.render('vwUser/myCourse', {
         course,
         userName: user.UserName,
+        shortName: res.locals.userAuth.shortName,
         email: user.Email,
         id: user.UserID,
 

@@ -14,6 +14,19 @@ module.exports = function (app) {
         res.locals.isLecturer = req.session.isLecturer;
         res.locals.userAuth = req.session.userAuth;
 
+        if (res.locals.isAuth) {
+            var name = res.locals.userAuth.UserName;
+            var shortName;
+            var pos = name.lastIndexOf(" ");
+            if (pos === -1) {
+                shortName = name.substr(0, 1);
+            }
+            else {
+                shortName = name.substr(pos, 2);
+            }
+            res.locals.userAuth['shortName'] = shortName;
+        }
+
         if (typeof (req.session.cart) === 'undefined')
             res.locals.cartCount = 0;
         else {
