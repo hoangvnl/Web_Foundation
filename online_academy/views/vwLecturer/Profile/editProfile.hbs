@@ -45,8 +45,7 @@
         <form id="frmEmail" method="POST" action="" class="text-left mb-2">
             <div class="form-group">
                 <label for="inputEmail">Email:</label>
-                <input type="text" class="d-none" name="UserID" value="{{id}}">
-                <input type="email" class="form-control" id="inputEmail" name="Email" placeholder="Email" required
+                <input type="email" class="form-control" id="inputEmail" name="Email" placeholder="Email" readonly
                     value="{{email}}">
             </div>
             <button type="submit" class="btn btn-danger" formaction="/lecturer/email">Save</button>
