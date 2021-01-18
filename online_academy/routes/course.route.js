@@ -38,11 +38,24 @@ router.get('/:param', async function (req, res) {
 
     for (i = 0; i < review.length; i++) {
         review[i]['rate'] = +review[i].Rate;
+
+
+
     }
 
     for (i = 0; i < review.length; i++) {
         var userTemp = await userModel.singleByID(review[i].UserID);
         review[i]['UserName'] = userTemp.UserName;
+        var name = userTemp.UserName;
+        var shortName;
+        var pos = name.lastIndexOf(" ");
+        if (pos === -1) {
+            shortName = name.substr(0, 1);
+        }
+        else {
+            shortName = name.substr(pos, 2);
+        }
+        review[i]['shortName'] = shortName;
     }
     // console.log(rating);
     if (rating.length > 0) {

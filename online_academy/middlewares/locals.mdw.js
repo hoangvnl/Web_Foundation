@@ -25,7 +25,7 @@ module.exports = function (app) {
                 shortName = name.substr(pos, 2);
             }
             res.locals.userAuth['shortName'] = shortName;
-            console.log(shortName);
+            // console.log(shortName);
         }
 
         if (typeof (req.session.cart) === 'undefined')

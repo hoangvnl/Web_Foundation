@@ -14,14 +14,14 @@ module.exports = {
         return cart.length;
     },
     total(cart) {
-        let price = 0, off = 0;
+        var price = 0, off = 0;
         for (item of cart) {
             if (+item.SalePrice != -1) {
                 price += (+item.SalePrice);
                 off += (+item.Price);
             }
             else {
-                price += Price;
+                price += (+item.Price);
             }
         }
         return { price, off };

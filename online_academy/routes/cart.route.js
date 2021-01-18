@@ -31,13 +31,26 @@ router.post('/remove', async function (req, res) {
 })
 router.post('/buy', async function (req, res) {
     const course = req.session.cart;
+    console.log(course.length);
     const UserID = req.session.userAuth.UserID;
+    const now = new Date();
     const JoinDate = dateFormat(now, "isoDate");
-    for (var i in course) {
+    for (i = 0; i < course.length; i++) {
+
+
         const CourseID = course[i].CourseID;
         const entity = { UserID, CourseID, JoinDate };
         await joincourse_module.add(entity);
+        const entityCourse = {
+            CourseID,
+            StudentCount: course[i].StudentCount + 1,
+        }
+        await coursesModel.patch(entityCourse);
+    }
 
+
+    while (course.length > 0) {
+        cart_module.del(req.session.cart, course[0]);
     }
     res.redirect(req.headers.referer);
 })
