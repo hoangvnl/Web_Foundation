@@ -1594,7 +1594,7 @@ CREATE TABLE `users` (
   `UserName` varchar(50) DEFAULT NULL,
   `Permission` int(6) DEFAULT NULL,
   `Verification` int(6) DEFAULT NULL,
-  `isLocked` int(11) NOT NULL
+  `isLocked` int(11)  DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1713,8 +1713,16 @@ ALTER TABLE `course_content`
 --
 ALTER TABLE `lecture`
   MODIFY `LectureID` int(10) NOT NULL AUTO_INCREMENT;
-
-
+--
+-- AUTO_INCREMENT cho bảng `lecturer`
+--
+ALTER TABLE `lecturer`
+  MODIFY `LecturerID` int(10) NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT cho bảng `subcategory`
+--
+ALTER TABLE `subcategory`
+  MODIFY `SubcategoryID` int(10) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT cho bảng `user`
 --

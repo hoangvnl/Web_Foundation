@@ -2,15 +2,13 @@ const isAuth = require("./auth.mdw");
 const isLecturer = require('./lecturer.mdw');
 const isAdmin = require('./admin.mdw');
 module.exports = function (app) {
-  app.get("/test", function (req, res) {
-    res.render("test");
-  });
   app.use("/courses", require("../routes/category.route"));
   app.use('/course', require("../routes/course.route"));
   app.use("/join", require("../routes/authentication.route"));
   app.use("/user", require("../routes/user.route"));
   app.use("/cart", isAuth, require("../routes/cart.route"));
   app.use("/lecturer", isLecturer, require("../routes/lecturer.route"));
+
 
   // admin
   app.use('/admin', isAdmin, require('../routes/admin.route'));

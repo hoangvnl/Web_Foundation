@@ -18,6 +18,10 @@
     .badge {
         font-size: 0.8rem;
     }
+
+    .cardInf {
+        height: 16rem;
+    }
 </style>
 {{/section}}
 
@@ -62,24 +66,26 @@
         {{#each courseOfTheWeek}}
         <a class="btn card text-left d-inline-flex" style="width: 22.8rem; height: 29rem;" href="/course/{{CourseName}}"
             role="button">
-            <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}" style="height: 190.5px;">
+            <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
             <div class="card-body">
-                <h6 class="card-title">{{CourseName}}</h6>
-                <p style="font-size: 0.8rem;">{{lecturerName}}</p>
-                <p style="font-size: 0.8rem;color: orange;">
-                    <span style="color:orange">{{formatRate rate}} </span>
-                    {{> ratingStar}}
-                    <i>({{formatCount StudentCount}})</i>
-                </p>
-                <p style="font-size: 0.8rem;">
-                    {{#compare SalePrice -1}}
-                    <b> ${{formatMoney Price}}</b><br><br>
-                    {{/compare}}
-                    {{#compare SalePrice -1 operator=">"}}
-                    <b> ${{formatMoney SalePrice}}</b><br><br>
-                    <del>${{formatMoney Price}}</del>
-                    {{/compare}}
-                </p>
+                <div class="cardInf" style="height: 10rem;">
+                    <h6 class="card-title">{{CourseName}}</h6>
+                    <p style="font-size: 0.8rem;">{{lecturerName}}</p>
+                    <p style="font-size: 0.8rem;color: orange;">
+                        <span style="color:orange">{{formatRate rate}} </span>
+                        {{> ratingStar}}
+                        <i>({{formatCount StudentCount}})</i>
+                    </p>
+                    <p style="font-size: 0.8rem;">
+                        {{#compare SalePrice -1}}
+                        <b> ${{formatMoney Price}}</b><br><br>
+                        {{/compare}}
+                        {{#compare SalePrice -1 operator=">"}}
+                        <b> ${{formatMoney SalePrice}}</b><br><br>
+                        <del>${{formatMoney Price}}</del>
+                        {{/compare}}
+                    </p>
+                </div>
                 {{#compare isBestSeller 1}}
                 <p class="badge badge-warning mt-5 text-left d-inline-block ">Bestseller</p>
                 {{/compare}}
@@ -119,22 +125,24 @@
                     href="/course/{{CourseName}}" role="button">
                     <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
                     <div class="card-body">
-                        <h6 class="card-title">{{CourseName}}</h6>
-                        <p style="font-size: 0.8rem;">{{lecturerName}}</p>
-                        <p style="font-size: 0.8rem;color: orange;">
-                            <span style="color:orange">{{formatRate rate}} </span>
-                            {{> ratingStar}}
-                            <i>({{formatCount StudentCount}})</i>
-                        </p>
-                        <p style="font-size: 0.8rem;">
-                            {{#compare SalePrice -1}}
-                            <b> ${{formatMoney Price}}</b><br><br>
-                            {{/compare}}
-                            {{#compare SalePrice -1 operator=">"}}
-                            <b> ${{formatMoney SalePrice}}</b><br><br>
-                            <del>${{formatMoney Price}}</del>
-                            {{/compare}}
-                        </p>
+                        <div class="cardInf">
+                            <h6 class="card-title">{{CourseName}}</h6>
+                            <p style="font-size: 0.8rem;">{{lecturerName}}</p>
+                            <p style="font-size: 0.8rem;color: orange;">
+                                <span style="color:orange">{{formatRate rate}} </span>
+                                {{> ratingStar}}
+                                <i>({{formatCount StudentCount}})</i>
+                            </p>
+                            <p style="font-size: 0.8rem;">
+                                {{#compare SalePrice -1}}
+                                <b> ${{formatMoney Price}}</b><br><br>
+                                {{/compare}}
+                                {{#compare SalePrice -1 operator=">"}}
+                                <b> ${{formatMoney SalePrice}}</b><br><br>
+                                <del>${{formatMoney Price}}</del>
+                                {{/compare}}
+                            </p>
+                        </div>
                         <div class="flex-column-reverse">
                             {{#if isBestSeller}}
                             <p class="badge badge-warning">Bestseller</p>
@@ -155,22 +163,24 @@
                         href="/course/{{CourseName}}" role="button">
                         <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
                         <div class="card-body">
-                            <h6 class="card-title">{{CourseName}}</h6>
-                            <p style="font-size: 0.8rem;">{{lecturerName}}</p>
-                            <p style="font-size: 0.8rem;color: orange;">
-                                <span style="color:orange">{{formatRate rate}} </span>
-                                {{> ratingStar}}
-                                <i>({{formatCount StudentCount}})</i>
-                            </p>
-                            <p style="font-size: 0.8rem;">
-                                {{#compare SalePrice -1}}
-                                <b> ${{formatMoney Price}}</b><br><br>
-                                {{/compare}}
-                                {{#compare SalePrice -1 operator=">"}}
-                                <b> ${{formatMoney SalePrice}}</b><br><br>
-                                <del>${{formatMoney Price}}</del>
-                                {{/compare}}
-                            </p>
+                            <div class="cardInf">
+                                <h6 class="card-title">{{CourseName}}</h6>
+                                <p style="font-size: 0.8rem;">{{lecturerName}}</p>
+                                <p style="font-size: 0.8rem;color: orange;">
+                                    <span style="color:orange">{{formatRate rate}} </span>
+                                    {{> ratingStar}}
+                                    <i>({{formatCount StudentCount}})</i>
+                                </p>
+                                <p style="font-size: 0.8rem;">
+                                    {{#compare SalePrice -1}}
+                                    <b> ${{formatMoney Price}}</b><br><br>
+                                    {{/compare}}
+                                    {{#compare SalePrice -1 operator=">"}}
+                                    <b> ${{formatMoney SalePrice}}</b><br><br>
+                                    <del>${{formatMoney Price}}</del>
+                                    {{/compare}}
+                                </p>
+                            </div>
                             <div class="flex-column-reverse">
                                 {{#if isBestSeller}}
                                 <p class="badge badge-warning">Bestseller</p>
@@ -192,22 +202,24 @@
                         href="/course/{{CourseName}}" role="button">
                         <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
                         <div class="card-body">
-                            <h6 class="card-title">{{CourseName}}</h6>
-                            <p style="font-size: 0.8rem;">{{lecturerName}}</p>
-                            <p style="font-size: 0.8rem;color: orange;">
-                                <span style="color:orange">{{formatRate rate}} </span>
-                                {{> ratingStar}}
-                                <i>({{formatCount StudentCount}})</i>
-                            </p>
-                            <p style="font-size: 0.8rem;">
-                                {{#compare SalePrice -1}}
-                                <b> ${{formatMoney Price}}</b><br><br>
-                                {{/compare}}
-                                {{#compare SalePrice -1 operator=">"}}
-                                <b> ${{formatMoney SalePrice}}</b><br><br>
-                                <del>${{formatMoney Price}}</del>
-                                {{/compare}}
-                            </p>
+                            <div class="cardInf">
+                                <h6 class="card-title">{{CourseName}}</h6>
+                                <p style="font-size: 0.8rem;">{{lecturerName}}</p>
+                                <p style="font-size: 0.8rem;color: orange;">
+                                    <span style="color:orange">{{formatRate rate}} </span>
+                                    {{> ratingStar}}
+                                    <i>({{formatCount StudentCount}})</i>
+                                </p>
+                                <p style="font-size: 0.8rem;">
+                                    {{#compare SalePrice -1}}
+                                    <b> ${{formatMoney Price}}</b><br><br>
+                                    {{/compare}}
+                                    {{#compare SalePrice -1 operator=">"}}
+                                    <b> ${{formatMoney SalePrice}}</b><br><br>
+                                    <del>${{formatMoney Price}}</del>
+                                    {{/compare}}
+                                </p>
+                            </div>
                             <div class="flex-column-reverse">
                                 {{#if isBestSeller}}
                                 <p class="badge badge-warning">Bestseller</p>
@@ -247,25 +259,26 @@
                 {{#each first4NewAllCat}}
                 <a class="btn card text-left d-inline-flex" style="width: 17rem; height: 29rem;"
                     href="/course/{{CourseName}}" role="button">
-                    <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}"
-                        style="height: 170.5px;">
+                    <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
                     <div class="card-body">
-                        <h6 class="card-title">{{CourseName}}</h6>
-                        <p style="font-size: 0.8rem;">{{lecturerName}}</p>
-                        <p style="font-size: 0.8rem;color: orange;">
-                            <span style="color:rgb(189, 125, 8)">{{formatRate rate}} </span>
-                            {{> ratingStar}}
-                            <i>({{formatCount StudentCount}})</i>
-                        </p>
-                        <p style="font-size: 0.8rem;">
-                            {{#compare SalePrice -1}}
-                            <b> ${{formatMoney Price}}</b><br><br>
-                            {{/compare}}
-                            {{#compare SalePrice -1 operator=">"}}
-                            <b> ${{formatMoney SalePrice}}</b><br><br>
-                            <del>${{formatMoney Price}}</del>
-                            {{/compare}}
-                        </p>
+                        <div class="cardInf">
+                            <h6 class="card-title">{{CourseName}}</h6>
+                            <p style="font-size: 0.8rem;">{{lecturerName}}</p>
+                            <p style="font-size: 0.8rem;color: orange;">
+                                <span style="color:rgb(189, 125, 8)">{{formatRate rate}} </span>
+                                {{> ratingStar}}
+                                <i>({{formatCount StudentCount}})</i>
+                            </p>
+                            <p style="font-size: 0.8rem;">
+                                {{#compare SalePrice -1}}
+                                <b> ${{formatMoney Price}}</b><br><br>
+                                {{/compare}}
+                                {{#compare SalePrice -1 operator=">"}}
+                                <b> ${{formatMoney SalePrice}}</b><br><br>
+                                <del>${{formatMoney Price}}</del>
+                                {{/compare}}
+                            </p>
+                        </div>
                         <div class="flex-column-reverse">
                             {{#if isBestSeller}}
                             <p class="badge badge-warning">Bestseller</p>
@@ -286,22 +299,24 @@
                         href="/course/{{CourseName}}" role="button">
                         <img src="/public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
                         <div class="card-body">
-                            <h6 class="card-title">{{CourseName}}</h6>
-                            <p style="font-size: 0.8rem;">{{lecturerName}}</p>
-                            <p style="font-size: 0.8rem;color: orange;">
-                                <span style="color:rgb(189, 125, 8)">{{formatRate rate}} </span>
-                                {{> ratingStar}}
-                                <i>({{formatCount StudentCount}})</i>
-                            </p>
-                            <p style="font-size: 0.8rem;">
-                                {{#compare SalePrice -1}}
-                                <b> ${{formatMoney Price}}</b><br><br>
-                                {{/compare}}
-                                {{#compare SalePrice -1 operator=">"}}
-                                <b> ${{formatMoney SalePrice}}</b><br><br>
-                                <del>${{formatMoney Price}}</del>
-                                {{/compare}}
-                            </p>
+                            <div class="cardInf">
+                                <h6 class="card-title">{{CourseName}}</h6>
+                                <p style="font-size: 0.8rem;">{{lecturerName}}</p>
+                                <p style="font-size: 0.8rem;color: orange;">
+                                    <span style="color:rgb(189, 125, 8)">{{formatRate rate}} </span>
+                                    {{> ratingStar}}
+                                    <i>({{formatCount StudentCount}})</i>
+                                </p>
+                                <p style="font-size: 0.8rem;">
+                                    {{#compare SalePrice -1}}
+                                    <b> ${{formatMoney Price}}</b><br><br>
+                                    {{/compare}}
+                                    {{#compare SalePrice -1 operator=">"}}
+                                    <b> ${{formatMoney SalePrice}}</b><br><br>
+                                    <del>${{formatMoney Price}}</del>
+                                    {{/compare}}
+                                </p>
+                            </div>
                             <div class="flex-column-reverse">
                                 {{#if isBestSeller}}
                                 <p class="badge badge-warning">Bestseller</p>
@@ -324,22 +339,24 @@
                         href="/course/{{CourseName}}" role="button">
                         <img src="public/{{CourseImage}}" class="card-img-top" alt="{{CourseName}}">
                         <div class="card-body">
-                            <h6 class="card-title">{{CourseName}}</h6>
-                            <p style="font-size: 0.8rem;">{{lecturerName}}</p>
-                            <p style="font-size: 0.8rem;color: orange;">
-                                <span style="color:rgb(189, 125, 8)">{{formatRate rate}} </span>
-                                {{> ratingStar}}
-                                <i>({{formatCount StudentCount}})</i>
-                            </p>
-                            <p style="font-size: 0.8rem;">
-                                {{#compare SalePrice -1}}
-                                <b> ${{formatMoney Price}}</b><br><br>
-                                {{/compare}}
-                                {{#compare SalePrice -1 operator=">"}}
-                                <b> ${{formatMoney SalePrice}}</b><br><br>
-                                <del>${{formatMoney Price}}</del>
-                                {{/compare}}
-                            </p>
+                            <div class="cardInf">
+                                <h6 class="card-title">{{CourseName}}</h6>
+                                <p style="font-size: 0.8rem;">{{lecturerName}}</p>
+                                <p style="font-size: 0.8rem;color: orange;">
+                                    <span style="color:rgb(189, 125, 8)">{{formatRate rate}} </span>
+                                    {{> ratingStar}}
+                                    <i>({{formatCount StudentCount}})</i>
+                                </p>
+                                <p style="font-size: 0.8rem;">
+                                    {{#compare SalePrice -1}}
+                                    <b> ${{formatMoney Price}}</b><br><br>
+                                    {{/compare}}
+                                    {{#compare SalePrice -1 operator=">"}}
+                                    <b> ${{formatMoney SalePrice}}</b><br><br>
+                                    <del>${{formatMoney Price}}</del>
+                                    {{/compare}}
+                                </p>
+                            </div>
                             <div class="flex-column-reverse">
                                 {{#if isBestSeller}}
                                 <p class="badge badge-warning">Bestseller</p>

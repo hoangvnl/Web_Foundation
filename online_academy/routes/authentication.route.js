@@ -35,10 +35,14 @@ router.post('/login', async function (req, res) {
         });
     }
 
-    req.session.userAuth = user;
-
-
     console.log(user);
+    if (user.isLocked === 1) {
+        res.render('lockedAccount');
+        return;
+    }
+
+    req.session.userAuth = user;
+    // console.log(user);
 
 
     if (+(user.Permission) === 0) {
