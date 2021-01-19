@@ -128,11 +128,12 @@
             <div class="form-group">
                 <label for="inputPassword">Password:</label>
                 <input type="text" class="d-none" id="id" name="UserID" value="{{id}}">
-                <input type="password" class="form-control" id="currentInputPassword"
+                <input type="password" class="form-control" id="currentInputPassword" required
                     placeholder="Enter Current Password">
-                <input type="password" class="form-control" id="newInputPassword" name="Password"
+                <input type="password" class="form-control" id="newInputPassword" name="Password" required
                     placeholder="Enter New Password">
-                <input type="password" class="form-control" id="retypeInputPassword" placeholder="Re-type New Password">
+                <input type="password" class="form-control" id="retypeInputPassword" placeholder="Re-type New Password"
+                    required>
             </div>
             <button type="submit" class="btn btn-danger">Save</button>
         </form>

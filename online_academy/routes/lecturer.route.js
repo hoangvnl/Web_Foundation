@@ -138,14 +138,31 @@ router.post('/course/:param/curriculum', async function upLoadVideoFunc(req, res
             var videoCountTempGetLink = 0;
             for (i = 0; i < curContent.length; i++) {
                 var lectureTempGetLink = await lectureModel.allWithContentID(curContent[i].ContentID);
+
                 for (j = 0; j < lectureTempGetLink.length; j++) {
                     videoCountTempGetLink++;
-                    if (lectureTempGetLink[j].VideoLink != null && typeof (req.files['LectureVideo' + videoCountTempGetLink]) === 'undefined') {
+                    console.log(videoCountTempGetLink);
+                    // log
+                    if (lectureTempGetLink[j].VideoLink != null) {
+                        while (typeof (req.files['LectureVideo' + videoCountTempGetLink]) !== 'undefined') {
+                            videoCountTempGetLink++;
+                        }
                         req.files['LectureVideo' + videoCountTempGetLink] = {};
-
                         req.files['LectureVideo' + videoCountTempGetLink]['filename'] = lectureTempGetLink[j].VideoLink;
                     }
                 }
+
+
+
+                // for (j = 0; j < lectureTempGetLink.length; j++) {
+                //     videoCountTempGetLink++;
+                //     console.log(videoCountTempGetLink);
+                //     // log
+                //     if (lectureTempGetLink[j].VideoLink != null && typeof (req.files['LectureVideo' + videoCountTempGetLink]) === 'undefined') {
+                //         req.files['LectureVideo' + videoCountTempGetLink] = {};
+                //         req.files['LectureVideo' + videoCountTempGetLink]['filename'] = lectureTempGetLink[j].VideoLink;
+                //     }
+                // }
 
                 await lectureModel.delAllByContentID(curContent[i].ContentID);
             }
@@ -291,8 +308,9 @@ router.get('/edit-profile', function (req, res) {
 router.post('/name', async function (req, res) {
     const id = req.session.userAuth.UserID;
     var entity = { LecturerID: req.session.userAuth.LecturerID, LecturerName: req.body.UserName };
-    await lecturerModel.path(entity);
-    await userModel.patch(req.body);
+    await lecturerModel.patch(entity);
+    var newEntity = { UserID: id, UserName: req.body.UserName };
+    await userModel.patch(newEntity);
     var user = await userModel.singleByID(id);
     var lecturer = await lecturerModel.singleByUserID(req.session.userAuth.UserID);
     user['LecturerID'] = lecturer[0].LecturerID;
