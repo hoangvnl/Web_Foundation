@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th1 15, 2021 lúc 10:20 AM
+-- Thời gian đã tạo: Th1 20, 2021 lúc 02:42 AM
 -- Phiên bản máy phục vụ: 10.4.17-MariaDB
 -- Phiên bản PHP: 7.4.13
 
@@ -20,26 +20,11 @@ SET time_zone = "+00:00";
 --
 -- Cơ sở dữ liệu: `online_academy`
 --
+CREATE DATABASE IF NOT EXISTS `online_academy` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `online_academy`;
 
 -- --------------------------------------------------------
 
---
--- Cấu trúc bảng cho bảng `watched_lecture`
---
-
-CREATE TABLE `watched_lecture` (
-  `UserID` int(10) NOT NULL,
-  `CourseID` int(10) NOT NULL,
-  `CurrentLecture` int(10) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
-
---
--- Đang đổ dữ liệu cho bảng `watched_lecture`
---
-
-
--- ---------------------------------------------------------
 --
 -- Cấu trúc bảng cho bảng `category`
 --
@@ -1588,13 +1573,13 @@ INSERT INTO `tokens` (`UserID`, `Token`) VALUES
 --
 
 CREATE TABLE `users` (
-  `UserID` int(11) NOT NULL,
+  `UserID` int(10) NOT NULL,
   `Email` varchar(50) DEFAULT NULL,
   `Password` varchar(255) DEFAULT NULL,
   `UserName` varchar(50) DEFAULT NULL,
   `Permission` int(6) DEFAULT NULL,
   `Verification` int(6) DEFAULT NULL,
-  `isLocked` int(11)  DEFAULT 0
+  `isLocked` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -1610,6 +1595,18 @@ INSERT INTO `users` (`UserID`, `Email`, `Password`, `UserName`, `Permission`, `V
 (5, 'test_user5@gmail.com', '1', 'Kara Horne', 0, 1, 0),
 (6, 'test_user6@gmail.com', '1', 'Aliza Smith', 0, 1, 1),
 (7, 'test_lecturer7@gmail.com', '1', 'Paulo Dichone', 1, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Cấu trúc bảng cho bảng `watched_lecture`
+--
+
+CREATE TABLE `watched_lecture` (
+  `UserID` int(10) NOT NULL,
+  `CourseID` int(10) NOT NULL,
+  `CurrentLecture` int(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1702,38 +1699,8 @@ ALTER TABLE `users`
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
+--
 
-
--- AUTO_INCREMENT cho bảng `course_content`
---
-ALTER TABLE `course_content`
-  MODIFY `ContentID` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT cho bảng `lecture`
---
-ALTER TABLE `lecture`
-  MODIFY `LectureID` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT cho bảng `lecturer`
---
-ALTER TABLE `lecturer`
-  MODIFY `LecturerID` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT cho bảng `subcategory`
---
-ALTER TABLE `subcategory`
-  MODIFY `SubcategoryID` int(10) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT cho bảng `user`
---
-ALTER TABLE `users`
-  MODIFY `UserID` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT cho bảng `course`
---
-ALTER TABLE `course`
-  MODIFY `CourseID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT cho bảng `category`
 --
@@ -1747,10 +1714,40 @@ ALTER TABLE `course`
   MODIFY `CourseID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
+-- AUTO_INCREMENT cho bảng `course_content`
+--
+ALTER TABLE `course_content`
+  MODIFY `ContentID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
+
+--
+-- AUTO_INCREMENT cho bảng `lecture`
+--
+ALTER TABLE `lecture`
+  MODIFY `LectureID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=355;
+
+--
+-- AUTO_INCREMENT cho bảng `lecturer`
+--
+ALTER TABLE `lecturer`
+  MODIFY `LecturerID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+
+--
 -- AUTO_INCREMENT cho bảng `review`
 --
 ALTER TABLE `review`
   MODIFY `ReviewID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=500;
+
+--
+-- AUTO_INCREMENT cho bảng `subcategory`
+--
+ALTER TABLE `subcategory`
+  MODIFY `SubcategoryID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT cho bảng `users`
+--
+ALTER TABLE `users`
+  MODIFY `UserID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
